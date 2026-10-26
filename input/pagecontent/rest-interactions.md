@@ -32,7 +32,7 @@ Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får v
 
 En sökning utan `status` returnerar bara poster med status `current`. Avregistrerade poster returneras bara när status anges explicit.
 
-Patienten är en logisk referens, eftersom indexet inte har några Patient-resurser. Sökningen görs därför med modifieraren `:identifier` och inte som kedjad sökning; se [Mappning till profiler](mappings.html).
+Patienten är en logisk referens, eftersom indexet inte har några Patient-resurser. Sökningen görs därför med modifieraren `:identifier` och inte som kedjad sökning (`patient.identifier=`), som skulle kräva att referensen löses upp till en Patient i FHIR-EI. Profilen kräver `subject.type = Patient`, så att servern kan avgöra att referensen gäller en patient. Vårdgivaren söks på samma sätt, med `custodian:identifier=`.
 
 Exempel, registrerade poster för en patient inom en tjänst vars innehåll ändrats efter 1 oktober 2026:
 

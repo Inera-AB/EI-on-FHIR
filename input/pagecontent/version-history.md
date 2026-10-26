@@ -20,4 +20,8 @@ Den här sidan beskriver vad som har ändrats i varje version. Listan över alla
 - Extensions för logisk adress och källsystem
 - Adressregister i övergångsadaptern och regler för överlämning
 - HSA-id med basprofilernas system `urn:oid:1.2.752.29.4.19`
+- Övergång per tjänst i fem lägen, med regeln att konsumenten byter först och utan återskrivning till dagens engagemangsindex
+- Uppdateringsregler per tjänst: en `SubscriptionTopic` per informationsmängd och `obligation` i tillämpningsprofilen
+- Ett index för både NPÖ och 1177, med prövning per syfte och säkerhetsetiketter i `meta.security`
+- Sidan Stöd för producenter: direkt registrering, indexeringsagent som bygger på FHIR Subscriptions, och övergångsadaptern
 - Sidor om indexposten, händelsemodell och övergång, samexistens med eHM:s patientindex, prenumeration, spärr och loggning samt öppna frågor

@@ -31,8 +31,6 @@ Specen lämnade några detaljer öppna eller formulerade dem på ett sätt som i
 
 | Område | Val i IG:n | Skäl |
 |---|---|---|
-| Sökning på patient | `patient:identifier=` i stället för kedjad `patient.identifier=` | Indexet har inga Patient-resurser; patienten är en logisk referens. En kedjad sökning kräver att referensen kan lösas upp till en Patient i FHIR-EI. Modifieraren `:identifier` söker direkt på referensens identifierare. Profilen kräver `subject.type = Patient`, så att servern kan avgöra att referensen gäller en patient |
-| Vårdgivare i sökning och filter | `custodian:identifier=` | Samma skäl: vårdgivaren är en logisk referens |
 | HSA-id-system | `urn:oid:1.2.752.29.4.19`, som i HL7 Swedens basprofiler och tjänstekatalogen. FHIR-EI SHALL även ta emot RIV-TA:s `urn:oid:1.2.752.129.2.1.4.1` och lagra värdet med basprofilernas system | Samma identifierarrymd har två OID:er. Specen ska bygga på svenska basprofiler, och EHDS-bryggan behandlar redan båda som samma rymd |
 | Profil-id | `IneraIndexEntry` i stället för `inera-index-entry` | Ineras profileringsanvisning: id samma som namn |
 | Förbjudna element | `description`, `event`, `bodySite`, `context`, `basedOn`, `attester` och `content.attachment.data` är 0..0 | Principen pekare, inte innehåll |

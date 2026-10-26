@@ -30,7 +30,10 @@ The specification and FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based 
 - **Lifecycle by deregistration, not deletion.** The base `status` plus the extensions `registrationStatus` and `deregistrationReason`. Deregistered entries remain as tombstones for a retention period, so consumers that missed notifications can reconcile.
 - **Producers are identified by their endpoint in [tjänstekatalogen](https://github.com/Inera-AB/tjanstekatalog).** The same URL is the producer's namespace in `identifier.system`, checked by an invariant, and a producer may only register for care providers that list its endpoint there.
 - **Logical address is carried separately.** In tjänstekatalogen a logical address is an organisation's HSA-id, not an endpoint, so RIV-TA sources carry `logicalAddress` next to the endpoint.
-- **Transition without changes to producers.** An adapter mirrors today's engagement index into FHIR-EI. It has an agent role and an address register built from TAK and tjänstekatalogen, the same idea as in [EHDS-bryggan](https://github.com/Inera-AB/ehds-brygga).
+- **Transition per service, consumers first.** Each service moves through five stages on its own: mirroring, consumer switch, FHIR producers, decommissioning. A producer registers a service only in FHIR-EI once that service's consumers read FHIR-EI, so nothing is written back to today's index. An adapter mirrors today's engagement index per service domain, with an agent role and an address register built from TAK and tjänstekatalogen, the same idea as in [EHDS-bryggan](https://github.com/Inera-AB/ehds-brygga).
+- **Update rules per service.** Each service's IG publishes a `SubscriptionTopic` per information set, defining what counts as a change, and `obligation` on its application profile.
+- **Producer support.** Producers register directly, through an indexing agent that subscribes to the service topics on their FHIR server (standard FHIR only), or through the transition adapter.
+- **One index for NPÖ and 1177.** Access is assessed per purpose of use, and producers can label entries with security labels such as `NOPAT`.
 - **Native R5 subscriptions** on the topic `indexpost-andrad`, with `id-only` notifications, `$status` and `$events`; reconciliation with `_lastUpdated`; bulk export with `$export`.
 - **FHIR-EI is its own access control point:** blocking (spärr), logging and filtering apply to every read, subscription and export.
 
@@ -55,7 +58,7 @@ The specification and FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based 
 
 Bulk Data `$export` is required in narrative only: Bulk Data Access is published for R4, so its OperationDefinition cannot be referenced from an R5 IG.
 
-An R5 IG validates against the R5 terminology server. Builds without one (`-tx n/a`) report false errors on `SearchParameter.base`; set the shared workflows' terminology input to `https://tx.fhir.org/r5` (see [CI workflows](#ci-workflows)).
+An R5 IG validates against the R5 terminology server, so `publish.yml` and `release.yml` pass `tx-server: https://tx.fhir.org/r5` to the shared workflows, whose default is the R4 server. The shared `pr-qa.yml` always builds without a terminology server (`-tx n/a`) and has no input for one; its QA comment therefore reports three false errors on `SearchParameter.base` and `SearchParameter.target`, which a build against the R5 server does not.
 
 Open questions are listed at the end of the specification and on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
 

@@ -14,6 +14,10 @@ tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för sen
 * insert IneraMetadata(IneraIndexEntry)
 
 * meta.source ^short = "Används bara för spårbarhet, aldrig för behörighet"
+// Security labels that FHIR-EI applies per purpose of use, e.g. NOPAT for entries that must not be
+// shown to the patient, family or guardians without the attending provider's authorisation.
+* meta.security MS
+* meta.security ^short = "Säkerhetsetiketter som FHIR-EI tillämpar per syfte, t.ex. NOPAT"
 
 * extension contains
     SourceEndpoint named sourceEndpoint 1..1 MS and

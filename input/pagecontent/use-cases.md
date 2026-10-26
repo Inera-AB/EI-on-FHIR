@@ -26,7 +26,7 @@ En systemkonsument, till exempel en framtida synk till eHM:s patientindex, behö
 
 ### Övergång från dagens engagemangsindex
 
-Källsystem ska kunna gå över till FHIR i egen takt. Under övergången speglar en adapter dagens engagemangsindex till FHIR-EI och skriver tillbaka FHIR-registrerade poster till dagens index så länge konsumenter läser därifrån. Se [Händelsemodell och övergång](event-model.html).
+Källsystem ska kunna gå över till FHIR i egen takt. Övergången görs per tjänst: en adapter speglar tjänstens poster från dagens engagemangsindex till FHIR-EI, tjänstens konsumenter byter till FHIR-EI, och först därefter registrerar producenterna direkt. Se [Händelsemodell och övergång](event-model.html).
 
 ---
 
