@@ -22,9 +22,32 @@ Context: DocumentReference
 Extension: RegisteringProducer
 Id: RegisteringProducer
 Title: "Registrerande producent"
-Description: "Producenten som registrerade posten, som HSA-id. FHIR-EI kontrollerar värdet mot den autentiserade klientens producentidentitet. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex."
+Description: "Producentens identitet: den Endpoint i tjänstekatalogen som den autentiserade klienten är bunden till, som absolut referens. För en direktansluten producent är det samma endpoint som i sourceEndpoint. Referensen är också producentens namnrymd i identifier.system. FHIR-EI kontrollerar värdet mot den autentiserade klienten. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex."
 Context: DocumentReference
 * insert IneraMetadata(RegisteringProducer)
+* value[x] 1..1
+* value[x] only Reference(Endpoint)
+* valueReference.reference 1..1
+* valueReference.reference ^short = "Absolut URL till producentens Endpoint i tjänstekatalogen"
+
+Extension: LogicalAddress
+Id: LogicalAddress
+Title: "Logisk adress"
+Description: "Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex."
+Context: DocumentReference
+* insert IneraMetadata(LogicalAddress)
+* value[x] 1..1
+* value[x] only Identifier
+* valueIdentifier.system 1..1
+* valueIdentifier.system = $hsaid
+* valueIdentifier.value 1..1
+
+Extension: SourceSystem
+Id: SourceSystem
+Title: "Källsystem"
+Description: "Källsystemet enligt dagens engagemangsindex, som HSA-id. Sätts av övergångsadaptern, eftersom registrerande producent då är adaptern och inte källsystemet. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex."
+Context: DocumentReference
+* insert IneraMetadata(SourceSystem)
 * value[x] 1..1
 * value[x] only Identifier
 * valueIdentifier.system 1..1

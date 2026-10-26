@@ -50,6 +50,8 @@ Svaret visas i exemplet [Sökresultat för en patient](Bundle-SokresultatForPati
 
 Varje post har exakt en endpoint, som refereras i tjänstekatalogen med extension [sourceEndpoint](StructureDefinition-SourceEndpoint.html). Katalogen är auktoritativ för endpointens egenskaper. Adressen finns också i `content.attachment.url`, så att konsumenten kan anropa källan utan ett extra uppslag.
 
+När endpointen adresseras med logisk adress, som tjänsteplattformen för RIV-TA, bär posten också [logicalAddress](StructureDefinition-LogicalAddress.html). Konsumenten anger den i anropet.
+
 ---
 
 ### Villkorad uppdatering
@@ -57,13 +59,15 @@ Varje post har exakt en endpoint, som refereras i tjänstekatalogen med extensio
 En producent registrerar, uppdaterar och avregistrerar poster med villkorad `PUT` på `identifier`:
 
 ```
-PUT [base]/DocumentReference?identifier=https://journal-a.example.org/fhir/sid/indexpost|7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33
+PUT [base]/DocumentReference?identifier=https://tjanstekatalog.example.org/fhir/Endpoint/journal-a|7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33
 ```
 
-| Träffar på identifier | Resultat |
+Villkoret utvärderas bara mot anropande producents egna poster. En producent kan alltså aldrig träffa en annan producents post, och svaret avslöjar inte om en identifierare finns hos någon annan.
+
+| Träffar bland producentens egna poster | Resultat |
 |---|---|
 | 0 | Posten skapas |
-| 1 | Posten uppdateras, om den tillhör anropande producent |
+| 1 | Posten uppdateras |
 | Fler än 1 | Avvisas med `412 Precondition Failed`; ingen post ändras |
 {:.grid}
 
@@ -73,6 +77,18 @@ Samtidiga uppdateringar av samma post hanteras med versionsvillkor (`If-Match` p
 
 Interaktionen `delete` stöds inte. Gravstenar rensas av FHIR-EI efter lagringstiden.
 
-### Skrivbehörighet
+### Producentidentitet och skrivbehörighet
 
-En producent får endast skapa, uppdatera och avregistrera indexposter som tillhör producentens registrerade identitet. FHIR-EI härleder producentidentiteten från den autentiserade klienten, via en betrodd koppling mellan klientidentitet och producentidentitet. Komponenten kontrollerar att den överensstämmer med postens `registeringProducer` och med namnrymden i `identifier.system`. `meta.source` används aldrig ensamt för behörighetskontroll.
+En producents identitet är dess Endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en sådan endpoint, via en betrodd koppling mellan klientidentitet (certifikat eller token) och endpoint. Vid varje skrivning kontrollerar FHIR-EI:
+
+| Kontroll | Regel |
+|---|---|
+| Producent | `registeringProducer` är en absolut referens till den endpoint klienten är bunden till |
+| Namnrymd | `identifier.system` är samma URL som `registeringProducer`. Profilens invariant `inera-ei-producer-namespace` kontrollerar det, och inget register över namnrymder behövs |
+| Endpoint | För en direktansluten producent är `sourceEndpoint` samma endpoint som `registeringProducer` |
+| Vårdgivare | Vårdgivaren i `custodian`, eller en underliggande enhet via `partOf`, listar `sourceEndpoint` i `Organization.endpoint` i tjänstekatalogen |
+{:.grid}
+
+Övergångsadaptern har en ombudsroll: den är registrerad i tjänstekatalogen med en egen endpoint och får registrera poster vars `sourceEndpoint` är en annan endpoint, men bara för kombinationer av logisk adress och tjänstedomän som finns i dess adressregister. Se [Händelsemodell och övergång](event-model.html).
+
+En producent får inte ändra `identifier` eller `registeringProducer` på en befintlig post. `meta.source` används aldrig ensamt för behörighetskontroll.

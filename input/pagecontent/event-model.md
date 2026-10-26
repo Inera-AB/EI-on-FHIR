@@ -62,11 +62,36 @@ Engagemangsposter för samma patient, logiska adress och tjänstedomän slås ih
 
 | Fält | Regel |
 |---|---|
-| `identifier` | System `https://fhir.inera.se/ig/engagementindex/sid/riv-ta-engagement` ([NamingSystem](NamingSystem-RivTaEngagementNamingSystem.html)). Värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän, så att samma kombination alltid ger samma post |
+| `identifier` | System = adapterns endpoint-URL, som för alla producenter. Värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän, så att samma kombination alltid ger samma post |
+| `sourceEndpoint`, `content.attachment.url` | Endpoint och adress enligt adressregistret nedan |
+| `logicalAddress` | logicalAddress från engagemangsposterna |
+| `sourceSystem` | sourceSystem från de ingående engagemangsposterna |
 | `contentLastUpdated` | Den senaste mostRecentContent bland de ingående engagemangsposterna |
 | `content.profile[category]` | En Coding per kategori bland de ingående engagemangsposterna |
 | Avregistrering | deleteFlag på den sista ingående engagemangsposten ger status `superseded`, `registrationStatus` `withdrawn` och `deregistrationReason` `transition-adapter`, eftersom dagens kontrakt inte bär någon orsak |
-| `registeringProducer` | Adapterns egen producentidentitet |
+| `registeringProducer` | Adapterns egen endpoint i tjänstekatalogen |
 {:.grid}
+
+### Adressregister i adaptern
+
+Tjänstekatalogen har ingen endpoint per logisk adress. Där är den logiska adressen en organisations HSA-id, och organisationen listar sina endpoints i `Organization.endpoint`. Tjänstekatalogen har inte heller TAK:s uppgift om vilken logisk adress och vilket tjänstekontrakt som routas till vilken producent.
+
+Adaptern håller därför ett eget adressregister, byggt genom att samköra TAK med tjänstekatalogen:
+
+| Nyckel | Värde |
+|---|---|
+| Logisk adress och tjänstedomän (via tjänstekontrakt i TAK) | Endpoint i tjänstekatalogen som posten ska peka på |
+{:.grid}
+
+Två varianter är möjliga för värdet:
+
+1. **Tjänsteplattformens endpoint för tjänstekontraktet.** Konsumenten anropar tjänsteplattformen med RIV-TA och anger postens `logicalAddress`.
+2. **EHDS-bryggans FHIR-yta för vårdgivaren** (`/fhir/{vg-hsa-id}/`). Konsumenten hämtar informationen med FHIR, och bryggan översätter till RIV-TA. Bryggan använder vårdgivarens HSA-id som logisk adress, medan dagens engagemangsposter kan ha vårdenhetens eller källsystemets. Det måste stämmas av mot TAK innan varianten används.
+
+Samma tanke finns i EHDS-bryggan, som håller ett eget register från vårdgivare till endpoint.
+
+### Överlämning från adaptern
+
+När ett källsystem börjar registrera direkt i FHIR-EI får dess poster en ny endpoint, och därmed nya poster, eftersom en post gäller patient × endpoint × tjänst. Adaptern avregistrerar då sina poster för källsystemet med `deregistrationReason` `transition-adapter`. Prenumeranter ser en avregistrering och en ny registrering för samma information. Om det behövs en operation som flyttar ägarskapet i stället är en [öppen fråga](open-issues.html).
 
 Se exemplet [Indexpost speglad av övergångsadaptern](DocumentReference-IndexpostFranAdapter.html).

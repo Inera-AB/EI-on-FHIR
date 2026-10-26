@@ -21,7 +21,7 @@ Prenumerationer filtreras på samma sätt. En konsument får bara notis om poste
 
 ### Producenter
 
-Producenternas skrivningar filtreras inte men auktoriseras mot den autentiserade producentidentiteten; se [REST-interaktioner och sökparametrar](rest-interactions.html). `meta.source` används aldrig ensamt för behörighetskontroll.
+Producenternas skrivningar filtreras inte men auktoriseras. Producentens identitet är dess endpoint i tjänstekatalogen, och en producent får bara registrera för vårdgivare som listar endpointen där. Se [REST-interaktioner och sökparametrar](rest-interactions.html). `meta.source` används aldrig ensamt för behörighetskontroll.
 
 ### Granularitet
 

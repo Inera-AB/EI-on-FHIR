@@ -20,9 +20,8 @@ The FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based engagement index. 
 | Artifact | FSH file |
 |---|---|
 | Index entry profile on R5 `DocumentReference` (`IneraIndexEntry`), one entry per patient × endpoint × service | `input/fsh/profiles/IneraIndexEntry.fsh` |
-| Extensions: source endpoint, care unit, registering producer, content last updated, registration status, deregistration reason | `input/fsh/extensions/Extensions.fsh` |
+| Extensions: source endpoint, care unit, registering producer, logical address, source system, content last updated, registration status, deregistration reason | `input/fsh/extensions/Extensions.fsh` |
 | Code systems and value sets | `input/fsh/terminology/Terminology.fsh` |
-| NamingSystem for the transition adapter's identifiers | `input/fsh/terminology/NamingSystems.fsh` |
 | SubscriptionTopic `indexpost-andrad` and a Subscription profile (`IneraIndexSubscription`) | `input/fsh/subscriptions/Subscriptions.fsh` |
 | National search parameters | `input/fsh/searchparameters/SearchParameters.fsh` |
 | Server CapabilityStatement | `input/fsh/capabilitystatements/IneraIndexServer.fsh` |

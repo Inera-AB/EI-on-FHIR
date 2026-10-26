@@ -4,6 +4,20 @@ Indexposten är en pekare: den anger att en producent, via en endpoint, har info
 
 Det finns en post per patient × endpoint × tjänst. En tjänst är en IG och motsvarar tjänstedomän i dagens modell. En post kan bära flera informationsmängder. Tidpunkten för senaste ändring gäller hela posten. En informationsmängd som behöver en egen tidpunkt bryts ut till en egen tjänst.
 
+### Producent, endpoint och logisk adress
+
+Producentens identitet är dess endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en Endpoint där, och postens [registeringProducer](StructureDefinition-RegisteringProducer.html) är en absolut referens till den endpointen. Samma URL är producentens namnrymd i `identifier.system`, så att FHIR-EI kan kontrollera namnrymden utan ett eget register.
+
+| Producent | registeringProducer | sourceEndpoint | logicalAddress |
+|---|---|---|---|
+| Direktansluten FHIR-producent | Producentens endpoint | Samma endpoint | Utelämnas |
+| Övergångsadaptern | Adapterns egen endpoint | Endpoint enligt adapterns adressregister, t.ex. tjänsteplattformens endpoint för tjänstekontraktet | Logisk adress från dagens engagemangsindex |
+{:.grid}
+
+En endpoint i tjänstekatalogen kan delas av många logiska adresser, till exempel tjänsteplattformens adress för ett tjänstekontrakt. Posten bär därför den [logiska adressen](StructureDefinition-LogicalAddress.html) separat när endpointen adresseras med logisk adress. I tjänstekatalogen är den logiska adressen en organisations HSA-id, så konsumenten kan slå upp den där.
+
+Poster från adaptern bär också [källsystemet](StructureDefinition-SourceSystem.html) från dagens engagemangsindex, eftersom registrerande producent då är adaptern.
+
 ### Tillämpning per tjänst
 
 Vad indexet svarar på bestäms per tjänst: bara var det finns information, eller också vilka informationsmängder som finns och hur aktuella de är. Varje tjänst publicerar sin tillämpning som en profil av den gemensamma indexprofilen, i tjänstens IG. Därmed hålls semantiken ihop även när tjänsterna använder indexet olika.

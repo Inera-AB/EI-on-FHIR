@@ -19,15 +19,18 @@ tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för sen
     SourceEndpoint named sourceEndpoint 1..1 MS and
     CareUnit named careUnit 1..1 MS and
     RegisteringProducer named registeringProducer 1..1 MS and
+    LogicalAddress named logicalAddress 0..1 MS and
+    SourceSystem named sourceSystem 0..* MS and
     ContentLastUpdated named contentLastUpdated 0..1 MS and
     RegistrationStatus named registrationStatus 1..1 MS and
     DeregistrationReason named deregistrationReason 0..1 MS
 
 // Identity: stable and bound to the producer. The producer may not change it on an existing entry.
+// The namespace is derived from the producer identity, so that FHIR-EI can check it without a register.
 * identifier 1..* MS
 * identifier ^short = "Producentens id för posten; nyckel för villkorad uppdatering"
 * identifier.system 1..1 MS
-* identifier.system ^short = "Producentens namnrymd"
+* identifier.system ^short = "Producentens namnrymd: samma URL som registeringProducer"
 * identifier.value 1..1 MS
 * identifier.value ^short = "Producentens id för posten"
 
@@ -35,7 +38,7 @@ tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för sen
 // carried by the registrationStatus extension; the invariants keep the two consistent.
 * status MS
 * status ^short = "current | superseded | entered-in-error; exakt tillstånd i registrationStatus"
-* obeys inera-ei-status-map and inera-ei-deregistration
+* obeys inera-ei-status-map and inera-ei-deregistration and inera-ei-producer-namespace
 
 // Service: one coding per generation, so that consumers that only understand service domains keep
 // working through the transition.
@@ -119,6 +122,11 @@ Invariant: inera-ei-deregistration
 Description: "deregistrationReason finns om och endast om registrationStatus inte är active."
 Severity: #error
 Expression: "extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason').exists() = extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus').where(value != 'active').exists()"
+
+Invariant: inera-ei-producer-namespace
+Description: "Minst en identifierare har producentens namnrymd: identifier.system är samma URL som referensen i registeringProducer."
+Severity: #error
+Expression: "identifier.system contains extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer').value.reference"
 
 Invariant: inera-ei-service-coding
 Description: "Tjänsten anges med tjänstedomän, IG:ns canonical eller båda."
