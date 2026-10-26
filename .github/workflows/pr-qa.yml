@@ -11,3 +11,7 @@ permissions:
 jobs:
   qa:
     uses: Inera-AB/fhir-ig-workflows/.github/workflows/pr-qa.yml@v1
+    # The IG is FHIR R5; without a terminology server the QA build reports
+    # false errors on R5 core value sets such as SearchParameter.base.
+    with:
+      tx-server: https://tx.fhir.org/r5
