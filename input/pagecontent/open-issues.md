@@ -20,4 +20,6 @@ Följande frågor är inte avgjorda. Svaren kan ändra profilerna eller API:et.
 - **Äldre uppdateringar.** IG:n ignorerar en uppdatering med äldre `mostRecentContent` och svarar `200 OK`. Specutkastet lämnade öppet om den i stället ska avvisas.
 - **Kodverk.** Var förvaltas tjänstedomäner och kategorier som FHIR-kodsystem, och med vilken canonical? Denna IG har utdrag under sin egen canonical.
 - **Kontrollsummor.** Hur exponeras antal och kontrollsummor per vårdgivare och dag för återsynk?
+- **Profil för prenumeration.** Backport-IG:ns R4-paket (`hl7.fhir.uv.subscriptions-backport.r4` 1.1.0 och 1.2.0-ballot) bygger på FHIR 4.0.0. IG Publisher 3 läser inga resurser från det, så en profil som ärver från dess Subscription går inte att bygga, och dess extensions kan inte valideras. Kraven står därför i text på [Prenumeration](subscriptions.html). En profil läggs till när ett paket på 4.0.1 finns, eller om FHIR-EI går över till R5.
+- **Bulk Data-version.** IG:n refererar Bulk Data Access 2.0.0. Version 3.0.0 finns och bör utvärderas, särskilt hur borttag redovisas vid `_since`.
 - **Endpoints för RIV-TA-källor.** En endpoint per kombination av källsystem och logisk adress kan bli många. Är det rätt nivå?

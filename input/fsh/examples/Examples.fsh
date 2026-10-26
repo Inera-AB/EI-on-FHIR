@@ -130,15 +130,25 @@ Usage: #example
 * entry[3].resource = EndpointRivTaKallsystem
 * entry[3].search.mode = #include
 
-Instance: PrenumerationForPatient
-InstanceOf: IneraEngagementIndexSubscription
-Title: "Prenumeration på en patients indexposter"
-Description: "En konsument prenumererar på ändrade indexposter för en patient inom en tjänstedomän."
+// The last version of an entry before it is deleted carries the reason. The producer sends this
+// with a conditional PUT and then deletes the entry with a conditional DELETE.
+Instance: IndexpostMedBorttagsorsak
+InstanceOf: IneraEngagementIndexEntry
+Title: "Indexpost med orsak till borttag"
+Description: "Den sista versionen av en felregistrerad post, innan producenten tar bort den. Versionen finns kvar i postens historik."
 Usage: #example
-* status = #requested
-* reason = "Visa aktuell översikt över patientens information"
-* criteria.extension[filterCriteria].valueString = "EpisodeOfCare?patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212&type=https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description"
-* channel.type = #rest-hook
-* channel.endpoint = "https://konsument.example.org/fhir/notifieringar"
-* channel.payload = #application/fhir+json
-* channel.extension[heartbeatPeriod].valueUnsignedInt = 3600
+* meta.lastUpdated = "2026-10-22T10:15:41+02:00"
+* extension[sourceEndpoint].valueReference = Reference(EndpointJournalsystemFhir)
+* extension[careUnit].valueIdentifier.system = $hsaid
+* extension[careUnit].valueIdentifier.value = "SE0000000000-VE01"
+* extension[mostRecentContent].valueDateTime = "2026-10-22T10:15:30+02:00"
+* extension[deletionReason].valueCodeableConcept = IneraDeletionReasonCodeSystem#entered-in-error "Felregistrering"
+* identifier[sourceEntryId].system = "https://journal-a.example.org/fhir/sid/indexpost"
+* identifier[sourceEntryId].value = "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d"
+* status = #active
+* type[serviceDomain] = $service-domain#riv:clinicalprocess:healthcond:description
+* type[category] = $engagement-category#voo
+* patient.identifier.system = $personnummer
+* patient.identifier.value = "191212121212"
+* managingOrganization.identifier.system = $hsaid
+* managingOrganization.identifier.value = "SE0000000000-VG01"

@@ -20,12 +20,13 @@ The FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based engagement index. 
 |---|---|
 | Index entry profile on `EpisodeOfCare` (`IneraEngagementIndexEntry`) | `input/fsh/profiles/IneraEngagementIndexEntry.fsh` |
 | Source system endpoint profile on `Endpoint` (`IneraEngagementIndexEndpoint`) | `input/fsh/profiles/IneraEngagementIndexEndpoint.fsh` |
-| Subscription profile on the Subscriptions R5 Backport (`IneraEngagementIndexSubscription`) | `input/fsh/profiles/IneraEngagementIndexSubscription.fsh` |
 | Extensions: source endpoint, care unit, most recent content, content profile, deletion reason | `input/fsh/extensions/Extensions.fsh` |
 | Code systems and value sets | `input/fsh/terminology/Terminology.fsh` |
 | Search parameters | `input/fsh/searchparameters/SearchParameters.fsh` |
 | Server CapabilityStatement | `input/fsh/capabilitystatements/IneraEngagementIndexServer.fsh` |
 | Examples | `input/fsh/examples/Examples.fsh` |
+
+Subscriptions follow the Subscriptions R5 Backport, but only in narrative (`input/pagecontent/subscriptions.md`): the backport's R4 package is built on FHIR 4.0.0, and IG Publisher 3 loads none of its resources, so a profile derived from it does not build.
 
 Open questions are listed on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
 

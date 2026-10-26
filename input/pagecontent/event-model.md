@@ -19,7 +19,7 @@ Specen lämnade öppet om sådana uppdateringar ska avvisas eller ignoreras. IG:
 
 #### Orsak vid borttag
 
-Ett borttag görs med villkorad `DELETE`, som inte har någon kropp. En producent som vill ange orsak gör först en villkorad `PUT` med extension [deletionReason](StructureDefinition-DeletionReason.html) och sedan `DELETE`. Versionen med orsaken blir då den sista i postens historik. Hur det ska göras atomärt är en [öppen fråga](open-issues.html).
+Ett borttag görs med villkorad `DELETE`, som inte har någon kropp. En producent som vill ange orsak gör först en villkorad `PUT` med extension [deletionReason](StructureDefinition-DeletionReason.html) och sedan `DELETE`. Versionen med orsaken blir då den sista i postens historik; se exemplet [Indexpost med orsak till borttag](EpisodeOfCare-IndexpostMedBorttagsorsak.html). Hur det ska göras atomärt är en [öppen fråga](open-issues.html).
 
 ---
 

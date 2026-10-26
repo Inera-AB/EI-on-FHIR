@@ -1,4 +1,6 @@
-En konsument prenumererar på ändrade indexposter med `Subscription` enligt [R4 Subscriptions Backport](https://hl7.org/fhir/uv/subscriptions-backport/STU1.1/), profilerad som [Prenumeration på indexposter](StructureDefinition-IneraEngagementIndexSubscription.html). Prenumerationen ersätter ProcessNotification.
+En konsument prenumererar på ändrade indexposter med `Subscription` enligt [R4 Subscriptions Backport](https://hl7.org/fhir/uv/subscriptions-backport/STU1.1/) 1.1.0. Prenumerationen ersätter ProcessNotification.
+
+Kraven på prenumerationer finns i text på denna sida, inte som en profil. Backport-IG:ns R4-paket bygger på FHIR 4.0.0, och IG Publisher 3 läser inga resurser från det, så en profil som ärver från backport-IG:ns Subscription går inte att bygga. Se [Öppna frågor](open-issues.html).
 
 ### Topic `indexpost-andrad`
 
@@ -22,7 +24,51 @@ EpisodeOfCare?patient:identifier=http://electronichealth.se/identifier/personnum
   &type=https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description
 ```
 
-Se exemplet [Prenumeration på en patients indexposter](Subscription-PrenumerationForPatient.html).
+En prenumeration för en patient inom en tjänstedomän:
+
+```json
+{
+  "resourceType": "Subscription",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-subscription"]
+  },
+  "status": "requested",
+  "reason": "Visa aktuell översikt över patientens information",
+  "criteria": "https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad",
+  "_criteria": {
+    "extension": [{
+      "url": "http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-filter-criteria",
+      "valueString": "EpisodeOfCare?patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212&type=https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description"
+    }]
+  },
+  "channel": {
+    "extension": [{
+      "url": "http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-heartbeat-period",
+      "valueUnsignedInt": 3600
+    }],
+    "type": "rest-hook",
+    "endpoint": "https://konsument.example.org/fhir/notifieringar",
+    "payload": "application/fhir+json",
+    "_payload": {
+      "extension": [{
+        "url": "http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-payload-content",
+        "valueCode": "id-only"
+      }]
+    }
+  }
+}
+```
+
+### Krav på prenumerationen
+
+| Element | Krav |
+|---|---|
+| `meta.profile` | Backport-IG:ns `backport-subscription` |
+| `criteria` | `https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad` |
+| `_criteria` extension `backport-filter-criteria` | Filter enligt ovan. En konsument SHALL filtrera på patient |
+| `channel.payload` extension `backport-payload-content` | Alltid `id-only`. FHIR-EI avvisar andra värden |
+| `channel.extension` `backport-heartbeat-period` | SHOULD anges |
+{:.grid}
 
 ### Notiser
 

@@ -16,8 +16,9 @@ publisher:
 
 jurisdiction: urn:iso:std:iso:3166#SE "Sweden"
 
+# Subscriptions R5 Backport is not a dependency: its R4 package is built on FHIR 4.0.0,
+# and IG Publisher 3 loads no resources from it. See the page Öppna frågor.
 dependencies:
-  hl7.fhir.uv.subscriptions-backport.r4: 1.1.0
   hl7.fhir.uv.bulkdata: 2.0.0
 
 # Inline instances (the resources inside the transaction example) get no id, since a

@@ -7,7 +7,6 @@ Title: "FHIR-EI server"
 * name = "IneraEngagementIndexServer"
 * description = "Krav på FHIR-EI som server: sökning, registrering, prenumeration och massuttag av indexposter."
 * kind = #requirements
-* instantiates = $backport-server-r4
 * fhirVersion = #4.0.1
 * format[0] = #json
 * format[+] = #xml
@@ -42,7 +41,7 @@ Title: "FHIR-EI server"
   * insert Interaction(search-type, SHALL)
   * insert SearchParam(patient, http://hl7.org/fhir/SearchParameter/clinical-patient, reference, SHALL)
   * searchParam[=].documentation = "Används med modifieraren :identifier, t.ex. patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212."
-  * insert SearchParam(type, http://hl7.org/fhir/SearchParameter/EpisodeOfCare-type, token, SHALL)
+  * insert SearchParam(type, http://hl7.org/fhir/SearchParameter/clinical-type, token, SHALL)
   * insert SearchParam(organization, http://hl7.org/fhir/SearchParameter/EpisodeOfCare-organization, reference, SHALL)
   * searchParam[=].documentation = "Vårdgivare. Används med modifieraren :identifier och HSA-id."
   * insert SearchParam(identifier, http://hl7.org/fhir/SearchParameter/clinical-identifier, token, SHALL)
@@ -64,19 +63,12 @@ Title: "FHIR-EI server"
 // Subscriptions
 * rest[0].resource[+]
   * type = #Subscription
-  * supportedProfile = Canonical(IneraEngagementIndexSubscription)
-  * documentation = "Prenumerationer enligt R4 Subscriptions Backport. Notiser filtreras på samma sätt som sökningar."
-  * extension[0].url = $backport-topic-canonical
-  * extension[0].valueCanonical = "https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad"
+  * documentation = "Prenumerationer enligt R4 Subscriptions Backport (hl7.fhir.uv.subscriptions-backport.r4 1.1.0), med topic https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad och notisinnehåll id-only. Servern SHALL uppfylla backport-IG:ns krav på R4-servrar och annonsera topic med extension capabilitystatement-subscriptiontopic-canonical. Notiser filtreras på samma sätt som sökningar."
   * insert Interaction(create, SHALL)
   * insert Interaction(read, SHALL)
   * insert Interaction(update, SHALL)
   * insert Interaction(delete, SHALL)
   * insert Interaction(search-type, SHALL)
-  * operation[0].name = "status"
-  * operation[=].definition = $backport-subscription-status
-  * operation[=].extension[0].url = $expectation
-  * operation[=].extension[0].valueCode = #SHALL
 
 // Bulk export for system consumers: initial load and resynchronisation
 * rest[0].operation[0].name = "export"

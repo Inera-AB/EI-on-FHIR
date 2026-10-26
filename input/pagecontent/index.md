@@ -49,7 +49,7 @@ IG:n bygger på FHIR R4 (4.0.1) och använder:
 
 | Paket | Version | Används för |
 |---|---|---|
-| [Subscriptions R5 Backport](https://hl7.org/fhir/uv/subscriptions-backport/STU1.1/) (`hl7.fhir.uv.subscriptions-backport.r4`) | 1.1.0 | Prenumeration på ändrade indexposter |
+| [Subscriptions R5 Backport](https://hl7.org/fhir/uv/subscriptions-backport/STU1.1/) (`hl7.fhir.uv.subscriptions-backport.r4`) | 1.1.0 | Prenumeration på ändrade indexposter. Refereras i text, inte som paketberoende; se [Prenumeration](subscriptions.html) |
 | [Bulk Data Access](https://hl7.org/fhir/uv/bulkdata/STU2/) (`hl7.fhir.uv.bulkdata`) | 2.0.0 | Massuttag för grundladdning och återsynk |
 {:.grid}
 

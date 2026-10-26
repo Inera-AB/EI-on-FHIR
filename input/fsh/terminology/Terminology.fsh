@@ -3,7 +3,7 @@
 // maintained in Inera's register of service domains.
 CodeSystem: IneraServiceDomainCodeSystem
 Id: IneraServiceDomainCodeSystem
-Title: "Tjänstedomäner"
+Title: "Kodsystem för tjänstedomäner"
 Description: "Tjänstedomäner som informationsmängd i FHIR-EI. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner."
 * insert IneraMetadata(IneraServiceDomainCodeSystem)
 * ^caseSensitive = true
@@ -19,7 +19,7 @@ Description: "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner."
 
 CodeSystem: IneraEngagementCategoryCodeSystem
 Id: IneraEngagementCategoryCodeSystem
-Title: "Kategorier inom tjänstedomän"
+Title: "Kodsystem för kategorier inom tjänstedomän"
 Description: "Underkategorier inom en tjänstedomän, motsvarande categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."
 * insert IneraMetadata(IneraEngagementCategoryCodeSystem)
 * ^caseSensitive = true
@@ -35,7 +35,7 @@ Description: "Alla kategorier i kodverket för kategorier inom tjänstedomän."
 
 CodeSystem: IneraEngagementIndexIdentifierTypeCodeSystem
 Id: IneraEngagementIndexIdentifierTypeCodeSystem
-Title: "Typer av identifierare för indexposter"
+Title: "Kodsystem för typer av identifierare för indexposter"
 Description: "Skiljer producentens id för indexposten från identifierare som behålls från dagens engagemangsindex."
 * insert IneraMetadata(IneraEngagementIndexIdentifierTypeCodeSystem)
 * ^caseSensitive = true
@@ -45,7 +45,7 @@ Description: "Skiljer producentens id för indexposten från identifierare som b
 
 CodeSystem: IneraDeletionReasonCodeSystem
 Id: IneraDeletionReasonCodeSystem
-Title: "Orsaker till borttag av indexpost"
+Title: "Kodsystem för orsaker till borttag av indexpost"
 Description: "Varför en indexpost tas bort. Orsaken avgör hur mottagare, till exempel ett tunt index, ska hantera borttaget."
 * insert IneraMetadata(IneraDeletionReasonCodeSystem)
 * ^caseSensitive = true
@@ -63,7 +63,7 @@ Description: "Alla orsaker till borttag av indexpost."
 
 CodeSystem: IneraEndpointConnectionTypeCodeSystem
 Id: IneraEndpointConnectionTypeCodeSystem
-Title: "Inera-specifika anslutningstyper"
+Title: "Kodsystem för Inera-specifika anslutningstyper"
 Description: "Anslutningstyper som saknas i HL7:s kodverk för Endpoint.connectionType."
 * insert IneraMetadata(IneraEndpointConnectionTypeCodeSystem)
 * ^caseSensitive = true

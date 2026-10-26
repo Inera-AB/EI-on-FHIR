@@ -3,6 +3,7 @@
 // The version is left out so that it follows the IG version in sushi-config.yaml.
 RuleSet: IneraMetadata(id)
 * ^status = #draft
+* ^experimental = false
 * ^identifier.value = "{id}"
 // Update on every material change to the artifact.
 * ^date = "2026-10-26"
@@ -16,6 +17,7 @@ RuleSet: IneraMetadata(id)
 // which have no identifier element in R4.
 RuleSet: IneraInstanceMetadata
 * status = #draft
+* experimental = false
 * date = "2026-10-26"
 * publisher = "Inera AB"
 * contact.name = "Inera AB"
