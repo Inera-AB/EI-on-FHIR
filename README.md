@@ -55,7 +55,7 @@ The specification and FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based 
 
 Bulk Data `$export` is required in narrative only: Bulk Data Access is published for R4, so its OperationDefinition cannot be referenced from an R5 IG.
 
-An R5 IG validates against the R5 terminology server. Builds without one (`-tx n/a`) report false errors on `SearchParameter.base`; set the shared workflows' terminology input to `https://tx.fhir.org/r5` (see [CI workflows](#ci-workflows)).
+An R5 IG validates against the R5 terminology server, so `publish.yml` and `release.yml` pass `tx-server: https://tx.fhir.org/r5` to the shared workflows, whose default is the R4 server. The shared `pr-qa.yml` always builds without a terminology server (`-tx n/a`) and has no input for one; its QA comment therefore reports three false errors on `SearchParameter.base` and `SearchParameter.target`, which a build against the R5 server does not.
 
 Open questions are listed at the end of the specification and on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
 

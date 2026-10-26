@@ -18,4 +18,7 @@ permissions:
 jobs:
   release:
     uses: Inera-AB/fhir-ig-workflows/.github/workflows/release.yml@v1
+    # The IG is FHIR R5; the shared workflow defaults to the R4 terminology server.
+    with:
+      tx-server: https://tx.fhir.org/r5
     secrets: inherit
