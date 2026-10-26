@@ -1,12 +1,12 @@
-id: inera.core.template
-canonical: https://fhir.inera.se/ig/template
-name: IneraCoreTemplate
-title: "Inera FHIR Implementation Guide Template"
-description: "Mall för Ineras FHIR Implementation Guides."
+id: inera.ei.engagementindex
+canonical: https://fhir.inera.se/ig/engagementindex
+name: IneraEngagementIndex
+title: "FHIR-baserat engagemangsindex (FHIR-EI)"
+description: "Indexprofil, API och händelsemodell för FHIR-EI, ett index över var det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades."
 status: draft
-version: 2.3.0
-fhirVersion: 4.0.1
-copyrightYear: 2024+
+version: 0.1.0
+fhirVersion: 5.0.0
+copyrightYear: 2026+
 releaseLabel: ci-build
 license: CC0-1.0
 
@@ -15,6 +15,12 @@ publisher:
   url: https://www.inera.se
 
 jurisdiction: urn:iso:std:iso:3166#SE "Sweden"
+
+
+# Inline instances (the resources inside the transaction example) get no id, since a
+# conditional PUT resolves the target from its identifier.
+instanceOptions:
+  setId: standalone-only
 
 parameters:
   show-inherited-invariants: false
@@ -32,10 +38,20 @@ pages:
     title: Användningsfall
   roles-and-responsibilities.md:
     title: Roller och ansvar
+  information-model.md:
+    title: Indexposten
+  information-sets.md:
+    title: Kodverk för tjänster och informationsmängder
+  event-model.md:
+    title: Händelsemodell och övergång
+  ehm-coexistence.md:
+    title: Samexistens med eHM:s patientindex
   mappings.md:
     title: Mappning till profiler
   rest-interactions.md:
     title: REST-interaktioner och sökparametrar
+  subscriptions.md:
+    title: Prenumeration
   expected-responses.md:
     title: Förväntade svar
   capabilitystatement.md:
@@ -43,11 +59,13 @@ pages:
   error-handling.md:
     title: Felhantering
   security.md:
-    title: Säkerhet och behörighet
+    title: Spärr, loggning och behörighet
   testing.md:
     title: Testning och validering
   about.md:
     title: Om
+  open-issues.md:
+    title: Öppna frågor
   downloads.md:
     title: Nedladdningar
   version-history.md:

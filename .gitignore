@@ -11,3 +11,6 @@ fsh-generated/
 # OS
 .DS_Store
 Thumbs.db
+
+# IG Publisher writes this to the repository root during a build
+Requirements-fromNarrative.json

@@ -1,21 +1,11 @@
-Denna sida beskriver informationsunderlaget som denna Implementation Guide bygger på. Detaljerade begrepps- och informationsmodeller, samt fullständiga processbeskrivningar, återfinns i den informationsspecifikation som anges nedan — de upprepas inte här för att undvika dubbeldokumentation som kan glida isär över tid.
-
-*Ange vilken informationsspecifikation denna IG baseras på.*
+FHIR-EI realiserar samma information som dagens engagemangsindex, i en FHIR-form som kan växa från tjänstedomäner och kategorier till IG:er och profiler. Informationsunderlaget är därför dagens engagemangsindex och dess tjänstekontrakt.
 
 | | |
 |---|---|
-| **Informationsspecifikation** | *[Namn på informationsspecifikationen]([länk till publicerat dokument])* |
-| **Version** | *[Version/datum för den informationsspecifikation som denna IG realiserar]* |
+| **Informationsunderlag** | Tjänstedomänen `riv:itintegration:engagementindex` med tjänstekontrakten FindContent, Update och ProcessNotification |
+| **Version** | Den version av tjänstedomänen som dagens engagemangsindex implementerar |
+{:.grid}
 
-**Länkar:**
+Det finns ingen fristående informationsspecifikation för FHIR-EI. Designen och dess skäl beskrivs i [specen](https://github.com/Inera-AB/EI-on-FHIR/blob/main/spec/fhir-ei-spec.md) i IG:ns repo, och denna IG realiserar den. Begrepp och principer beskrivs under [Inledning](introduction.html), den logiska modellen för indexposten under [Indexposten](information-model.html), och hur den motsvaras av FHIR-element och fält i dagens engagemangsindex under [Mappning till profiler](mappings.html).
 
-- *[Länk till publicerad informationsspecifikation]*
-- *[Länk till begreppsmodell]*
-- *[Länk till informationsmodell]*
-- *[Länk till ev. externa mappningsdokument]*
-
-Se [Mappning till profiler](mappings.html) för vilka delar av informationsspecifikationen som denna IG realiserar och eventuella avvikelser eller tillägg i FHIR-realiseringen.
-
----
-
-> **Vägledning för författare:** Håll denna sida kort. Användningsfall samt roller och ansvar beskrivs under [Användningsfall](use-cases.html) och [Roller och ansvar](roles-and-responsibilities.html).
+Användningsfall samt roller och ansvar beskrivs under [Användningsfall](use-cases.html) och [Roller och ansvar](roles-and-responsibilities.html).

@@ -1,11 +1,65 @@
-# Inera FHIR Implementation Guide Template
+# FHIR-baserat engagemangsindex (FHIR-EI)
 
-[![Build and publish IG](https://github.com/Inera-AB/IneraFHIRTemplate/actions/workflows/publish.yml/badge.svg)](https://github.com/Inera-AB/IneraFHIRTemplate/actions/workflows/publish.yml)
-[![Validate FSH](https://github.com/Inera-AB/IneraFHIRTemplate/actions/workflows/validate.yml/badge.svg)](https://github.com/Inera-AB/IneraFHIRTemplate/actions/workflows/validate.yml)
-[![FHIR R4](https://img.shields.io/badge/FHIR-R4-blue)](https://hl7.org/fhir/R4/)
+[![Build and publish IG](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml)
+[![Validate FSH](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml)
+[![FHIR R5](https://img.shields.io/badge/FHIR-R5-blue)](https://hl7.org/fhir/R5/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-This repository is a GitHub template for Inera FHIR Implementation Guides. It includes the standard IG structure, author guidance pages, an example FSH profile, and pre-configured GitHub Actions for validation and publishing.
+The specification and FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based engagement index. FHIR-EI answers three questions about a patient: which systems hold information about them, which information sets are there, and when they were last updated. It replaces today's engagement index (RIV-TA `itintegration:engagementindex`) when NPÖ and 1177 move to FHIR, following the same pattern as NHS England's National Record Locator and IHE MHD. Both the specification and the IG are written in Swedish.
+
+| | |
+|---|---|
+| Package id | `inera.ei.engagementindex` |
+| Canonical | `https://fhir.inera.se/ig/engagementindex` |
+| FHIR version | 5.0.0 |
+| Branch builds | `https://inera-ab.github.io/EI-on-FHIR/` |
+| Status | Draft, version 0.1.0 (unpublished) |
+
+### What is in this repository
+
+| Part | Where | What it is |
+|---|---|---|
+| Specification | [`spec/fhir-ei-spec.md`](spec/fhir-ei-spec.md) | The design and its rationale: information model, code systems, API, event model and transition, access control, coexistence with eHM's patient index, open questions. Design changes are made here first |
+| Implementation Guide | `input/`, `sushi-config.yaml` | The formal realisation in FSH and narrative pages, built with SUSHI and IG Publisher. Where the IG makes a choice the specification leaves open, the IG page *Mappning till profiler* says so |
+| Publishing instructions | [`docs/`](docs/) | Swedish instructions for versioning and releases, from the Inera IG template |
+
+### Design in brief
+
+- **One index entry per patient × endpoint × service**, as a profiled R5 `DocumentReference` (`IneraIndexEntry`). A service is an IG (today a RIV-TA service domain); information sets are profiles within it (today categories). Each service publishes an application profile of the common entry in its own IG.
+- **Pointers, not content.** The entry says where and when, never what; elements that would carry clinical content are prohibited.
+- **Lifecycle by deregistration, not deletion.** The base `status` plus the extensions `registrationStatus` and `deregistrationReason`. Deregistered entries remain as tombstones for a retention period, so consumers that missed notifications can reconcile.
+- **Producers are identified by their endpoint in [tjänstekatalogen](https://github.com/Inera-AB/tjanstekatalog).** The same URL is the producer's namespace in `identifier.system`, checked by an invariant, and a producer may only register for care providers that list its endpoint there.
+- **Logical address is carried separately.** In tjänstekatalogen a logical address is an organisation's HSA-id, not an endpoint, so RIV-TA sources carry `logicalAddress` next to the endpoint.
+- **Transition without changes to producers.** An adapter mirrors today's engagement index into FHIR-EI. It has an agent role and an address register built from TAK and tjänstekatalogen, the same idea as in [EHDS-bryggan](https://github.com/Inera-AB/ehds-brygga).
+- **Native R5 subscriptions** on the topic `indexpost-andrad`, with `id-only` notifications, `$status` and `$events`; reconciliation with `_lastUpdated`; bulk export with `$export`.
+- **FHIR-EI is its own access control point:** blocking (spärr), logging and filtering apply to every read, subscription and export.
+
+### Related repositories
+
+| Repository | Relation |
+|---|---|
+| [Inera-AB/tjanstekatalog](https://github.com/Inera-AB/tjanstekatalog) | Holds the endpoints that index entries point to and that identify producers. Its organisations' HSA-ids are the logical addresses |
+| [Inera-AB/ehds-brygga](https://github.com/Inera-AB/ehds-brygga) | Uses the engagement index before calling producers, and is one of the address register's possible targets for RIV-TA sources |
+
+### IG artifacts
+
+| Artifact | FSH file |
+|---|---|
+| Index entry profile on R5 `DocumentReference` (`IneraIndexEntry`) | `input/fsh/profiles/IneraIndexEntry.fsh` |
+| Extensions: source endpoint, care unit, registering producer, logical address, source system, content last updated, registration status, deregistration reason | `input/fsh/extensions/Extensions.fsh` |
+| Code systems and value sets | `input/fsh/terminology/Terminology.fsh` |
+| SubscriptionTopic `indexpost-andrad` and a Subscription profile (`IneraIndexSubscription`) | `input/fsh/subscriptions/Subscriptions.fsh` |
+| National search parameters | `input/fsh/searchparameters/SearchParameters.fsh` |
+| Server CapabilityStatement | `input/fsh/capabilitystatements/IneraIndexServer.fsh` |
+| Examples | `input/fsh/examples/Examples.fsh` |
+
+Bulk Data `$export` is required in narrative only: Bulk Data Access is published for R4, so its OperationDefinition cannot be referenced from an R5 IG.
+
+An R5 IG validates against the R5 terminology server. Builds without one (`-tx n/a`) report false errors on `SearchParameter.base`; set the shared workflows' terminology input to `https://tx.fhir.org/r5` (see [CI workflows](#ci-workflows)).
+
+Open questions are listed at the end of the specification and on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
+
+The repository was created from [IneraFHIRTemplate](https://github.com/Inera-AB/IneraFHIRTemplate) 2.3.0. The sections below describe how the template's structure, publishing and CI work.
 
 ---
 
@@ -15,7 +69,7 @@ Three deliberate choices shape how this template's narrative pages are organised
 
 - **Menu structure inspired by European specifications.** The top menu (Home / Inledning / Funktionellt / Implementering / Om / Artefakter — Home / Introduction / Functional / Implementation / About / Artifacts) mirrors the pattern used by specifications such as FHIR ePS, rather than the ad-hoc Background/Artifacts grouping used in earlier versions of this template. Funktionellt and Implementering are expandable dropdowns grouping several narrower topic pages; this gives implementers a familiar entry point across Inera and other European FHIR IGs, and separates background material (Inledning), business requirements (Funktionellt), and what implementers actually build against (Implementering) into distinct top-level sections.
 - **Artifacts is a single, auto-generated page, not hand-maintained catalog pages.** Profiles, terminology (code systems/value sets) and examples are not given their own narrative pages — IG Publisher already lists them automatically on the generated `artifacts.html` page, so the "Artefakter" menu entry links straight there. Maintaining separate `profiles.md`/`terminology.md`/`examples.md` pages would just duplicate that listing and require manual upkeep as profiles change.
-- **The information model is published externally, separate from the IG.** Concept models, information models and detailed business workflows are not restated in this template — they live in an authoritative, independently published information specification that the IG references (see `information-basis.md`'s "Informationsunderlag" page, under Funktionellt, and `mappings.md`). This avoids duplicate documentation that can drift out of sync between the information specification and the IG over time.
+- **The information model is published externally, separate from the IG.** Concept models, information models and detailed business workflows are not restated in this template — they live in an authoritative, independently published information specification that the IG references (see `information-basis.md`'s "Informationsunderlag" page, under Funktionellt, and `mappings.md`). This avoids duplicate documentation that can drift out of sync between the information specification and the IG over time. For FHIR-EI there is no separate information specification; the design lives in [`spec/fhir-ei-spec.md`](spec/fhir-ei-spec.md) in this repository, and the IG's *Informationsunderlag* page points to today's engagement index contracts.
 
 ---
 
@@ -62,53 +116,9 @@ The Swedish instructions in [`docs/`](docs/) describe the process in full:
 
 ---
 
-## Creating a new IG from this template
+## Before the first release
 
-Done once per IG repo. The web root on fhir.inera.se and the feeds are shared by all Inera IGs and already set up. In the addresses below, `<repo>` is the repository name and `<name>` the third part of the package id, e.g. `laboratory` in `inera.lab.laboratory`.
-
-### Repository and GitHub settings
-
-1. **Create the repository.** On this repository click **Use this template** → **Create a new repository**. Choose `inera-ab` as owner and a name that describes the IG, e.g. `ig-laboratory`. All files, including the workflows, are copied.
-2. **Give Actions write access:** Settings → Actions → General → *Workflow permissions* → **Read and write permissions**. Branch builds need it to write to `gh-pages`.
-3. **Add the secret `FHIR_PORTAL_TOKEN`:** Settings → Secrets and variables → Actions. A fine-grained PAT with **Contents: Read and write** on `inera-ab/fhir-portal` and `inera-ab/fhir-portal-test`. Releases use it to publish to fhir.inera.se and update the IG catalog. Note the token's expiry date.
-
-### IG identity
-
-4. **Fill in `sushi-config.yaml`:**
-
-   | Field | Example | Notes |
-   |-------|---------|-------|
-   | `id` | `inera.lab.laboratory` | Exactly three parts: `inera.<domain>.<name>`. `<name>` becomes the IG's folder on fhir.inera.se and must be unique |
-   | `canonical` | `https://fhir.inera.se/ig/laboratory` | `https://fhir.inera.se/ig/<name>`. Never change it after the first release |
-   | `name` | `IneraLaboratory` | PascalCase, no spaces |
-   | `title` | `"Inera Laboratory IG"` | Shown in the IG header and in the IG catalog |
-   | `description` | `"FHIR-profiler för laboratoriesvar."` | Shown in the IG catalog |
-   | `version` | `0.1.0` | The version the next release will get |
-   | `status` | `draft` | Changed as the IG matures |
-   | `fhirVersion` | `4.0.1` | One repository per FHIR base version |
-
-5. **Set `ig = fsh-generated/resources/ImplementationGuide-<id>.json` in `ig.ini`**, with the same `id`. Easy to miss, and then IG Publisher finds no IG.
-6. **Fill in `publication-request.json`** for the first release: `"mode": "milestone"`, `"first": true`, a `desc`, `title`, `introduction`, `ci-build` (`https://inera-ab.github.io/<repo>`) and the FHIR IG registry fields. The workflow fills in `package-id`, `version` and `path`.
-7. **Remove the lines `with:` and `package-feed: false`** in `.github/workflows/release.yml`. They keep the template out of packages.fhir.org; your IG's packages should go there.
-8. **Empty `input/pagecontent/version-history.md`** of the template's entries. Keep the first line, `{::options header_offset="1" /}` (see [Version history](#version-history)).
-9. **Point the package link** in `input/pagecontent/downloads.md` to `https://fhir.inera.se/ig/<name>/package.tgz`, and update the matching line in `input/ignoreWarnings.txt`.
-10. **Give each profile its own `* ^version`** if profiles are versioned separately. Otherwise they get the IG version.
-
-### After the first push to `main`
-
-11. **Turn on GitHub Pages:** Settings → Pages → *Deploy from a branch* → `gh-pages` / `(root)`. The `gh-pages` branch is created by the first build on `main`. Without this step no branch builds are visible.
-12. **Create the `develop` branch** from `main`.
-
-The template no longer needs *Allow GitHub Actions to create and approve pull requests*. That setting was for release-please, which has been removed.
-
-### Check before the first release
-
-- [ ] `id` is the same in `sushi-config.yaml` and `ig.ini`, and has three parts
-- [ ] `<name>` is not already used on `https://fhir.inera.se/ig/`
-- [ ] The repository has no `package-list.json` (the publisher keeps it in the web root and refuses to publish from a source folder that has one)
-- [ ] The build on `main` is green and visible at `https://inera-ab.github.io/<repo>/`
-- [ ] `FHIR_PORTAL_TOKEN` exists and has not expired
-- [ ] A test publication has succeeded
+The IG identity, `ig.ini`, `publication-request.json` (`"first": true`), `release.yml` and the package link are already set for FHIR-EI. The remaining one-time steps are repository settings: GitHub Pages on `gh-pages`, Actions write access, the `FHIR_PORTAL_TOKEN` secret and a `develop` branch. See [Förbereda en IG för publicering](docs/forbereda-och-releasa-ig.md#förberedelser-inför-första-publiceringen).
 
 ---
 
@@ -320,13 +330,20 @@ Recommended VS Code extensions:
   release.yml              Releases with -go-publish to the web root
   cleanup.yml              Remove build dir for deleted branches
 docs/                      Swedish instructions for versioning and publishing
+spec/                      The FHIR-EI specification (design and rationale)
 publication-request.json   What the next release is (desc, mode, status, sequence)
 sushi-config.yaml          IG metadata, dependencies, pages and menu
 ig.ini                     IG Publisher configuration
 input/
   fsh/
     aliases.fsh            Shared FSH aliases
+    rulesets.fsh           Shared metadata and CapabilityStatement rule sets
     profiles/              FHIR profile definitions (.fsh)
+    extensions/            Extension definitions
+    terminology/           Code systems and value sets
+    searchparameters/      SearchParameter definitions
+    subscriptions/         SubscriptionTopic and Subscription profile
+    capabilitystatements/  CapabilityStatement definitions
     examples/              Example instances (.fsh)
   pagecontent/             Narrative IG pages (.md); no leading "# Title", the template renders the page title
   images/                  Images, CSS and diagrams
@@ -337,4 +354,4 @@ input/
 
 ## Governance
 
-This template is maintained by Inera AB. See the [Inera FHIR Landing Page](https://www.inera.se/fhir) for conformance requirements that apply to all Inera FHIR IGs.
+This IG is maintained by Inera AB. See the [Inera FHIR Landing Page](https://www.inera.se/fhir) for conformance requirements that apply to all Inera FHIR IGs.
