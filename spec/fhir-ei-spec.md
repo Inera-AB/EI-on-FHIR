@@ -135,6 +135,7 @@ Description: "Gemensam indexpost. Anger att en producent via en endpoint har inf
 * type 1..1 MS  // tjänst (IG)
 * subject 1..1 MS
 * subject only Reference(Patient)
+* subject.type = "Patient"  // logisk referens; möjliggör patient:identifier
 * subject.identifier 1..1
 * custodian 1..1 MS
 * content 1..1 MS
@@ -186,7 +187,7 @@ Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får v
 
 | Operation | Aktör | FHIR-interaktion | Motsvarighet idag |
 |---|---|---|---|
-| Sök indexposter för en patient | Konsument | `GET DocumentReference?patient.identifier=…&type=…` (standard: `status=current`) | FindContent |
+| Sök indexposter för en patient | Konsument | `GET DocumentReference?patient:identifier=…&type=…` (standard: `status=current`) | FindContent |
 | Filtrera på informationsmängd | Konsument | Standardparametrarna `format-code` / `format-canonical` (på `content.profile`) | FindContent med kategori |
 | Filtrera på aktualitet | Konsument | Nationell sökparameter `content-last-updated=gt…` | FindContent med tidsfilter |
 | Registrera eller uppdatera post | Producent | Villkorad `PUT DocumentReference?identifier=<producent>\|<id>`, eller `transaction`-Bundle för flera | Update |
@@ -195,7 +196,7 @@ Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får v
 | Inkrementell avstämning | Konsument | `GET DocumentReference?_lastUpdated=gt…&status=current,superseded,entered-in-error` | Saknas |
 | Massuttag | Systemkonsument | Bulk Data `$export` med `_type=DocumentReference` och `_since` | Saknas |
 
-Sökparametrar. Kedjad sökning på `patient.identifier` är obligatorisk för servern. `content-last-updated` och `source-endpoint` är nationella sökparametrar. De definieras som `SearchParameter`-resurser i IG:n och annonseras i FHIR-EI:s `CapabilityStatement`, tillsammans med vilka prenumerationsfilter som stöds.
+Sökparametrar. Sökning på patient görs med modifieraren `:identifier` (`patient:identifier=`), som är obligatorisk för servern. Patienten är en logisk referens med personnummer eller samordningsnummer, och indexet har inga Patient-resurser. En kedjad sökning (`patient.identifier=`) skulle kräva att referensen löses upp till en Patient i FHIR-EI, medan `:identifier` söker direkt på referensens identifierare. Indexposten anger därför `subject.type = Patient`, så att servern kan avgöra att referensen gäller en patient. Vårdgivaren söks på samma sätt, med `custodian:identifier=` och HSA-id. `content-last-updated` och `source-endpoint` är nationella sökparametrar. De definieras som `SearchParameter`-resurser i IG:n och annonseras i FHIR-EI:s `CapabilityStatement`, tillsammans med vilka prenumerationsfilter som stöds.
 
 Endpoint. Varje post har exakt en endpoint, som refereras i tjänstekatalogen. Katalogen är auktoritativ för endpointens egenskaper. Adressen finns också i `content.attachment.url`, så att konsumenten kan anropa källan utan ett extra uppslag.
 
@@ -211,7 +212,7 @@ Villkorad uppdatering. Villkoret utvärderas bara mot anropande producents egna 
 
 Samtidiga uppdateringar av samma post hanteras med versionsvillkor (`If-Match` på `ETag`) eller med regeln om `contentLastUpdated` i avsnittet om händelser. En producent får inte ändra `identifier` eller `registeringProducer` på en befintlig post.
 
-Prenumeration. R5 har topic-baserade prenumerationer inbyggda, inklusive operationerna `$status` och `$events`. Topic `indexpost-andrad` triggar på skapande, uppdatering och avregistrering. Avregistrering syns som en uppdatering till status `superseded` eller `entered-in-error`, inte som en radering. Filter stöds på patient, `type` och `custodian`. Standardinnehåll är `id-only`, så att notisen inte bär mer patientinformation än nödvändigt.
+Prenumeration. R5 har topic-baserade prenumerationer inbyggda, inklusive operationerna `$status` och `$events`. Topic `indexpost-andrad` triggar på skapande, uppdatering och avregistrering. Avregistrering syns som en uppdatering till status `superseded` eller `entered-in-error`, inte som en radering. Filter stöds på patient (`patient:identifier`), `type` och vårdgivare (`custodian:identifier`). Standardinnehåll är `id-only`, så att notisen inte bär mer patientinformation än nödvändigt.
 
 Massuttag kompletterar men ersätter inte prenumeration. Bulk Data är asynkront och inte avsett för realtidsutbyte. Ett `_since`-uttag innehåller även avregistrerade poster inom lagringstiden, så att en konsument kan upptäcka borttag utan att ha fått notisen.
 
