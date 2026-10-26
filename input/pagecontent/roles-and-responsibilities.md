@@ -1,13 +1,14 @@
-Sex roller deltar i [användningsfallen](use-cases.html), plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.
+Sju roller deltar i [användningsfallen](use-cases.html), plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.
 
 | Roll | Ansvar |
 |---|---|
 | FHIR-EI | Lagrar indexposter. Är sin egen åtkomstkontrollpunkt: kontrollerar behörighet och spärrar, filtrerar och loggar alla anrop. Auktoriserar producenternas skrivningar mot den autentiserade producentidentiteten. Skickar notiser till prenumeranter och håller händelselogg och gravstenar under sina lagringstider |
 | Producent | Registrerar, uppdaterar och avregistrerar indexposter, så att indexet speglar vilken information producenten håller. Identifieras med sin endpoint i tjänstekatalogen. Försöker igen tills FHIR-EI kvitterat |
-| Övergångsadapter | Speglar dagens engagemangsindex till FHIR-EI utan egen affärslogik, gör grundladdningen och skriver tillbaka FHIR-registrerade poster till dagens index. Har ombudsroll och håller ett adressregister från logisk adress och tjänstedomän till endpoint |
+| Övergångsadapter | Speglar dagens engagemangsindex till FHIR-EI per tjänstedomän, utan egen affärslogik, och gör grundladdningen. Skriver inte tillbaka till dagens index. Har ombudsroll och håller ett adressregister från logisk adress och tjänstedomän till endpoint |
+| Indexeringsagent | Prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar; se [Stöd för producenter](producer-support.html) |
 | Konsument | Söker i eller prenumererar på indexet för en patient, inom sitt uppdrag och syfte. Stämmer av efter avbrott. Hämtar informationen från producenternas endpoints |
 | Systemkonsument | Gör massuttag för grundladdning och återsynk, till exempel en framtida synk till eHM:s patientindex |
-| Tjänsteägare | Publicerar tjänstens tillämpning av indexprofilen i tjänstens IG |
+| Tjänsteägare | Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics och producentens skyldigheter i tjänstens IG |
 {:.grid}
 
 Tjänstekatalogen är auktoritativ för producenternas endpoints, och för vilka vårdgivare som listar dem.
@@ -27,6 +28,9 @@ Tjänstekatalogen är auktoritativ för producenternas endpoints, och för vilka
 | Konsument | SHALL deduplicera notiser och ignorera en notis om en äldre version än den den redan har; se [Händelsemodell och övergång](event-model.html) |
 | Konsument | SHALL ignorera kodningar i `type` och `content.profile` som den inte förstår |
 | Tjänsteägare | SHALL publicera tillämpningen som en profil med [Indexpost](StructureDefinition-IneraIndexEntry.html) som förälder |
+| Tjänsteägare | SHALL publicera en `SubscriptionTopic` per informationsmängd som anger vad som räknas som en ändring, och SHOULD ange producentens skyldigheter med extensionen `obligation`; se [Indexposten](information-model.html) |
+| Producent | SHALL NOT registrera en tjänst enbart i FHIR-EI förrän tjänstens konsumenter läser FHIR-EI; se [Händelsemodell och övergång](event-model.html) |
+| Producent | MAY märka en post med säkerhetsetiketter i `meta.security`, till exempel `NOPAT`; se [Spärr, loggning och behörighet](security.html) |
 {:.grid}
 
 ### Ansvar under övergången

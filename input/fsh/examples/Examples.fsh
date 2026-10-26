@@ -33,6 +33,30 @@ Usage: #example
 * content.profile[category].valueCoding = $engagement-category#voo
 * content.profile[contentProfile].valueCanonical = "http://hl7.org/fhir/StructureDefinition/Composition"
 
+Instance: IndexpostEjForPatient
+InstanceOf: IneraIndexEntry
+Title: "Indexpost som inte visas för patient eller närstående"
+Description: "Producenten har märkt posten med säkerhetsetiketten NOPAT. FHIR-EI lämnar inte ut den vid patientens direktåtkomst eller till ombud och vårdnadshavare, men vid sammanhållen journalföring prövas den som vanligt."
+Usage: #example
+* meta.lastUpdated = "2026-10-23T09:12:40+02:00"
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActCode#NOPAT
+* extension[sourceEndpoint].valueReference = Reference(https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
+* extension[careUnit].valueIdentifier.system = $hsaid
+* extension[careUnit].valueIdentifier.value = "SE0000000000-VE03"
+* extension[registeringProducer].valueReference.reference = "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"
+* extension[contentLastUpdated].valueDateTime = "2026-10-23T09:12:31+02:00"
+* extension[registrationStatus].valueCode = #active
+* identifier.system = "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"
+* identifier.value = "3c4d5e6f-7a8b-4c9d-8e0f-1a2b3c4d5e6f"
+* status = #current
+* type.coding[serviceDomain] = $service-domain#riv:clinicalprocess:healthcond:description
+* type.coding[implementationGuide] = urn:ietf:rfc:3986#https://example.org/fhir/ImplementationGuide/vardochomsorgsdokumentation
+* insert TestPatient
+* insert TestCustodian(SE0000000000-VG01)
+* content.attachment.url = "https://journal-a.example.org/fhir"
+* content.profile[category].valueCoding = $engagement-category#voo
+* content.profile[contentProfile].valueCanonical = "http://hl7.org/fhir/StructureDefinition/Composition"
+
 Instance: IndexpostFranAdapter
 InstanceOf: IneraIndexEntry
 Title: "Indexpost speglad av övergångsadaptern"

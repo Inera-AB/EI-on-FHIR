@@ -52,6 +52,8 @@ pages:
     title: REST-interaktioner och sökparametrar
   subscriptions.md:
     title: Prenumeration
+  producer-support.md:
+    title: Stöd för producenter
   expected-responses.md:
     title: Förväntade svar
   capabilitystatement.md:

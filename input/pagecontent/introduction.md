@@ -15,6 +15,7 @@ FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangs
 | Endpoint | Producentens åtkomstpunkt, registrerad i tjänstekatalogen |
 | Logisk adress | Den adress en RIV-TA-konsument anger mot tjänsteplattformen. I tjänstekatalogen är den en organisations HSA-id |
 | Producent | System som registrerar, uppdaterar och avregistrerar indexposter: källsystemet eller övergångsadaptern. Identifieras med sin endpoint i tjänstekatalogen |
+| Indexeringsagent | Komponent som prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar. Se [Stöd för producenter](producer-support.html) |
 | Konsument | Tjänst som söker i eller prenumererar på indexet, till exempel NPÖ och 1177 |
 | Tunt index | eHM:s patientindex kopplat till NDI |
 {:.grid}
