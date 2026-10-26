@@ -8,12 +8,13 @@ Den här sidan beskriver vad som har ändrats i varje version. Listan över alla
 
 ### Features
 
-- Första utkastet av FHIR-EI, byggt från specutkastet *FHIR-baserad engagemangsindexkomponent*
-- Profiler för indexpost (EpisodeOfCare) och källsystemets endpoint (Endpoint)
-- Krav på prenumeration enligt R4 Subscriptions Backport, i text
-- Extensions för källsystemets endpoint, vårdenhet, senaste innehåll, innehållsprofil och orsak till borttag
-- Kodsystem och värdemängder för tjänstedomäner, kategorier, identifierartyper, orsaker till borttag och anslutningstyper
-- NamingSystem för adapterns identifierare och clinicalProcessInterestId
-- Sökparametrar för senaste innehåll, källsystemets endpoint, vårdenhet och innehållsprofil
+- Första utkastet av FHIR-EI, byggt från specen *FHIR-baserad engagemangsindexkomponent*
+- FHIR R5. Indexposten är en profilerad `DocumentReference` med en post per patient × endpoint × tjänst
+- Livscykel med registrering och avregistrering i stället för radering: basstatus plus extensions för registreringsstatus och orsak till avregistrering
+- Extensions för producentens endpoint i tjänstekatalogen, vårdenhet, registrerande producent och innehållets senaste ändring
+- Kodsystem och värdemängder för tjänstedomäner, kategorier, registreringsstatus och orsaker till avregistrering
+- SubscriptionTopic `indexpost-andrad` och en profil för prenumeration med `id-only`
+- Nationella sökparametrar `content-last-updated` och `source-endpoint`
 - CapabilityStatement för FHIR-EI som server
-- Sidor om händelsemodell och övergång, samexistens med eHM:s patientindex, prenumeration, spärr och loggning samt öppna frågor
+- NamingSystem för övergångsadapterns identifierare
+- Sidor om indexposten, händelsemodell och övergång, samexistens med eHM:s patientindex, prenumeration, spärr och loggning samt öppna frågor

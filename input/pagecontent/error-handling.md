@@ -4,11 +4,12 @@ Fel rapporteras med HTTP-statuskod och en `OperationOutcome` i svarskroppen. `Op
 |---|---|---|
 | `400 Bad Request` | `invalid` | Ogiltig sökning, till exempel utan `patient:identifier`, eller okänd sökparameter |
 | `401 Unauthorized` | `login` | Åtkomsttoken saknas eller är ogiltig |
-| `403 Forbidden` | `forbidden` | Åtkomstkontexten räcker inte för anropet, eller en producent försöker skriva en post där den inte är registrerande system |
+| `403 Forbidden` | `forbidden` | Åtkomstkontexten räcker inte för anropet, eller en producent försöker skriva en post som inte tillhör dess identitet |
 | `404 Not Found` | `not-found` | Posten finns inte, eller anroparen har inte rätt att se den |
-| `410 Gone` | `deleted` | Posten är borttagen |
-| `412 Precondition Failed` | `multiple-matches` | En villkorad `PUT` eller `DELETE` matchar flera poster |
-| `422 Unprocessable Entity` | `processing` | Posten uppfyller inte [Indexpost](StructureDefinition-IneraEngagementIndexEntry.html), eller refererar till en okänd Endpoint |
+| `405 Method Not Allowed` | `not-supported` | `DELETE` på en indexpost; avregistrering sker med villkorad `PUT` |
+| `409 Conflict` | `conflict` | En producent försöker ändra `identifier` eller `registeringProducer` på en befintlig post |
+| `412 Precondition Failed` | `multiple-matches` | En villkorad `PUT` matchar flera poster, eller `If-Match` stämmer inte med aktuell version |
+| `422 Unprocessable Entity` | `processing` | Posten uppfyller inte [Indexpost](StructureDefinition-IneraIndexEntry.html) eller tjänstens tillämpning |
 | `429 Too Many Requests` | `throttled` | Anroparen har överskridit sin kvot. `Retry-After` anger när den kan försöka igen |
 | `5xx` | `exception` | Tillfälligt fel i FHIR-EI eller i spärr-, logg- eller säkerhetstjänsten |
 {:.grid}
@@ -19,6 +20,6 @@ En `transaction` registreras helt eller inte alls. Vid fel i någon entry svarar
 
 ### Omförsök
 
-En producent SHALL försöka igen vid `429` och `5xx`, med ökande intervall. Vid `400`, `403` och `422` hjälper inte ett omförsök; händelsen läggs i kön för manuell hantering. Se [Händelsemodell och övergång](event-model.html).
+En producent SHALL försöka igen vid `429` och `5xx`, med ökande intervall. Vid `400`, `403`, `409` och `422` hjälper inte ett omförsök; händelsen läggs i kön för manuell hantering. Se [Händelsemodell och övergång](event-model.html).
 
 Om spärrtjänsten inte svarar lämnar FHIR-EI inte ut några poster. Svaret är då `503 Service Unavailable`, inte ett tomt sökresultat.

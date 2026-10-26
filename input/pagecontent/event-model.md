@@ -1,25 +1,41 @@
 Leveransgarantin är minst den samma som idag: en ändring i källsystemet ska nå indexet utan förlust, i rätt ordning per post, och kunna återhämtas efter avbrott. Det gäller både dagens RIV-TA-producenter och framtida FHIR-producenter.
 
-### Krav på händelsehanteringen
+### Registrering, från producent till FHIR-EI
 
 | Krav | Innebörd | Hur det uppfylls |
 |---|---|---|
-| Idempotens | Samma händelse två gånger ger samma resultat | Uppdatering och borttag sker villkorat på `identifier[sourceEntryId]` |
-| Ordning per post | Sena eller omkastade händelser skriver inte över nyare | FHIR-EI skriver inte en uppdatering vars `mostRecentContent` är äldre än den lagrade; se nedan |
+| Idempotens | Samma händelse två gånger ger samma resultat | Uppdatering och avregistrering sker villkorat på producentbunden `identifier` |
+| Ordning per post | Sena eller omkastade händelser skriver inte över nyare | En uppdatering med äldre `contentLastUpdated` än den lagrade ignoreras. En avregistrering kan bara upphävas av en ny registrering med senare `contentLastUpdated` |
 | Minst en leverans | Ingen händelse går förlorad | Producent eller adapter försöker igen tills FHIR-EI kvitterat. Ej levererbara händelser hamnar i en kö för manuell hantering |
 | Atomicitet | En samling ändringar registreras helt eller inte alls | `transaction`-Bundle |
-| Avstämning | Avvikelser efter avbrott hittas och rättas | Återsynk enligt [Samexistens med eHM:s patientindex](ehm-coexistence.html) |
 {:.grid}
 
-#### Äldre uppdateringar
+En ignorerad uppdatering besvaras med `200 OK` och den lagrade versionen, med oförändrad `ETag`. Producenten ser att inget skrevs och försöker inte igen. Samtidiga uppdateringar av samma post hanteras med versionsvillkor (`If-Match` på `ETag`) eller med regeln om `contentLastUpdated`.
 
-När en villkorad `PUT` träffar en lagrad post vars `mostRecentContent` är senare än den inkommande, skriver FHIR-EI inte uppdateringen. Svaret är `200 OK` med den lagrade versionen och oförändrad `ETag`, så att producenten ser att inget skrevs och inte försöker igen. Samma `mostRecentContent` som den lagrade skrivs som vanligt, så att en producent kan rätta övriga fält.
+### Notiser, från FHIR-EI till prenumerant
 
-Specen lämnade öppet om sådana uppdateringar ska avvisas eller ignoreras. IG:n väljer att ignorera dem, eftersom ett felsvar skulle få en producent med minst-en-leverans att försöka igen i onödan.
+Principen är att prenumerationen ger snabbhet och avstämningen ger korrekthet. En konsument ska kunna återställa en korrekt bild även om den missat notiser.
 
-#### Orsak vid borttag
+| Fråga | Regel |
+|---|---|
+| Kan notiser komma flera gånger? | Ja. Varje notis bär ett löpande händelsenummer i `SubscriptionStatus`. Konsumenten deduplicerar på händelsenummer och postens `meta.versionId` |
+| Garanteras ordning? | Bara per post, via `meta.versionId`. Konsumenten ignorerar en notis om en äldre version än den den redan har. Ingen ordning garanteras mellan poster |
+| Hur upptäcks missade notiser? | Luckor i händelsenumren, uteblivna heartbeat-notiser eller fel vid anrop av `$status` på prenumerationen |
+| Hur återhämtar sig konsumenten? | Kortare avbrott: `$events` för att hämta missade händelser ur händelseloggen. Längre avbrott: inkrementell avstämning med `_lastUpdated` inklusive avregistrerade poster. Avbrott längre än gravstenarnas lagringstid, eller ny konsument: `$export` och full omladdning |
+| Hur syns borttag? | Som uppdatering till status `superseded` eller `entered-in-error`. Gravstenen finns kvar under lagringstiden, så borttaget syns även vid avstämning |
+{:.grid}
 
-Ett borttag görs med villkorad `DELETE`, som inte har någon kropp. En producent som vill ange orsak gör först en villkorad `PUT` med extension [deletionReason](StructureDefinition-DeletionReason.html) och sedan `DELETE`. Versionen med orsaken blir då den sista i postens historik; se exemplet [Indexpost med orsak till borttag](EpisodeOfCare-IndexpostMedBorttagsorsak.html). Hur det ska göras atomärt är en [öppen fråga](open-issues.html).
+### Lagringstider
+
+Två lagringstider ska fastställas. Båda härleds från samma fråga: hur långt avbrott ska en konsument klara utan full omladdning?
+
+| Lagringstid | Vad den styr | Dimensioneras efter |
+|---|---|---|
+| Händelselogg | Hur långt bakåt en konsument kan hämta missade notiser med `$events` | Normala driftavbrott hos konsumenter; kort, eftersom avstämning tar vid efteråt |
+| Gravstenar | Hur länge en avregistrerad post syns vid inkrementell avstämning och `_since`-export | Det längsta tillåtna avbrottet för alla synkande konsumenter, inklusive en framtida synk mot eHM |
+{:.grid}
+
+Värdena är en [öppen fråga](open-issues.html).
 
 ---
 
@@ -30,16 +46,27 @@ Ett borttag görs med villkorad `DELETE`, som inte har någon kropp. En producen
 3. **Byte av master.** När NPÖ och 1177 läser från FHIR-EI blir det master. Dagens engagemangsindex kan då speglas från FHIR-EI eller avvecklas.
 
 <figure>
-  <img src="overgang-blandad-drift.svg" alt="Steg 2, blandad drift: RIV-TA-källsystem skickar Update till dagens engagemangsindex, som via ProcessNotification och adaptern når FHIR-EI. FHIR-källsystem skriver direkt till FHIR-EI med PUT och DELETE. NPÖ och 1177 söker och får notiser från FHIR-EI. En streckad pil visar en senare aggregering till eHM:s patientindex." style="max-width:100%;height:auto"/>
+  <img src="overgang-blandad-drift.svg" alt="Steg 2, blandad drift: RIV-TA-källsystem skickar Update till dagens engagemangsindex, som via ProcessNotification och adaptern når FHIR-EI. FHIR-källsystem skriver direkt till FHIR-EI med villkorad PUT. NPÖ och 1177 söker och får notiser från FHIR-EI. En streckad pil visar en senare aggregering till eHM:s patientindex." style="max-width:100%;height:auto"/>
   <figcaption>Steg 2, blandad drift. Synken till eHM är streckad eftersom den inte ingår i första iterationen.</figcaption>
 </figure>
 
 RIV-TA-producenter når FHIR-EI via dagens index och adaptern; FHIR-producenter skriver direkt.
 
+### Ansvar under övergången
+
+Adaptern speglar dagens engagemangsindex utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos producenterna, genom deras registrering i dagens engagemangsindex.
+
 ### Mappning av Update
 
-Varje engagemangspost i ett Update blir en villkorad `PUT`, eller `DELETE` vid deleteFlag, i en `transaction`. Fälten mappas enligt [Mappning till profiler](mappings.html).
+Engagemangsposter för samma patient, logiska adress och tjänstedomän slås ihop till en indexpost, med dagens kategorier som informationsmängder. Varje indexpost blir en villkorad `PUT` i en `transaction`, med fältmappningen under [Mappning till profiler](mappings.html).
 
-Adaptern sätter `identifier[sourceEntryId]` med systemet `https://fhir.inera.se/ig/engagementindex/sid/riv-ta-engagement`. Värdet bildas deterministiskt ur engagemangspostens nyckelfält, så att samma post alltid får samma värde och spegling och återsynk blir idempotenta. Om businessObjectInstanceIdentifier ensam räcker som nyckel är en [öppen fråga](open-issues.html).
+| Fält | Regel |
+|---|---|
+| `identifier` | System `https://fhir.inera.se/ig/engagementindex/sid/riv-ta-engagement` ([NamingSystem](NamingSystem-RivTaEngagementNamingSystem.html)). Värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän, så att samma kombination alltid ger samma post |
+| `contentLastUpdated` | Den senaste mostRecentContent bland de ingående engagemangsposterna |
+| `content.profile[category]` | En Coding per kategori bland de ingående engagemangsposterna |
+| Avregistrering | deleteFlag på den sista ingående engagemangsposten ger status `superseded`, `registrationStatus` `withdrawn` och `deregistrationReason` `transition-adapter`, eftersom dagens kontrakt inte bär någon orsak |
+| `registeringProducer` | Adapterns egen producentidentitet |
+{:.grid}
 
-Adaptern skapar en [Endpoint](StructureDefinition-IneraEngagementIndexEndpoint.html) med `connectionType = riv-ta` per kombination av källsystem och logisk adress, och refererar till den från posten.
+Se exemplet [Indexpost speglad av övergångsadaptern](DocumentReference-IndexpostFranAdapter.html).

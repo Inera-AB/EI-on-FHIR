@@ -2,15 +2,16 @@
 
 [![Build and publish IG](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml)
 [![Validate FSH](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml)
-[![FHIR R4](https://img.shields.io/badge/FHIR-R4-blue)](https://hl7.org/fhir/R4/)
+[![FHIR R5](https://img.shields.io/badge/FHIR-R5-blue)](https://hl7.org/fhir/R5/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-The FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based engagement index. FHIR-EI answers three questions about a patient: which systems hold information about them, which information sets are there, and when they were last updated. It replaces today's engagement index (RIV-TA `itintegration:engagementindex`) when NPÖ and 1177 move to FHIR, following the same pattern as NHS England's National Record Locator. The IG is written in Swedish.
+The FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based engagement index. FHIR-EI answers three questions about a patient: which systems hold information about them, which information sets are there, and when they were last updated. It replaces today's engagement index (RIV-TA `itintegration:engagementindex`) when NPÖ and 1177 move to FHIR, following the same pattern as NHS England's National Record Locator and IHE MHD. The IG targets FHIR R5 and is written in Swedish.
 
 | | |
 |---|---|
 | Package id | `inera.ei.engagementindex` |
 | Canonical | `https://fhir.inera.se/ig/engagementindex` |
+| FHIR version | 5.0.0 |
 | Branch builds | `https://inera-ab.github.io/EI-on-FHIR/` |
 | Status | Draft, version 0.1.0 (unpublished) |
 
@@ -18,15 +19,18 @@ The FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based engagement index. 
 
 | Artifact | FSH file |
 |---|---|
-| Index entry profile on `EpisodeOfCare` (`IneraEngagementIndexEntry`) | `input/fsh/profiles/IneraEngagementIndexEntry.fsh` |
-| Source system endpoint profile on `Endpoint` (`IneraEngagementIndexEndpoint`) | `input/fsh/profiles/IneraEngagementIndexEndpoint.fsh` |
-| Extensions: source endpoint, care unit, most recent content, content profile, deletion reason | `input/fsh/extensions/Extensions.fsh` |
+| Index entry profile on R5 `DocumentReference` (`IneraIndexEntry`), one entry per patient × endpoint × service | `input/fsh/profiles/IneraIndexEntry.fsh` |
+| Extensions: source endpoint, care unit, registering producer, content last updated, registration status, deregistration reason | `input/fsh/extensions/Extensions.fsh` |
 | Code systems and value sets | `input/fsh/terminology/Terminology.fsh` |
-| Search parameters | `input/fsh/searchparameters/SearchParameters.fsh` |
-| Server CapabilityStatement | `input/fsh/capabilitystatements/IneraEngagementIndexServer.fsh` |
+| NamingSystem for the transition adapter's identifiers | `input/fsh/terminology/NamingSystems.fsh` |
+| SubscriptionTopic `indexpost-andrad` and a Subscription profile (`IneraIndexSubscription`) | `input/fsh/subscriptions/Subscriptions.fsh` |
+| National search parameters | `input/fsh/searchparameters/SearchParameters.fsh` |
+| Server CapabilityStatement | `input/fsh/capabilitystatements/IneraIndexServer.fsh` |
 | Examples | `input/fsh/examples/Examples.fsh` |
 
-Subscriptions follow the Subscriptions R5 Backport, but only in narrative (`input/pagecontent/subscriptions.md`): the backport's R4 package is built on FHIR 4.0.0, and IG Publisher 3 loads none of its resources, so a profile derived from it does not build.
+Bulk Data `$export` is required in narrative only: Bulk Data Access is published for R4, so its OperationDefinition cannot be referenced from an R5 IG.
+
+An R5 IG validates against the R5 terminology server. Builds without one (`-tx n/a`) report false errors on `SearchParameter.base`; set the shared workflows' terminology input to `https://tx.fhir.org/r5` (see [CI workflows](#ci-workflows)).
 
 Open questions are listed on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
 
@@ -312,6 +316,7 @@ input/
     extensions/            Extension definitions
     terminology/           Code systems and value sets
     searchparameters/      SearchParameter definitions
+    subscriptions/         SubscriptionTopic and Subscription profile
     capabilitystatements/  CapabilityStatement definitions
     examples/              Example instances (.fsh)
   pagecontent/             Narrative IG pages (.md); no leading "# Title", the template renders the page title

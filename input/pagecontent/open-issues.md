@@ -1,25 +1,18 @@
-Följande frågor är inte avgjorda. Svaren kan ändra profilerna eller API:et.
+Följande frågor är inte avgjorda. Svaren kan ändra profilen eller API:et.
 
-### Från specutkastet
+### Från specen
 
-- **FHIR-version.** Profilera EpisodeOfCare på R4 nu, eller vänta in svenska basprofiler i R5? Denna version använder R4 och FHIR:s basresurser.
-- **Granularitet.** En post per informationsmängd (som föreslås här) eller en post per patient × vårdenhet med flera `type`? Det första behåller `mostRecentContent` per mängd men ger fler poster.
-- **Aggregering.** Ska dagens aggregering i engagemangsindex behållas, och i så fall var?
-- **Endpoint.** Egen `Endpoint`-resurs i FHIR-EI (som i denna version), eller referens till tjänstekatalogen eller eHM:s NTK?
+- **Federation.** Dagens engagemangsindex kan vara hierarkiskt, där regionala index vidarebefordrar till det nationella via ProcessNotification. Ska FHIR-EI stödja en sådan topologi, eller bara ett nationellt index?
 - **Latens.** Vilket krav gäller från ändring i källsystemet till synlig indexpost? Vad klarar dagens engagemangsindex i praktiken?
-- **Filtrerade poster.** Ska en konsument få veta att poster filtrerats bort, till exempel för att visa att information finns men kräver samtycke?
-- **Loggning.** Loggas varje sökning, varje utlämnad post, eller båda? Denna version anger båda.
-- **eHM:s krav på tunt index.** Nyckel, granularitet, API och semantik för borttag.
-- **Ansvar.** Vem svarar för att indexposten är korrekt när den härrör från adaptern?
+- **Lagringstider.** Hur långt avbrott ska en konsument klara utan full omladdning? Svaret sätter både händelseloggens och gravstenarnas lagringstid.
+- **eHM:s tunna index.** Torrsimma borttag, grundladdning och återsynk mot eHM:s API-specifikationer.
+- **R5-beroende.** Tidplanen för svenska basprofiler i R5, och om konsumenter och producenter är redo för R5. Denna version bygger direkt på FHIR:s basresurser.
 
 ### Uppkomna när IG:n skrevs
 
-- **Unik nyckel från adaptern.** Är businessObjectInstanceIdentifier unik per källsystem i dagens data? Om inte bildar adaptern `identifier[sourceEntryId]` ur hela engagemangsnyckeln, som [Händelsemodell och övergång](event-model.html) beskriver.
-- **Format för `meta.source`.** Registrerande system ska anges som en URI. Hur ett HSA-id skrivs som URI är inte bestämt.
-- **Orsak vid borttag.** En villkorad `DELETE` har ingen kropp, så orsaken kräver en `PUT` före borttaget. Räcker det, eller behövs en egen operation som tar bort och anger orsak atomärt?
-- **Äldre uppdateringar.** IG:n ignorerar en uppdatering med äldre `mostRecentContent` och svarar `200 OK`. Specutkastet lämnade öppet om den i stället ska avvisas.
+- **Bulk Data i R5.** Bulk Data Access finns bara publicerad för R4, så `$export` kan inte refereras formellt från denna R5-IG. Kravet står i text. Följs upp när Bulk Data publiceras för R5.
+- **Endpoints för RIV-TA-källor.** Har tjänstekatalogen en Endpoint per logisk adress, så att övergångsadaptern kan referera till den? Annars behöver adaptern ett annat sätt att ange `sourceEndpoint`.
 - **Kodverk.** Var förvaltas tjänstedomäner och kategorier som FHIR-kodsystem, och med vilken canonical? Denna IG har utdrag under sin egen canonical.
 - **Kontrollsummor.** Hur exponeras antal och kontrollsummor per vårdgivare och dag för återsynk?
-- **Profil för prenumeration.** Backport-IG:ns R4-paket (`hl7.fhir.uv.subscriptions-backport.r4` 1.1.0 och 1.2.0-ballot) bygger på FHIR 4.0.0. IG Publisher 3 läser inga resurser från det, så en profil som ärver från dess Subscription går inte att bygga, och dess extensions kan inte valideras. Kraven står därför i text på [Prenumeration](subscriptions.html). En profil läggs till när ett paket på 4.0.1 finns, eller om FHIR-EI går över till R5.
-- **Bulk Data-version.** IG:n refererar Bulk Data Access 2.0.0. Version 3.0.0 finns och bör utvärderas, särskilt hur borttag redovisas vid `_since`.
-- **Endpoints för RIV-TA-källor.** En endpoint per kombination av källsystem och logisk adress kan bli många. Är det rätt nivå?
+- **Producentidentitet.** `registeringProducer` är producentens HSA-id. Är det rätt identitet, och hur ser den betrodda kopplingen mellan klientidentitet och producentidentitet ut?
+- **Namnrymd i `identifier.system`.** Hur kontrollerar FHIR-EI att namnrymden tillhör producenten? Det kräver ett register över producenternas namnrymder.

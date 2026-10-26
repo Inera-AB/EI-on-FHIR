@@ -2,10 +2,10 @@ id: inera.ei.engagementindex
 canonical: https://fhir.inera.se/ig/engagementindex
 name: IneraEngagementIndex
 title: "FHIR-baserat engagemangsindex (FHIR-EI)"
-description: "Profiler, API och händelsemodell för FHIR-EI, ett index över i vilka källsystem det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades."
+description: "Indexprofil, API och händelsemodell för FHIR-EI, ett index över var det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades."
 status: draft
 version: 0.1.0
-fhirVersion: 4.0.1
+fhirVersion: 5.0.0
 copyrightYear: 2026+
 releaseLabel: ci-build
 license: CC0-1.0
@@ -16,10 +16,6 @@ publisher:
 
 jurisdiction: urn:iso:std:iso:3166#SE "Sweden"
 
-# Subscriptions R5 Backport is not a dependency: its R4 package is built on FHIR 4.0.0,
-# and IG Publisher 3 loads no resources from it. See the page Öppna frågor.
-dependencies:
-  hl7.fhir.uv.bulkdata: 2.0.0
 
 # Inline instances (the resources inside the transaction example) get no id, since a
 # conditional PUT resolves the target from its identifier.
@@ -42,8 +38,10 @@ pages:
     title: Användningsfall
   roles-and-responsibilities.md:
     title: Roller och ansvar
+  information-model.md:
+    title: Indexposten
   information-sets.md:
-    title: Kodverk för informationsmängder
+    title: Kodverk för tjänster och informationsmängder
   event-model.md:
     title: Händelsemodell och övergång
   ehm-coexistence.md:

@@ -1,24 +1,28 @@
-FHIR-EI stöder sex användningsfall. De tre första har motsvarigheter i dagens tjänstekontrakt; massuttag saknar motsvarighet idag.
+API:et skiljer på tre sätt att läsa indexet: sökning vid behov, löpande uppdatering via prenumeration och avstämning eller massuttag för korrekthet. Till det kommer producenternas registrering och övergången från dagens engagemangsindex.
 
 ### Sök var information finns om en patient
 
-En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa informationsmängder eller till poster som ändrats efter en viss tidpunkt. FHIR-EI kontrollerar spärrar, filtrerar bort poster som konsumenten inte har rätt att se, loggar åtkomsten och returnerar posterna med källsystemens endpoints. Konsumenten hämtar sedan informationen direkt från källsystemen. Motsvarar FindContent.
+En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. FHIR-EI kontrollerar behörighet och spärrar, filtrerar bort poster som konsumenten inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.
 
 ### Registrera eller uppdatera indexposter
 
-Ett källsystem har fått ny eller ändrad information om en patient. Källsystemet, eller adaptern för källsystem som fortfarande använder RIV-TA, registrerar eller uppdaterar motsvarande indexposter. Uppdateringen är idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.
+En producent har fått ny eller ändrad information om en patient inom en tjänst. Producenten, eller övergångsadaptern för källsystem som fortfarande använder RIV-TA, registrerar eller uppdaterar motsvarande indexpost. Uppdateringen är idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.
 
-### Ta bort indexposter
+### Avregistrera indexposter
 
-Ett källsystem håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Producenten tar bort indexposten och anger orsaken. Borttaget går att följa i postens historik och ger en notis till prenumeranter. Motsvarar Update med deleteFlag.
+En producent håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Producenten avregistrerar posten och anger orsaken. Posten ligger kvar som gravsten under en lagringstid, så att avregistreringen syns för prenumeranter och vid avstämning. Motsvarar Update med deleteFlag.
 
 ### Prenumerera på ändringar
 
-En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration, filtrerad på patient, informationsmängd eller vårdgivare. Vid varje ändring som konsumenten har rätt att se får den en notis med postens id. Motsvarar ProcessNotification.
+En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration, filtrerad på patient, tjänst eller vårdgivare. Vid varje ändring som konsumenten har rätt att se får den en notis med postens id. Motsvarar ProcessNotification.
 
-### Massuttag och återsynk
+### Stäm av efter avbrott
 
-En systemkonsument, till exempel en framtida synk till eHM:s patientindex, behöver hela indexet eller allt som ändrats sedan en viss tidpunkt. Systemkonsumenten gör ett massuttag av indexposter. Används för grundladdning och för att hitta och rätta avvikelser efter avbrott. Saknar motsvarighet idag.
+En konsument har missat notiser. Vid kortare avbrott hämtar den missade händelser ur händelseloggen. Vid längre avbrott söker den poster som ändrats sedan en viss tidpunkt, inklusive avregistrerade. Saknar motsvarighet idag.
+
+### Massuttag
+
+En systemkonsument, till exempel en framtida synk till eHM:s patientindex, behöver hela indexet eller allt som ändrats sedan en viss tidpunkt. Systemkonsumenten gör ett massuttag. Används för grundladdning, för ny konsument och efter avbrott längre än gravstenarnas lagringstid. Saknar motsvarighet idag.
 
 ### Övergång från dagens engagemangsindex
 
