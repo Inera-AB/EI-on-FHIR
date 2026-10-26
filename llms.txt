@@ -13,6 +13,7 @@
 * [Samexistens med eHM:s patientindex](sv/ehm-coexistence.md)
 * [Kodverk för tjänster och informationsmängder](sv/information-sets.md)
 * [Mappning till profiler](sv/mappings.md)
+* [Stöd för producenter](sv/producer-support.md)
 * [Sammanfattning av artefakter](sv/artifacts.md)
 * [Prenumeration](sv/subscriptions.md)
 * [Förväntade svar](sv/expected-responses.md)
@@ -78,6 +79,7 @@
 
 * [RegistreringTransaction (Bundle)](sv/Bundle-RegistreringTransaction.md)
 * [SokresultatForPatient (Bundle)](sv/Bundle-SokresultatForPatient.md)
+* [IndexpostEjForPatient (DocumentReference)](sv/DocumentReference-IndexpostEjForPatient.md)
 * [IndexpostFhirProducent (DocumentReference)](sv/DocumentReference-IndexpostFhirProducent.md)
 * [IndexpostFranAdapter (DocumentReference)](sv/DocumentReference-IndexpostFranAdapter.md)
 * [IndexpostIndragen (DocumentReference)](sv/DocumentReference-IndexpostIndragen.md)

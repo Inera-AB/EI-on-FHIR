@@ -4,7 +4,7 @@
 
 **Användningar:**
 
-* Exempel för denna Profil: [DocumentReference/IndexpostFhirProducent](DocumentReference-IndexpostFhirProducent.md), [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md) and [DocumentReference/IndexpostIndragen](DocumentReference-IndexpostIndragen.md)
+* Exempel för denna Profil: [DocumentReference/IndexpostEjForPatient](DocumentReference-IndexpostEjForPatient.md), [DocumentReference/IndexpostFhirProducent](DocumentReference-IndexpostFhirProducent.md), [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md) and [DocumentReference/IndexpostIndragen](DocumentReference-IndexpostIndragen.md)
 * CapabilityStatements som använder denna Profil: [FHIR-EI server](CapabilityStatement-IneraIndexServer.md)
 
 Du kan också kontrollera [användningar i FHIR IG-statistiken](https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/IneraIndexEntry)
@@ -166,6 +166,12 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
       "id" : "DocumentReference.meta.source",
       "path" : "DocumentReference.meta.source",
       "short" : "Används bara för spårbarhet, aldrig för behörighet"
+    },
+    {
+      "id" : "DocumentReference.meta.security",
+      "path" : "DocumentReference.meta.security",
+      "short" : "Säkerhetsetiketter som FHIR-EI tillämpar per syfte, t.ex. NOPAT",
+      "mustSupport" : true
     },
     {
       "id" : "DocumentReference.extension",

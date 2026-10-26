@@ -17,6 +17,7 @@ Exemplen i IG:n visar giltiga instanser:
 | | |
 | :--- | :--- |
 | [Registrerad indexpost från en FHIR-producent](DocumentReference-IndexpostFhirProducent.md) | Indexpost |
+| [Indexpost som inte visas för patient eller närstående](DocumentReference-IndexpostEjForPatient.md) | Indexpost |
 | [Indexpost speglad av övergångsadaptern](DocumentReference-IndexpostFranAdapter.md) | Indexpost |
 | [Indragen indexpost](DocumentReference-IndexpostIndragen.md) | Indexpost |
 | [Prenumeration på en patients indexposter](Subscription-PrenumerationForPatient.md) | Prenumeration på indexposter |

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DocumentReference xmlns="http://hl7.org/fhir">
+  <id value="IndexpostEjForPatient"/>
+  <meta>
+    <lastUpdated value="2026-10-23T09:12:40+02:00"/>
+    <profile value="https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"/>
+    <security>
+      <system value="http://terminology.hl7.org/CodeSystem/v3-ActCode"/>
+      <code value="NOPAT"/>
+    </security>
+  </meta>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: DocumentReference IndexpostEjForPatient</b></p><a name="IndexpostEjForPatient"> </a><a name="hcIndexpostEjForPatient"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Senast uppdaterad: 2026-10-23 09:12:40+0200</p><p style="margin-bottom: 0px">Profil: <a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></p><p style="margin-bottom: 0px">Säkerhetsetikett: <a href="http://terminology.hl7.org/7.4.0/CodeSystem-v3-ActCode.html">no disclosure to patient, family or caregivers without attending provider's authorization (Detaljer: ActCode kod NOPAT = 'no disclosure to patient, family or caregivers without attending provider's authorization')</a></p></div><p><b>Producentens endpoint</b>: <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE03</p><p><b>Registrerande producent</b>: <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registreringsstatus</b>: active</p><p><b>Innehållets senaste ändring</b>: 2026-10-23 09:12:31+0200</p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</code>/3c4d5e6f-7a8b-4c9d-8e0f-1a2b3c4d5e6f</p><p><b>status</b>: Current</p><p><b>type</b>: <span title="Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}, {urn:ietf:rfc:3986 https://example.org/fhir/ImplementationGuide/vardochomsorgsdokumentation}">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Url</b></td></tr><tr><td style="display: none">*</td><td><a href="https://journal-a.example.org/fhir">https://journal-a.example.org/fhir</a></td></tr></table><blockquote><p><b>profile</b></p><p><b>value</b>: <a href="CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo">Kodsystem för kategorier inom tjänstedomän: voo</a> (voo)</p></blockquote><blockquote><p><b>profile</b></p><p><b>value</b>: <a href="http://hl7.org/fhir/R5/composition.html">Composition</a></p></blockquote></blockquote></div>
+  </text>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint">
+    <valueReference>
+      <reference value="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"/>
+    </valueReference>
+  </extension>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit">
+    <valueIdentifier>
+      <system value="urn:oid:1.2.752.29.4.19"/>
+      <value value="SE0000000000-VE03"/>
+    </valueIdentifier>
+  </extension>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer">
+    <valueReference>
+      <reference value="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"/>
+    </valueReference>
+  </extension>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus">
+    <valueCode value="active"/>
+  </extension>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated">
+    <valueDateTime value="2026-10-23T09:12:31+02:00"/>
+  </extension>
+  <identifier>
+    <system value="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"/>
+    <value value="3c4d5e6f-7a8b-4c9d-8e0f-1a2b3c4d5e6f"/>
+  </identifier>
+  <status value="current"/>
+  <type>
+    <coding>
+      <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
+      <code value="riv:clinicalprocess:healthcond:description"/>
+    </coding>
+    <coding>
+      <system value="urn:ietf:rfc:3986"/>
+      <code value="https://example.org/fhir/ImplementationGuide/vardochomsorgsdokumentation"/>
+    </coding>
+  </type>
+  <subject>
+    <type value="Patient"/>
+    <identifier>
+      <system value="http://electronichealth.se/identifier/personnummer"/>
+      <value value="191212121212"/>
+    </identifier>
+  </subject>
+  <custodian>
+    <identifier>
+      <system value="urn:oid:1.2.752.29.4.19"/>
+      <value value="SE0000000000-VG01"/>
+    </identifier>
+  </custodian>
+  <content>
+    <attachment>
+      <url value="https://journal-a.example.org/fhir"/>
+    </attachment>
+    <profile>
+      <valueCoding>
+        <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"/>
+        <code value="voo"/>
+      </valueCoding>
+    </profile>
+    <profile>
+      <valueCanonical value="http://hl7.org/fhir/StructureDefinition/Composition"/>
+    </profile>
+  </content>
+</DocumentReference>

@@ -51,8 +51,8 @@
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"22.12"}
-    h3,h4,h5,h6{--heading-prefix:"22.12"}</style>
+    <style type="text/css">h2{--heading-prefix:"23.12"}
+    h3,h4,h5,h6{--heading-prefix:"23.12"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -70,7 +70,7 @@
 
 
 
-  Sweden
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
 
 
             </span>
@@ -116,6 +116,7 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -310,7 +311,7 @@ Element-ID:     <code>
   <p><b>Användningar:</b></p>
 <ul>
  <li>Använd denna Extension: <a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></li>
- <li>Exempel för denna Extension: <a href="Bundle-RegistreringTransaction.html">Bundle/RegistreringTransaction</a>, <a href="Bundle-SokresultatForPatient.html">Bundle/SokresultatForPatient</a>, <a href="DocumentReference-IndexpostFhirProducent.html">DocumentReference/IndexpostFhirProducent</a>, <a href="DocumentReference-IndexpostFranAdapter.html">DocumentReference/IndexpostFranAdapter</a> and <a href="DocumentReference-IndexpostIndragen.html">DocumentReference/IndexpostIndragen</a></li>
+ <li>Exempel för denna Extension: <a href="Bundle-RegistreringTransaction.html">Bundle/RegistreringTransaction</a>, <a href="Bundle-SokresultatForPatient.html">Bundle/SokresultatForPatient</a>, <a href="DocumentReference-IndexpostEjForPatient.html">DocumentReference/IndexpostEjForPatient</a>, <a href="DocumentReference-IndexpostFhirProducent.html">DocumentReference/IndexpostFhirProducent</a><span id="rr_ex">... <button type="button" style="cursor: pointer; border: 1px grey solid; background-color: #fcdcb3; padding: 0 3px; margin: 0; color: black; font: inherit" onClick="var s = document.getElementById('rr_ex'); s.innerHTML = document.getElementById('rr2_ex').innerHTML; var a = s.querySelector('a'); if (a) a.focus();">Show 2 more</button></span><span id="rr2_ex" style="display: none">, <a href="DocumentReference-IndexpostFranAdapter.html">DocumentReference/IndexpostFranAdapter</a> and <a href="DocumentReference-IndexpostIndragen.html">DocumentReference/IndexpostIndragen</a></span></li>
 </ul>
 <p>Du kan också kontrollera <a href="https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/RegisteringProducer">användningar i FHIR IG-statistiken</a></p>
 
@@ -385,7 +386,7 @@ Element-ID:     <code>
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string" class="xhtPieceDeEmphasized">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0">Absolut URL till producentens Endpoint i tjänstekatalogen</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 7e647ab3-e5ff-499c-8655-c8180fee019d
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 77b2acdf-bbb7-463d-97f7-fe355845382b
 document.getElementById('cbRegisteringProducerD-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegisteringProducerD'), 'constraint', document.getElementById('cbRegisteringProducerD-constraint').checked, document.getElementById('ppRegisteringProducerD'));
 document.getElementById('cbRegisteringProducerD-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -469,7 +470,7 @@ The type is the Canonical URL of Resource Definition that is the type this refer
 <td style="" class="hierarchy xhtCellBorder0">0..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0">Text alternative for the resource</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 7e647ab3-e5ff-499c-8655-c8180fee019d
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 77b2acdf-bbb7-463d-97f7-fe355845382b
 document.getElementById('cbRegisteringProducerS-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegisteringProducerS'), 'constraint', document.getElementById('cbRegisteringProducerS-constraint').checked, document.getElementById('ppRegisteringProducerS'));
 document.getElementById('cbRegisteringProducerS-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -651,7 +652,7 @@ Sammanfattning
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string" class="xhtPieceDeEmphasized">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0">Absolut URL till producentens Endpoint i tjänstekatalogen</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 7e647ab3-e5ff-499c-8655-c8180fee019d
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 77b2acdf-bbb7-463d-97f7-fe355845382b
 document.getElementById('cbRegisteringProducerDA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegisteringProducerDA'), 'constraint', document.getElementById('cbRegisteringProducerDA-constraint').checked, document.getElementById('ppRegisteringProducerDA'));
 document.getElementById('cbRegisteringProducerDA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -731,7 +732,7 @@ The type is the Canonical URL of Resource Definition that is the type this refer
 <td style="" class="hierarchy xhtCellBorder0">0..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0">Text alternative for the resource</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 7e647ab3-e5ff-499c-8655-c8180fee019d
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 77b2acdf-bbb7-463d-97f7-fe355845382b
 document.getElementById('cbRegisteringProducerSA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegisteringProducerSA'), 'constraint', document.getElementById('cbRegisteringProducerSA-constraint').checked, document.getElementById('ppRegisteringProducerSA'));
 document.getElementById('cbRegisteringProducerSA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -909,7 +910,7 @@ Sammanfattning
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 20:06:00 +0000">
+  <span title="2026-10-26 22:11:00 +0000">
     2026-10-26
   </span>
 

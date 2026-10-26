@@ -18,6 +18,23 @@ Skälet är att indexet självt är skyddsvärd information: att en patient har 
 
 Kontrollen gäller alla operationer: sökning, läsning, skrivning, prenumeration, inkrementell avstämning och export. Filtreringen sker i FHIR-EI innan svaret lämnas ut, aldrig bara i den komponent som presenterar svaret. Export kräver egen behörighet för systemkonsumenten och loggas per uttag.
 
+### Ett index, prövning per syfte
+
+NPÖ och 1177 använder samma indexposter. Det som skiljer är prövningen vid varje läsning, som FHIR-EI väljer utifrån åtkomstkontexten och `purposeOfUse`.
+
+| | | |
+| :--- | :--- | :--- |
+| Vem frågar | Vårdpersonal med uppdrag | Patienten, eller ombud med fullmakt |
+| Spärr | Gäller | Gäller inte mot patienten själv |
+| Samtycke och nödåtkomst | Krävs | Ersätts av inloggning och identitet |
+| Särskilda begränsningar | – | Till exempel vårdgivarens fördröjda visning och sekretess mot vårdnadshavare för unga |
+
+Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma. Se [Öppna frågor](open-issues.md).
+
+### Säkerhetsetiketter
+
+En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Producenten kan därför märka en post med säkerhetsetiketter i `meta.security`, till exempel `NOPAT` ur HL7:s kodsystem `v3-ActCode`: inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande. FHIR-EI tillämpar etiketterna per syfte. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177. Se exemplet [Indexpost som inte visas för patient eller närstående](DocumentReference-IndexpostEjForPatient.md).
+
 ### Prenumerationer
 
 Prenumerationer filtreras på samma sätt. En konsument får bara notis om poster den skulle ha fått i en sökning. Det, och `id-only`-innehåll, hindrar att notiser läcker förekomst av spärrad information. Se [Prenumeration](subscriptions.md).

@@ -19,7 +19,7 @@
   fhir:name [ fhir:v "IneraEngagementIndex"] ; # 
   fhir:title [ fhir:v "FHIR-baserat engagemangsindex (FHIR-EI)"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
-  fhir:date [ fhir:v "2026-10-26T20:06:25+00:00"^^xsd:dateTime] ; # 
+  fhir:date [ fhir:v "2026-10-26T22:11:12+00:00"^^xsd:dateTime] ; # 
   fhir:publisher [ fhir:v "Inera AB"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "Inera AB" ] ;
@@ -107,6 +107,25 @@
        fhir:name [ fhir:v "Indexpost (FHIR-EI)" ] ;
        fhir:description [ fhir:v "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska." ] ;
        fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "DocumentReference"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/DocumentReference/IndexpostEjForPatient> ;
+         fhir:reference [ fhir:v "DocumentReference/IndexpostEjForPatient" ]
+       ] ;
+       fhir:name [ fhir:v "Indexpost som inte visas för patient eller närstående" ] ;
+       fhir:description [ fhir:v "Producenten har märkt posten med säkerhetsetiketten NOPAT. FHIR-EI lämnar inte ut den vid patientens direktåtkomst eller till ombud och vårdnadshavare, men vid sammanhållen journalföring prövas den som vanligt." ] ;
+       fhir:isExample [ fhir:v true ] ;
+       fhir:profile ( [
+         fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"^^xsd:anyURI ;
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry>
+       ] )
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
@@ -617,6 +636,14 @@
          ] ;
          fhir:name [ fhir:v "subscriptions.html"^^xsd:anyURI ] ;
          fhir:title [ fhir:v "Prenumeration" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "producer-support.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "producer-support.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Stöd för producenter" ] ;
          fhir:generation [ fhir:v "markdown" ]
        ] [
          fhir:source [

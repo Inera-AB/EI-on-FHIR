@@ -14,7 +14,7 @@
   "name" : "IneraEngagementIndex",
   "title" : "FHIR-baserat engagemangsindex (FHIR-EI)",
   "status" : "draft",
-  "date" : "2026-10-26T20:06:25+00:00",
+  "date" : "2026-10-26T22:11:12+00:00",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -89,6 +89,23 @@
       "name" : "Indexpost (FHIR-EI)",
       "description" : "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska.",
       "isExample" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "DocumentReference"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "DocumentReference-IndexpostEjForPatient.html"
+      }],
+      "reference" : {
+        "reference" : "DocumentReference/IndexpostEjForPatient"
+      },
+      "name" : "Indexpost som inte visas för patient eller närstående",
+      "description" : "Producenten har märkt posten med säkerhetsetiketten NOPAT. FHIR-EI lämnar inte ut den vid patientens direktåtkomst eller till ombud och vårdnadshavare, men vid sammanhållen journalföring prövas den som vanligt.",
+      "isExample" : true,
+      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
     },
     {
       "extension" : [{
@@ -585,6 +602,12 @@
         "sourceUrl" : "subscriptions.html",
         "name" : "subscriptions.html",
         "title" : "Prenumeration",
+        "generation" : "markdown"
+      },
+      {
+        "sourceUrl" : "producer-support.html",
+        "name" : "producer-support.html",
+        "title" : "Stöd för producenter",
         "generation" : "markdown"
       },
       {

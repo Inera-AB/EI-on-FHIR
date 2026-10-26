@@ -69,7 +69,7 @@
 
 
 
-  Sweden
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
 
 
             </span>
@@ -115,6 +115,7 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -337,7 +338,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>En sökning utan <code class="language-plaintext highlighter-rouge">status</code> returnerar bara poster med status <code class="language-plaintext highlighter-rouge">current</code>. Avregistrerade poster returneras bara när status anges explicit.</p>
 
-<p>Patienten är en logisk referens, eftersom indexet inte har några Patient-resurser. Sökningen görs därför med modifieraren <code class="language-plaintext highlighter-rouge">:identifier</code> och inte som kedjad sökning; se <a href="mappings.html">Mappning till profiler</a>.</p>
+<p>Patienten är en logisk referens, eftersom indexet inte har några Patient-resurser. Sökningen görs därför med modifieraren <code class="language-plaintext highlighter-rouge">:identifier</code> och inte som kedjad sökning (<code class="language-plaintext highlighter-rouge">patient.identifier=</code>), som skulle kräva att referensen löses upp till en Patient i FHIR-EI. Profilen kräver <code class="language-plaintext highlighter-rouge">subject.type = Patient</code>, så att servern kan avgöra att referensen gäller en patient. Vårdgivaren söks på samma sätt, med <code class="language-plaintext highlighter-rouge">custodian:identifier=</code>.</p>
 
 <p>Exempel, registrerade poster för en patient inom en tjänst vars innehåll ändrats efter 1 oktober 2026:</p>
 
@@ -459,7 +460,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 20:06:00 +0000">
+  <span title="2026-10-26 22:11:00 +0000">
     2026-10-26
   </span>
 

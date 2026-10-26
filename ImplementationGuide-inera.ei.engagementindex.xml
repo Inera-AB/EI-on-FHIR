@@ -12,7 +12,7 @@
   <name value="IneraEngagementIndex"/>
   <title value="FHIR-baserat engagemangsindex (FHIR-EI)"/>
   <status value="draft"/>
-  <date value="2026-10-26T20:06:25+00:00"/>
+  <date value="2026-10-26T22:11:12+00:00"/>
   <publisher value="Inera AB"/>
   <contact>
     <name value="Inera AB"/>
@@ -72,6 +72,18 @@
       <name value="Indexpost (FHIR-EI)"/>
       <description value="Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.&#xA;Det finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten&#xA;för senaste ändring av innehållet gäller hela posten.&#xA;&#xA;Posten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i&#xA;tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska."/>
       <isExample value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="DocumentReference"/>
+      </extension>
+      <reference>
+        <reference value="DocumentReference/IndexpostEjForPatient"/>
+      </reference>
+      <name value="Indexpost som inte visas för patient eller närstående"/>
+      <description value="Producenten har märkt posten med säkerhetsetiketten NOPAT. FHIR-EI lämnar inte ut den vid patientens direktåtkomst eller till ombud och vårdnadshavare, men vid sammanhållen journalföring prövas den som vanligt."/>
+      <isExample value="true"/>
+      <profile value="https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
@@ -438,6 +450,12 @@
         <sourceUrl value="subscriptions.html"/>
         <name value="subscriptions.html"/>
         <title value="Prenumeration"/>
+        <generation value="markdown"/>
+      </page>
+      <page>
+        <sourceUrl value="producer-support.html"/>
+        <name value="producer-support.html"/>
+        <title value="Stöd för producenter"/>
         <generation value="markdown"/>
       </page>
       <page>

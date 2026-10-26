@@ -45,6 +45,19 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
 
 En konsument känner igen indexposter på `meta.profile`.
 
+#### Uppdateringsregler per tjänst
+
+Tillämpningen bestämmer vad som räknas som en ändring, och den regeln ska vara maskinläsbar. Varje tjänst publicerar därför, utöver tillämpningsprofilen:
+
+| | |
+| :--- | :--- |
+| En`SubscriptionTopic`per informationsmängd | Vilka ändringar i tjänstens innehållsresurser som räknas:`resourceTrigger`med`supportedInteraction`,`queryCriteria`och`fhirPathCriteria`. Till exempel att en Observation skapas eller går till`final` |
+| Extensionen`obligation`i tillämpningsprofilen | Vilka element producenten ska fylla i |
+
+`contentLastUpdated` är tidpunkten för den senaste händelse som uppfyller tjänstens topic. Samma topics driver [indexeringsagenten](producer-support.md).
+
+Tillämpningsprofilen har indexprofilen som förälder och är därför en R5-profil. En tjänst vars IG är R4 publicerar sin tillämpning i ett separat R5-paket och anger sina topics med canonical, som i Subscriptions Backport.
+
 ### Tidpunkter
 
 | | | |

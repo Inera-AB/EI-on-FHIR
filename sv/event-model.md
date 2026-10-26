@@ -40,14 +40,32 @@ Värdena är en [öppen fråga](open-issues.md).
 
 -------
 
-### Övergången i tre steg
+### Övergång per tjänst
 
-1. **Spegling.**Dagens engagemangsindex är fortsatt master. En adapter prenumererar på det via ProcessNotification och skriver motsvarande indexposter i FHIR-EI. Grundladdning sker med ett engångsuttag. Inga producenter behöver ändras.
-1. **Blandad drift.**Källsystem som kan FHIR registrerar direkt i FHIR-EI. Adaptern fortsätter för övriga. Adaptern måste skriva tillbaka FHIR-registrerade poster till dagens engagemangsindex så länge konsumenter läser därifrån.
-1. **Byte av master.**När NPÖ och 1177 läser från FHIR-EI blir det master. Dagens engagemangsindex kan då speglas från FHIR-EI eller avvecklas.
+Övergången görs per tjänst. Dagens konsumenter läser engagemangsindex per tjänstedomän: de aggregerande tjänsterna på tjänsteplattformen frågar FindContent per tjänstedomän för att hitta vilka logiska adresser de ska anropa, och NPÖ och 1177 Journalen går via dem. Det ska bekräftas; se [Öppna frågor](open-issues.md). Varje tjänst kan därför gå över i egen takt, utan att andra tjänster påverkas och utan att NPÖ och 1177 behöver ändras först.
 
-Steg 2, blandad drift. Synken till eHM är streckad eftersom den inte ingår i första iterationen.
-RIV-TA-producenter når FHIR-EI via dagens index och adaptern; FHIR-producenter skriver direkt.
+| | | | | |
+| :--- | :--- | :--- | :--- | :--- |
+| 0. Bara engagemangsindex | Dagens konsumenter, via engagemangsindex | RIV-producenter, till engagemangsindex | Tjänstens tillämpning är publicerad, och tjänstedomänens uppdelning i tjänster är beslutad | – |
+| 1. Spegling | Engagemangsindex; FHIR-EI läses parallellt för jämförelse | Adaptern speglar tjänstens poster | Avstämningen visar samma antal per vårdgivare och dag under en överenskommen period | Stäng av speglingen för tjänsten |
+| 2. Konsumenten byter | Tjänstedomänens aggregerande tjänst läser FHIR-EI | Som i läge 1 | Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften | Peka konsumenten mot engagemangsindex igen |
+| 3. FHIR-producenter | Konsumenter som kan FHIR hämtar direkt från producenterna | FHIR-producenter, direkt eller via[indexeringsagent](producer-support.md); adaptern för övriga | Inga RIV-producenter kvar för tjänstedomänen | – |
+| 4. Avveckling | FHIR-EI | FHIR-producenter | – | – |
+
+Läge 3 för en tjänst: FHIR-producenter skriver direkt, RIV-TA-producenter når FHIR-EI via dagens index och adaptern. Synken till eHM är streckad eftersom den inte ingår i första iterationen.
+#### Konsumenten först
+
+En producent får registrera en tjänst enbart i FHIR-EI först när tjänstens konsumenter läser FHIR-EI och kan hämta med FHIR. En producent som bara har en FHIR-endpoint kan ändå inte nås av en konsument som läser engagemangsindex och anropar med RIV-TA, och en producent som har kvar RIV-TA uppdaterar engagemangsindex själv. Adaptern skriver därför inte tillbaka FHIR-registrerade poster till dagens engagemangsindex.
+
+Adapterns konfiguration per tjänstedomän anger om den ska spegla tjänsten och om dess poster ska dras in. Eftersom adaptern aldrig skriver till dagens engagemangsindex uppstår ingen rundgång via ProcessNotification. Om återskrivning ändå skulle behövas i ett undantagsfall måste adaptern känna igen och hoppa över sina egna poster.
+
+#### Uppdelning, avstämning och första tjänst
+
+| | |
+| :--- | :--- |
+| Uppdelning i tjänster | Beslutas före läge 1. Dagens engagemangsindex har en mostRecentContent per kategori, medan en indexpost har en tidpunkt för alla sina informationsmängder. En kategori vars konsumenter filtrerar på aktualitet bryts ut till en egen tjänst innan speglingen startar |
+| Avstämning | Grundladdning och spegling görs per tjänstedomän. Antal och kontrollsummor per vårdgivare, dag och tjänstedomän i dagens engagemangsindex jämförs med FHIR-EI. Avstämningen är villkoret för att gå från läge 1 till läge 2 |
+| Första tjänst | En tjänst med publicerad eller nära förestående IG, få producenter och en konsument via en aggregerande tjänst som Inera förvaltar, så att läge 1 och 2 kan genomföras helt inom Inera |
 
 ### Ansvar under övergången
 
@@ -87,7 +105,7 @@ Samma tanke finns i EHDS-bryggan, som håller ett eget register från vårdgivar
 
 ### Överlämning från adaptern
 
-När ett källsystem börjar registrera direkt i FHIR-EI får dess poster en ny endpoint, och därmed nya poster, eftersom en post gäller patient × endpoint × tjänst. Adaptern avregistrerar då sina poster för källsystemet med `deregistrationReason` `transition-adapter`. Prenumeranter ser en avregistrering och en ny registrering för samma information. Om det behövs en operation som flyttar ägarskapet i stället är en [öppen fråga](open-issues.md).
+När ett källsystem börjar registrera en tjänst direkt i FHIR-EI får dess poster en ny endpoint, och därmed nya poster, eftersom en post gäller patient × endpoint × tjänst. Adressregistret markerar då kombinationen av källsystem och tjänstedomän som överlämnad. Adaptern drar in sina poster för kombinationen med `deregistrationReason` `transition-adapter` och slutar spegla den. Annars skulle konsumenterna se två poster för samma information under övergången. Prenumeranter ser en avregistrering och en ny registrering. Om det behövs en operation som flyttar ägarskapet i stället är en [öppen fråga](open-issues.md).
 
 Se exemplet [Indexpost speglad av övergångsadaptern](DocumentReference-IndexpostFranAdapter.md).
 

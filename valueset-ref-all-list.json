@@ -1,5 +1,19 @@
 {
   "codeSystems" : [{
+    "url" : "http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html",
+    "version" : "2025.3.20250714",
+    "status" : "active",
+    "name" : "Modality",
+    "title" : null,
+    "description" : "Transitive closure of CID 33 Modality",
+    "systems" : ["http://dicom.nema.org/resources/ontology/DCM"],
+    "oids" : ["1.2.840.10008.6.1.1283"],
+    "sources" : ["1.2.840.10008.6.1.1283"],
+    "uses" : {
+    },
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
+  },
+  {
     "url" : "http://hl7.org/fhir/ValueSet/all-languages",
     "version" : "5.0.0",
     "status" : "active",
@@ -192,9 +206,9 @@
     "uses" : {
     },
     "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-LogicalAddress.html" : "Logisk adress",
+    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-SourceSystem.html" : "Källsystem"
+    "StructureDefinition-LogicalAddress.html" : "Logisk adress"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/identifier-use",
@@ -209,9 +223,9 @@
     "uses" : {
     },
     "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-LogicalAddress.html" : "Logisk adress",
+    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-SourceSystem.html" : "Källsystem"
+    "StructureDefinition-LogicalAddress.html" : "Logisk adress"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/languages",

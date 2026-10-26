@@ -69,7 +69,7 @@
 
 
 
-  Sweden
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
 
 
             </span>
@@ -115,6 +115,7 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -283,6 +284,33 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
 
 <p>En konsument känner igen indexposter på <code class="language-plaintext highlighter-rouge">meta.profile</code>.</p>
 
+<h4 id="uppdateringsregler-per-tjänst">Uppdateringsregler per tjänst</h4>
+
+<p>Tillämpningen bestämmer vad som räknas som en ändring, och den regeln ska vara maskinläsbar. Varje tjänst publicerar därför, utöver tillämpningsprofilen:</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Artefakt</th>
+      <th>Vad den uttrycker</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>En <code class="language-plaintext highlighter-rouge">SubscriptionTopic</code> per informationsmängd</td>
+      <td>Vilka ändringar i tjänstens innehållsresurser som räknas: <code class="language-plaintext highlighter-rouge">resourceTrigger</code> med <code class="language-plaintext highlighter-rouge">supportedInteraction</code>, <code class="language-plaintext highlighter-rouge">queryCriteria</code> och <code class="language-plaintext highlighter-rouge">fhirPathCriteria</code>. Till exempel att en Observation skapas eller går till <code class="language-plaintext highlighter-rouge">final</code></td>
+    </tr>
+    <tr>
+      <td>Extensionen <code class="language-plaintext highlighter-rouge">obligation</code> i tillämpningsprofilen</td>
+      <td>Vilka element producenten ska fylla i</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">contentLastUpdated</code> är tidpunkten för den senaste händelse som uppfyller tjänstens topic. Samma topics driver <a href="producer-support.html">indexeringsagenten</a>.</p>
+
+<p>Tillämpningsprofilen har indexprofilen som förälder och är därför en R5-profil. En tjänst vars IG är R4 publicerar sin tillämpning i ett separat R5-paket och anger sina topics med canonical, som i Subscriptions Backport.</p>
+
 <h3 id="tidpunkter">Tidpunkter</h3>
 
 <table class="grid">
@@ -389,7 +417,7 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 20:06:00 +0000">
+  <span title="2026-10-26 22:11:00 +0000">
     2026-10-26
   </span>
 

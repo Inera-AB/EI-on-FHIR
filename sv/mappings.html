@@ -69,7 +69,7 @@
 
 
 
-  Sweden
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
 
 
             </span>
@@ -115,6 +115,7 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -294,16 +295,6 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </thead>
   <tbody>
     <tr>
-      <td>Sökning på patient</td>
-      <td><code class="language-plaintext highlighter-rouge">patient:identifier=</code> i stället för kedjad <code class="language-plaintext highlighter-rouge">patient.identifier=</code></td>
-      <td>Indexet har inga Patient-resurser; patienten är en logisk referens. En kedjad sökning kräver att referensen kan lösas upp till en Patient i FHIR-EI. Modifieraren <code class="language-plaintext highlighter-rouge">:identifier</code> söker direkt på referensens identifierare. Profilen kräver <code class="language-plaintext highlighter-rouge">subject.type = Patient</code>, så att servern kan avgöra att referensen gäller en patient</td>
-    </tr>
-    <tr>
-      <td>Vårdgivare i sökning och filter</td>
-      <td><code class="language-plaintext highlighter-rouge">custodian:identifier=</code></td>
-      <td>Samma skäl: vårdgivaren är en logisk referens</td>
-    </tr>
-    <tr>
       <td>HSA-id-system</td>
       <td><code class="language-plaintext highlighter-rouge">urn:oid:1.2.752.29.4.19</code>, som i HL7 Swedens basprofiler och tjänstekatalogen. FHIR-EI SHALL även ta emot RIV-TA:s <code class="language-plaintext highlighter-rouge">urn:oid:1.2.752.129.2.1.4.1</code> och lagra värdet med basprofilernas system</td>
       <td>Samma identifierarrymd har två OID:er. Specen ska bygga på svenska basprofiler, och EHDS-bryggan behandlar redan båda som samma rymd</td>
@@ -374,7 +365,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 20:06:00 +0000">
+  <span title="2026-10-26 22:11:00 +0000">
     2026-10-26
   </span>
 

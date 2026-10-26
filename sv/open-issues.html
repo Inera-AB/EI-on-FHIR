@@ -50,8 +50,8 @@
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"19"}
-    h3,h4,h5,h6{--heading-prefix:"19"}</style>
+    <style type="text/css">h2{--heading-prefix:"20"}
+    h3,h4,h5,h6{--heading-prefix:"20"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -69,7 +69,7 @@
 
 
 
-  Sweden
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
 
 
             </span>
@@ -115,6 +115,7 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -215,6 +216,14 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><strong>Adressregistrets innehåll.</strong> Vilken variant ska adaptern peka på för RIV-TA-källor: tjänsteplattformens endpoint per tjänstekontrakt, eller EHDS-bryggans FHIR-yta per vårdgivare? Bryggan använder vårdgivarens HSA-id som logisk adress; dagens engagemangsposter kan ha vårdenhetens eller källsystemets.</li>
   <li><strong>Överlämning från adaptern.</strong> När ett källsystem går över till FHIR blir det en avregistrering och en ny registrering per post. Räcker det, eller behövs en operation som flyttar ägarskapet?</li>
   <li><strong>Behörighet per vårdgivare.</strong> Regeln att en producent bara får registrera för vårdgivare som listar dess endpoint i tjänstekatalogen förutsätter att vårdgivarna håller sina listningar aktuella. Hur säkerställs det?</li>
+  <li><strong>Aggregerande tjänster.</strong> Stämmer det att de är dagens huvudsakliga konsumenter av engagemangsindex, per tjänstedomän? <a href="event-model.html">Övergången per tjänst</a> bygger på det.</li>
+  <li><strong>Spärr och samtycke i dagens kedja.</strong> Var filtreras de i dag, i den aggregerande tjänsten eller hos konsumenten? Om FHIR-EI också filtrerar kan läge 2 ge dubbel filtrering eller ändrat beteende.</li>
+  <li><strong>Juridik.</strong> Täcker vårdgivarnas ändamål och Ineras personuppgiftsbiträdesavtal att samma index används för sammanhållen journalföring och för patientens direktåtkomst?</li>
+  <li><strong>Säkerhetsetiketter.</strong> Vilka etiketter används, och hur tillämpas de per syfte?</li>
+  <li><strong>Vårdgivarens prövning vid sökning.</strong> Ska FHIR-EI, som det nederländska lokaliseringsindexet, fråga vårdgivaren om åtkomst vid varje sökning i stället för att filtrera centralt? Ansvaret för samtycke och spärr blir då tydligt, men det kostar svarstid och kräver en beslutstjänst hos varje vårdgivare.</li>
+  <li><strong>Avregistrering via indexeringsagenten.</strong> Hur vet agenten att informationen inte längre finns hos producenten?</li>
+  <li><strong>R4-tjänster.</strong> Publiceras deras tillämpning i ett separat R5-paket, eller går tjänsterna över till R5?</li>
+  <li><strong>Första tjänst.</strong> Vilken tjänst går först genom övergången?</li>
 </ul>
 
 
@@ -245,7 +254,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 20:06:00 +0000">
+  <span title="2026-10-26 22:11:00 +0000">
     2026-10-26
   </span>
 

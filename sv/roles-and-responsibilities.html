@@ -69,7 +69,7 @@
 
 
 
-  Sweden
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
 
 
             </span>
@@ -115,6 +115,7 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -193,7 +194,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </ul>
 
 </div>
-<p>Sex roller deltar i <a href="use-cases.html">användningsfallen</a>, plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.</p>
+<p>Sju roller deltar i <a href="use-cases.html">användningsfallen</a>, plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.</p>
 
 <table class="grid">
   <thead>
@@ -213,7 +214,11 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Övergångsadapter</td>
-      <td>Speglar dagens engagemangsindex till FHIR-EI utan egen affärslogik, gör grundladdningen och skriver tillbaka FHIR-registrerade poster till dagens index. Har ombudsroll och håller ett adressregister från logisk adress och tjänstedomän till endpoint</td>
+      <td>Speglar dagens engagemangsindex till FHIR-EI per tjänstedomän, utan egen affärslogik, och gör grundladdningen. Skriver inte tillbaka till dagens index. Har ombudsroll och håller ett adressregister från logisk adress och tjänstedomän till endpoint</td>
+    </tr>
+    <tr>
+      <td>Indexeringsagent</td>
+      <td>Prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar; se <a href="producer-support.html">Stöd för producenter</a></td>
     </tr>
     <tr>
       <td>Konsument</td>
@@ -225,7 +230,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Tjänsteägare</td>
-      <td>Publicerar tjänstens tillämpning av indexprofilen i tjänstens IG</td>
+      <td>Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics och producentens skyldigheter i tjänstens IG</td>
     </tr>
   </tbody>
 </table>
@@ -286,6 +291,18 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>Tjänsteägare</td>
       <td>SHALL publicera tillämpningen som en profil med <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> som förälder</td>
     </tr>
+    <tr>
+      <td>Tjänsteägare</td>
+      <td>SHALL publicera en <code class="language-plaintext highlighter-rouge">SubscriptionTopic</code> per informationsmängd som anger vad som räknas som en ändring, och SHOULD ange producentens skyldigheter med extensionen <code class="language-plaintext highlighter-rouge">obligation</code>; se <a href="information-model.html">Indexposten</a></td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>SHALL NOT registrera en tjänst enbart i FHIR-EI förrän tjänstens konsumenter läser FHIR-EI; se <a href="event-model.html">Händelsemodell och övergång</a></td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>MAY märka en post med säkerhetsetiketter i <code class="language-plaintext highlighter-rouge">meta.security</code>, till exempel <code class="language-plaintext highlighter-rouge">NOPAT</code>; se <a href="security.html">Spärr, loggning och behörighet</a></td>
+    </tr>
   </tbody>
 </table>
 
@@ -321,7 +338,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 20:06:00 +0000">
+  <span title="2026-10-26 22:11:00 +0000">
     2026-10-26
   </span>
 

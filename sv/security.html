@@ -50,8 +50,8 @@
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"16"}
-    h3,h4,h5,h6{--heading-prefix:"16"}</style>
+    <style type="text/css">h2{--heading-prefix:"17"}
+    h3,h4,h5,h6{--heading-prefix:"17"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -69,7 +69,7 @@
 
 
 
-  Sweden
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
 
 
             </span>
@@ -115,6 +115,7 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -189,6 +190,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <div class="markdown-toc">
 <ul id="markdown-toc">
   <li><a href="#alla-operationer" id="markdown-toc-alla-operationer">Alla operationer</a></li>
+  <li><a href="#ett-index-prövning-per-syfte" id="markdown-toc-ett-index-prövning-per-syfte">Ett index, prövning per syfte</a></li>
+  <li><a href="#säkerhetsetiketter" id="markdown-toc-säkerhetsetiketter">Säkerhetsetiketter</a></li>
   <li><a href="#prenumerationer" id="markdown-toc-prenumerationer">Prenumerationer</a></li>
   <li><a href="#producenter" id="markdown-toc-producenter">Producenter</a></li>
   <li><a href="#granularitet" id="markdown-toc-granularitet">Granularitet</a></li>
@@ -241,6 +244,48 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>Kontrollen gäller alla operationer: sökning, läsning, skrivning, prenumeration, inkrementell avstämning och export. Filtreringen sker i FHIR-EI innan svaret lämnas ut, aldrig bara i den komponent som presenterar svaret. Export kräver egen behörighet för systemkonsumenten och loggas per uttag.</p>
 
+<h3 id="ett-index-prövning-per-syfte">Ett index, prövning per syfte</h3>
+
+<p>NPÖ och 1177 använder samma indexposter. Det som skiljer är prövningen vid varje läsning, som FHIR-EI väljer utifrån åtkomstkontexten och <code class="language-plaintext highlighter-rouge">purposeOfUse</code>.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Prövning</th>
+      <th>NPÖ (sammanhållen journalföring)</th>
+      <th>1177 (patientens direktåtkomst)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Vem frågar</td>
+      <td>Vårdpersonal med uppdrag</td>
+      <td>Patienten, eller ombud med fullmakt</td>
+    </tr>
+    <tr>
+      <td>Spärr</td>
+      <td>Gäller</td>
+      <td>Gäller inte mot patienten själv</td>
+    </tr>
+    <tr>
+      <td>Samtycke och nödåtkomst</td>
+      <td>Krävs</td>
+      <td>Ersätts av inloggning och identitet</td>
+    </tr>
+    <tr>
+      <td>Särskilda begränsningar</td>
+      <td>–</td>
+      <td>Till exempel vårdgivarens fördröjda visning och sekretess mot vårdnadshavare för unga</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma. Se <a href="open-issues.html">Öppna frågor</a>.</p>
+
+<h3 id="säkerhetsetiketter">Säkerhetsetiketter</h3>
+
+<p>En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Producenten kan därför märka en post med säkerhetsetiketter i <code class="language-plaintext highlighter-rouge">meta.security</code>, till exempel <code class="language-plaintext highlighter-rouge">NOPAT</code> ur HL7:s kodsystem <code class="language-plaintext highlighter-rouge">v3-ActCode</code>: inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande. FHIR-EI tillämpar etiketterna per syfte. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177. Se exemplet <a href="DocumentReference-IndexpostEjForPatient.html">Indexpost som inte visas för patient eller närstående</a>.</p>
+
 <h3 id="prenumerationer">Prenumerationer</h3>
 
 <p>Prenumerationer filtreras på samma sätt. En konsument får bara notis om poster den skulle ha fått i en sökning. Det, och <code class="language-plaintext highlighter-rouge">id-only</code>-innehåll, hindrar att notiser läcker förekomst av spärrad information. Se <a href="subscriptions.html">Prenumeration</a>.</p>
@@ -285,7 +330,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 20:06:00 +0000">
+  <span title="2026-10-26 22:11:00 +0000">
     2026-10-26
   </span>
 

@@ -21,4 +21,12 @@ Följande frågor är inte avgjorda. Svaren kan ändra profilen eller API:et.
 * **Adressregistrets innehåll.** Vilken variant ska adaptern peka på för RIV-TA-källor: tjänsteplattformens endpoint per tjänstekontrakt, eller EHDS-bryggans FHIR-yta per vårdgivare? Bryggan använder vårdgivarens HSA-id som logisk adress; dagens engagemangsposter kan ha vårdenhetens eller källsystemets.
 * **Överlämning från adaptern.** När ett källsystem går över till FHIR blir det en avregistrering och en ny registrering per post. Räcker det, eller behövs en operation som flyttar ägarskapet?
 * **Behörighet per vårdgivare.** Regeln att en producent bara får registrera för vårdgivare som listar dess endpoint i tjänstekatalogen förutsätter att vårdgivarna håller sina listningar aktuella. Hur säkerställs det?
+* **Aggregerande tjänster.** Stämmer det att de är dagens huvudsakliga konsumenter av engagemangsindex, per tjänstedomän? [Övergången per tjänst](event-model.md) bygger på det.
+* **Spärr och samtycke i dagens kedja.** Var filtreras de i dag, i den aggregerande tjänsten eller hos konsumenten? Om FHIR-EI också filtrerar kan läge 2 ge dubbel filtrering eller ändrat beteende.
+* **Juridik.** Täcker vårdgivarnas ändamål och Ineras personuppgiftsbiträdesavtal att samma index används för sammanhållen journalföring och för patientens direktåtkomst?
+* **Säkerhetsetiketter.** Vilka etiketter används, och hur tillämpas de per syfte?
+* **Vårdgivarens prövning vid sökning.** Ska FHIR-EI, som det nederländska lokaliseringsindexet, fråga vårdgivaren om åtkomst vid varje sökning i stället för att filtrera centralt? Ansvaret för samtycke och spärr blir då tydligt, men det kostar svarstid och kräver en beslutstjänst hos varje vårdgivare.
+* **Avregistrering via indexeringsagenten.** Hur vet agenten att informationen inte längre finns hos producenten?
+* **R4-tjänster.** Publiceras deras tillämpning i ett separat R5-paket, eller går tjänsterna över till R5?
+* **Första tjänst.** Vilken tjänst går först genom övergången?
 
