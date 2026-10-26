@@ -1,0 +1,37 @@
+{
+  "resourceType" : "SearchParameter",
+  "id" : "DocumentReference-source-endpoint",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: SearchParameter DocumentReference-source-endpoint</b></p><a name=\"DocumentReference-source-endpoint\"> </a><a name=\"hcDocumentReference-source-endpoint\"> </a><h2>SourceEndpoint</h2><p>Parameter <code>source-endpoint</code>:<code>reference</code></p><div><p>Producentens endpoint i tjänstekatalogen (extension sourceEndpoint).</p>\n</div><table class=\"grid\"><tr><td>Resurs</td><td><a href=\"http://hl7.org/fhir/R5/documentreference.html\">DocumentReference</a></td></tr><tr><td>Uttryck</td><td><code>DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint').value</code></td></tr><tr><td>Bearbetningsläge</td><td>Normal</td></tr><tr><td>Målresurser</td><td><a href=\"http://hl7.org/fhir/R5/endpoint.html\">Endpoint</a></td></tr><tr><td>Multipler</td><td><ul><li>multipleAnd: Det är upp till servern om parametern får upprepas för att ange flera värden som alla måste vara sanna</li><li>multipleOr: Det är upp till servern om parametern kan ha flera värden (separerade med kommatecken) där minst ett måste vara sant</li></ul></td></tr></table></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint",
+  "version" : "0.1.0",
+  "name" : "SourceEndpoint",
+  "title" : "Sök på producentens endpoint",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-10-26",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "Producentens endpoint i tjänstekatalogen (extension sourceEndpoint).",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "code" : "source-endpoint",
+  "base" : ["DocumentReference"],
+  "type" : "reference",
+  "expression" : "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint').value",
+  "processingMode" : "normal",
+  "target" : ["Endpoint"]
+}

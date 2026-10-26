@@ -1,0 +1,51 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "IneraEngagementCategoryCodeSystem"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraEngagementCategoryCodeSystem</b></p><a name=\"IneraEngagementCategoryCodeSystem\"> </a><a name=\"hcIneraEngagementCategoryCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande kod:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">voo<a name=\"IneraEngagementCategoryCodeSystem-voo\"> </a></td><td>Kategorin voo inom tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr></table></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"^^xsd:anyURI] ; # 
+  fhir:identifier ( [
+     fhir:value [ fhir:v "IneraEngagementCategoryCodeSystem" ]
+  ] ) ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IneraEngagementCategoryCodeSystem"] ; # 
+  fhir:title [ fhir:v "Kodsystem för kategorier inom tjänstedomän"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v false] ; # 
+  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "Inera AB"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Inera AB" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://www.inera.se" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "SE" ] ;
+       fhir:display [ fhir:v "Sweden" ]
+     ] )
+  ] ) ; # 
+  fhir:caseSensitive [ fhir:v true] ; # 
+  fhir:content [ fhir:v "fragment"] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "voo" ] ;
+     fhir:display [ fhir:v "voo" ] ;
+     fhir:definition [ fhir:v "Kategorin voo inom tjänstedomänen riv:clinicalprocess:healthcond:description." ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

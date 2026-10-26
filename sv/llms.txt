@@ -1,19 +1,25 @@
-# inera.core.template#2.3.0: Inera FHIR Implementation Guide Template(sv)
+# inera.ei.engagementindex#0.1.0: FHIR-baserat engagemangsindex (FHIR-EI)(sv)
 
 ## Pages
 
 * [Hem](index.md)
 * [Användningsfall](use-cases.md)
 * [Om](about.md)
+* [Händelsemodell och övergång](event-model.md)
 * [Testning och validering](testing.md)
 * [Felhantering](error-handling.md)
 * [Inledning](introduction.md)
+* [Öppna frågor](open-issues.md)
+* [Samexistens med eHM:s patientindex](ehm-coexistence.md)
+* [Kodverk för tjänster och informationsmängder](information-sets.md)
 * [Mappning till profiler](mappings.md)
 * [Sammanfattning av artefakter](artifacts.md)
+* [Prenumeration](subscriptions.md)
 * [Förväntade svar](expected-responses.md)
+* [Indexposten](information-model.md)
 * [Nedladdningar](downloads.md)
 * [CapabilityStatement](capabilitystatement.md)
-* [Säkerhet och behörighet](security.md)
+* [Spärr, loggning och behörighet](security.md)
 * [Versionshistorik](version-history.md)
 * [Informationsunderlag](information-basis.md)
 * [REST-interaktioner och sökparametrar](rest-interactions.md)
@@ -21,14 +27,58 @@
 
 ## Resources
 
+### CodeSystems
+
+* [Kodsystem för orsaker till avregistrering](CodeSystem-IneraDeregistrationReasonCodeSystem.md)
+* [Kodsystem för kategorier inom tjänstedomän](CodeSystem-IneraEngagementCategoryCodeSystem.md)
+* [Kodsystem för registreringsstatus](CodeSystem-IneraIndexRegistrationStatusCodeSystem.md)
+* [Kodsystem för tjänstedomäner](CodeSystem-IneraServiceDomainCodeSystem.md)
+
+### ValueSets
+
+* [Orsaker till avregistrering](ValueSet-IneraDeregistrationReasonValueSet.md)
+* [Kategorier inom tjänstedomän](ValueSet-IneraEngagementCategoryValueSet.md)
+* [Registreringsstatus för indexposter](ValueSet-IneraIndexRegistrationStatusValueSet.md)
+* [Tjänstedomäner](ValueSet-IneraServiceDomainValueSet.md)
+
 ### Resource Profiles
 
-* [Inera Patient](StructureDefinition-IneraPatient.md)
+* [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
+* [Prenumeration på indexposter (FHIR-EI)](StructureDefinition-IneraIndexSubscription.md)
+
+### Extensions
+
+* [Vårdenhet](StructureDefinition-CareUnit.md)
+* [Innehållets senaste ändring](StructureDefinition-ContentLastUpdated.md)
+* [Orsak till avregistrering](StructureDefinition-DeregistrationReason.md)
+* [Logisk adress](StructureDefinition-LogicalAddress.md)
+* [Registrerande producent](StructureDefinition-RegisteringProducer.md)
+* [Registreringsstatus](StructureDefinition-RegistrationStatus.md)
+* [Producentens endpoint](StructureDefinition-SourceEndpoint.md)
+* [Källsystem](StructureDefinition-SourceSystem.md)
+
+### CapabilityStatements
+
+* [FHIR-EI server](CapabilityStatement-IneraIndexServer.md)
 
 ### ImplementationGuides
 
-* [Inera FHIR Implementation Guide Template](ImplementationGuide-inera.core.template.md)
+* [FHIR-baserat engagemangsindex (FHIR-EI)](ImplementationGuide-inera.ei.engagementindex.md)
+
+### SearchParameters
+
+* [Sök på innehållets senaste ändring](SearchParameter-DocumentReference-content-last-updated.md)
+* [Sök på producentens endpoint](SearchParameter-DocumentReference-source-endpoint.md)
+
+### SubscriptionTopics
+
+* [Indexpost ändrad](SubscriptionTopic-indexpost-andrad.md)
 
 ### Examples
 
-* [IneraPatientExample (Patient)](Patient-IneraPatientExample.md)
+* [RegistreringTransaction (Bundle)](Bundle-RegistreringTransaction.md)
+* [SokresultatForPatient (Bundle)](Bundle-SokresultatForPatient.md)
+* [IndexpostFhirProducent (DocumentReference)](DocumentReference-IndexpostFhirProducent.md)
+* [IndexpostFranAdapter (DocumentReference)](DocumentReference-IndexpostFranAdapter.md)
+* [IndexpostIndragen (DocumentReference)](DocumentReference-IndexpostIndragen.md)
+* [PrenumerationForPatient (Subscription)](Subscription-PrenumerationForPatient.md)

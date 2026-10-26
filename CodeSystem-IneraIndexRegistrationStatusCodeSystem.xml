@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="IneraIndexRegistrationStatusCodeSystem"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: CodeSystem IneraIndexRegistrationStatusCodeSystem</b></p><a name="IneraIndexRegistrationStatusCodeSystem"> </a><a name="hcIneraIndexRegistrationStatusCodeSystem"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code> definierar följande koder:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">active<a name="IneraIndexRegistrationStatusCodeSystem-active"> </a></td><td>Registrerad</td><td>Informationen finns tillgänglig hos producenten. Basstatus current.</td></tr><tr><td style="white-space:nowrap">withdrawn<a name="IneraIndexRegistrationStatusCodeSystem-withdrawn"> </a></td><td>Indragen</td><td>Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded.</td></tr><tr><td style="white-space:nowrap">entered-in-error<a name="IneraIndexRegistrationStatusCodeSystem-entered-in-error"> </a></td><td>Felregistrerad</td><td>Posten skulle aldrig ha funnits. Basstatus entered-in-error.</td></tr></table></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"/>
+  <identifier>
+    <value value="IneraIndexRegistrationStatusCodeSystem"/>
+  </identifier>
+  <version value="0.1.0"/>
+  <name value="IneraIndexRegistrationStatusCodeSystem"/>
+  <title value="Kodsystem för registreringsstatus"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-10-26"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <caseSensitive value="true"/>
+  <content value="complete"/>
+  <count value="3"/>
+  <concept>
+    <code value="active"/>
+    <display value="Registrerad"/>
+    <definition value="Informationen finns tillgänglig hos producenten. Basstatus current."/>
+  </concept>
+  <concept>
+    <code value="withdrawn"/>
+    <display value="Indragen"/>
+    <definition value="Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded."/>
+  </concept>
+  <concept>
+    <code value="entered-in-error"/>
+    <display value="Felregistrerad"/>
+    <definition value="Posten skulle aldrig ha funnits. Basstatus entered-in-error."/>
+  </concept>
+</CodeSystem>

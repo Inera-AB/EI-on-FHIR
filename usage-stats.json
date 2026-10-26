@@ -1,18 +1,117 @@
 {
-  "package": "inera.core.template",
-  "version": "2.3.0",
-  "fhirVersion": "4.0.1",
+  "package": "inera.ei.engagementindex",
+  "version": "0.1.0",
+  "fhirVersion": "5.0.0",
   "jurisdiction": "SE",
-  "extensions": [],
+  "extensions": [
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
+      "title": "Vårdenhet",
+      "types": [
+        "Identifier",
+        "id",
+        "Extension",
+        "code",
+        "CodeableConcept",
+        "uri",
+        "string",
+        "Period",
+        "Reference"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated",
+      "title": "Innehållets senaste ändring",
+      "types": [
+        "dateTime"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason",
+      "title": "Orsak till avregistrering",
+      "types": [
+        "CodeableConcept"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress",
+      "title": "Logisk adress",
+      "types": [
+        "Identifier",
+        "id",
+        "Extension",
+        "code",
+        "CodeableConcept",
+        "uri",
+        "string",
+        "Period",
+        "Reference"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer",
+      "title": "Registrerande producent",
+      "types": [
+        "Reference",
+        "id",
+        "Extension",
+        "string",
+        "uri",
+        "Identifier",
+        "string"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
+      "title": "Registreringsstatus",
+      "types": [
+        "code"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
+      "title": "Producentens endpoint",
+      "types": [
+        "Reference"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceSystem",
+      "title": "Källsystem",
+      "types": [
+        "Identifier",
+        "id",
+        "Extension",
+        "code",
+        "CodeableConcept",
+        "uri",
+        "string",
+        "Period",
+        "Reference"
+      ]
+    }
+  ],
   "profiles": {
-    "Patient": [
+    "DocumentReference": [
       {
-        "url": "https://fhir.inera.se/ig/template/StructureDefinition/IneraPatient",
-        "title": "Inera Patient"
+        "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry",
+        "title": "Indexpost (FHIR-EI)"
+      }
+    ],
+    "Subscription": [
+      {
+        "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription",
+        "title": "Prenumeration på indexposter (FHIR-EI)"
       }
     ]
   },
   "usage": {
+    "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation": [
+      "CapabilityStatement.rest.interaction",
+      "CapabilityStatement.rest.resource.interaction",
+      "CapabilityStatement.rest.resource.operation",
+      "CapabilityStatement.rest.resource.searchParam"
+    ],
     "http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice": [
       "StructureDefinition.snapshot.element.constraint"
     ],
@@ -22,23 +121,16 @@
     "http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName": [
       "StructureDefinition.snapshot.element.binding"
     ],
-    "http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet": [
-      "StructureDefinition.snapshot.element.binding"
+    "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable": [
+      "StructureDefinition.snapshot.element"
     ],
     "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type": [
       "StructureDefinition.snapshot.element.type"
     ],
-    "http://hl7.org/fhir/StructureDefinition/structuredefinition-hierarchy": [
-      "StructureDefinition.snapshot.element.type"
+    "http://hl7.org/fhir/StructureDefinition/structuredefinition-type-characteristics": [
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency": [
-      "ImplementationGuide.definition"
-    ],
-    "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name": [
-      "ImplementationGuide.definition.page",
-      "ImplementationGuide.definition.page.page"
-    ],
-    "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter": [
       "ImplementationGuide.definition"
     ],
     "http://hl7.org/fhir/tools/StructureDefinition/implementationguide-dependency-comment": [
@@ -49,6 +141,38 @@
     ],
     "http://hl7.org/fhir/tools/StructureDefinition/snapshot-base-version": [
       "StructureDefinition.snapshot"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit": [
+      "Bundle.entry.resource",
+      "DocumentReference"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated": [
+      "Bundle.entry.resource",
+      "DocumentReference"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason": [
+      "Bundle.entry.resource",
+      "DocumentReference"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress": [
+      "Bundle.entry.resource",
+      "DocumentReference"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer": [
+      "Bundle.entry.resource",
+      "DocumentReference"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus": [
+      "Bundle.entry.resource",
+      "DocumentReference"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint": [
+      "Bundle.entry.resource",
+      "DocumentReference"
+    ],
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceSystem": [
+      "Bundle.entry.resource",
+      "DocumentReference"
     ]
   }
 }

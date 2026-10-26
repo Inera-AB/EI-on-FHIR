@@ -1,0 +1,963 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex> a fhir:ImplementationGuide ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "inera.ei.engagementindex"] ; # 
+  fhir:language [ fhir:v "sv"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"sv\" lang=\"sv\"><p class=\"res-header-id\"><b>Genererad berättande text: ImplementationGuide inera.ei.engagementindex</b></p><a name=\"inera.ei.engagementindex\"> </a><a name=\"hcinera.ei.engagementindex\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Språk: sv</p></div><h2>IneraEngagementIndex</h2><p>Den officiella URL:en för denna implementationsguide är: </p><pre>https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex</pre><div><p>Indexprofil, API och händelsemodell för FHIR-EI, ett index över var det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades.</p>\n</div></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IneraEngagementIndex"] ; # 
+  fhir:title [ fhir:v "FHIR-baserat engagemangsindex (FHIR-EI)"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:date [ fhir:v "2026-10-26T20:06:25+00:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Inera AB"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Inera AB" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://www.inera.se" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Indexprofil, API och händelsemodell för FHIR-EI, ett index över var det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "SE" ] ;
+       fhir:display [ fhir:v "Sweden" ]
+     ] )
+  ] ) ; # 
+  fhir:packageId [ fhir:v "inera.ei.engagementindex"] ; # 
+  fhir:fhirVersion ( [ fhir:v "5.0.0"] ) ; # 
+  fhir:dependsOn ( [
+     fhir:id [ fhir:v "hl7tx" ] ;
+     fhir:extension ( [
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/implementationguide-dependency-comment"^^xsd:anyURI ] ;
+       fhir:value [
+         a fhir:markdown ;
+         fhir:v "Automatically added as a dependency - all IGs depend on HL7 Terminology"
+       ]
+     ] ) ;
+     fhir:uri [
+       fhir:v "http://terminology.hl7.org/ImplementationGuide/hl7.terminology"^^xsd:anyURI ;
+       fhir:link <http://terminology.hl7.org/ImplementationGuide/hl7.terminology>
+     ] ;
+     fhir:packageId [ fhir:v "hl7.terminology.r5" ] ;
+     fhir:version [ fhir:v "7.4.0" ]
+  ] [
+     fhir:id [ fhir:v "hl7ext" ] ;
+     fhir:extension ( [
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/implementationguide-dependency-comment"^^xsd:anyURI ] ;
+       fhir:value [
+         a fhir:markdown ;
+         fhir:v "Automatically added as a dependency - all IGs depend on the HL7 Extension Pack"
+       ]
+     ] ) ;
+     fhir:uri [
+       fhir:v "http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions"^^xsd:anyURI ;
+       fhir:link <http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions>
+     ] ;
+     fhir:packageId [ fhir:v "hl7.fhir.uv.extensions.r5" ] ;
+     fhir:version [ fhir:v "5.3.0" ]
+  ] ) ; # 
+  fhir:definition [
+     fhir:extension ( [
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency"^^xsd:anyURI ] ;
+       fhir:value [
+         a fhir:code ;
+         fhir:v "hl7.fhir.uv.tools.r5#1.3.0"
+       ]
+     ] ) ;
+     fhir:resource ( [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "CapabilityStatement"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraIndexServer> ;
+         fhir:reference [ fhir:v "CapabilityStatement/IneraIndexServer" ]
+       ] ;
+       fhir:name [ fhir:v "FHIR-EI server" ] ;
+       fhir:description [ fhir:v "Krav på FHIR-EI som server: sökning, registrering och avregistrering, prenumeration, inkrementell avstämning och massuttag av indexposter." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:resource"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry> ;
+         fhir:reference [ fhir:v "StructureDefinition/IneraIndexEntry" ]
+       ] ;
+       fhir:name [ fhir:v "Indexpost (FHIR-EI)" ] ;
+       fhir:description [ fhir:v "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "DocumentReference"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/DocumentReference/IndexpostFranAdapter> ;
+         fhir:reference [ fhir:v "DocumentReference/IndexpostFranAdapter" ]
+       ] ;
+       fhir:name [ fhir:v "Indexpost speglad av övergångsadaptern" ] ;
+       fhir:description [ fhir:v "Adaptern har slagit ihop dagens engagemangsposter för samma patient, logiska adress och tjänstedomän till en indexpost, med dagens kategori som informationsmängd. Endpointen är tjänsteplattformens endpoint för tjänstekontraktet, enligt adapterns adressregister, och den logiska adressen anges separat. Registrerande producent är adaptern, och källsystemet behålls." ] ;
+       fhir:isExample [ fhir:v true ] ;
+       fhir:profile ( [
+         fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"^^xsd:anyURI ;
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry>
+       ] )
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "SubscriptionTopic"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad> ;
+         fhir:reference [ fhir:v "SubscriptionTopic/indexpost-andrad" ]
+       ] ;
+       fhir:name [ fhir:v "Indexpost ändrad" ] ;
+       fhir:description [ fhir:v "Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "DocumentReference"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/DocumentReference/IndexpostIndragen> ;
+         fhir:reference [ fhir:v "DocumentReference/IndexpostIndragen" ]
+       ] ;
+       fhir:name [ fhir:v "Indragen indexpost" ] ;
+       fhir:description [ fhir:v "Producenten har dragit tillbaka posten eftersom engagemanget är avslutat. Posten ligger kvar som gravsten under gravstenarnas lagringstid och syns vid avstämning och export, men inte i en standardsökning." ] ;
+       fhir:isExample [ fhir:v true ] ;
+       fhir:profile ( [
+         fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"^^xsd:anyURI ;
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry>
+       ] )
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated> ;
+         fhir:reference [ fhir:v "StructureDefinition/ContentLastUpdated" ]
+       ] ;
+       fhir:name [ fhir:v "Innehållets senaste ändring" ] ;
+       fhir:description [ fhir:v "När det kliniska innehållet i källsystemet senast ändrades, enligt producenten. Gäller hela posten. Hålls isär från meta.lastUpdated, som anger när indexposten ändrades i FHIR-EI. Motsvarar mostRecentContent i dagens engagemangsindex." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "ValueSet"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementCategoryValueSet> ;
+         fhir:reference [ fhir:v "ValueSet/IneraEngagementCategoryValueSet" ]
+       ] ;
+       fhir:name [ fhir:v "Kategorier inom tjänstedomän" ] ;
+       fhir:description [ fhir:v "Alla kategorier i kodverket för kategorier inom tjänstedomän." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "CodeSystem"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem> ;
+         fhir:reference [ fhir:v "CodeSystem/IneraEngagementCategoryCodeSystem" ]
+       ] ;
+       fhir:name [ fhir:v "Kodsystem för kategorier inom tjänstedomän" ] ;
+       fhir:description [ fhir:v "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "CodeSystem"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem> ;
+         fhir:reference [ fhir:v "CodeSystem/IneraDeregistrationReasonCodeSystem" ]
+       ] ;
+       fhir:name [ fhir:v "Kodsystem för orsaker till avregistrering" ] ;
+       fhir:description [ fhir:v "Varför en indexpost avregistreras. Orsaken avgör hur mottagare, till exempel ett tunt index, ska hantera avregistreringen." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "CodeSystem"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem> ;
+         fhir:reference [ fhir:v "CodeSystem/IneraIndexRegistrationStatusCodeSystem" ]
+       ] ;
+       fhir:name [ fhir:v "Kodsystem för registreringsstatus" ] ;
+       fhir:description [ fhir:v "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "CodeSystem"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem> ;
+         fhir:reference [ fhir:v "CodeSystem/IneraServiceDomainCodeSystem" ]
+       ] ;
+       fhir:name [ fhir:v "Kodsystem för tjänstedomäner" ] ;
+       fhir:description [ fhir:v "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceSystem> ;
+         fhir:reference [ fhir:v "StructureDefinition/SourceSystem" ]
+       ] ;
+       fhir:name [ fhir:v "Källsystem" ] ;
+       fhir:description [ fhir:v "Källsystemet enligt dagens engagemangsindex, som HSA-id. Sätts av övergångsadaptern, eftersom registrerande producent då är adaptern och inte källsystemet. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress> ;
+         fhir:reference [ fhir:v "StructureDefinition/LogicalAddress" ]
+       ] ;
+       fhir:name [ fhir:v "Logisk adress" ] ;
+       fhir:description [ fhir:v "Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason> ;
+         fhir:reference [ fhir:v "StructureDefinition/DeregistrationReason" ]
+       ] ;
+       fhir:name [ fhir:v "Orsak till avregistrering" ] ;
+       fhir:description [ fhir:v "Varför posten avregistrerades: felregistrering, avslutat engagemang, gallring eller avregistrering via övergångsadaptern. Finns om och endast om posten inte är registrerad." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "ValueSet"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet> ;
+         fhir:reference [ fhir:v "ValueSet/IneraDeregistrationReasonValueSet" ]
+       ] ;
+       fhir:name [ fhir:v "Orsaker till avregistrering" ] ;
+       fhir:description [ fhir:v "Alla orsaker till avregistrering av en indexpost." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "Subscription"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/Subscription/PrenumerationForPatient> ;
+         fhir:reference [ fhir:v "Subscription/PrenumerationForPatient" ]
+       ] ;
+       fhir:name [ fhir:v "Prenumeration på en patients indexposter" ] ;
+       fhir:description [ fhir:v "En konsument prenumererar på ändrade indexposter för en patient inom en tjänst." ] ;
+       fhir:isExample [ fhir:v true ] ;
+       fhir:profile ( [
+         fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription"^^xsd:anyURI ;
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription>
+       ] )
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:resource"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription> ;
+         fhir:reference [ fhir:v "StructureDefinition/IneraIndexSubscription" ]
+       ] ;
+       fhir:name [ fhir:v "Prenumeration på indexposter (FHIR-EI)" ] ;
+       fhir:description [ fhir:v "En konsuments prenumeration på ändrade indexposter, på topic `indexpost-andrad`. Prenumerationen kan\nfiltreras på patient, tjänst och vårdgivare. Notiser bär bara id för ändrade poster, så att de inte bär\nmer patientinformation än nödvändigt." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint> ;
+         fhir:reference [ fhir:v "StructureDefinition/SourceEndpoint" ]
+       ] ;
+       fhir:name [ fhir:v "Producentens endpoint" ] ;
+       fhir:description [ fhir:v "Producentens åtkomstpunkt, som Endpoint-resurs i tjänstekatalogen. Katalogen är auktoritativ för endpointens egenskaper. Exakt en per indexpost. Motsvarar logicalAddress i dagens engagemangsindex." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "DocumentReference"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/DocumentReference/IndexpostFhirProducent> ;
+         fhir:reference [ fhir:v "DocumentReference/IndexpostFhirProducent" ]
+       ] ;
+       fhir:name [ fhir:v "Registrerad indexpost från en FHIR-producent" ] ;
+       fhir:description [ fhir:v "Journalsystem A har vård- och omsorgsdokumentation om patienten. Tjänsten anges med både tjänstedomän och IG-canonical, och informationsmängden med både kategori och profil-canonical." ] ;
+       fhir:isExample [ fhir:v true ] ;
+       fhir:profile ( [
+         fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"^^xsd:anyURI ;
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry>
+       ] )
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer> ;
+         fhir:reference [ fhir:v "StructureDefinition/RegisteringProducer" ]
+       ] ;
+       fhir:name [ fhir:v "Registrerande producent" ] ;
+       fhir:description [ fhir:v "Producentens identitet: den Endpoint i tjänstekatalogen som den autentiserade klienten är bunden till, som absolut referens. För en direktansluten producent är det samma endpoint som i sourceEndpoint. Referensen är också producentens namnrymd i identifier.system. FHIR-EI kontrollerar värdet mot den autentiserade klienten. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "Bundle"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/Bundle/RegistreringTransaction> ;
+         fhir:reference [ fhir:v "Bundle/RegistreringTransaction" ]
+       ] ;
+       fhir:name [ fhir:v "Registrering och avregistrering i en transaction" ] ;
+       fhir:description [ fhir:v "En producent registrerar en post och avregistrerar en felregistrerad post i samma transaction. Bundlen registreras helt eller inte alls." ] ;
+       fhir:isExample [ fhir:v true ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus> ;
+         fhir:reference [ fhir:v "StructureDefinition/RegistrationStatus" ]
+       ] ;
+       fhir:name [ fhir:v "Registreringsstatus" ] ;
+       fhir:description [ fhir:v "Postens exakta livscykeltillstånd: registrerad, indragen eller felregistrerad. Bär den semantik som DocumentReference.status inte kan uttrycka, eftersom basbindningen inte kan utökas." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "ValueSet"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet> ;
+         fhir:reference [ fhir:v "ValueSet/IneraIndexRegistrationStatusValueSet" ]
+       ] ;
+       fhir:name [ fhir:v "Registreringsstatus för indexposter" ] ;
+       fhir:description [ fhir:v "Alla livscykeltillstånd för en indexpost." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "SearchParameter"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-content-last-updated> ;
+         fhir:reference [ fhir:v "SearchParameter/DocumentReference-content-last-updated" ]
+       ] ;
+       fhir:name [ fhir:v "Sök på innehållets senaste ändring" ] ;
+       fhir:description [ fhir:v "Filtrerar indexposter på när det kliniska innehållet i källsystemet senast ändrades (extension contentLastUpdated). Ersätter tidsfiltret i FindContent." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "SearchParameter"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint> ;
+         fhir:reference [ fhir:v "SearchParameter/DocumentReference-source-endpoint" ]
+       ] ;
+       fhir:name [ fhir:v "Sök på producentens endpoint" ] ;
+       fhir:description [ fhir:v "Producentens endpoint i tjänstekatalogen (extension sourceEndpoint)." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "Bundle"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/Bundle/SokresultatForPatient> ;
+         fhir:reference [ fhir:v "Bundle/SokresultatForPatient" ]
+       ] ;
+       fhir:name [ fhir:v "Sökresultat för en patient" ] ;
+       fhir:description [ fhir:v "Svar på en konsuments sökning efter en patients indexposter. Utan status-parameter returneras bara registrerade poster, så den indragna posten finns inte med." ] ;
+       fhir:isExample [ fhir:v true ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "ValueSet"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/ValueSet/IneraServiceDomainValueSet> ;
+         fhir:reference [ fhir:v "ValueSet/IneraServiceDomainValueSet" ]
+       ] ;
+       fhir:name [ fhir:v "Tjänstedomäner" ] ;
+       fhir:description [ fhir:v "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:string ;
+           fhir:v "StructureDefinition:extension"
+         ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit> ;
+         fhir:reference [ fhir:v "StructureDefinition/CareUnit" ]
+       ] ;
+       fhir:name [ fhir:v "Vårdenhet" ] ;
+       fhir:description [ fhir:v "Vårdenheten där informationen finns, som HSA-id. Motsvarar careUnitId i dagens engagemangsindex." ] ;
+       fhir:isExample [ fhir:v false ]
+     ] ) ;
+     fhir:page [
+       fhir:source [
+         a fhir:url ;
+         fhir:v "toc.html"^^xsd:anyURI
+       ] ;
+       fhir:name [ fhir:v "toc.html"^^xsd:anyURI ] ;
+       fhir:title [ fhir:v "Table of Contents" ] ;
+       fhir:generation [ fhir:v "html" ] ;
+       fhir:page ( [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "index.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "index.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Hem" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "introduction.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "introduction.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Inledning" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "information-basis.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "information-basis.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Informationsunderlag" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "use-cases.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "use-cases.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Användningsfall" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "roles-and-responsibilities.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "roles-and-responsibilities.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Roller och ansvar" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "information-model.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "information-model.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Indexposten" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "information-sets.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "information-sets.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Kodverk för tjänster och informationsmängder" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "event-model.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "event-model.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Händelsemodell och övergång" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "ehm-coexistence.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "ehm-coexistence.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Samexistens med eHM:s patientindex" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "mappings.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "mappings.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Mappning till profiler" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "rest-interactions.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "rest-interactions.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "REST-interaktioner och sökparametrar" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "subscriptions.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "subscriptions.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Prenumeration" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "expected-responses.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "expected-responses.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Förväntade svar" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "capabilitystatement.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "capabilitystatement.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "CapabilityStatement" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "error-handling.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "error-handling.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Felhantering" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "security.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "security.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Spärr, loggning och behörighet" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "testing.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "testing.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Testning och validering" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "about.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "about.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Om" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "open-issues.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "open-issues.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Öppna frågor" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "downloads.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "downloads.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Nedladdningar" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "version-history.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "version-history.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Versionshistorik" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] )
+     ] ;
+     fhir:parameter ( [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "copyrightyear" ]
+       ] ;
+       fhir:value [ fhir:v "2026+" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "releaselabel" ]
+       ] ;
+       fhir:value [ fhir:v "ci-build" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "show-inherited-invariants" ]
+       ] ;
+       fhir:value [ fhir:v "false" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "usage-stats-opt-out" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "i18n-default-lang" ]
+       ] ;
+       fhir:value [ fhir:v "sv" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "autoload-resources" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/capabilities" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/examples" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/extensions" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/models" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/operations" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/profiles" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/resources" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/vocabulary" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/maps" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/testing" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "input/history" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-resource" ]
+       ] ;
+       fhir:value [ fhir:v "fsh-generated/resources" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-pages" ]
+       ] ;
+       fhir:value [ fhir:v "template/config" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-pages" ]
+       ] ;
+       fhir:value [ fhir:v "input/assets" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-pages" ]
+       ] ;
+       fhir:value [ fhir:v "input/images" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-liquid-template" ]
+       ] ;
+       fhir:value [ fhir:v "template/liquid" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-liquid-template" ]
+       ] ;
+       fhir:value [ fhir:v "input/liquid" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-qa" ]
+       ] ;
+       fhir:value [ fhir:v "temp/qa" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-temp" ]
+       ] ;
+       fhir:value [ fhir:v "temp/pages" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-output" ]
+       ] ;
+       fhir:value [ fhir:v "output" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/guide-parameter-code"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-tx-cache" ]
+       ] ;
+       fhir:value [ fhir:v "input-cache/txcache" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-suppressed-warnings" ]
+       ] ;
+       fhir:value [ fhir:v "input/ignoreWarnings.txt" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "path-history" ]
+       ] ;
+       fhir:value [ fhir:v "https://fhir.inera.se/ig/engagementindex/history.html" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "template-html" ]
+       ] ;
+       fhir:value [ fhir:v "template-page.html" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "template-md" ]
+       ] ;
+       fhir:value [ fhir:v "template-page-md.html" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-contact" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-context" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-copyright" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-jurisdiction" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-license" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-publisher" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-version" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "apply-wg" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "active-tables" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "fmm-definition" ]
+       ] ;
+       fhir:value [ fhir:v "http://hl7.org/fhir/versions.html#maturity" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "propagate-status" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "excludelogbinaryformat" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] [
+       fhir:code [
+         fhir:system [ fhir:v "http://hl7.org/fhir/tools/CodeSystem/ig-parameters"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "tabbed-snapshots" ]
+       ] ;
+       fhir:value [ fhir:v "true" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

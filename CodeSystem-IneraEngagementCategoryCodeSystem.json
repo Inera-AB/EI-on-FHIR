@@ -1,0 +1,41 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "IneraEngagementCategoryCodeSystem",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraEngagementCategoryCodeSystem</b></p><a name=\"IneraEngagementCategoryCodeSystem\"> </a><a name=\"hcIneraEngagementCategoryCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande kod:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">voo<a name=\"IneraEngagementCategoryCodeSystem-voo\"> </a></td><td>Kategorin voo inom tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr></table></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem",
+  "identifier" : [{
+    "value" : "IneraEngagementCategoryCodeSystem"
+  }],
+  "version" : "0.1.0",
+  "name" : "IneraEngagementCategoryCodeSystem",
+  "title" : "Kodsystem för kategorier inom tjänstedomän",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-10-26",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "fragment",
+  "concept" : [{
+    "code" : "voo",
+    "display" : "voo",
+    "definition" : "Kategorin voo inom tjänstedomänen riv:clinicalprocess:healthcond:description."
+  }]
+}

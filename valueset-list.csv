@@ -1,1 +1,5 @@
 URL,Version,Status,OIDs,Name,Title,Description,Uses,Used,Sources
+https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet,0.1.0,draft,,IneraDeregistrationReasonValueSet,Orsaker till avregistrering,"Alla orsaker till avregistrering av en indexpost.",,"Internal"
+https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementCategoryValueSet,0.1.0,draft,,IneraEngagementCategoryValueSet,Kategorier inom tjänstedomän,"Alla kategorier i kodverket för kategorier inom tjänstedomän.",,"Internal"
+https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet,0.1.0,draft,,IneraIndexRegistrationStatusValueSet,Registreringsstatus för indexposter,"Alla livscykeltillstånd för en indexpost.",,"Internal"
+https://fhir.inera.se/ig/engagementindex/ValueSet/IneraServiceDomainValueSet,0.1.0,draft,,IneraServiceDomainValueSet,Tjänstedomäner,"Alla tjänstedomäner i Ineras kodverk för tjänstedomäner.",,"Internal"

@@ -1,0 +1,47 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad> a fhir:SubscriptionTopic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "indexpost-andrad"] ; # 
+  fhir:language [ fhir:v "sv"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: SubscriptionTopic indexpost-andrad</b></p><a name=\"indexpost-andrad\"> </a><a name=\"hcindexpost-andrad\"> </a><table class=\"grid\"><tr><td><b>SubscriptionTopic</b></td><td>Indexpost ändrad</td></tr><tr><td><b>Description</b></td><td><div><p>Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering.</p>\n</div></td></tr><tr><td><b>Upphovsrättsuttalande:</b></td><td> null</td></tr></table><table class=\"grid\"><tr><td colspan=\"3\"><b>Resurstriggers</b></td></tr><tr><th><b>Resurs</b></th><th><b>Interaktioner</b></th><th><b>Beskrivning</b></th></tr><tr><td><a href=\"http://hl7.org/fhir/R5/documentreference.html\">http://hl7.org/fhir/StructureDefinition/DocumentReference</a></td><td>create, update</td><td><div><p>En indexpost skapas, uppdateras eller avregistreras.</p>\n</div></td></tr></table></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IndexpostAndrad"] ; # 
+  fhir:title [ fhir:v "Indexpost ändrad"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v false] ; # 
+  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "Inera AB"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Inera AB" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://www.inera.se" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "SE" ] ;
+       fhir:display [ fhir:v "Sweden" ]
+     ] )
+  ] ) ; # 
+  fhir:resourceTrigger ( [
+     fhir:description [ fhir:v "En indexpost skapas, uppdateras eller avregistreras." ] ;
+     fhir:resource [ fhir:v "http://hl7.org/fhir/StructureDefinition/DocumentReference"^^xsd:anyURI ] ;
+     fhir:supportedInteraction ( [ fhir:v "create" ] [ fhir:v "update" ] )
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

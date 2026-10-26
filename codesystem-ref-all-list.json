@@ -1,87 +1,170 @@
 {
   "codeSystems" : [{
-    "url" : "http://hl7.org/fhir/address-type",
-    "version" : "4.0.1",
+    "url" : "http://hl7.org/fhir/composition-attestation-mode",
+    "version" : "5.0.0",
     "status" : "active",
-    "name" : "AddressType",
-    "title" : "AddressType",
-    "description" : "The type of an address (physical / postal).",
-    "oids" : ["2.16.840.1.113883.4.642.4.70"],
+    "name" : "CompositionAttestationMode",
+    "title" : "Composition Attestation Mode",
+    "description" : "The way in which a person authenticated a composition.",
+    "oids" : ["2.16.840.1.113883.4.642.1.234",
+    "2.16.840.1.113883.4.642.4.239",
+    "2.16.840.1.113883.4.642.2.120"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-address-type.html" : "AddressType"
+    "http://hl7.org/fhir/R5/valueset-composition-attestation-mode.html" : "Composition Attestation Mode"
   },
   {
-    "url" : "http://hl7.org/fhir/address-use",
-    "version" : "4.0.1",
+    "url" : "http://hl7.org/fhir/composition-status",
+    "version" : "5.0.0",
     "status" : "active",
-    "name" : "AddressUse",
-    "title" : "AddressUse",
-    "description" : "The use of an address.",
-    "oids" : ["2.16.840.1.113883.4.642.4.68"],
+    "name" : "CompositionStatus",
+    "title" : "Composition Status",
+    "description" : "The workflow/clinical status of the composition.",
+    "oids" : ["2.16.840.1.113883.4.642.4.242",
+    "2.16.840.1.113883.4.642.2.123",
+    "2.16.840.1.113883.4.642.1.237"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-address-use.html" : "AddressUse"
+    "http://hl7.org/fhir/R5/valueset-composition-status.html" : "Composition Status"
   },
   {
-    "url" : "http://hl7.org/fhir/administrative-gender",
-    "version" : "4.0.1",
-    "status" : "active",
-    "name" : "AdministrativeGender",
-    "title" : "AdministrativeGender",
-    "description" : "The gender of a person used for administrative purposes.",
-    "oids" : ["2.16.840.1.113883.4.642.4.2"],
+    "url" : "http://hl7.org/fhir/document-reference-status",
+    "version" : "5.0.0",
+    "status" : "draft",
+    "name" : "DocumentReferenceStatus",
+    "title" : "DocumentReferenceStatus",
+    "description" : "The status of the document reference.",
+    "oids" : ["2.16.840.1.113883.4.642.4.8"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-administrative-gender.html" : "AdministrativeGender"
+    "http://hl7.org/fhir/R5/valueset-document-reference-status.html" : "DocumentReferenceStatus"
+  },
+  {
+    "url" : "http://hl7.org/fhir/document-relationship-type",
+    "version" : "5.0.0",
+    "status" : "active",
+    "name" : "DocumentRelationshipType",
+    "title" : "Document Relationship Type",
+    "description" : "The type of relationship between documents.",
+    "oids" : ["2.16.840.1.113883.4.642.4.245",
+    "2.16.840.1.113883.4.642.2.133",
+    "2.16.840.1.113883.4.642.1.240"],
+    "uses" : {
+    },
+    "http://hl7.org/fhir/R5/valueset-document-relationship-type.html" : "Document Relationship Type"
+  },
+  {
+    "url" : "http://hl7.org/fhir/fhir-types",
+    "version" : "5.0.0",
+    "status" : "active",
+    "name" : "FHIRTypes",
+    "title" : "All FHIR Types",
+    "description" : "One of the types defined as part of this version of FHIR.",
+    "oids" : ["2.16.840.1.113883.4.642.4.1802"],
+    "uses" : {
+    },
+    "http://hl7.org/fhir/R5/valueset-resource-types.html" : "Resource Types",
+    "http://hl7.org/fhir/R5/valueset-subscription-types.html" : "Types used with Subscriptions",
+    "http://hl7.org/fhir/R5/valueset-all-resource-types.html" : "All Resource Types"
   },
   {
     "url" : "http://hl7.org/fhir/identifier-use",
-    "version" : "4.0.1",
+    "version" : "5.0.0",
     "status" : "active",
     "name" : "IdentifierUse",
     "title" : "IdentifierUse",
     "description" : "Identifies the purpose for this identifier, if known .",
-    "oids" : ["2.16.840.1.113883.4.642.4.58"],
+    "oids" : ["2.16.840.1.113883.4.642.1.58"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-identifier-use.html" : "IdentifierUse"
+    "http://hl7.org/fhir/R5/valueset-identifier-use.html" : "IdentifierUse"
   },
   {
-    "url" : "http://hl7.org/fhir/link-type",
-    "version" : "4.0.1",
+    "url" : "http://hl7.org/fhir/search-comparator",
+    "version" : "5.0.0",
     "status" : "active",
-    "name" : "LinkType",
-    "title" : "LinkType",
-    "description" : "The type of link between this patient resource and another patient resource.",
-    "oids" : ["2.16.840.1.113883.4.642.4.424"],
+    "name" : "SearchComparator",
+    "title" : "Search Comparator",
+    "description" : "What Search Comparator Codes are supported in search.",
+    "oids" : ["2.16.840.1.113883.4.642.1.623",
+    "2.16.840.1.113883.4.642.4.638"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-link-type.html" : "LinkType"
+    "http://hl7.org/fhir/R5/valueset-search-comparator.html" : "Search Comparator"
   },
   {
-    "url" : "http://hl7.org/fhir/name-use",
-    "version" : "4.0.1",
+    "url" : "http://hl7.org/fhir/search-modifier-code",
+    "version" : "5.0.0",
     "status" : "active",
-    "name" : "NameUse",
-    "title" : "NameUse",
-    "description" : "The use of a human name.",
-    "oids" : ["2.16.840.1.113883.4.642.4.66"],
+    "name" : "SearchModifierCode",
+    "title" : "Search Modifier Code",
+    "description" : "A supported modifier for a search parameter.",
+    "oids" : ["2.16.840.1.113883.4.642.1.625",
+    "2.16.840.1.113883.4.642.4.640",
+    "2.16.840.1.113883.4.642.2.92"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-name-use.html" : "NameUse"
+    "http://hl7.org/fhir/R5/valueset-search-modifier-code.html" : "Search Modifier Code"
   },
   {
-    "url" : "http://terminology.hl7.org/CodeSystem/v2-0131",
-    "version" : "3.0.0",
+    "url" : "http://hl7.org/fhir/subscription-payload-content",
+    "version" : "5.0.0",
     "status" : "active",
-    "name" : "ContactRole2",
-    "title" : "contactRole2",
-    "description" : "Code system of concepts which specify a relationship role that the next of kin/associated parties plays with regard to the patient. Also used in referrals, for example, it may be necessary to identify the contact representative at the clinic that sent a referral. Used in HL7 Version 2 messaging in the NK1 and CTD segments after 2.5, when it replace 2.16.840.1.113883.18.57.",
-    "oids" : ["2.16.840.1.113883.18.58"],
+    "name" : "SubscriptionPayloadContent",
+    "title" : "Subscription Payload Content",
+    "description" : "Codes to represent how much resource content to send in the notification payload.",
+    "oids" : ["2.16.840.1.113883.4.642.4.2021"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-patient-contactrelationship.html" : "Patient Contact Relationship "
+    "http://hl7.org/fhir/R5/valueset-subscription-payload-content.html" : "Subscription Payload Content"
+  },
+  {
+    "url" : "http://hl7.org/fhir/subscription-status",
+    "version" : "5.0.0",
+    "status" : "active",
+    "name" : "SubscriptionStatus",
+    "title" : "Subscription Status",
+    "description" : "This codesystem defines a set of codes that can be used to filter Subscription triggers.",
+    "oids" : ["2.16.840.1.113883.4.642.4.2022"],
+    "uses" : {
+    },
+    "http://hl7.org/fhir/R5/valueset-subscription-status.html" : "Subscription Status"
+  },
+  {
+    "url" : "http://terminology.hl7.org/CodeSystem/common-tags",
+    "version" : "1.0.1",
+    "status" : "active",
+    "name" : "CommonTags",
+    "title" : "Common Tags",
+    "description" : "Common Tag Codes defined by FHIR project",
+    "oids" : ["2.16.840.1.113883.4.642.1.1067"],
+    "uses" : {
+    },
+    "http://hl7.org/fhir/R5/valueset-common-tags.html" : "Common Tags"
+  },
+  {
+    "url" : "http://terminology.hl7.org/CodeSystem/media-category",
+    "version" : "5.0.0",
+    "status" : "active",
+    "name" : "DigitalMediaCategory",
+    "title" : "Digital Media Category",
+    "description" : "Codes for high level media types - whether the media is an image, video, or audio.",
+    "oids" : ["2.16.840.1.113883.4.642.1.326"],
+    "uses" : {
+    },
+    "http://hl7.org/fhir/R5/valueset-referenced-item-category.html" : "Referenced Item Category Value Set"
+  },
+  {
+    "url" : "http://terminology.hl7.org/CodeSystem/subscription-channel-type",
+    "version" : "1.0.1",
+    "status" : "active",
+    "name" : "SubscriptionChannelTypeCodes",
+    "title" : "SubscriptionChannel Type Codes",
+    "description" : "The type of method used to execute a subscription",
+    "oids" : ["2.16.840.1.113883.4.642.1.1432"],
+    "uses" : {
+    },
+    "http://hl7.org/fhir/R5/valueset-subscription-channel-type.html" : "Subscription Channel Type"
   },
   {
     "url" : "http://terminology.hl7.org/CodeSystem/v2-0203",
@@ -93,30 +176,86 @@
     "oids" : ["2.16.840.1.113883.18.108"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-identifier-type.html" : "IdentifierType"
+    "http://hl7.org/fhir/R5/valueset-identifier-type.html" : "Identifier Type Codes"
   },
   {
-    "url" : "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
-    "version" : "5.0.0",
+    "url" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+    "version" : "11.0.0",
     "status" : "active",
-    "name" : "MaritalStatus",
-    "title" : "MaritalStatus",
-    "description" : "\\* \\* \\* No description supplied \\* \\* \\*\r\n\r\n*Open Issue:* The specific meanings of these codes can vary somewhat by jurisdiction and implementation so caution should be used when determining equivalency.\r\n\r\n*Open Issue:* fixing and completion of the hierarchy and proper good definitions of all the concepts is badly needed.",
-    "oids" : ["2.16.840.1.113883.5.2"],
+    "name" : "ActCode",
+    "title" : "ActCode",
+    "description" : "A code specifying the particular kind of Act that the Act-instance represents within its class.\r\n\r\n*Constraints:* The kind of Act (e.g. physical examination, serum potassium, inpatient encounter, charge financial transaction, etc.) is specified with a code from one of several, typically external, coding systems. The coding system will depend on the class of Act, such as LOINC for observations, etc.\r\n\r\nConceptually, the Act.code must be a specialization of the Act.classCode. This is why the structure of ActClass domain should be reflected in the superstructure of the ActCode domain and then individual codes or externally referenced vocabularies subordinated under these domains that reflect the ActClass structure.\r\n\r\nAct.classCode and Act.code are not modifiers of each other but the Act.code concept should really imply the Act.classCode concept. For a negative example, it is not appropriate to use an Act.code \"potassium\" together with and Act.classCode for \"laboratory observation\" to somehow mean \"potassium laboratory observation\" and then use the same Act.code for \"potassium\" together with Act.classCode for \"medication\" to mean \"substitution of potassium\". This mutually modifying use of Act.code and Act.classCode is not permitted.",
+    "oids" : ["2.16.840.1.113883.5.4"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-marital-status.html" : "MaritalStatus"
+    "http://terminology.hl7.org/7.4.0/ValueSet-v3-ActCode.html" : "v3 Code System ActCode"
   },
   {
-    "url" : "http://terminology.hl7.org/CodeSystem/v3-NullFlavor",
-    "version" : "4.0.0",
+    "url" : "http://terminology.hl7.org/CodeSystem/v3-HL7DocumentFormatCodes",
+    "version" : "4.1.0",
     "status" : "active",
-    "name" : "NullFlavor",
-    "title" : "NullFlavor",
-    "description" : "A collection of codes specifying why a valid value is not present.",
-    "oids" : ["2.16.840.1.113883.5.1008"],
+    "name" : "HL7DocumentFormatCodes",
+    "title" : "HL7 Document Format Codes",
+    "description" : "This codeSystem contains codes which specify the technical format of a document. Each code provides sufficient information to allow any potential document consumer to know if it will be able to process the document. The codes are sufficiently specific to ensure processing/display by identifying a document encoding, structure and template. For example, formatCodes can be used in the FHIR DocumentReference resource to characterize the document being referenced.",
+    "oids" : ["2.16.840.1.113883.4.642.1.1407"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R4/valueset-marital-status.html" : "MaritalStatus"
+    "http://terminology.hl7.org/7.4.0/ValueSet-v3-HL7FormatCodes.html" : "HL7 ValueSet of Format Codes for use with Document Sharing"
+  },
+  {
+    "url" : "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+    "version" : "6.0.0",
+    "status" : "active",
+    "name" : "ObservationValue",
+    "title" : "ObservationValue",
+    "description" : "This code system covers all concepts of HL7-defined values for the Observation value element, when it has a coded datatype.",
+    "oids" : ["2.16.840.1.113883.5.1063"],
+    "uses" : {
+    },
+    "http://hl7.org/fhir/R5/valueset-common-tags.html" : "Common Tags"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraDeregistrationReasonCodeSystem",
+    "title" : "Kodsystem för orsaker till avregistrering",
+    "description" : "Varför en indexpost avregistreras. Orsaken avgör hur mottagare, till exempel ett tunt index, ska hantera avregistreringen.",
+    "uses" : {
+    },
+    "ValueSet-IneraDeregistrationReasonValueSet.html" : "Orsaker till avregistrering"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraEngagementCategoryCodeSystem",
+    "title" : "Kodsystem för kategorier inom tjänstedomän",
+    "description" : "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
+    "uses" : {
+    },
+    "ValueSet-IneraEngagementCategoryValueSet.html" : "Kategorier inom tjänstedomän"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraIndexRegistrationStatusCodeSystem",
+    "title" : "Kodsystem för registreringsstatus",
+    "description" : "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status.",
+    "uses" : {
+    },
+    "ValueSet-IneraIndexRegistrationStatusValueSet.html" : "Registreringsstatus för indexposter"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraServiceDomainCodeSystem",
+    "title" : "Kodsystem för tjänstedomäner",
+    "description" : "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
+    "uses" : {
+    },
+    "ValueSet-IneraServiceDomainValueSet.html" : "Tjänstedomäner"
   }]
 }

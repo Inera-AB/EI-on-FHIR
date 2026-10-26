@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SubscriptionTopic xmlns="http://hl7.org/fhir">
+  <id value="indexpost-andrad"/>
+  <language value="sv"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: SubscriptionTopic indexpost-andrad</b></p><a name="indexpost-andrad"> </a><a name="hcindexpost-andrad"> </a><table class="grid"><tr><td><b>SubscriptionTopic</b></td><td>Indexpost ändrad</td></tr><tr><td><b>Description</b></td><td><div><p>Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering.</p>
+</div></td></tr><tr><td><b>Upphovsrättsuttalande:</b></td><td> null</td></tr></table><table class="grid"><tr><td colspan="3"><b>Resurstriggers</b></td></tr><tr><th><b>Resurs</b></th><th><b>Interaktioner</b></th><th><b>Beskrivning</b></th></tr><tr><td><a href="http://hl7.org/fhir/R5/documentreference.html">http://hl7.org/fhir/StructureDefinition/DocumentReference</a></td><td>create, update</td><td><div><p>En indexpost skapas, uppdateras eller avregistreras.</p>
+</div></td></tr></table></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad"/>
+  <version value="0.1.0"/>
+  <name value="IndexpostAndrad"/>
+  <title value="Indexpost ändrad"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-10-26"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <resourceTrigger>
+    <description value="En indexpost skapas, uppdateras eller avregistreras."/>
+    <resource value="http://hl7.org/fhir/StructureDefinition/DocumentReference"/>
+    <supportedInteraction value="create"/>
+    <supportedInteraction value="update"/>
+  </resourceTrigger>
+</SubscriptionTopic>

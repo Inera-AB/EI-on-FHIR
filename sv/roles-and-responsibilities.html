@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Roller och ansvar - Inera FHIR Implementation Guide Template v2.3.0</title>
+    <title>Roller och ansvar - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -63,13 +63,13 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">Inera FHIR Implementation Guide Template</span>
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
             <br/>
-            <span style="display:inline-block;">2.3.0 - ci-build
+            <span style="display:inline-block;">0.1.0 - ci-build
 
 
 
-  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+  Sweden
 
 
             </span>
@@ -92,7 +92,7 @@
               <span class="icon-bar"> </span>
               <span class="icon-bar"> </span>
             </button>
-            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
@@ -103,6 +103,10 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
       <li><a href="mappings.html">Mappning till profiler</a></li>
     </ul>
   </li>
@@ -110,10 +114,11 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Säkerhet och behörighet</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -121,6 +126,7 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
       <li><a href="downloads.html">Nedladdningar</a></li>
       <li><a href="version-history.html">Versionshistorik</a></li>
     </ul>
@@ -163,7 +169,7 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/template/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   <h2>Roller och ansvar</h2>
   
 
@@ -180,12 +186,16 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div>
-<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
-</div>
-<p><em>Lista de system eller mänskliga roller som deltar i användningsfallen (se <a href="use-cases.html">Användningsfall</a>). Beskriv för varje roll dess verksamhetsansvar i sammanhanget för denna IG — vem som ansvarar för vad, inte hur anropen tekniskt går till.</em></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#förväntningar" id="markdown-toc-förväntningar">Förväntningar</a></li>
+  <li><a href="#ansvar-under-övergången" id="markdown-toc-ansvar-under-övergången">Ansvar under övergången</a></li>
+</ul>
 
-<table>
+</div>
+<p>Sex roller deltar i <a href="use-cases.html">användningsfallen</a>, plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.</p>
+
+<table class="grid">
   <thead>
     <tr>
       <th>Roll</th>
@@ -194,19 +204,37 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </thead>
   <tbody>
     <tr>
-      <td><em>[Rollens namn]</em></td>
-      <td><em>Beskriv rollen och ansvarsområdena för denna aktör.</em></td>
+      <td>FHIR-EI</td>
+      <td>Lagrar indexposter. Är sin egen åtkomstkontrollpunkt: kontrollerar behörighet och spärrar, filtrerar och loggar alla anrop. Auktoriserar producenternas skrivningar mot den autentiserade producentidentiteten. Skickar notiser till prenumeranter och håller händelselogg och gravstenar under sina lagringstider</td>
     </tr>
     <tr>
-      <td><em>[Rollens namn]</em></td>
-      <td><em>Beskriv rollen och ansvarsområdena för denna aktör.</em></td>
+      <td>Producent</td>
+      <td>Registrerar, uppdaterar och avregistrerar indexposter, så att indexet speglar vilken information producenten håller. Identifieras med sin endpoint i tjänstekatalogen. Försöker igen tills FHIR-EI kvitterat</td>
+    </tr>
+    <tr>
+      <td>Övergångsadapter</td>
+      <td>Speglar dagens engagemangsindex till FHIR-EI utan egen affärslogik, gör grundladdningen och skriver tillbaka FHIR-registrerade poster till dagens index. Har ombudsroll och håller ett adressregister från logisk adress och tjänstedomän till endpoint</td>
+    </tr>
+    <tr>
+      <td>Konsument</td>
+      <td>Söker i eller prenumererar på indexet för en patient, inom sitt uppdrag och syfte. Stämmer av efter avbrott. Hämtar informationen från producenternas endpoints</td>
+    </tr>
+    <tr>
+      <td>Systemkonsument</td>
+      <td>Gör massuttag för grundladdning och återsynk, till exempel en framtida synk till eHM:s patientindex</td>
+    </tr>
+    <tr>
+      <td>Tjänsteägare</td>
+      <td>Publicerar tjänstens tillämpning av indexprofilen i tjänstens IG</td>
     </tr>
   </tbody>
 </table>
 
-<p><em>Ange för varje roll vad den förväntas kunna göra vid implementering av denna IG, t.ex. med HL7 FHIR:s terminologi för förmågor där det är lämpligt.</em></p>
+<p>Tjänstekatalogen är auktoritativ för producenternas endpoints, och för vilka vårdgivare som listar dem.</p>
 
-<table>
+<h3 id="förväntningar">Förväntningar</h3>
+
+<table class="grid">
   <thead>
     <tr>
       <th>Roll</th>
@@ -215,25 +243,55 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </thead>
   <tbody>
     <tr>
-      <td><em>[Rollens namn]</em></td>
-      <td><em>Ange förväntningen, t.ex. "SHALL kunna producera en [Resurs] som uppfyller [Profil]."</em></td>
+      <td>FHIR-EI</td>
+      <td>SHALL uppfylla <a href="CapabilityStatement-IneraIndexServer.html">CapabilityStatement för FHIR-EI</a></td>
     </tr>
     <tr>
-      <td><em>[Rollens namn]</em></td>
-      <td><em>Ange förväntningen, t.ex. "SHALL kunna konsumera och bearbeta en [Resurs] som uppfyller [Profil]."</em></td>
+      <td>Producent</td>
+      <td>SHALL registrera poster som uppfyller <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> och tjänstens tillämpning, med villkorad uppdatering på <code class="language-plaintext highlighter-rouge">identifier</code></td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>SHALL avregistrera med villkorad uppdatering till status <code class="language-plaintext highlighter-rouge">superseded</code> eller <code class="language-plaintext highlighter-rouge">entered-in-error</code> och ange <code class="language-plaintext highlighter-rouge">deregistrationReason</code>; aldrig med delete</td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>SHALL NOT ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post</td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>SHALL använda sin endpoint-URL i tjänstekatalogen som <code class="language-plaintext highlighter-rouge">identifier.system</code> och <code class="language-plaintext highlighter-rouge">registeringProducer</code></td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>SHALL ange <code class="language-plaintext highlighter-rouge">logicalAddress</code> när endpointen adresseras med logisk adress</td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>SHALL försöka igen tills FHIR-EI kvitterat, och lägga ej levererbara händelser i en kö för manuell hantering</td>
+    </tr>
+    <tr>
+      <td>Konsument</td>
+      <td>SHALL skicka åtkomstkontext i varje anrop; se <a href="security.html">Spärr, loggning och behörighet</a></td>
+    </tr>
+    <tr>
+      <td>Konsument</td>
+      <td>SHALL deduplicera notiser och ignorera en notis om en äldre version än den den redan har; se <a href="event-model.html">Händelsemodell och övergång</a></td>
+    </tr>
+    <tr>
+      <td>Konsument</td>
+      <td>SHALL ignorera kodningar i <code class="language-plaintext highlighter-rouge">type</code> och <code class="language-plaintext highlighter-rouge">content.profile</code> som den inte förstår</td>
+    </tr>
+    <tr>
+      <td>Tjänsteägare</td>
+      <td>SHALL publicera tillämpningen som en profil med <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> som förälder</td>
     </tr>
   </tbody>
 </table>
 
-<p>Fr.o.m. FHIR R5 kan <code class="language-plaintext highlighter-rouge">CapabilityStatement</code> uttrycka denna typ av förväntningar formellt via elementet <code class="language-plaintext highlighter-rouge">obligations</code>. Om denna IG definierar formella CapabilityStatements, se <a href="capabilitystatement.html">CapabilityStatement</a> under Implementering.</p>
+<h3 id="ansvar-under-övergången">Ansvar under övergången</h3>
 
-<p><em>Referera till eller återge kortfattat det arbetsflöde där dessa roller interagerar — vad som utlöser flödet, i vilken ordning rollerna agerar och vad resultatet blir. Se <a href="information-basis.html">Informationsunderlag</a> för den fullständiga, auktoritativa beskrivningen.</em></p>
-
-<hr />
-
-<blockquote>
-  <p><strong>Vägledning för författare:</strong> Referera till relevanta nationella föreskrifter eller RIVTA-tjänstekontrakt där det är tillämpligt.</p>
-</blockquote>
+<p>Adaptern speglar dagens engagemangsindex utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos producenterna, genom deras registrering i dagens engagemangsindex.</p>
 
 
 
@@ -260,10 +318,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
 
-          IG © 2024+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
-          Paket inera.core.template#2.3.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 15:17:00 +0000">
+  <span title="2026-10-26 20:06:00 +0000">
     2026-10-26
   </span>
 

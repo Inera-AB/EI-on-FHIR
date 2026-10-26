@@ -1,0 +1,60 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "IneraIndexRegistrationStatusCodeSystem"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraIndexRegistrationStatusCodeSystem</b></p><a name=\"IneraIndexRegistrationStatusCodeSystem\"> </a><a name=\"hcIneraIndexRegistrationStatusCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code> definierar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">active<a name=\"IneraIndexRegistrationStatusCodeSystem-active\"> </a></td><td>Registrerad</td><td>Informationen finns tillgänglig hos producenten. Basstatus current.</td></tr><tr><td style=\"white-space:nowrap\">withdrawn<a name=\"IneraIndexRegistrationStatusCodeSystem-withdrawn\"> </a></td><td>Indragen</td><td>Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded.</td></tr><tr><td style=\"white-space:nowrap\">entered-in-error<a name=\"IneraIndexRegistrationStatusCodeSystem-entered-in-error\"> </a></td><td>Felregistrerad</td><td>Posten skulle aldrig ha funnits. Basstatus entered-in-error.</td></tr></table></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"^^xsd:anyURI] ; # 
+  fhir:identifier ( [
+     fhir:value [ fhir:v "IneraIndexRegistrationStatusCodeSystem" ]
+  ] ) ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IneraIndexRegistrationStatusCodeSystem"] ; # 
+  fhir:title [ fhir:v "Kodsystem för registreringsstatus"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v false] ; # 
+  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "Inera AB"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Inera AB" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://www.inera.se" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "SE" ] ;
+       fhir:display [ fhir:v "Sweden" ]
+     ] )
+  ] ) ; # 
+  fhir:caseSensitive [ fhir:v true] ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "3"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "active" ] ;
+     fhir:display [ fhir:v "Registrerad" ] ;
+     fhir:definition [ fhir:v "Informationen finns tillgänglig hos producenten. Basstatus current." ]
+  ] [
+     fhir:code [ fhir:v "withdrawn" ] ;
+     fhir:display [ fhir:v "Indragen" ] ;
+     fhir:definition [ fhir:v "Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded." ]
+  ] [
+     fhir:code [ fhir:v "entered-in-error" ] ;
+     fhir:display [ fhir:v "Felregistrerad" ] ;
+     fhir:definition [ fhir:v "Posten skulle aldrig ha funnits. Basstatus entered-in-error." ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

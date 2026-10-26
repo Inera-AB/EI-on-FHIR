@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Inledning - Inera FHIR Implementation Guide Template v2.3.0</title>
+    <title>Inledning - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -63,13 +63,13 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">Inera FHIR Implementation Guide Template</span>
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
             <br/>
-            <span style="display:inline-block;">2.3.0 - ci-build
+            <span style="display:inline-block;">0.1.0 - ci-build
 
 
 
-  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+  Sweden
 
 
             </span>
@@ -92,7 +92,7 @@
               <span class="icon-bar"> </span>
               <span class="icon-bar"> </span>
             </button>
-            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
@@ -103,6 +103,10 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
       <li><a href="mappings.html">Mappning till profiler</a></li>
     </ul>
   </li>
@@ -110,10 +114,11 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Säkerhet och behörighet</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -121,6 +126,7 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
       <li><a href="downloads.html">Nedladdningar</a></li>
       <li><a href="version-history.html">Versionshistorik</a></li>
     </ul>
@@ -163,7 +169,7 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/template/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   <h2>Inledning</h2>
   
 
@@ -180,20 +186,116 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div>
-<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#begrepp" id="markdown-toc-begrepp">Begrepp</a></li>
+  <li><a href="#arkitekturprinciper" id="markdown-toc-arkitekturprinciper">Arkitekturprinciper</a></li>
+  <li><a href="#varför-documentreference" id="markdown-toc-varför-documentreference">Varför DocumentReference</a></li>
+</ul>
+
 </div>
-<p><em>Detta är beskrivningen av [Domännamn] i tjänstedomänen [tjänstedomän/supportprocess]. Denna Implementation Guide (IG) är baserad på RIVTA 2.1 [R2] och regleras genom arkitekturella beslut [R1].</em></p>
-
-<p><em>Denna IG är en kravspecifikation. Den ska fungera som ett teknikneutralt, formellt regelverk som reglerar integrationskrav för parter (tjänstekonsumenter och tjänsteproducenter) som avser ansluta system för samverkan enligt denna IG. IG:n är också ett viktigt underlag för skapandet av de tekniska artefakterna (FHIR-profiler och StructureDefinitions).</em></p>
-
-<p><em>Detta dokument kompletterar reglerna i de tekniska artefakterna. Tjänsteproducenter och tjänstekonsumenter ska med andra ord följa såväl de maskintolkbara reglerna i FHIR-profilerna, som de regler som uttrycks verbalt i detta dokument.</em></p>
+<p>Detta är beskrivningen av FHIR-baserat engagemangsindex (FHIR-EI). IG:n är en kravspecifikation för parter som registrerar indexposter i, söker i eller prenumererar på FHIR-EI, och för tjänster som tillämpar indexprofilen. Parterna ska följa både de maskintolkbara reglerna i profilerna och de regler som uttrycks i text i denna IG.</p>
 
 <hr />
 
-<blockquote>
-  <p><strong>Vägledning för författare:</strong> Informationsunderlaget, användningsfall, roller och ansvar samt mappning till profiler beskrivs under Funktionellt (se <a href="information-basis.html">Informationsunderlag</a>, <a href="use-cases.html">Användningsfall</a>, <a href="roles-and-responsibilities.html">Roller och ansvar</a> och <a href="mappings.html">Mappning till profiler</a>). Tekniska detaljer om REST-anrop, sökparametrar och konformanskrav hör hemma under Implementering (se t.ex. <a href="capabilitystatement.html">CapabilityStatement</a>).</p>
-</blockquote>
+<h3 id="begrepp">Begrepp</h3>
+
+<p>FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangsindex klarar, och vara byggt så att ett tunt index hos eHM kan härledas ur det senare.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Begrepp</th>
+      <th>Betydelse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Indexpost</td>
+      <td>En pekare: patient × endpoint × tjänst, med de informationsmängder som finns och tidpunkt för senaste innehåll. Profil: <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a></td>
+    </tr>
+    <tr>
+      <td>Tjänst</td>
+      <td>En IG; motsvarar tjänstedomän i dagens modell</td>
+    </tr>
+    <tr>
+      <td>Informationsmängd</td>
+      <td>En profil eller resurs inom en tjänst; motsvarar kategori i dagens modell</td>
+    </tr>
+    <tr>
+      <td>Tillämpning</td>
+      <td>En tjänsts profil av den gemensamma indexprofilen, som bestämmer vad indexet svarar på för just den tjänsten. Se <a href="information-model.html">Indexposten</a></td>
+    </tr>
+    <tr>
+      <td>Endpoint</td>
+      <td>Producentens åtkomstpunkt, registrerad i tjänstekatalogen</td>
+    </tr>
+    <tr>
+      <td>Logisk adress</td>
+      <td>Den adress en RIV-TA-konsument anger mot tjänsteplattformen. I tjänstekatalogen är den en organisations HSA-id</td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>System som registrerar, uppdaterar och avregistrerar indexposter: källsystemet eller övergångsadaptern. Identifieras med sin endpoint i tjänstekatalogen</td>
+    </tr>
+    <tr>
+      <td>Konsument</td>
+      <td>Tjänst som söker i eller prenumererar på indexet, till exempel NPÖ och 1177</td>
+    </tr>
+    <tr>
+      <td>Tunt index</td>
+      <td>eHM:s patientindex kopplat till NDI</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="arkitekturprinciper">Arkitekturprinciper</h3>
+
+<ol>
+  <li><strong>Pekare, inte innehåll.</strong> Indexet svarar på var och när, aldrig vad. Profilen förbjuder de element i DocumentReference som skulle beskriva eller bära journalinnehåll.</li>
+  <li><strong>Minst lika god förmåga som idag.</strong> Det gäller aktualitet, leveransgarantier, borttag och återhämtning.</li>
+  <li><strong>Registrera en gång.</strong> Indexposten bär det som behövs för att härleda ett tunt index, även om Inera inte tar det ansvaret i första iterationen.</li>
+  <li><strong>Övergång utan krav på producenterna.</strong> Befintliga uppdateringar till engagemangsindex mappas in, så att källsystem kan gå över till FHIR i egen takt.</li>
+  <li><strong>Indexet är självt skyddsvärd information.</strong> Att en patient har en post hos en viss vårdenhet är en uppgift om patienten. Komponenten tillämpar därför spärr, loggning och filtrering.</li>
+  <li><strong>Profilering enligt Ineras tre-lagersmodell, ovanpå svenska basprofiler.</strong> I denna version bygger profilen direkt på FHIR:s basresurser; se <a href="open-issues.html">Öppna frågor</a>.</li>
+</ol>
+
+<hr />
+
+<h3 id="varför-documentreference">Varför DocumentReference</h3>
+
+<p>Indexposten definieras i en gemensam logisk modell och representeras i FHIR R5 som en profilerad <code class="language-plaintext highlighter-rouge">DocumentReference</code>. Det är samma mönster som NHS NRL och IHE MHD. I R5 har DocumentReference breddats till att referera innehåll av alla slag, inte bara dokument.</p>
+
+<p>Tre begrepp hålls isär:</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Begrepp</th>
+      <th>Vad det är</th>
+      <th>I indexet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Vårdepisod</td>
+      <td>Klinisk information hos producenten</td>
+      <td>Ingår inte</td>
+    </tr>
+    <tr>
+      <td>Indexpost</td>
+      <td>Uppgiften att information finns tillgänglig hos en producent</td>
+      <td>Representeras med <a href="StructureDefinition-IneraIndexEntry.html">indexprofilen</a></td>
+    </tr>
+    <tr>
+      <td>Innehåll</td>
+      <td>Själva journalinformationen</td>
+      <td>Hämtas från producentens endpoint efter att indexet pekat ut den</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
@@ -220,10 +322,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
 
-          IG © 2024+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
-          Paket inera.core.template#2.3.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 15:17:00 +0000">
+  <span title="2026-10-26 20:06:00 +0000">
     2026-10-26
   </span>
 

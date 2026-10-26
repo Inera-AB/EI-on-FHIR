@@ -1,56 +1,66 @@
-# Hem - Inera FHIR Implementation Guide Template v2.3.0
+# Hem - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
 
 ## Hem
 
-### [Domännamn]
+### FHIR-baserat engagemangsindex (FHIR-EI)
 
-**Ange ett namn som ringar in det avgränsade område som denna IG realiserar, t.ex. "Fasta kontakter" eller "Öppenvårdsemiss".**
+FHIR-EI är en ny komponent som pekar ut var det finns information om en patient. Den svarar på tre frågor: i vilka system finns information om patienten, vilka informationsmängder finns där, och när uppdaterades de senast. Komponenten ersätter engagemangsindex när NPÖ och 1177 FHIR-ifieras, och följer samma mönster som NHS Englands [National Record Locator](https://digital.nhs.uk/services/national-record-locator) och IHE MHD.
 
-**Välj ett kort, stabilt och beskrivande namn som speglar informationsmängden eller API:ets syfte, snarare än projekt-, organisations- eller versionsnamn. Domännamnet (canonical URL) ska ligga under en långsiktigt förvaltad Inera-domän, `https://fhir.inera.se/ig/<namn>`, och ska inte innehålla versionsnummer eftersom versioner hanteras i FHIR-paketet och Implementation Guidens metadata. Använd samma namn konsekvent i paketnamn, repository, canonical URL och dokumentation för att underlätta identifiering och återanvändning."**
+> **Status:** utkast. Specifikationen är under arbete och kan ändras utan föregående meddelande. Se [Öppna frågor](open-issues.md).
 
 -------
 
 ### Omfattning
 
-**Definiera vad som ingår i denna IG och beskriv eventuella avgränsningar. Specificera vilka användningsfall, kliniska scenarier eller informationsutbyten som beskrivs. Om denna IG är avsedd att användas som en basprofil/gemensam profil för mer specialiserade guider, beskriv det här.**
+IG:n omfattar:
+
+* informationsmodell för indexposten ([Indexposten](information-model.md), profil [Indexpost](StructureDefinition-IneraIndexEntry.md))
+* [kodverk för tjänster och informationsmängder](information-sets.md)
+* [API för sökning, registrering](rest-interactions.md) och [prenumeration](subscriptions.md)
+* [händelsemodell och leveransgarantier](event-model.md), inklusive övergången från dagens engagemangsindex
+* [spärr, loggning och filtrering](security.md) av svar
+* [samexistens med eHM:s patientindex](ehm-coexistence.md): borttag, grundladdning och återsynk
+
+Utanför IG:n ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll.
+
+Första konsumenter är NPÖ och 1177.
 
 -------
 
 ### Syfte
 
-**Beskriv målet med denna IG. Förklara vilket problem den löser och hur den passar in i det bredare Inera- och e-hälsolandskapet. Hänvisa till nationella eller regionala program, standarder eller mandat som motiverat arbetet.**
+Dagens engagemangsindex bygger på RIV-TA-tjänstekontrakten FindContent, Update och ProcessNotification. När NPÖ och 1177 går över till FHIR behöver de ett index med FHIR-gränssnitt. FHIR-EI ska klara minst det dagens engagemangsindex klarar, i aktualitet, leveransgarantier, borttag och återhämtning, och vara byggt så att ett tunt index hos eHM kan härledas ur det senare.
 
 -------
 
 ### Målgrupp
 
-**Ange målgrupper för IG:n, (speciellt viktigt om IG:n vänder sig till andra målgrupper än systemarkitekter och utvecklare, t ex levernatörer av vissa system, eller verksamhetsarkitektrer inom en viss verksamhet). Hänvisa gärna nya läsare till [Inledning](introduction.md) och implementatörer till relevanta tekniska avsnitt, exempelvis [REST-interaktioner och sökparametrar](rest-interactions.md).**
+* Leverantörer av källsystem som registrerar indexposter (producenter)
+* Tjänster som söker i eller prenumererar på indexet, till att börja med NPÖ och 1177 (konsumenter)
+* Tjänsteägare som publicerar en tillämpning av indexprofilen i sin tjänsts IG
+* Arkitekter och förvaltare av engagemangsindex och FHIR-EI
+
+Nya läsare börjar med [Inledning](introduction.md). Implementatörer går till [REST-interaktioner och sökparametrar](rest-interactions.md).
 
 -------
 
 ### Terminologi
 
-På [Inera Terminologitjänst](https://www.inera.se/tjanster/alla-tjanster-a-o/terminologitjanst-for-nationell-e-halsa/) finns alla refererade kodsystem och värdemängder som utvecklats av Inera.
+Kodverken för tjänstedomäner och kategorier i denna IG är utdrag. Den fullständiga förteckningen förvaltas av Inera. På [Inera Terminologitjänst](https://www.inera.se/tjanster/alla-tjanster-a-o/terminologitjanst-for-nationell-e-halsa/) finns de kodsystem och värdemängder som Inera förvaltar.
 
 -------
 
 ### Beroenden
 
-**Om denna IG har ett beroende till t ex SE-core, definierat av HL7 Sweden ska detta beskrivas här. Detta återspeglas även i de profiler som ärver från eller refererar till SECore-profiler.**
+IG:n bygger på FHIR R5 (5.0.0). Prenumeration använder R5:s inbyggda topic-baserade prenumerationer. Massuttag använder [Bulk Data Access](https://hl7.org/fhir/uv/bulkdata/) (`$export`), som bara finns publicerad för R4 och därför refereras i text, inte som paketberoende.
+
+Profilerna bygger direkt på FHIR:s basresurser. Specen anger att de ska bygga på svenska basprofiler; några sådana finns inte för R5 än. Se [Öppna frågor](open-issues.md).
 
 -------
 
 ### Dokumentation
 
-Mer information om FHIR på Inera finns [här](https://fhir.inera.se/). FHIR på Inera är en del av RIVTA – referensarkitekturen för svensk hälso- och sjukvård.
+Mer information om FHIR på Inera finns på [fhir.inera.se](https://fhir.inera.se/). FHIR på Inera är en del av RIVTA, referensarkitekturen för svensk hälso- och sjukvård.
 
 Information om hur denna IG förvaltas finns under [Om](about.md).
-
--------
-
-### Om mallens struktur
-
-Menyn i denna IG är medvetet utformad efter samma mönster som europeiska specifikationer, t.ex. FHIR ePS (Hem / Inledning / Funktionellt / Implementering / Om / Artefakter), för att ge implementatörer en igenkännbar ingång oavsett vilken europeisk FHIR-IG de arbetar med.
-
-Informationsmodellen för denna förmåga publiceras externt och fristående i en egen informationsspecifikation (se [Informationsunderlag](information-basis.md) under Funktionellt) snarare än i denna IG. Det håller informationsspecifikationen som den auktoritativa källan för begrepp och informationsstruktur, och undviker att IG:n och specifikationen glider isär över tid.
 

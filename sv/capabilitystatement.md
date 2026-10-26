@@ -1,8 +1,16 @@
-# CapabilityStatement - Inera FHIR Implementation Guide Template v2.3.0
+# CapabilityStatement - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
 
 ## CapabilityStatement
 
-**Om denna IG definierar formella CapabilityStatements, beskriv dem här och länka till respektive resurs. Ange vilken aktörsroll (t.ex. server/klient) varje CapabilityStatement representerar.**
+IG:n definierar ett CapabilityStatement med `kind = requirements`:
 
-Fr.o.m. FHIR R5 kan `CapabilityStatement` uttrycka formella konformanskrav per roll via elementet `obligations`, som ett maskinläsbart alternativ eller komplement till de förväntningar som beskrivs under [Roller och ansvar](roles-and-responsibilities.md) under Funktionellt.
+| | | |
+| :--- | :--- | :--- |
+| [FHIR-EI server](CapabilityStatement-IneraIndexServer.md) | Server | Sökning, villkorad registrering och avregistrering,`transaction`, historik, topic-baserad prenumeration med`$status`och`$events`, och SubscriptionTopic |
+
+Kraven anges per interaktion och sökparameter med extension `capabilitystatement-expectation` (SHALL, SHOULD). CapabilityStatementet annonserar de nationella sökparametrarna och, via SubscriptionTopic-resursen, vilka prenumerationsfilter som stöds.
+
+Massuttag med Bulk Data `$export` står inte i CapabilityStatementet. Bulk Data Access finns bara publicerad för R4, så dess OperationDefinition kan inte refereras från en R5-IG. Kravet står i text under [REST-interaktioner och sökparametrar](rest-interactions.md): FHIR-EI SHALL stödja `$export` på systemnivå med `_type=DocumentReference` och `_since`, och ett `_since`-uttag SHALL innehålla avregistrerade poster inom gravstenarnas lagringstid.
+
+Producenter och konsumenter har inga egna CapabilityStatements. Deras förväntningar beskrivs under [Roller och ansvar](roles-and-responsibilities.md).
 

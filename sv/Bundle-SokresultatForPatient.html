@@ -1,0 +1,302 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>Sökresultat för en patient - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<link href="inera.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="inera-thumbnail.png"/>
+<link rel="shortcut icon" href="inera-thumbnail.png"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"22.28"}
+    h3,h4,h5,h6{--heading-prefix:"22.28"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <div id="inera-nav">
+  <a id="inera-logo" data-no-external="true" href="https://www.inera.se">
+    <img height="50" alt="Inera" src="inera-logo-header.svg"/>
+  </a>
+</div>
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  Sweden
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul class="nav navbar-nav">
+  <li><a href="index.html">Hem</a></li>
+  <li><a href="introduction.html">Inledning</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="information-basis.html">Informationsunderlag</a></li>
+      <li><a href="use-cases.html">Användningsfall</a></li>
+      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
+      <li><a href="mappings.html">Mappning till profiler</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="error-handling.html">Felhantering</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
+      <li><a href="testing.html">Testning och validering</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
+      <li><a href="downloads.html">Nedladdningar</a></li>
+      <li><a href="version-history.html">Versionshistorik</a></li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artefakter</a></li>
+  <li><a href="https://fhir.inera.se/" target="_blank" rel="noopener">FHIR på Inera <span aria-hidden="true">&#8599;</span></a></li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='artifacts.html'><b>Sammanfattning av artefakter</b></a></li><li><b>Sökresultat för en patient</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<!-- layouts\layout-instance-base -->
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+  <li class="active">
+    <a href="#">Berättande innehåll</a>
+  </li>
+
+
+
+  
+    <li>
+      <a href="Bundle-SokresultatForPatient.xml.html">XML</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Bundle-SokresultatForPatient.json.html">JSON</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Bundle-SokresultatForPatient.ttl.html">TTL</a>
+    </li>
+  
+
+
+
+</ul>
+
+
+
+  <a name="root"> </a>
+
+
+
+  <h2 id="root">Exempel Bundle: Sökresultat för en patient</h2>
+
+
+  <p></p>
+
+
+
+
+
+  <!-- insert intro if present -->
+  
+
+
+
+  <div data-fhir="generated"><p class="res-header-id"/><a name="SokresultatForPatient"> </a><a name="hcSokresultatForPatient"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Språk: sv</p></div><p>Bundle SokresultatForPatient av typ searchset</p><a name="https-//ei.example.org/fhir/DocumentReference/IndexpostFhirProducent"> </a><a name="DocumentReference_IndexpostFhirProducent"> </a><a name="hcDocumentReference_IndexpostFhirProducent"> </a><hr/><p>Post 1 - fullUrl = https://ei.example.org/fhir/DocumentReference/IndexpostFhirProducent</p><p>Sök:Läge = match</p><p>Resurs DocumentReference:</p><blockquote><p class="res-header-id"/><a name="SokresultatForPatient/IndexpostFhirProducent"> </a><a name="hcSokresultatForPatient/IndexpostFhirProducent"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Senast uppdaterad: 2026-10-20 14:32:07+0200; Språk: sv</p><p style="margin-bottom: 0px">Profil: <a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></p></div><p><b>Producentens endpoint</b>: <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE01</p><p><b>Registrerande producent</b>: <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registreringsstatus</b>: active</p><p><b>Innehållets senaste ändring</b>: 2026-10-20 14:31:55+0200</p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</code>/7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33</p><p><b>status</b>: Current</p><p><b>type</b>: <span title="Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}, {urn:ietf:rfc:3986 https://example.org/fhir/ImplementationGuide/vardochomsorgsdokumentation}">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Url</b></td></tr><tr><td style="display: none">*</td><td><a href="https://journal-a.example.org/fhir">https://journal-a.example.org/fhir</a></td></tr></table><blockquote><p><b>profile</b></p><p><b>value</b>: <a href="CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo">Kodsystem för kategorier inom tjänstedomän: voo</a> (voo)</p></blockquote><blockquote><p><b>profile</b></p><p><b>value</b>: <a href="http://hl7.org/fhir/R5/composition.html">Composition</a></p></blockquote></blockquote></blockquote><a name="https-//ei.example.org/fhir/DocumentReference/IndexpostFranAdapter"> </a><a name="DocumentReference_IndexpostFranAdapter"> </a><a name="hcDocumentReference_IndexpostFranAdapter"> </a><hr/><p>Post 2 - fullUrl = https://ei.example.org/fhir/DocumentReference/IndexpostFranAdapter</p><p>Sök:Läge = match</p><p>Resurs DocumentReference:</p><blockquote><p class="res-header-id"/><a name="SokresultatForPatient/IndexpostFranAdapter"> </a><a name="hcSokresultatForPatient/IndexpostFranAdapter"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Senast uppdaterad: 2026-10-21 08:05:12+0200; Språk: sv</p><p style="margin-bottom: 0px">Profil: <a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></p></div><p><b>Producentens endpoint</b>: <a href="https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation">https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation</a></p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE02</p><p><b>Registrerande producent</b>: <a href="https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter">https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter</a></p><p><b>Registreringsstatus</b>: active</p><p><b>Logisk adress</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE02</p><p><b>Källsystem</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-SYS2</p><p><b>Innehållets senaste ändring</b>: 2026-10-21 08:04:59+0200</p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter</code>/b5e0d6a4-1f2c-5e7d-8a9b-0c1d2e3f4a5b</p><p><b>status</b>: Current</p><p><b>type</b>: <span title="Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG02</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Url</b></td></tr><tr><td style="display: none">*</td><td><a href="https://ntjp.example.org/vp/clinicalprocess/healthcond/description/GetCareDocumentation/2/rivtabp21">https://ntjp.example.org/vp/clinicalprocess/healthcond/description/GetCareDocumentation/2/rivtabp21</a></td></tr></table><h3>Profiles</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Value[x]</b></td></tr><tr><td style="display: none">*</td><td><a href="CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo">Kodsystem för kategorier inom tjänstedomän: voo</a> (voo)</td></tr></table></blockquote></blockquote></div>
+
+  
+
+  <!-- insert notes if present -->
+  
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
+          Genererad 
+  <span title="2026-10-26 20:06:00 +0000">
+    2026-10-26
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Länkar: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Innehållsförteckning</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-rapport</a>
+                 
+                
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

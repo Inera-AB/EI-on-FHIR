@@ -1,0 +1,624 @@
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>FHIR-EI server - XML Representation - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<link href="inera.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="inera-thumbnail.png"/>
+<link rel="shortcut icon" href="inera-thumbnail.png"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"22.1"}
+    h3,h4,h5,h6{--heading-prefix:"22.1"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <div id="inera-nav">
+  <a id="inera-logo" data-no-external="true" href="https://www.inera.se">
+    <img height="50" alt="Inera" src="inera-logo-header.svg"/>
+  </a>
+</div>
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  Sweden
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul class="nav navbar-nav">
+  <li><a href="index.html">Hem</a></li>
+  <li><a href="introduction.html">Inledning</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="information-basis.html">Informationsunderlag</a></li>
+      <li><a href="use-cases.html">Användningsfall</a></li>
+      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
+      <li><a href="mappings.html">Mappning till profiler</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="error-handling.html">Felhantering</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
+      <li><a href="testing.html">Testning och validering</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
+      <li><a href="downloads.html">Nedladdningar</a></li>
+      <li><a href="version-history.html">Versionshistorik</a></li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artefakter</a></li>
+  <li><a href="https://fhir.inera.se/" target="_blank" rel="noopener">FHIR på Inera <span aria-hidden="true">&#8599;</span></a></li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='artifacts.html'><b>Sammanfattning av artefakter</b></a></li><li><b>FHIR-EI server</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<!-- layouts\layout-instance-format -->
+<div style="counter-reset: section 7" class="col-12">
+<!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+
+
+
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+  <li>
+    <a href="CapabilityStatement-IneraIndexServer.html">Berättande innehåll</a>
+  </li>
+
+
+
+  
+    <li class="active">
+      <a href="#">XML</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="CapabilityStatement-IneraIndexServer.json.html">JSON</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="CapabilityStatement-IneraIndexServer.ttl.html">TTL</a>
+    </li>
+  
+
+
+
+</ul>
+
+
+<a name="root"> </a>
+
+
+
+<h2 id="root">: FHIR-EI server</h2>
+
+  <table class="colsd" data-fhir="generated">
+    <tr>
+
+      <td colspan="2">
+        
+          Draft
+          
+
+            per 
+2026-10-26
+
+          
+        
+      </td>
+
+    </tr>
+  </table>
+
+
+<p><a href="CapabilityStatement-IneraIndexServer.xml" no-download="true">Rå xml</a> | <a href="CapabilityStatement-IneraIndexServer.xml" download>Ladda ner</a></p>
+
+  <!-- insert intro if present -->
+  
+
+
+
+  <pre class="xml" data-fhir="generated" style="white-space: pre; text-wrap: nowrap; width: auto;"><code style="white-space: pre; text-wrap: nowrap;">
+&lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement">CapabilityStatement</a> xmlns=&quot;http://hl7.org/fhir&quot;&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/resource.html#XCapabilityStatement.id">id</a> <a href="http://hl7.org/fhir/R5/datatypes.html#id">value</a>=&quot;IneraIndexServer&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/resource.html#XCapabilityStatement.language">language</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;sv&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/domainresource.html#XCapabilityStatement.text">text</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/narrative.html#Narrative#XNarrative.status">status</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;extensions&quot;/&gt;
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Genererad berättande text: CapabilityStatement IneraIndexServer&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;IneraIndexServer&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcIneraIndexServer&quot;&gt; &lt;/a&gt;&lt;h2 id=&quot;title&quot;&gt;FHIR-EI server&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Implementationsguidens version: 0.1.0 &lt;/li&gt;&lt;li&gt;FHIR-version: 5.0.0 &lt;/li&gt;&lt;li&gt;Format som stöds: &lt;code&gt;json&lt;/code&gt;, &lt;code&gt;xml&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Publicerad: 2026-10-26 &lt;/li&gt;&lt;li&gt;Publicerad av: Inera AB &lt;/li&gt;&lt;/ul&gt;&lt;blockquote class=&quot;impl-note&quot;&gt;&lt;p&gt;&lt;strong&gt;Notera till implementörer: FHIR-förmågor&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Vilken FHIR-förmåga som helst kan vara 'tillåten' av systemet om den inte uttryckligen är markerad som 'SHALL NOT'. Några objekt är markerade som MAY i implementationsguiden för att belysa deras potentiella relevans för användningsfallet.&lt;/p&gt;&lt;/blockquote&gt;&lt;h3 id=&quot;shallIGs&quot;&gt;SKA stödja följande implementationsguider&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;index.html&quot;&gt;https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2 id=&quot;rest&quot;&gt;FHIR RESTful-förmågor&lt;/h2&gt;&lt;div class=&quot;panel panel-default&quot;&gt;&lt;div class=&quot;panel-heading&quot;&gt;&lt;h3 id=&quot;mode1&quot; class=&quot;panel-title&quot;&gt;Mode: &lt;code&gt;server&lt;/code&gt;&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;panel-body&quot;&gt;&lt;div&gt;&lt;p&gt;Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning. Se sidan Spärr, loggning och behörighet.&lt;/p&gt;
+&lt;/div&gt;&lt;div class=&quot;lead&quot;&gt;&lt;em&gt;Security&lt;/em&gt;&lt;/div&gt;&lt;blockquote&gt;&lt;div&gt;&lt;p&gt;Se sidan Spärr, loggning och behörighet.&lt;/p&gt;
+&lt;/div&gt;&lt;/blockquote&gt;&lt;div class=&quot;lead&quot;&gt;&lt;em&gt;Sammanfattning av systemövergripande interaktioner&lt;/em&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;SHALL &lt;/strong&gt;stöd &lt;code&gt;transaction&lt;/code&gt;interaktion beskrivs enligt följande:&lt;div&gt;&lt;p&gt;Producenter registrerar och avregistrerar flera poster i en transaction-Bundle. Den registreras helt eller inte alls.&lt;/p&gt;
+&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;h3 id=&quot;resourcesCap1&quot;&gt;Förmågor per resurs/profil&lt;/h3&gt;&lt;h4 id=&quot;resourcesSummary1&quot;&gt;Sammanfattning&lt;/h4&gt;&lt;p&gt;Sammanfattningstabellen listar resurserna som ingår i denna konfiguration, och för varje resurs listar den:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;De relevanta profilerna (om några)&lt;/li&gt;&lt;li&gt;Interaktionerna som stöds av varje resurs (&lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;R&lt;/span&gt;&lt;/b&gt;ead, &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;S&lt;/span&gt;&lt;/b&gt;earch, &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;U&lt;/span&gt;&lt;/b&gt;pdate, and &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;C&lt;/span&gt;&lt;/b&gt;reate, are always shown, while &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;VR&lt;/span&gt;&lt;/b&gt;ead, &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;P&lt;/span&gt;&lt;/b&gt;atch, &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;D&lt;/span&gt;&lt;/b&gt;elete, &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;H&lt;/span&gt;&lt;/b&gt;istory on &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;I&lt;/span&gt;&lt;/b&gt;nstance, or &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;H&lt;/span&gt;&lt;/b&gt;istory on &lt;b&gt;&lt;span class=&quot;bg-info&quot;&gt;T&lt;/span&gt;&lt;/b&gt;yp är endast närvarande om minst en av resurserna har stöd för dem.&lt;/li&gt;&lt;li&gt;&lt;span&gt;De obligatoriska, rekommenderade och vissa valfria sökparametrarna (om några). &lt;/span&gt;&lt;/li&gt;&lt;li&gt;De länkade resurserna aktiverade för &lt;code&gt;_include&lt;/code&gt;&lt;/li&gt;&lt;li&gt;De övriga resurserna aktiverade för &lt;code&gt;_revinclude&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Operationerna på resursen (om några)&lt;/li&gt;&lt;/ul&gt;&lt;div class=&quot;table-responsive&quot;&gt;&lt;table class=&quot;table table-condensed table-hover&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;b&gt;Resurstyp&lt;/b&gt;&lt;/th&gt;&lt;th&gt;&lt;b&gt;Profil&lt;/b&gt;&lt;/th&gt;&lt;th class=&quot;text-center&quot;&gt;&lt;b title=&quot;GET en resurs (läs-interaktion)&quot;&gt;R&lt;/b&gt;&lt;/th&gt;&lt;th class=&quot;text-center&quot;&gt;&lt;b title=&quot;GET tidigare versioner av resurser (vread-interaktion)&quot;&gt;V-R&lt;/b&gt;&lt;/th&gt;&lt;th class=&quot;text-center&quot;&gt;&lt;b title=&quot;GET alla resurser av typen (sök-interaktion)&quot;&gt;S&lt;/b&gt;&lt;/th&gt;&lt;th class=&quot;text-center&quot;&gt;&lt;b title=&quot;PUT en ny resursversion (uppdatera-interaktion)&quot;&gt;U&lt;/b&gt;&lt;/th&gt;&lt;th class=&quot;text-center&quot;&gt;&lt;b title=&quot;POST en ny resurs (skapa-interaktion)&quot;&gt;C&lt;/b&gt;&lt;/th&gt;&lt;th class=&quot;text-center&quot;&gt;&lt;b title=&quot;DELETE en resurs (radera-interaktion)&quot;&gt;D&lt;/b&gt;&lt;/th&gt;&lt;th class=&quot;text-center&quot;&gt;&lt;b title=&quot;GET ändringar för en resurs (historik-interaktion på instans)&quot;&gt;H-I&lt;/b&gt;&lt;/th&gt;&lt;th&gt;&lt;b title=&quot;Obligatoriska och rekommenderade sökparametrar&quot;&gt;Sökningar&lt;/b&gt;&lt;/th&gt;&lt;th&gt;&lt;code&gt;&lt;b&gt;_include&lt;/b&gt;&lt;/code&gt;&lt;/th&gt;&lt;th&gt;&lt;code&gt;&lt;b&gt;_revinclude&lt;/b&gt;&lt;/code&gt;&lt;/th&gt;&lt;th&gt;&lt;b&gt;Operationer&lt;/b&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#DocumentReference1-1&quot;&gt;DocumentReference&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;StructureDefinition-IneraIndexEntry.html&quot;&gt;https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry&lt;/a&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td&gt;patient, type, status, custodian, identifier, format-code, format-canonical, content-last-updated, source-endpoint, _lastUpdated&lt;/td&gt;&lt;td/&gt;&lt;td/&gt;&lt;td/&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#Subscription1-2&quot;&gt;Subscription&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;StructureDefinition-IneraIndexSubscription.html&quot;&gt;https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription&lt;/a&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td/&gt;&lt;td/&gt;&lt;td/&gt;&lt;td&gt;&lt;code&gt;$status&lt;/code&gt;, &lt;code&gt;$events&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#SubscriptionTopic1-3&quot;&gt;SubscriptionTopic&lt;/a&gt;&lt;/td&gt;&lt;td&gt; &lt;/td&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td class=&quot;text-center&quot;&gt;&lt;span title=&quot;SHALL&quot;&gt;&lt;b&gt;Y&lt;/b&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td class=&quot;text-center&quot;/&gt;&lt;td/&gt;&lt;td/&gt;&lt;td/&gt;&lt;td/&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;hr/&gt;&lt;div class=&quot;panel panel-default&quot;&gt;&lt;div class=&quot;panel-heading&quot;&gt;&lt;h4 id=&quot;DocumentReference1-1&quot; class=&quot;panel-title&quot;&gt;&lt;span style=&quot;float: right;&quot;&gt;Resurskonformans: unspecified &lt;/span&gt;DocumentReference&lt;/h4&gt;&lt;/div&gt;&lt;div class=&quot;panel-body&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-lg-6&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Bassystemprofil&lt;/span&gt;&lt;br/&gt;&lt;a href=&quot;StructureDefinition-IneraIndexEntry.html&quot;&gt;Indexpost (FHIR-EI)&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-3&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Profilkonformans&lt;/span&gt;&lt;br/&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-3&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Referenspolicy&lt;/span&gt;&lt;br/&gt;&lt;/div&gt;&lt;/div&gt;&lt;p/&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-lg-6&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Interaktionssammanfattning&lt;/span&gt;&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;SHALL&lt;/strong&gt; stöd &lt;code&gt;read&lt;/code&gt;, &lt;code&gt;vread&lt;/code&gt;, &lt;code&gt;history-instance&lt;/code&gt;, &lt;code&gt;search-type&lt;/code&gt;&lt;br/&gt;&lt;code&gt;update&lt;/code&gt;&lt;div&gt;&lt;p&gt;Villkorad uppdatering på identifier: PUT DocumentReference?identifier=system|value.&lt;/p&gt;
+&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;p/&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-12&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Dokumentation&lt;/span&gt;&lt;blockquote&gt;&lt;div&gt;&lt;p&gt;Indexposter. En producent får bara skapa, uppdatera och avregistrera poster som tillhör dess registrerade identitet. Avregistrering sker med villkorad uppdatering, aldrig med delete. En sökning utan status-parameter returnerar bara poster med status current.&lt;/p&gt;
+&lt;/div&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-lg-7&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Sökparametrar&lt;/span&gt;&lt;table class=&quot;table table-condensed table-hover&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Konformans&lt;/th&gt;&lt;th&gt;Parameter&lt;/th&gt;&lt;th&gt;Typ&lt;/th&gt;&lt;th&gt;Dokumentation&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/documentreference.html#search&quot;&gt;patient&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;reference&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div&gt;&lt;p&gt;Med modifieraren :identifier, t.ex. patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212.&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/documentreference.html#search&quot;&gt;type&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;token&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/documentreference.html#search&quot;&gt;status&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;token&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div&gt;&lt;p&gt;Standardvärde current. Avregistrerade poster returneras bara när status anges explicit.&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/documentreference.html#search&quot;&gt;custodian&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;reference&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div&gt;&lt;p&gt;Vårdgivare, med modifieraren :identifier och HSA-id.&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/documentreference.html#search&quot;&gt;identifier&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;token&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/documentreference.html#search&quot;&gt;format-code&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;token&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div&gt;&lt;p&gt;Informationsmängd som kategori (content.profile som Coding).&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/documentreference.html#search&quot;&gt;format-canonical&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;reference&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div&gt;&lt;p&gt;Informationsmängd som profil-canonical (content.profile som canonical).&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;SearchParameter-DocumentReference-content-last-updated.html&quot;&gt;content-last-updated&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;date&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;SearchParameter-DocumentReference-source-endpoint.html&quot;&gt;source-endpoint&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;reference&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;http://hl7.org/fhir/resource.html#search&quot;&gt;_lastUpdated&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;date&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;div&gt;&lt;p&gt;Inkrementell avstämning, tillsammans med status=current,superseded,entered-in-error.&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-5&quot;&gt; &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;panel panel-default&quot;&gt;&lt;div class=&quot;panel-heading&quot;&gt;&lt;h4 id=&quot;Subscription1-2&quot; class=&quot;panel-title&quot;&gt;&lt;span style=&quot;float: right;&quot;&gt;Resurskonformans: unspecified &lt;/span&gt;Subscription&lt;/h4&gt;&lt;/div&gt;&lt;div class=&quot;panel-body&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-lg-6&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Bassystemprofil&lt;/span&gt;&lt;br/&gt;&lt;a href=&quot;StructureDefinition-IneraIndexSubscription.html&quot;&gt;Prenumeration på indexposter (FHIR-EI)&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-3&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Profilkonformans&lt;/span&gt;&lt;br/&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-3&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Referenspolicy&lt;/span&gt;&lt;br/&gt;&lt;/div&gt;&lt;/div&gt;&lt;p/&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-lg-6&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Interaktionssammanfattning&lt;/span&gt;&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;SHALL&lt;/strong&gt; stöd &lt;code&gt;create&lt;/code&gt;, &lt;code&gt;read&lt;/code&gt;, &lt;code&gt;update&lt;/code&gt;, &lt;code&gt;delete&lt;/code&gt;, &lt;code&gt;search-type&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;p/&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-12&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Dokumentation&lt;/span&gt;&lt;blockquote&gt;&lt;div&gt;&lt;p&gt;Topic-baserade prenumerationer på topic indexpost-andrad. Notiser filtreras på samma sätt som sökningar.&lt;/p&gt;
+&lt;/div&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-12&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Utökade operationer&lt;/span&gt;&lt;table class=&quot;table table-condensed table-hover&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Konformans&lt;/th&gt;&lt;th&gt;Operation&lt;/th&gt;&lt;th&gt;Dokumentation&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;$status&lt;/td&gt;&lt;td&gt;&lt;div/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;SHALL&lt;/b&gt;&lt;/td&gt;&lt;td&gt;$events&lt;/td&gt;&lt;td&gt;&lt;div/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;panel panel-default&quot;&gt;&lt;div class=&quot;panel-heading&quot;&gt;&lt;h4 id=&quot;SubscriptionTopic1-3&quot; class=&quot;panel-title&quot;&gt;&lt;span style=&quot;float: right;&quot;&gt;Resurskonformans: unspecified &lt;/span&gt;SubscriptionTopic&lt;/h4&gt;&lt;/div&gt;&lt;div class=&quot;panel-body&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-lg-4&quot;&gt;&lt;span class=&quot;lead&quot;&gt;FHIR-kärnresurs&lt;/span&gt;&lt;br/&gt;&lt;a href=&quot;http://hl7.org/fhir/subscriptiontopic.html&quot;&gt;SubscriptionTopic&lt;/a&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-4&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Referenspolicy&lt;/span&gt;&lt;br/&gt;&lt;/div&gt;&lt;div class=&quot;col-lg-4&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Interaktionssammanfattning&lt;/span&gt;&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;SHALL&lt;/strong&gt; stöd &lt;code&gt;read&lt;/code&gt;, &lt;code&gt;search-type&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;p/&gt;&lt;p/&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-12&quot;&gt;&lt;span class=&quot;lead&quot;&gt;Dokumentation&lt;/span&gt;&lt;blockquote&gt;&lt;div&gt;&lt;p&gt;Servern exponerar topic indexpost-andrad.&lt;/p&gt;
+&lt;/div&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+  &lt;/<a href="http://hl7.org/fhir/R5/domainresource.html#XCapabilityStatement.text">text</a>&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.url">url</a>
+       <a href="http://hl7.org/fhir/R5/datatypes.html#uri">value</a>=&quot;https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraIndexServer&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.version">version</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;0.1.0&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;IneraIndexServer&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.title">title</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;FHIR-EI server&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.status">status</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;draft&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.experimental">experimental</a> <a href="http://hl7.org/fhir/R5/datatypes.html#boolean">value</a>=&quot;false&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.date">date</a> <a href="http://hl7.org/fhir/R5/datatypes.html#dateTime">value</a>=&quot;2026-10-26&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.publisher">publisher</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;Inera AB&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.contact">contact</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/metadatatypes.html#ContactDetail#XContactDetail.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;Inera AB&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/metadatatypes.html#ContactDetail#XContactDetail.telecom">telecom</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/datatypes.html#ContactPoint#XContactPoint.system">system</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;url&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/datatypes.html#ContactPoint#XContactPoint.value">value</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;https://www.inera.se&quot;/&gt;
+    &lt;/<a href="http://hl7.org/fhir/R5/metadatatypes.html#ContactDetail#XContactDetail.telecom">telecom</a>&gt;
+  &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.contact">contact</a>&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.description">description</a>
+               <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Krav på FHIR-EI som server: sökning, registrering och avregistrering, prenumeration, inkrementell avstämning och massuttag av indexposter.&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.jurisdiction">jurisdiction</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/datatypes.html#CodeableConcept#XCodeableConcept.coding">coding</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/datatypes.html#Coding#XCoding.system">system</a> <a href="http://hl7.org/fhir/R5/datatypes.html#uri">value</a>=&quot;urn:iso:std:iso:3166&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/datatypes.html#Coding#XCoding.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SE&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/datatypes.html#Coding#XCoding.display">display</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;Sweden&quot;/&gt;
+    &lt;/<a href="http://hl7.org/fhir/R5/datatypes.html#CodeableConcept#XCodeableConcept.coding">coding</a>&gt;
+  &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.jurisdiction">jurisdiction</a>&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.kind">kind</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;requirements&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.fhirVersion">fhirVersion</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;5.0.0&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.format">format</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;json&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.format">format</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;xml&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.implementationGuide">implementationGuide</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest">rest</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.mode">mode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;server&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.documentation">documentation</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning. Se sidan Spärr, loggning och behörighet.&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.security">security</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.security.description">description</a> <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Se sidan Spärr, loggning och behörighet.&quot;/&gt;
+    &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.security">security</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource">resource</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;DocumentReference&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.profile">profile</a>
+               <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.documentation">documentation</a>
+                     <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Indexposter. En producent får bara skapa, uppdatera och avregistrera poster som tillhör dess registrerade identitet. Avregistrering sker med villkorad uppdatering, aldrig med delete. En sökning utan status-parameter returnerar bara poster med status current.&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;read&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;vread&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;update&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.documentation">documentation</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Villkorad uppdatering på identifier: PUT DocumentReference?identifier=system|value.&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;history-instance&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;search-type&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.versioning">versioning</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;versioned&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.readHistory">readHistory</a> <a href="http://hl7.org/fhir/R5/datatypes.html#boolean">value</a>=&quot;true&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.updateCreate">updateCreate</a> <a href="http://hl7.org/fhir/R5/datatypes.html#boolean">value</a>=&quot;true&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.conditionalCreate">conditionalCreate</a> <a href="http://hl7.org/fhir/R5/datatypes.html#boolean">value</a>=&quot;false&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.conditionalUpdate">conditionalUpdate</a> <a href="http://hl7.org/fhir/R5/datatypes.html#boolean">value</a>=&quot;true&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.conditionalDelete">conditionalDelete</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;not-supported&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;patient&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/clinical-patient&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;reference&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.documentation">documentation</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Med modifieraren :identifier, t.ex. patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212.&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;type&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/clinical-type&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;token&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;status&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/DocumentReference-status&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;token&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.documentation">documentation</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Standardvärde current. Avregistrerade poster returneras bara när status anges explicit.&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;custodian&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/DocumentReference-custodian&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;reference&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.documentation">documentation</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Vårdgivare, med modifieraren :identifier och HSA-id.&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;identifier&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/clinical-identifier&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;token&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;format-code&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/DocumentReference-format-code&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;token&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.documentation">documentation</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Informationsmängd som kategori (content.profile som Coding).&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;format-canonical&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/DocumentReference-format-canonical&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;reference&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.documentation">documentation</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Informationsmängd som profil-canonical (content.profile som canonical).&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;content-last-updated&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-content-last-updated&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;date&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;source-endpoint&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;reference&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.searchParam.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;_lastUpdated&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/SearchParameter/Resource-lastUpdated&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;date&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam.documentation">documentation</a>
+                       <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Inkrementell avstämning, tillsammans med status=current,superseded,entered-in-error.&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.searchParam">searchParam</a>&gt;
+    &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource">resource</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource">resource</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;Subscription&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.profile">profile</a>
+               <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.documentation">documentation</a>
+                     <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Topic-baserade prenumerationer på topic indexpost-andrad. Notiser filtreras på samma sätt som sökningar.&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;create&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;read&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;update&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;delete&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;search-type&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation">operation</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.operation.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.operation.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;status&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/OperationDefinition/Subscription-status&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation">operation</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation">operation</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.operation.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.operation.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation.name">name</a> <a href="http://hl7.org/fhir/R5/datatypes.html#string">value</a>=&quot;events&quot;/&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation.definition">definition</a>
+                    <a href="http://hl7.org/fhir/R5/datatypes.html#canonical">value</a>=&quot;http://hl7.org/fhir/OperationDefinition/Subscription-events&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.operation">operation</a>&gt;
+    &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource">resource</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource">resource</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.type">type</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SubscriptionTopic&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.documentation">documentation</a> <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Servern exponerar topic indexpost-andrad.&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;read&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>
+                   <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+          &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+        &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.resource.interaction.extension">extension</a>&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;search-type&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource.interaction">interaction</a>&gt;
+    &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.resource">resource</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.interaction">interaction</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.interaction.extension">extension</a>
+                 <a href="http://hl7.org/fhir/R5/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation&quot;&gt;
+        &lt;<a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">valueCode</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;SHALL&quot;/&gt;
+      &lt;/<a href="http://hl7.org/fhir/R5/types.html#Element#XCapabilityStatement.rest.interaction.extension">extension</a>&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.interaction.code">code</a> <a href="http://hl7.org/fhir/R5/datatypes.html#code">value</a>=&quot;transaction&quot;/&gt;
+      &lt;<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.interaction.documentation">documentation</a>
+                     <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">value</a>=&quot;Producenter registrerar och avregistrerar flera poster i en transaction-Bundle. Den registreras helt eller inte alls.&quot;/&gt;
+    &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest.interaction">interaction</a>&gt;
+  &lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement.rest">rest</a>&gt;
+&lt;/<a href="http://hl7.org/fhir/R5/capabilitystatement.html#XCapabilityStatement">CapabilityStatement</a>&gt;</code></pre>
+
+
+  <!-- insert notes if present -->
+  
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
+          Genererad 
+  <span title="2026-10-26 20:06:00 +0000">
+    2026-10-26
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Länkar: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Innehållsförteckning</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-rapport</a>
+                 
+                
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

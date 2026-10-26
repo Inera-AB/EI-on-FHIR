@@ -1,0 +1,47 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-content-last-updated> a fhir:SearchParameter ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "DocumentReference-content-last-updated"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: SearchParameter DocumentReference-content-last-updated</b></p><a name=\"DocumentReference-content-last-updated\"> </a><a name=\"hcDocumentReference-content-last-updated\"> </a><h2>ContentLastUpdated</h2><p>Parameter <code>content-last-updated</code>:<code>date</code></p><div><p>Filtrerar indexposter på när det kliniska innehållet i källsystemet senast ändrades (extension contentLastUpdated). Ersätter tidsfiltret i FindContent.</p>\n</div><table class=\"grid\"><tr><td>Resurs</td><td><a href=\"http://hl7.org/fhir/R5/documentreference.html\">DocumentReference</a></td></tr><tr><td>Uttryck</td><td><code>DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated').value</code></td></tr><tr><td>Bearbetningsläge</td><td>Normal</td></tr><tr><td>Multipler</td><td><ul><li>multipleAnd: Det är upp till servern om parametern får upprepas för att ange flera värden som alla måste vara sanna</li><li>multipleOr: Det är upp till servern om parametern kan ha flera värden (separerade med kommatecken) där minst ett måste vara sant</li></ul></td></tr><tr><td>Komparatorer</td><td>Tillåten: eq, gt, ge, lt, le</td></tr></table></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-content-last-updated"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "ContentLastUpdated"] ; # 
+  fhir:title [ fhir:v "Sök på innehållets senaste ändring"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v false] ; # 
+  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "Inera AB"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Inera AB" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://www.inera.se" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Filtrerar indexposter på när det kliniska innehållet i källsystemet senast ändrades (extension contentLastUpdated). Ersätter tidsfiltret i FindContent."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "SE" ] ;
+       fhir:display [ fhir:v "Sweden" ]
+     ] )
+  ] ) ; # 
+  fhir:code [ fhir:v "content-last-updated"] ; # 
+  fhir:base ( [ fhir:v "DocumentReference"] ) ; # 
+  fhir:type [ fhir:v "date"] ; # 
+  fhir:expression [ fhir:v "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated').value"] ; # 
+  fhir:processingMode [ fhir:v "normal"] ; # 
+  fhir:comparator ( [ fhir:v "eq"] [ fhir:v "gt"] [ fhir:v "ge"] [ fhir:v "lt"] [ fhir:v "le"] ) . # 
+
+# -------------------------------------------------------------------------------------
+

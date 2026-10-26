@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Användningsfall - Inera FHIR Implementation Guide Template v2.3.0</title>
+    <title>Användningsfall - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -63,13 +63,13 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">Inera FHIR Implementation Guide Template</span>
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
             <br/>
-            <span style="display:inline-block;">2.3.0 - ci-build
+            <span style="display:inline-block;">0.1.0 - ci-build
 
 
 
-  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+  Sweden
 
 
             </span>
@@ -92,7 +92,7 @@
               <span class="icon-bar"> </span>
               <span class="icon-bar"> </span>
             </button>
-            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
@@ -103,6 +103,10 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
       <li><a href="mappings.html">Mappning till profiler</a></li>
     </ul>
   </li>
@@ -110,10 +114,11 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Säkerhet och behörighet</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -121,6 +126,7 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
       <li><a href="downloads.html">Nedladdningar</a></li>
       <li><a href="version-history.html">Versionshistorik</a></li>
     </ul>
@@ -163,7 +169,7 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/template/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   <h2>Användningsfall</h2>
   
 
@@ -180,20 +186,51 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div>
-<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#sök-var-information-finns-om-en-patient" id="markdown-toc-sök-var-information-finns-om-en-patient">Sök var information finns om en patient</a></li>
+  <li><a href="#registrera-eller-uppdatera-indexposter" id="markdown-toc-registrera-eller-uppdatera-indexposter">Registrera eller uppdatera indexposter</a></li>
+  <li><a href="#avregistrera-indexposter" id="markdown-toc-avregistrera-indexposter">Avregistrera indexposter</a></li>
+  <li><a href="#prenumerera-på-ändringar" id="markdown-toc-prenumerera-på-ändringar">Prenumerera på ändringar</a></li>
+  <li><a href="#stäm-av-efter-avbrott" id="markdown-toc-stäm-av-efter-avbrott">Stäm av efter avbrott</a></li>
+  <li><a href="#massuttag" id="markdown-toc-massuttag">Massuttag</a></li>
+  <li><a href="#övergång-från-dagens-engagemangsindex" id="markdown-toc-övergång-från-dagens-engagemangsindex">Övergång från dagens engagemangsindex</a></li>
+</ul>
+
 </div>
-<p><em>Beskriv varje användningsfall som denna IG stöder. För varje användningsfall, förklara vad som utlöser det, vilka aktörer som deltar och vilket resultat det leder till.</em></p>
+<p>API:et skiljer på tre sätt att läsa indexet: sökning vid behov, löpande uppdatering via prenumeration och avstämning eller massuttag för korrekthet. Till det kommer producenternas registrering och övergången från dagens engagemangsindex.</p>
 
-<h3 id="användningsfallets-namn">[Användningsfallets namn]</h3>
+<h3 id="sök-var-information-finns-om-en-patient">Sök var information finns om en patient</h3>
 
-<p><em>Beskriv användningsfallet. Exempel: "En vårdgivare behöver hämta en patients fasta kontakter för att avgöra vem som ska kontaktas vid en vårdhändelse."</em></p>
+<p>En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. FHIR-EI kontrollerar behörighet och spärrar, filtrerar bort poster som konsumenten inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.</p>
+
+<h3 id="registrera-eller-uppdatera-indexposter">Registrera eller uppdatera indexposter</h3>
+
+<p>En producent har fått ny eller ändrad information om en patient inom en tjänst. Producenten, eller övergångsadaptern för källsystem som fortfarande använder RIV-TA, registrerar eller uppdaterar motsvarande indexpost. Uppdateringen är idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.</p>
+
+<h3 id="avregistrera-indexposter">Avregistrera indexposter</h3>
+
+<p>En producent håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Producenten avregistrerar posten och anger orsaken. Posten ligger kvar som gravsten under en lagringstid, så att avregistreringen syns för prenumeranter och vid avstämning. Motsvarar Update med deleteFlag.</p>
+
+<h3 id="prenumerera-på-ändringar">Prenumerera på ändringar</h3>
+
+<p>En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration, filtrerad på patient, tjänst eller vårdgivare. Vid varje ändring som konsumenten har rätt att se får den en notis med postens id. Motsvarar ProcessNotification.</p>
+
+<h3 id="stäm-av-efter-avbrott">Stäm av efter avbrott</h3>
+
+<p>En konsument har missat notiser. Vid kortare avbrott hämtar den missade händelser ur händelseloggen. Vid längre avbrott söker den poster som ändrats sedan en viss tidpunkt, inklusive avregistrerade. Saknar motsvarighet idag.</p>
+
+<h3 id="massuttag">Massuttag</h3>
+
+<p>En systemkonsument, till exempel en framtida synk till eHM:s patientindex, behöver hela indexet eller allt som ändrats sedan en viss tidpunkt. Systemkonsumenten gör ett massuttag. Används för grundladdning, för ny konsument och efter avbrott längre än gravstenarnas lagringstid. Saknar motsvarighet idag.</p>
+
+<h3 id="övergång-från-dagens-engagemangsindex">Övergång från dagens engagemangsindex</h3>
+
+<p>Källsystem ska kunna gå över till FHIR i egen takt. Under övergången speglar en adapter dagens engagemangsindex till FHIR-EI och skriver tillbaka FHIR-registrerade poster till dagens index så länge konsumenter läser därifrån. Se <a href="event-model.html">Händelsemodell och övergång</a>.</p>
 
 <hr />
 
-<blockquote>
-  <p><strong>Vägledning för författare:</strong> Roller och ansvar för de aktörer som deltar i användningsfallen beskrivs under <a href="roles-and-responsibilities.html">Roller och ansvar</a>.</p>
-</blockquote>
+<p>Rollerna i användningsfallen beskrivs under <a href="roles-and-responsibilities.html">Roller och ansvar</a>.</p>
 
 
 
@@ -220,10 +257,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
 
-          IG © 2024+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
-          Paket inera.core.template#2.3.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 15:17:00 +0000">
+  <span title="2026-10-26 20:06:00 +0000">
     2026-10-26
   </span>
 

@@ -1,0 +1,371 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>FHIR-EI server - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<link href="inera.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="inera-thumbnail.png"/>
+<link rel="shortcut icon" href="inera-thumbnail.png"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"22.1"}
+    h3,h4,h5,h6{--heading-prefix:"22.1"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <div id="inera-nav">
+  <a id="inera-logo" data-no-external="true" href="https://www.inera.se">
+    <img height="50" alt="Inera" src="inera-logo-header.svg"/>
+  </a>
+</div>
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  Sweden
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul class="nav navbar-nav">
+  <li><a href="index.html">Hem</a></li>
+  <li><a href="introduction.html">Inledning</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="information-basis.html">Informationsunderlag</a></li>
+      <li><a href="use-cases.html">Användningsfall</a></li>
+      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
+      <li><a href="mappings.html">Mappning till profiler</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="error-handling.html">Felhantering</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
+      <li><a href="testing.html">Testning och validering</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
+      <li><a href="downloads.html">Nedladdningar</a></li>
+      <li><a href="version-history.html">Versionshistorik</a></li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artefakter</a></li>
+  <li><a href="https://fhir.inera.se/" target="_blank" rel="noopener">FHIR på Inera <span aria-hidden="true">&#8599;</span></a></li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='artifacts.html'><b>Sammanfattning av artefakter</b></a></li><li><b>FHIR-EI server</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<!-- layouts\layout-canonical -->
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  
+
+
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+  <li class="active">
+    <a href="#">Berättande innehåll</a>
+  </li>
+
+
+
+  
+    <li>
+      <a href="CapabilityStatement-IneraIndexServer.xml.html">XML</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="CapabilityStatement-IneraIndexServer.json.html">JSON</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="CapabilityStatement-IneraIndexServer.ttl.html">TTL</a>
+    </li>
+  
+
+
+
+</ul>
+
+  <a name="root"> </a>
+
+
+  <h2 id="root">CapabilityStatement: FHIR-EI server
+
+  </h2>
+
+  <table class="colsd" data-fhir="generated">
+
+    <tr>
+      <td colspan="4"><i>Officiell URL</i>: <span class="copy-text">https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraIndexServer<button title="Klicka för att kopiera URL" class="btn-copy" data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraIndexServer"/></span>
+      </td>
+      <td><i>Version</i>:
+      <span class="copy-text">0.1.0<button title="Klicka för att kopiera versionsspecificerad URL" class="btn-copy" data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraIndexServer|0.1.0"/></span>
+      </td>
+      <td style="text-align: right;border-left-style: hidden" title="Aktivera detta för att se ändringar sedan den senaste officiella versionen">
+        <span id="toggle-change-display"><label style="margin:0;font-weight:normal" for="showChanges">Markera textändringar?</label>
+  
+        <input style="margin:0" type="checkbox" id="showChanges" onchange="toggleChanges()"/>
+  
+      </span>
+      </td>
+    </tr>
+
+    <tr>
+
+
+
+
+
+
+
+      <td colspan="5">
+        
+          Draft
+          
+
+            per 
+2026-10-26
+
+          
+        
+      </td>
+
+
+
+      <td><i>Beräkningsbart namn</i>: <span style="font-family: monospace;">IneraIndexServer</span></td>
+    </tr>
+
+
+
+
+  </table>
+
+
+<div data-fhir="generated">
+<p>Krav på FHIR-EI som server: sökning, registrering och avregistrering, prenumeration, inkrementell avstämning och massuttag av indexposter.</p>
+
+</div>
+
+
+  <!-- insert intro if present -->
+  
+
+
+
+<!--  <p>
+  Formats: <a href="CapabilityStatement-IneraIndexServer.xml.html">XML</a>, <a href="CapabilityStatement-IneraIndexServer.json.html">JSON</a>, <a href="CapabilityStatement-IneraIndexServer.ttl.html">Turtle</a>
+  </p>-->
+
+  
+  <p>
+      <a href="../IneraIndexServer.openapi.json" no-download="true">Rå OpenAPI-Swagger-definitionsfil</a> | <a href="../IneraIndexServer.openapi.json" download>Ladda ner</a>
+  </p>
+  
+
+
+  <div data-fhir="generated"><p class="res-header-id"/><a name="IneraIndexServer"> </a><a name="hcIneraIndexServer"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Språk: sv</p></div><h3 id="title">FHIR-EI server</h3><ul><li>Implementationsguidens version: 0.1.0 </li><li>FHIR-version: 5.0.0 </li><li>Format som stöds: <code>json</code>, <code>xml</code></li><li>Publicerad: 2026-10-26 </li><li>Publicerad av: Inera AB </li></ul><blockquote class="impl-note"><p><strong>Notera till implementörer: FHIR-förmågor</strong></p><p>Vilken FHIR-förmåga som helst kan vara 'tillåten' av systemet om den inte uttryckligen är markerad som 'SHALL NOT'. Några objekt är markerade som MAY i implementationsguiden för att belysa deras potentiella relevans för användningsfallet.</p></blockquote><h4 id="shallIGs">SKA stödja följande implementationsguider</h4><ul><li><a href="index.html">https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex</a></li></ul><h3 id="rest">FHIR RESTful-förmågor</h3><div class="panel panel-default"><div class="panel-heading"><h4 id="mode1" class="panel-title">Mode: <code>server</code></h4></div><div class="panel-body"><div><p>Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning. Se sidan Spärr, loggning och behörighet.</p>
+</div><div class="lead"><em>Security</em></div><blockquote><div><p>Se sidan Spärr, loggning och behörighet.</p>
+</div></blockquote><div class="lead"><em>Sammanfattning av systemövergripande interaktioner</em></div><ul><li><strong>SHALL </strong>stöd <code>transaction</code>interaktion beskrivs enligt följande:<div><p>Producenter registrerar och avregistrerar flera poster i en transaction-Bundle. Den registreras helt eller inte alls.</p>
+</div></li></ul></div></div><h4 id="resourcesCap1">Förmågor per resurs/profil</h4><h5 id="resourcesSummary1">Sammanfattning</h5><p>Sammanfattningstabellen listar resurserna som ingår i denna konfiguration, och för varje resurs listar den:</p><ul><li>De relevanta profilerna (om några)</li><li>Interaktionerna som stöds av varje resurs (<b><span class="bg-info">R</span></b>ead, <b><span class="bg-info">S</span></b>earch, <b><span class="bg-info">U</span></b>pdate, and <b><span class="bg-info">C</span></b>reate, are always shown, while <b><span class="bg-info">VR</span></b>ead, <b><span class="bg-info">P</span></b>atch, <b><span class="bg-info">D</span></b>elete, <b><span class="bg-info">H</span></b>istory on <b><span class="bg-info">I</span></b>nstance, or <b><span class="bg-info">H</span></b>istory on <b><span class="bg-info">T</span></b>yp är endast närvarande om minst en av resurserna har stöd för dem.</li><li><span>De obligatoriska, rekommenderade och vissa valfria sökparametrarna (om några). </span></li><li>De länkade resurserna aktiverade för <code>_include</code></li><li>De övriga resurserna aktiverade för <code>_revinclude</code></li><li>Operationerna på resursen (om några)</li></ul><div class="table-responsive"><table class="table table-condensed table-hover"><thead><tr><th><b>Resurstyp</b></th><th><b>Profil</b></th><th class="text-center"><b title="GET en resurs (läs-interaktion)">R</b></th><th class="text-center"><b title="GET tidigare versioner av resurser (vread-interaktion)">V-R</b></th><th class="text-center"><b title="GET alla resurser av typen (sök-interaktion)">S</b></th><th class="text-center"><b title="PUT en ny resursversion (uppdatera-interaktion)">U</b></th><th class="text-center"><b title="POST en ny resurs (skapa-interaktion)">C</b></th><th class="text-center"><b title="DELETE en resurs (radera-interaktion)">D</b></th><th class="text-center"><b title="GET ändringar för en resurs (historik-interaktion på instans)">H-I</b></th><th><b title="Obligatoriska och rekommenderade sökparametrar">Sökningar</b></th><th><code><b>_include</b></code></th><th><code><b>_revinclude</b></code></th><th><b>Operationer</b></th></tr></thead><tbody><tr><td><a href="#DocumentReference1-1">DocumentReference</a></td><td><a href="StructureDefinition-IneraIndexEntry.html">https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry</a></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"/><td class="text-center"/><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td>patient, type, status, custodian, identifier, format-code, format-canonical, content-last-updated, source-endpoint, _lastUpdated</td><td/><td/><td/></tr><tr><td><a href="#Subscription1-2">Subscription</a></td><td><a href="StructureDefinition-IneraIndexSubscription.html">https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription</a></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"/><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"/><td></td><td/><td/><td><code>$status</code>, <code>$events</code></td></tr><tr><td><a href="#SubscriptionTopic1-3">SubscriptionTopic</a></td><td> </td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"/><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"/><td class="text-center"/><td class="text-center"/><td class="text-center"/><td></td><td/><td/><td/></tr></tbody></table></div><hr/><div class="panel panel-default"><div id="heading1-1" class="panel-heading"><h5 id="DocumentReference1-1" class="panel-title"><a data-toggle="collapse" role="button" aria-controls="collapse1-1" aria-expanded="true" href="#collapse1-1"><span style="float: right;">Resource Conformance: unspecified</span>DocumentReference</a></h5></div><div role="region" aria-labelledby="heading1-1" id="collapse1-1" class="panel-collapse in"><div class="panel-body"><div class="container"><div class="row"><div class="col-lg-6"><span class="lead">Bassystemprofil</span><br/><a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></div><div class="col-lg-3"><span class="lead">Profilkonformans</span><br/><b>SHALL</b></div><div class="col-lg-3"><span class="lead">Referenspolicy</span><br/></div></div><p/><div class="row"><div class="col-lg-6"><span class="lead">Interaktionssammanfattning</span><br/><ul><li><strong>SHALL</strong> stöd <code>read</code>, <code>vread</code>, <code>history-instance</code>, <code>search-type</code><br/><code>update</code><div><p>Villkorad uppdatering på identifier: PUT DocumentReference?identifier=system|value.</p>
+</div></li></ul></div></div><p/><div class="row"><div class="col-12"><span class="lead">Dokumentation</span><blockquote><div><p>Indexposter. En producent får bara skapa, uppdatera och avregistrera poster som tillhör dess registrerade identitet. Avregistrering sker med villkorad uppdatering, aldrig med delete. En sökning utan status-parameter returnerar bara poster med status current.</p>
+</div></blockquote></div></div><div class="row"><div class="col-lg-7"><span class="lead">Sökparametrar</span><table class="table table-condensed table-hover"><thead><tr><th>Konformans</th><th>Parameter</th><th>Typ</th><th>Dokumentation</th></tr></thead><tbody><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">patient</a></td><td><code>reference</code></td><td><div><p>Med modifieraren :identifier, t.ex. patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212.</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">type</a></td><td><code>token</code></td><td><div/></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">status</a></td><td><code>token</code></td><td><div><p>Standardvärde current. Avregistrerade poster returneras bara när status anges explicit.</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">custodian</a></td><td><code>reference</code></td><td><div><p>Vårdgivare, med modifieraren :identifier och HSA-id.</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">identifier</a></td><td><code>token</code></td><td><div/></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">format-code</a></td><td><code>token</code></td><td><div><p>Informationsmängd som kategori (content.profile som Coding).</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">format-canonical</a></td><td><code>reference</code></td><td><div><p>Informationsmängd som profil-canonical (content.profile som canonical).</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="SearchParameter-DocumentReference-content-last-updated.html">content-last-updated</a></td><td><code>date</code></td><td><div/></td></tr><tr><td><b>SHALL</b></td><td><a href="SearchParameter-DocumentReference-source-endpoint.html">source-endpoint</a></td><td><code>reference</code></td><td><div/></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/resource.html#search">_lastUpdated</a></td><td><code>date</code></td><td><div><p>Inkrementell avstämning, tillsammans med status=current,superseded,entered-in-error.</p>
+</div></td></tr></tbody></table></div><div class="col-lg-5"> </div></div></div></div></div></div><div class="panel panel-default"><div id="heading1-2" class="panel-heading"><h5 id="Subscription1-2" class="panel-title"><a data-toggle="collapse" role="button" aria-controls="collapse1-2" aria-expanded="true" href="#collapse1-2"><span style="float: right;">Resource Conformance: unspecified</span>Subscription</a></h5></div><div role="region" aria-labelledby="heading1-2" id="collapse1-2" class="panel-collapse in"><div class="panel-body"><div class="container"><div class="row"><div class="col-lg-6"><span class="lead">Bassystemprofil</span><br/><a href="StructureDefinition-IneraIndexSubscription.html">Prenumeration på indexposter (FHIR-EI)</a></div><div class="col-lg-3"><span class="lead">Profilkonformans</span><br/><b>SHALL</b></div><div class="col-lg-3"><span class="lead">Referenspolicy</span><br/></div></div><p/><div class="row"><div class="col-lg-6"><span class="lead">Interaktionssammanfattning</span><br/><ul><li><strong>SHALL</strong> stöd <code>create</code>, <code>read</code>, <code>update</code>, <code>delete</code>, <code>search-type</code>.</li></ul></div></div><p/><div class="row"><div class="col-12"><span class="lead">Dokumentation</span><blockquote><div><p>Topic-baserade prenumerationer på topic indexpost-andrad. Notiser filtreras på samma sätt som sökningar.</p>
+</div></blockquote></div></div><div class="row"><div class="col-12"><span class="lead">Utökade operationer</span><table class="table table-condensed table-hover"><thead><tr><th>Konformans</th><th>Operation</th><th>Dokumentation</th></tr></thead><tbody><tr><td><b>SHALL</b></td><td>$status</td><td><div/></td></tr><tr><td><b>SHALL</b></td><td>$events</td><td><div/></td></tr></tbody></table></div></div></div></div></div></div><div class="panel panel-default"><div id="heading1-3" class="panel-heading"><h5 id="SubscriptionTopic1-3" class="panel-title"><a data-toggle="collapse" role="button" aria-controls="collapse1-3" aria-expanded="true" href="#collapse1-3"><span style="float: right;">Resource Conformance: unspecified</span>SubscriptionTopic</a></h5></div><div role="region" aria-labelledby="heading1-3" id="collapse1-3" class="panel-collapse in"><div class="panel-body"><div class="container"><div class="row"><div class="col-lg-4"><span class="lead">FHIR-kärnresurs</span><br/><a href="http://hl7.org/fhir/subscriptiontopic.html">SubscriptionTopic</a></div><div class="col-lg-4"><span class="lead">Referenspolicy</span><br/></div><div class="col-lg-4"><span class="lead">Interaktionssammanfattning</span><br/><ul><li><strong>SHALL</strong> stöd <code>read</code>, <code>search-type</code>.</li></ul></div></div><p/><p/><div class="row"><div class="col-12"><span class="lead">Dokumentation</span><blockquote><div><p>Servern exponerar topic indexpost-andrad.</p>
+</div></blockquote></div></div></div></div></div></div></div>
+
+  <!-- insert notes if present -->
+  
+
+
+
+  
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
+          Genererad 
+  <span title="2026-10-26 20:06:00 +0000">
+    2026-10-26
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Länkar: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Innehållsförteckning</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-rapport</a>
+                 
+                
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

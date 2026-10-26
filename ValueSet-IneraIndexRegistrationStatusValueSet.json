@@ -1,0 +1,39 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "IneraIndexRegistrationStatusValueSet",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: ValueSet IneraIndexRegistrationStatusValueSet</b></p><a name=\"IneraIndexRegistrationStatusValueSet\"> </a><a name=\"hcIneraIndexRegistrationStatusValueSet\"> </a><ul><li>Include alla koder som definieras i <a href=\"CodeSystem-IneraIndexRegistrationStatusCodeSystem.html\"><code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code></a><span title=\"Versionen är inte uttryckligen angiven, vilket innebär att den är fast till den version som tillhandahålls i denna specifikation\"> version &#x1F4E6;0.1.0</span></li></ul></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet",
+  "identifier" : [{
+    "value" : "IneraIndexRegistrationStatusValueSet"
+  }],
+  "version" : "0.1.0",
+  "name" : "IneraIndexRegistrationStatusValueSet",
+  "title" : "Registreringsstatus för indexposter",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-10-26",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "Alla livscykeltillstånd för en indexpost.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"
+    }]
+  }
+}

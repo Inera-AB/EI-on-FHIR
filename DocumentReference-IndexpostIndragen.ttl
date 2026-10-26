@@ -1,0 +1,105 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/DocumentReference/IndexpostIndragen> a fhir:DocumentReference ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "IndexpostIndragen"] ; # 
+  fhir:meta [
+     fhir:lastUpdated [ fhir:v "2026-10-22T10:15:41+02:00"^^xsd:dateTime ] ;
+     fhir:profile ( [
+       fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"^^xsd:anyURI ;
+       fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: DocumentReference IndexpostIndragen</b></p><a name=\"IndexpostIndragen\"> </a><a name=\"hcIndexpostIndragen\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Senast uppdaterad: 2026-10-22 10:15:41+0200</p><p style=\"margin-bottom: 0px\">Profil: <a href=\"StructureDefinition-IneraIndexEntry.html\">Indexpost (FHIR-EI)</a></p></div><p><b>Producentens endpoint</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE01</p><p><b>Registrerande producent</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registreringsstatus</b>: withdrawn</p><p><b>Innehållets senaste ändring</b>: 2026-10-22 10:15:30+0200</p><p><b>Orsak till avregistrering</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem ended}\">Avslutat engagemang</span></p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</code>/1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d</p><p><b>status</b>: Superseded</p><p><b>type</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}\">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Url</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"https://journal-a.example.org/fhir\">https://journal-a.example.org/fhir</a></td></tr></table><h3>Profiles</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Value[x]</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo\">Kodsystem för kategorier inom tjänstedomän: voo</a> (voo)</td></tr></table></blockquote></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:extension ( [
+     fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <https://tjanstekatalog.example.org/fhir/Endpoint/journal-a> ;
+       fhir:reference [ fhir:v "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Identifier ;
+       fhir:system [ fhir:v "urn:oid:1.2.752.29.4.19"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "SE0000000000-VE01" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <https://tjanstekatalog.example.org/fhir/Endpoint/journal-a> ;
+       fhir:reference [ fhir:v "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:code ;
+       fhir:v "withdrawn"
+     ]
+  ] [
+     fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:dateTime ;
+       fhir:v "2026-10-22T10:15:30+02:00"^^xsd:dateTime
+     ]
+  ] [
+     fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:CodeableConcept ;
+       fhir:coding ( [
+         fhir:system [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "ended" ] ;
+         fhir:display [ fhir:v "Avslutat engagemang" ]
+       ] )
+     ]
+  ] ) ; # 
+  fhir:identifier ( [
+     fhir:system [ fhir:v "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"^^xsd:anyURI ] ;
+     fhir:value [ fhir:v "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d" ]
+  ] ) ; # 
+  fhir:status [ fhir:v "superseded"] ; # 
+  fhir:type [
+     fhir:coding ( [
+       fhir:system [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "riv:clinicalprocess:healthcond:description" ]
+     ] )
+  ] ; # 
+  fhir:subject [
+     fhir:type [ fhir:v "Patient"^^xsd:anyURI ] ;
+     fhir:identifier [
+       fhir:system [ fhir:v "http://electronichealth.se/identifier/personnummer"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "191212121212" ]
+     ]
+  ] ; # 
+  fhir:custodian [
+     fhir:identifier [
+       fhir:system [ fhir:v "urn:oid:1.2.752.29.4.19"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "SE0000000000-VG01" ]
+     ]
+  ] ; # 
+  fhir:content ( [
+     fhir:attachment [
+       fhir:url [ fhir:v "https://journal-a.example.org/fhir"^^xsd:anyURI ]
+     ] ;
+     fhir:profile ( [
+       fhir:value [
+         a fhir:Coding ;
+         fhir:system [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "voo" ]
+       ]
+     ] )
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="IneraEngagementCategoryCodeSystem"/>
+  <language value="sv"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: CodeSystem IneraEngagementCategoryCodeSystem</b></p><a name="IneraEngagementCategoryCodeSystem"> </a><a name="hcIneraEngagementCategoryCodeSystem"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande kod:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">voo<a name="IneraEngagementCategoryCodeSystem-voo"> </a></td><td>Kategorin voo inom tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr></table></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"/>
+  <identifier>
+    <value value="IneraEngagementCategoryCodeSystem"/>
+  </identifier>
+  <version value="0.1.0"/>
+  <name value="IneraEngagementCategoryCodeSystem"/>
+  <title value="Kodsystem för kategorier inom tjänstedomän"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-10-26"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <caseSensitive value="true"/>
+  <content value="fragment"/>
+  <concept>
+    <code value="voo"/>
+    <display value="voo"/>
+    <definition value="Kategorin voo inom tjänstedomänen riv:clinicalprocess:healthcond:description."/>
+  </concept>
+</CodeSystem>

@@ -1,0 +1,48 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/Subscription/PrenumerationForPatient> a fhir:Subscription ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "PrenumerationForPatient"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription"^^xsd:anyURI ;
+       fhir:link <https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription>
+     ] )
+  ] ; # 
+  fhir:language [ fhir:v "sv"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: Subscription PrenumerationForPatient</b></p><a name=\"PrenumerationForPatient\"> </a><a name=\"hcPrenumerationForPatient\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profil: <a href=\"StructureDefinition-IneraIndexSubscription.html\">Prenumeration på indexposter (FHIR-EI)</a></p></div><p><b>status</b>: Requested</p><p><b>topic</b>: <a href=\"SubscriptionTopic-indexpost-andrad.html\">Indexpost ändrad</a></p><p><b>reason</b>: Visa aktuell översikt över patientens information</p><blockquote><p><b>filterBy</b></p><p><b>resourceType</b>: <a href=\"http://hl7.org/fhir/R5/documentreference.html\">http://hl7.org/fhir/StructureDefinition/DocumentReference</a></p><p><b>filterParameter</b>: patient</p><p><b>modifier</b>: Identifier</p><p><b>value</b>: http://electronichealth.se/identifier/personnummer|191212121212</p></blockquote><blockquote><p><b>filterBy</b></p><p><b>resourceType</b>: <a href=\"http://hl7.org/fhir/R5/documentreference.html\">http://hl7.org/fhir/StructureDefinition/DocumentReference</a></p><p><b>filterParameter</b>: type</p><p><b>value</b>: https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description</p></blockquote><p><b>channelType</b>: <a href=\"http://terminology.hl7.org/7.4.0/CodeSystem-subscription-channel-type.html#subscription-channel-type-rest-hook\">SubscriptionChannel Type Codes: rest-hook</a> (Rest Hook)</p><p><b>endpoint</b>: <a href=\"https://konsument.example.org/fhir/notifieringar\">https://konsument.example.org/fhir/notifieringar</a></p><p><b>heartbeatPeriod</b>: 3600</p><p><b>contentType</b>: application/fhir+json</p></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:status [ fhir:v "requested"] ; # 
+  fhir:topic [
+     fhir:v "https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad"^^xsd:anyURI ;
+     fhir:link <https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad>
+  ] ; # 
+  fhir:reason [ fhir:v "Visa aktuell översikt över patientens information"] ; # 
+  fhir:filterBy ( [
+     fhir:resourceType [ fhir:v "http://hl7.org/fhir/StructureDefinition/DocumentReference"^^xsd:anyURI ] ;
+     fhir:filterParameter [ fhir:v "patient" ] ;
+     fhir:modifier [ fhir:v "identifier" ] ;
+     fhir:value [ fhir:v "http://electronichealth.se/identifier/personnummer|191212121212" ]
+  ] [
+     fhir:resourceType [ fhir:v "http://hl7.org/fhir/StructureDefinition/DocumentReference"^^xsd:anyURI ] ;
+     fhir:filterParameter [ fhir:v "type" ] ;
+     fhir:value [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description" ]
+  ] ) ; # 
+  fhir:channelType [
+     fhir:system [ fhir:v "http://terminology.hl7.org/CodeSystem/subscription-channel-type"^^xsd:anyURI ] ;
+     fhir:code [ fhir:v "rest-hook" ]
+  ] ; # 
+  fhir:endpoint [ fhir:v "https://konsument.example.org/fhir/notifieringar"^^xsd:anyURI] ; # 
+  fhir:heartbeatPeriod [ fhir:v "3600"^^xsd:nonNegativeInteger] ; # 
+  fhir:contentType [ fhir:v "application/fhir+json"] . # 
+
+# -------------------------------------------------------------------------------------
+

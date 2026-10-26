@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="IneraServiceDomainCodeSystem"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: CodeSystem IneraServiceDomainCodeSystem</b></p><a name="IneraServiceDomainCodeSystem"> </a><a name="hcIneraServiceDomainCodeSystem"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande kod:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">riv:clinicalprocess:healthcond:description<a name="IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description"> </a></td><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr></table></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
+  <identifier>
+    <value value="IneraServiceDomainCodeSystem"/>
+  </identifier>
+  <version value="0.1.0"/>
+  <name value="IneraServiceDomainCodeSystem"/>
+  <title value="Kodsystem för tjänstedomäner"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-10-26"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <caseSensitive value="true"/>
+  <content value="fragment"/>
+  <concept>
+    <code value="riv:clinicalprocess:healthcond:description"/>
+    <display value="riv:clinicalprocess:healthcond:description"/>
+    <definition value="Tjänstedomänen riv:clinicalprocess:healthcond:description."/>
+  </concept>
+</CodeSystem>

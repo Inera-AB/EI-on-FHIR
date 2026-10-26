@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="IneraDeregistrationReasonCodeSystem"/>
+  <language value="sv"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: CodeSystem IneraDeregistrationReasonCodeSystem</b></p><a name="IneraDeregistrationReasonCodeSystem"> </a><a name="hcIneraDeregistrationReasonCodeSystem"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code> definierar följande koder:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">entered-in-error<a name="IneraDeregistrationReasonCodeSystem-entered-in-error"> </a></td><td>Felregistrering</td><td>Posten skulle aldrig ha registrerats. Används med registreringsstatus entered-in-error.</td></tr><tr><td style="white-space:nowrap">ended<a name="IneraDeregistrationReasonCodeSystem-ended"> </a></td><td>Avslutat engagemang</td><td>Producenten håller inte längre information om patienten inom tjänsten. Används med registreringsstatus withdrawn.</td></tr><tr><td style="white-space:nowrap">purged<a name="IneraDeregistrationReasonCodeSystem-purged"> </a></td><td>Gallring</td><td>Informationen har gallrats hos producenten. Används med registreringsstatus withdrawn.</td></tr><tr><td style="white-space:nowrap">transition-adapter<a name="IneraDeregistrationReasonCodeSystem-transition-adapter"> </a></td><td>Avregistrering via övergångsadapter</td><td>Posten avregistrerades i dagens engagemangsindex, vars kontrakt inte bär någon orsak. Används med registreringsstatus withdrawn.</td></tr></table></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
+  <identifier>
+    <value value="IneraDeregistrationReasonCodeSystem"/>
+  </identifier>
+  <version value="0.1.0"/>
+  <name value="IneraDeregistrationReasonCodeSystem"/>
+  <title value="Kodsystem för orsaker till avregistrering"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-10-26"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="Varför en indexpost avregistreras. Orsaken avgör hur mottagare, till exempel ett tunt index, ska hantera avregistreringen."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <caseSensitive value="true"/>
+  <content value="complete"/>
+  <count value="4"/>
+  <concept>
+    <code value="entered-in-error"/>
+    <display value="Felregistrering"/>
+    <definition value="Posten skulle aldrig ha registrerats. Används med registreringsstatus entered-in-error."/>
+  </concept>
+  <concept>
+    <code value="ended"/>
+    <display value="Avslutat engagemang"/>
+    <definition value="Producenten håller inte längre information om patienten inom tjänsten. Används med registreringsstatus withdrawn."/>
+  </concept>
+  <concept>
+    <code value="purged"/>
+    <display value="Gallring"/>
+    <definition value="Informationen har gallrats hos producenten. Används med registreringsstatus withdrawn."/>
+  </concept>
+  <concept>
+    <code value="transition-adapter"/>
+    <display value="Avregistrering via övergångsadapter"/>
+    <definition value="Posten avregistrerades i dagens engagemangsindex, vars kontrakt inte bär någon orsak. Används med registreringsstatus withdrawn."/>
+  </concept>
+</CodeSystem>

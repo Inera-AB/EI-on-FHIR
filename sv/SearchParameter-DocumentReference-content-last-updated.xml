@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SearchParameter xmlns="http://hl7.org/fhir">
+  <id value="DocumentReference-content-last-updated"/>
+  <language value="sv"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: SearchParameter DocumentReference-content-last-updated</b></p><a name="DocumentReference-content-last-updated"> </a><a name="hcDocumentReference-content-last-updated"> </a><h2>ContentLastUpdated</h2><p>Parameter <code>content-last-updated</code>:<code>date</code></p><div><p>Filtrerar indexposter på när det kliniska innehållet i källsystemet senast ändrades (extension contentLastUpdated). Ersätter tidsfiltret i FindContent.</p>
+</div><table class="grid"><tr><td>Resurs</td><td><a href="http://hl7.org/fhir/R5/documentreference.html">DocumentReference</a></td></tr><tr><td>Uttryck</td><td><code>DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated').value</code></td></tr><tr><td>Bearbetningsläge</td><td>Normal</td></tr><tr><td>Multipler</td><td><ul><li>multipleAnd: Det är upp till servern om parametern får upprepas för att ange flera värden som alla måste vara sanna</li><li>multipleOr: Det är upp till servern om parametern kan ha flera värden (separerade med kommatecken) där minst ett måste vara sant</li></ul></td></tr><tr><td>Komparatorer</td><td>Tillåten: eq, gt, ge, lt, le</td></tr></table></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-content-last-updated"/>
+  <version value="0.1.0"/>
+  <name value="ContentLastUpdated"/>
+  <title value="Sök på innehållets senaste ändring"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-10-26"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="Filtrerar indexposter på när det kliniska innehållet i källsystemet senast ändrades (extension contentLastUpdated). Ersätter tidsfiltret i FindContent."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <code value="content-last-updated"/>
+  <base value="DocumentReference"/>
+  <type value="date"/>
+  <expression value="DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated').value"/>
+  <processingMode value="normal"/>
+  <comparator value="eq"/>
+  <comparator value="gt"/>
+  <comparator value="ge"/>
+  <comparator value="lt"/>
+  <comparator value="le"/>
+</SearchParameter>

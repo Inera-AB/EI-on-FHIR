@@ -1,0 +1,42 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "IneraServiceDomainCodeSystem",
+  "language" : "sv",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraServiceDomainCodeSystem</b></p><a name=\"IneraServiceDomainCodeSystem\"> </a><a name=\"hcIneraServiceDomainCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande kod:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">riv:clinicalprocess:healthcond:description<a name=\"IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description\"> </a></td><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr></table></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem",
+  "identifier" : [{
+    "value" : "IneraServiceDomainCodeSystem"
+  }],
+  "version" : "0.1.0",
+  "name" : "IneraServiceDomainCodeSystem",
+  "title" : "Kodsystem för tjänstedomäner",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-10-26",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "fragment",
+  "concept" : [{
+    "code" : "riv:clinicalprocess:healthcond:description",
+    "display" : "riv:clinicalprocess:healthcond:description",
+    "definition" : "Tjänstedomänen riv:clinicalprocess:healthcond:description."
+  }]
+}

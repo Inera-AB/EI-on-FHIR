@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>REST-interaktioner och sökparametrar - Inera FHIR Implementation Guide Template v2.3.0</title>
+    <title>REST-interaktioner och sökparametrar - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -50,8 +50,8 @@
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"7"}
-    h3,h4,h5,h6{--heading-prefix:"7"}</style>
+    <style type="text/css">h2{--heading-prefix:"11"}
+    h3,h4,h5,h6{--heading-prefix:"11"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -63,13 +63,13 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">Inera FHIR Implementation Guide Template</span>
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
             <br/>
-            <span style="display:inline-block;">2.3.0 - ci-build
+            <span style="display:inline-block;">0.1.0 - ci-build
 
 
 
-  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+  Sweden
 
 
             </span>
@@ -92,7 +92,7 @@
               <span class="icon-bar"> </span>
               <span class="icon-bar"> </span>
             </button>
-            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
@@ -103,6 +103,10 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
       <li><a href="mappings.html">Mappning till profiler</a></li>
     </ul>
   </li>
@@ -110,10 +114,11 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Säkerhet och behörighet</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -121,6 +126,7 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
       <li><a href="downloads.html">Nedladdningar</a></li>
       <li><a href="version-history.html">Versionshistorik</a></li>
     </ul>
@@ -163,7 +169,7 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/template/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   <h2>REST-interaktioner och sökparametrar</h2>
   
 
@@ -180,33 +186,250 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div>
-<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
-</div>
-<p><em>Beskriv vilka REST-interaktioner (read, search, create, update, …) varje roll ska stödja, för vilka resurser/profiler. Lista de sökparametrar som stöds per resurs, inklusive eventuella kombinationer som ska stödjas.</em></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#sökparametrar" id="markdown-toc-sökparametrar">Sökparametrar</a></li>
+  <li><a href="#endpoint" id="markdown-toc-endpoint">Endpoint</a></li>
+  <li><a href="#villkorad-uppdatering" id="markdown-toc-villkorad-uppdatering">Villkorad uppdatering</a></li>
+  <li><a href="#producentidentitet-och-skrivbehörighet" id="markdown-toc-producentidentitet-och-skrivbehörighet">Producentidentitet och skrivbehörighet</a></li>
+</ul>
 
-<table>
+</div>
+<p>Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får var sin FHIR R5-motsvarighet. API:et skiljer på tre användningsfall: sökning vid behov, löpande uppdatering via prenumeration och massuttag för avstämning. Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning; se <a href="security.html">Spärr, loggning och behörighet</a>. De formella kraven finns i <a href="CapabilityStatement-IneraIndexServer.html">CapabilityStatement för FHIR-EI</a>.</p>
+
+<table class="grid">
   <thead>
     <tr>
-      <th>Resurs/Profil</th>
-      <th>Interaktion</th>
-      <th>Sökparametrar</th>
+      <th>Operation</th>
+      <th>Aktör</th>
+      <th>FHIR-interaktion</th>
+      <th>Motsvarighet idag</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><em>[Profilnamn]</em></td>
-      <td><em>[t.ex. search, read]</em></td>
-      <td><em>[t.ex. <code class="language-plaintext highlighter-rouge">patient</code>, <code class="language-plaintext highlighter-rouge">date</code>]</em></td>
+      <td>Sök indexposter för en patient</td>
+      <td>Konsument</td>
+      <td><code class="language-plaintext highlighter-rouge">GET DocumentReference?patient:identifier=…&amp;type=…</code> (standard: <code class="language-plaintext highlighter-rouge">status=current</code>)</td>
+      <td>FindContent</td>
+    </tr>
+    <tr>
+      <td>Filtrera på informationsmängd</td>
+      <td>Konsument</td>
+      <td>Standardparametrarna <code class="language-plaintext highlighter-rouge">format-code</code> / <code class="language-plaintext highlighter-rouge">format-canonical</code> (på <code class="language-plaintext highlighter-rouge">content.profile</code>)</td>
+      <td>FindContent med kategori</td>
+    </tr>
+    <tr>
+      <td>Filtrera på aktualitet</td>
+      <td>Konsument</td>
+      <td>Nationell sökparameter <code class="language-plaintext highlighter-rouge">content-last-updated=gt…</code></td>
+      <td>FindContent med tidsfilter</td>
+    </tr>
+    <tr>
+      <td>Registrera eller uppdatera post</td>
+      <td>Producent</td>
+      <td>Villkorad <code class="language-plaintext highlighter-rouge">PUT DocumentReference?identifier=&lt;producent&gt;|&lt;id&gt;</code>, eller <code class="language-plaintext highlighter-rouge">transaction</code>-Bundle för flera</td>
+      <td>Update</td>
+    </tr>
+    <tr>
+      <td>Avregistrera post</td>
+      <td>Producent</td>
+      <td>Villkorad <code class="language-plaintext highlighter-rouge">PUT</code> med <code class="language-plaintext highlighter-rouge">status</code> = <code class="language-plaintext highlighter-rouge">superseded</code> eller <code class="language-plaintext highlighter-rouge">entered-in-error</code> och <code class="language-plaintext highlighter-rouge">deregistrationReason</code></td>
+      <td>Update med deleteFlag</td>
+    </tr>
+    <tr>
+      <td>Prenumerera på ändringar</td>
+      <td>Konsument</td>
+      <td>R5 <code class="language-plaintext highlighter-rouge">Subscription</code> på <code class="language-plaintext highlighter-rouge">SubscriptionTopic</code> <code class="language-plaintext highlighter-rouge">indexpost-andrad</code>; se <a href="subscriptions.html">Prenumeration</a></td>
+      <td>ProcessNotification</td>
+    </tr>
+    <tr>
+      <td>Inkrementell avstämning</td>
+      <td>Konsument</td>
+      <td><code class="language-plaintext highlighter-rouge">GET DocumentReference?_lastUpdated=gt…&amp;status=current,superseded,entered-in-error</code></td>
+      <td>Saknas</td>
+    </tr>
+    <tr>
+      <td>Massuttag</td>
+      <td>Systemkonsument</td>
+      <td>Bulk Data <code class="language-plaintext highlighter-rouge">$export</code> med <code class="language-plaintext highlighter-rouge">_type=DocumentReference</code> och <code class="language-plaintext highlighter-rouge">_since</code></td>
+      <td>Saknas</td>
     </tr>
   </tbody>
 </table>
 
 <hr />
 
-<blockquote>
-  <p><strong>Vägledning för författare:</strong> Roller och deras verksamhetsansvar beskrivs under <a href="roles-and-responsibilities.html">Roller och ansvar</a> (Funktionellt). Håll denna sida på ett konkret, tekniskt REST-plan.</p>
-</blockquote>
+<h3 id="sökparametrar">Sökparametrar</h3>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Typ</th>
+      <th>Element</th>
+      <th>Kommentar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">patient</code></td>
+      <td>reference</td>
+      <td><code class="language-plaintext highlighter-rouge">subject</code></td>
+      <td>Med <code class="language-plaintext highlighter-rouge">:identifier</code>. Obligatorisk i varje konsumentsökning</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td>Tjänst</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">status</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">status</code></td>
+      <td>Standardvärde <code class="language-plaintext highlighter-rouge">current</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">custodian</code></td>
+      <td>reference</td>
+      <td><code class="language-plaintext highlighter-rouge">custodian</code></td>
+      <td>Vårdgivare, med <code class="language-plaintext highlighter-rouge">:identifier</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">identifier</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">identifier</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">format-code</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">content.profile</code> som Coding</td>
+      <td>Informationsmängd idag</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">format-canonical</code></td>
+      <td>reference</td>
+      <td><code class="language-plaintext highlighter-rouge">content.profile</code> som canonical</td>
+      <td>Informationsmängd framåt</td>
+    </tr>
+    <tr>
+      <td><a href="SearchParameter-DocumentReference-content-last-updated.html"><code class="language-plaintext highlighter-rouge">content-last-updated</code></a></td>
+      <td>date</td>
+      <td>extension contentLastUpdated</td>
+      <td>Nationell</td>
+    </tr>
+    <tr>
+      <td><a href="SearchParameter-DocumentReference-source-endpoint.html"><code class="language-plaintext highlighter-rouge">source-endpoint</code></a></td>
+      <td>reference</td>
+      <td>extension sourceEndpoint</td>
+      <td>Nationell</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_lastUpdated</code></td>
+      <td>date</td>
+      <td><code class="language-plaintext highlighter-rouge">meta.lastUpdated</code></td>
+      <td>Inkrementell avstämning</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>En sökning utan <code class="language-plaintext highlighter-rouge">status</code> returnerar bara poster med status <code class="language-plaintext highlighter-rouge">current</code>. Avregistrerade poster returneras bara när status anges explicit.</p>
+
+<p>Patienten är en logisk referens, eftersom indexet inte har några Patient-resurser. Sökningen görs därför med modifieraren <code class="language-plaintext highlighter-rouge">:identifier</code> och inte som kedjad sökning; se <a href="mappings.html">Mappning till profiler</a>.</p>
+
+<p>Exempel, registrerade poster för en patient inom en tjänst vars innehåll ändrats efter 1 oktober 2026:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET [base]/DocumentReference?patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212
+    &amp;type=https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description
+    &amp;content-last-updated=gt2026-10-01
+</code></pre></div></div>
+
+<p>Svaret visas i exemplet <a href="Bundle-SokresultatForPatient.html">Sökresultat för en patient</a>.</p>
+
+<hr />
+
+<h3 id="endpoint">Endpoint</h3>
+
+<p>Varje post har exakt en endpoint, som refereras i tjänstekatalogen med extension <a href="StructureDefinition-SourceEndpoint.html">sourceEndpoint</a>. Katalogen är auktoritativ för endpointens egenskaper. Adressen finns också i <code class="language-plaintext highlighter-rouge">content.attachment.url</code>, så att konsumenten kan anropa källan utan ett extra uppslag.</p>
+
+<p>När endpointen adresseras med logisk adress, som tjänsteplattformen för RIV-TA, bär posten också <a href="StructureDefinition-LogicalAddress.html">logicalAddress</a>. Konsumenten anger den i anropet.</p>
+
+<hr />
+
+<h3 id="villkorad-uppdatering">Villkorad uppdatering</h3>
+
+<p>En producent registrerar, uppdaterar och avregistrerar poster med villkorad <code class="language-plaintext highlighter-rouge">PUT</code> på <code class="language-plaintext highlighter-rouge">identifier</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT [base]/DocumentReference?identifier=https://tjanstekatalog.example.org/fhir/Endpoint/journal-a|7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33
+</code></pre></div></div>
+
+<p>Villkoret utvärderas bara mot anropande producents egna poster. En producent kan alltså aldrig träffa en annan producents post, och svaret avslöjar inte om en identifierare finns hos någon annan.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Träffar bland producentens egna poster</th>
+      <th>Resultat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Posten skapas</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Posten uppdateras</td>
+    </tr>
+    <tr>
+      <td>Fler än 1</td>
+      <td>Avvisas med <code class="language-plaintext highlighter-rouge">412 Precondition Failed</code>; ingen post ändras</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Posten i kroppen har inget <code class="language-plaintext highlighter-rouge">id</code>. Flera poster registreras i en <code class="language-plaintext highlighter-rouge">transaction</code>-Bundle, som i exemplet <a href="Bundle-RegistreringTransaction.html">Registrering och avregistrering i en transaction</a>.</p>
+
+<p>Samtidiga uppdateringar av samma post hanteras med versionsvillkor (<code class="language-plaintext highlighter-rouge">If-Match</code> på <code class="language-plaintext highlighter-rouge">ETag</code>) eller med regeln om <code class="language-plaintext highlighter-rouge">contentLastUpdated</code> under <a href="event-model.html">Händelsemodell och övergång</a>. En producent får inte ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post.</p>
+
+<p>Interaktionen <code class="language-plaintext highlighter-rouge">delete</code> stöds inte. Gravstenar rensas av FHIR-EI efter lagringstiden.</p>
+
+<h3 id="producentidentitet-och-skrivbehörighet">Producentidentitet och skrivbehörighet</h3>
+
+<p>En producents identitet är dess Endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en sådan endpoint, via en betrodd koppling mellan klientidentitet (certifikat eller token) och endpoint. Vid varje skrivning kontrollerar FHIR-EI:</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Kontroll</th>
+      <th>Regel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Producent</td>
+      <td><code class="language-plaintext highlighter-rouge">registeringProducer</code> är en absolut referens till den endpoint klienten är bunden till</td>
+    </tr>
+    <tr>
+      <td>Namnrymd</td>
+      <td><code class="language-plaintext highlighter-rouge">identifier.system</code> är samma URL som <code class="language-plaintext highlighter-rouge">registeringProducer</code>. Profilens invariant <code class="language-plaintext highlighter-rouge">inera-ei-producer-namespace</code> kontrollerar det, och inget register över namnrymder behövs</td>
+    </tr>
+    <tr>
+      <td>Endpoint</td>
+      <td>För en direktansluten producent är <code class="language-plaintext highlighter-rouge">sourceEndpoint</code> samma endpoint som <code class="language-plaintext highlighter-rouge">registeringProducer</code></td>
+    </tr>
+    <tr>
+      <td>Vårdgivare</td>
+      <td>Vårdgivaren i <code class="language-plaintext highlighter-rouge">custodian</code>, eller en underliggande enhet via <code class="language-plaintext highlighter-rouge">partOf</code>, listar <code class="language-plaintext highlighter-rouge">sourceEndpoint</code> i <code class="language-plaintext highlighter-rouge">Organization.endpoint</code> i tjänstekatalogen</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Övergångsadaptern har en ombudsroll: den är registrerad i tjänstekatalogen med en egen endpoint och får registrera poster vars <code class="language-plaintext highlighter-rouge">sourceEndpoint</code> är en annan endpoint, men bara för kombinationer av logisk adress och tjänstedomän som finns i dess adressregister. Se <a href="event-model.html">Händelsemodell och övergång</a>.</p>
+
+<p>En producent får inte ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post. <code class="language-plaintext highlighter-rouge">meta.source</code> används aldrig ensamt för behörighetskontroll.</p>
 
 
 
@@ -233,10 +456,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
 
-          IG © 2024+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
-          Paket inera.core.template#2.3.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 15:17:00 +0000">
+  <span title="2026-10-26 20:06:00 +0000">
     2026-10-26
   </span>
 

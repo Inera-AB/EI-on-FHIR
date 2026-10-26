@@ -1,0 +1,38 @@
+{
+  "resourceType" : "SubscriptionTopic",
+  "id" : "indexpost-andrad",
+  "language" : "sv",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: SubscriptionTopic indexpost-andrad</b></p><a name=\"indexpost-andrad\"> </a><a name=\"hcindexpost-andrad\"> </a><table class=\"grid\"><tr><td><b>SubscriptionTopic</b></td><td>Indexpost ändrad</td></tr><tr><td><b>Description</b></td><td><div><p>Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering.</p>\n</div></td></tr><tr><td><b>Upphovsrättsuttalande:</b></td><td> null</td></tr></table><table class=\"grid\"><tr><td colspan=\"3\"><b>Resurstriggers</b></td></tr><tr><th><b>Resurs</b></th><th><b>Interaktioner</b></th><th><b>Beskrivning</b></th></tr><tr><td><a href=\"http://hl7.org/fhir/R5/documentreference.html\">http://hl7.org/fhir/StructureDefinition/DocumentReference</a></td><td>create, update</td><td><div><p>En indexpost skapas, uppdateras eller avregistreras.</p>\n</div></td></tr></table></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad",
+  "version" : "0.1.0",
+  "name" : "IndexpostAndrad",
+  "title" : "Indexpost ändrad",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-10-26",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "resourceTrigger" : [{
+    "description" : "En indexpost skapas, uppdateras eller avregistreras.",
+    "resource" : "http://hl7.org/fhir/StructureDefinition/DocumentReference",
+    "supportedInteraction" : ["create",
+    "update"]
+  }]
+}

@@ -9,7 +9,23 @@
     <h2>Unattributed Code Systems</h2>
     <ul>
       <li>
-        <a href="StructureDefinition-IneraPatient.html">
+        <a href="DocumentReference-IndexpostIndragen.html">
+<code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>        </a>
+      </li>
+      <li>
+        <a href="DocumentReference-IndexpostIndragen.html">
+<code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem</code>        </a>
+      </li>
+      <li>
+        <a href="DocumentReference-IndexpostIndragen.html">
+<code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code>        </a>
+      </li>
+      <li>
+        <a href="DocumentReference-IndexpostFhirProducent.html">
+<code>urn:ietf:rfc:3986</code>        </a>
+      </li>
+      <li>
+        <a href="ValueSet-IneraServiceDomainValueSet.html">
 <code>urn:iso:std:iso:3166</code>        </a>
       </li>
     </ul>
@@ -17,7 +33,37 @@
     <p style="color: maroon">
       <b>This fragment is not visible to the reader</b>
     </p>
-    <div>Ingen användning av extern IP (annan än från FHIR-specifikationen)</div>
+    <div>
+      <p>Denna publication inkluderar IP som omfattas av följande uttalanden.</p>
+
+      <ul>
+
+        <li>
+This material derives from the HL7 Terminology (THO). THO is copyright &copy;1989+ Health Level Seven International and is made available under the CC0 designation. For more licensing information see:           <a href="https://terminology.hl7.org/license.html">https://terminology.hl7.org/license.html</a>
+          <div id="ipp_1" data-fhir="generated">
+             <button onClick="var t = document.getElementById('ipp_1'); var s = document.getElementById('ipp2_1'); if (s.innerHTML != '') { t.innerHTML = s.innerHTML; s.innerHTML = ''; var a = t.querySelector('a, button'); if (a) a.focus(); }" style="cursor: pointer; border: 1px grey solid; background-color: #fcdcb3; padding: 0 3px; margin: 0; color: black; font: inherit" type="button">Show Usage</button>
+          </div>
+          <div style="display: none" id="ipp2_1">
+
+            <ul>
+
+              <li>
+                <a href="http://terminology.hl7.org/7.4.0/CodeSystem-subscription-channel-type.html">SubscriptionChannel Type Codes</a>
+:                 <a href="Subscription-PrenumerationForPatient.html">Subscription/PrenumerationForPatient</a>
+              </li>
+
+
+            </ul>
+
+
+          </div>
+        </li>
+
+
+      </ul>
+
+
+    </div>
     <h2>Copyright and Registered Trademark Uses</h2>
     <ul>
       <li>
@@ -25,8 +71,8 @@
 
 
 
-          IG &copy; 2024+ Inera AB.  
-          Paket inera.core.template#2.3.0 baserat på FHIR 4.0.1.
+          IG &copy; 2026+ Inera AB.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på FHIR 5.0.0.
           Genererad 
   
     2026-10-26
@@ -52,14 +98,14 @@
       </li>
       <li>
 
-          Inera FHIR Implementation Guide Template  &reg;&copy; HL7 |
+          FHIR-baserat engagemangsindex (FHIR-EI)  &reg;&copy; HL7 |
              
                 Creative Commons 0
          (        <a href="sv/searchform.html">src</a>
 )
       </li>
       <li>
-Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt av FHIR (HL7&reg; FHIR&reg; Standard) Build Tools. Se katalogen över publicerade versioner (        <a href="version-history.html">src</a>
+FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7&reg; FHIR&reg; Standard) Build Tools. Se katalogen över publicerade versioner (        <a href="version-history.html">src</a>
 )
       </li>
     </ul>
@@ -78,7 +124,89 @@ Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt
       </tr>
       <tr>
         <td>
-          <a href="sv/Patient-IneraPatientExample.change.history.html">web</a>
+          <a href="DocumentReference-IndexpostFhirProducent.html">web</a>
+        </td>
+        <td>
+          <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">tjanstekatalog.example.org</a>
+        </td>
+        <td>
+          <b>Producentens endpoint</b>
+:           <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="DocumentReference-IndexpostFhirProducent.html">web</a>
+        </td>
+        <td>
+          <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">tjanstekatalog.example.org</a>
+        </td>
+        <td>
+          <b>Registrerande producent</b>
+:           <a href="https://tjanstekatalog.example.org/fhir/Endpoint/journal-a">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="DocumentReference-IndexpostFhirProducent.html">web</a>
+        </td>
+        <td>
+          <a href="https://journal-a.example.org/fhir">journal-a.example.org</a>
+        </td>
+        <td>
+          <a href="https://journal-a.example.org/fhir">https://journal-a.example.org/fhir</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="DocumentReference-IndexpostFranAdapter.html">web</a>
+        </td>
+        <td>
+          <a href="https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation">tjanstekatalog.example.org</a>
+        </td>
+        <td>
+          <b>Producentens endpoint</b>
+:           <a href="https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation">https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="DocumentReference-IndexpostFranAdapter.html">web</a>
+        </td>
+        <td>
+          <a href="https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter">tjanstekatalog.example.org</a>
+        </td>
+        <td>
+          <b>Registrerande producent</b>
+:           <a href="https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter">https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="DocumentReference-IndexpostFranAdapter.html">web</a>
+        </td>
+        <td>
+          <a href="https://ntjp.example.org/vp/clinicalprocess/healthcond/description/GetCareDocumentation/2/rivtabp21">ntjp.example.org</a>
+        </td>
+        <td>
+          <a href="https://ntjp.example.org/vp/clinicalprocess/healthcond/description/GetCareDocumentation/2/rivtabp21">https://ntjp.example.org/vp/clinicalprocess/healthcond/description/GetCareDocumentation/2/rivtabp21</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="Subscription-PrenumerationForPatient.html">web</a>
+        </td>
+        <td>
+          <a href="https://konsument.example.org/fhir/notifieringar">konsument.example.org</a>
+        </td>
+        <td>
+          <b>endpoint</b>
+:           <a href="https://konsument.example.org/fhir/notifieringar">https://konsument.example.org/fhir/notifieringar</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="sv/Bundle-RegistreringTransaction.change.history.html">web</a>
         </td>
         <td>
           <a href="https://www.inera.se">www.inera.se</a>
@@ -96,7 +224,7 @@ Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt
       </tr>
       <tr>
         <td>
-          <a href="sv/Patient-IneraPatientExample.change.history.html">web</a>
+          <a href="sv/Bundle-RegistreringTransaction.change.history.html">web</a>
         </td>
         <td>
           <a href="https://fhir.inera.se/">fhir.inera.se</a>
@@ -108,7 +236,7 @@ FHIR på Inera <span aria-hidden="true">↗</span>          </a>
       </tr>
       <tr>
         <td>
-          <a href="sv/Patient-IneraPatientExample.change.history.html">web</a>
+          <a href="sv/Bundle-RegistreringTransaction.change.history.html">web</a>
         </td>
         <td>
           <a href="https://www.inera.se">www.inera.se</a>
@@ -118,12 +246,12 @@ FHIR på Inera <span aria-hidden="true">↗</span>          </a>
 
 
 
-          IG &copy; 2024+           <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>
+          IG &copy; 2026+           <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>
 .  
-          Paket inera.core.template#2.3.0 baserat på           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>
+          Paket inera.ei.engagementindex#0.1.0 baserat på           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>
 .
           Genererad 
-            <span title="2026-10-26 15:17:00 +0000">
+            <span title="2026-10-26 20:06:00 +0000">
     2026-10-26
   </span>
 
@@ -144,14 +272,76 @@ FHIR på Inera <span aria-hidden="true">↗</span>          </a>
       </tr>
       <tr>
         <td>
+          <a href="sv/StructureDefinition-IneraIndexEntry-definitions.html">web</a>
+        </td>
+        <td>
+          <a href="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html">dicom.nema.org</a>
+        </td>
+        <td>
+Om inte olämpligt SKA dessa koder tas från            <a href="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html">http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html</a>
+          <br/>
+(          <a href="http://hl7.org/fhir/R5/terminologies.html#extensible">extensible</a>
+ to           <span class="copy-text-inline">
+<code>http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html</code><button data-clipboard-text="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>          </span>
+)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="sv/StructureDefinition-IneraIndexEntry-mappings.html">web</a>
+        </td>
+        <td>
+          <a href="http://ihe.net/xds">ihe.net</a>
+        </td>
+        <td>
+          <a href="http://ihe.net/xds" title="http://ihe.net/xds">XDS metadata equivalent</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="sv/StructureDefinition-IneraIndexEntry.html">web</a>
+        </td>
+        <td>
+          <a href="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html">dicom.nema.org</a>
+        </td>
+        <td>
+Imaging modality used          <br class="binding"/>
+          <span class="xhtPieceBold binding">Bindning: </span>
+          <a href="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html" class="binding">http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html</a>
+          <span class="binding"> (</span>
+          <a href="http://hl7.org/fhir/R5/terminologies.html#extensible" title="To be conformant, the concept in this element SHALL be from the specified value set if any of the codes within the value set can apply to the concept being communicated.  If the value set does not cover the concept (based on human review), alternate codings (or, data type allowing, text) may be included instead." class="binding">extensible</a>
+          <span class="binding">)</span>
+          <span class="binding">: </span>
+          <span class="binding">Type of acquired data in the instance.</span>
+          <br/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="sv/StructureDefinition-IneraIndexEntry.html">web</a>
+        </td>
+        <td>
+          <a href="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html">dicom.nema.org</a>
+        </td>
+        <td>
+
+                <a style="opacity: 1.0" href="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html">http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html</a>
+
+                <button data-clipboard-text="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
+
+    
+        </td>
+      </tr>
+      <tr>
+        <td>
           <a href="sv/about.html">web</a>
         </td>
         <td>
-          <a href="https://github.com/inera-ab">github.com</a>
+          <a href="https://github.com/Inera-AB/EI-on-FHIR">github.com</a>
         </td>
         <td>
-FHIR-profiler förvaltas av Inera:           <a href="https://github.com/inera-ab">Källkod</a>
-.
+IG:n förvaltas av Inera. Källkoden finns på           <a href="https://github.com/Inera-AB/EI-on-FHIR">GitHub</a>
+. Ändringsförslag och felrapporter lämnas som issues där.
         </td>
       </tr>
       <tr>
@@ -171,11 +361,23 @@ En beskrivning av krav på följsamhet samt vägledning vid implementering av In
           <a href="sv/downloads.html">web</a>
         </td>
         <td>
-          <a href="https://fhir.inera.se/ig/template/package.tgz">fhir.inera.se</a>
+          <a href="https://fhir.inera.se/ig/engagementindex/package.tgz">fhir.inera.se</a>
         </td>
         <td>
-          <a name="l351">​</a>
-          <a href="https://fhir.inera.se/ig/template/package.tgz">Paket (tgz)</a>
+          <a name="l373">​</a>
+          <a href="https://fhir.inera.se/ig/engagementindex/package.tgz">Paket (tgz)</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="sv/index.html">web</a>
+        </td>
+        <td>
+          <a href="https://digital.nhs.uk/services/national-record-locator">digital.nhs.uk</a>
+        </td>
+        <td>
+FHIR-EI är en ny komponent som pekar ut var det finns information om en patient. Den svarar på tre frågor: i vilka system finns information om patienten, vilka informationsmängder finns där, och när uppdaterades de senast. Komponenten ersätter engagemangsindex när NPÖ och 1177 FHIR-ifieras, och följer samma mönster som NHS Englands           <a href="https://digital.nhs.uk/services/national-record-locator">National Record Locator</a>
+ och IHE MHD.
         </td>
       </tr>
       <tr>
@@ -186,8 +388,8 @@ En beskrivning av krav på följsamhet samt vägledning vid implementering av In
           <a href="https://www.inera.se/tjanster/alla-tjanster-a-o/terminologitjanst-for-nationell-e-halsa/">www.inera.se</a>
         </td>
         <td>
-På           <a href="https://www.inera.se/tjanster/alla-tjanster-a-o/terminologitjanst-for-nationell-e-halsa/">Inera Terminologitjänst</a>
- finns alla refererade kodsystem och värdemängder som utvecklats av Inera.
+Kodverken för tjänstedomäner och kategorier i denna IG är utdrag. Den fullständiga förteckningen förvaltas av Inera. På           <a href="https://www.inera.se/tjanster/alla-tjanster-a-o/terminologitjanst-for-nationell-e-halsa/">Inera Terminologitjänst</a>
+ finns de kodsystem och värdemängder som Inera förvaltar.
         </td>
       </tr>
       <tr>
@@ -198,8 +400,23 @@ På           <a href="https://www.inera.se/tjanster/alla-tjanster-a-o/terminolo
           <a href="https://fhir.inera.se/">fhir.inera.se</a>
         </td>
         <td>
-Mer information om FHIR på Inera  finns           <a href="https://fhir.inera.se/">här</a>
-. FHIR på Inera är en del av RIVTA – referensarkitekturen för svensk hälso- och sjukvård.
+Mer information om FHIR på Inera finns på           <a href="https://fhir.inera.se/">fhir.inera.se</a>
+. FHIR på Inera är en del av RIVTA, referensarkitekturen för svensk hälso- och sjukvård.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="sv/information-basis.html">web</a>
+        </td>
+        <td>
+          <a href="https://github.com/Inera-AB/EI-on-FHIR/blob/main/spec/fhir-ei-spec.md">github.com</a>
+        </td>
+        <td>
+Det finns ingen fristående informationsspecifikation för FHIR-EI. Designen och dess skäl beskrivs i           <a href="https://github.com/Inera-AB/EI-on-FHIR/blob/main/spec/fhir-ei-spec.md">specen</a>
+ i IG:ns repo, och denna IG realiserar den. Begrepp och principer beskrivs under           <a href="introduction.html">Inledning</a>
+, den logiska modellen för indexposten under           <a href="information-model.html">Indexposten</a>
+, och hur den motsvaras av FHIR-element och fält i dagens engagemangsindex under           <a href="mappings.html">Mappning till profiler</a>
+.
         </td>
       </tr>
       <tr>
@@ -210,8 +427,8 @@ Mer information om FHIR på Inera  finns           <a href="https://fhir.inera.s
           <a href="https://fhir.inera.se/">fhir.inera.se</a>
         </td>
         <td>
-Beskriv de säkerhets- och behörighetsförutsättningar som gäller för att ansluta till och använda denna IG:s gränssnitt, t.ex. autentiseringsmetod, behörighetsmodell och eventuella krav på samtycke. Hänvisa till Ineras generella säkerhetskrav på           <a href="https://fhir.inera.se/">FHIR på Inera</a>
- där tillämpligt.
+Ineras generella säkerhetskrav för FHIR-gränssnitt på           <a href="https://fhir.inera.se/">FHIR på Inera</a>
+ gäller. Exakt tokenformat och vilka anspråk åtkomstkontexten bär specificeras inte i denna version.
         </td>
       </tr>
     </table>
@@ -219,14 +436,14 @@ Beskriv de säkerhets- och behörighetsförutsättningar som gäller för att an
     <table class="grid">
       <tr>
         <td>
-../assets/images/swe.svg          <br/>
-          <img src="../assets/images/swe.svg" alt="../assets/images/swe.svg" width="600px" height="auto"/>
+inera-logo-header.svg          <br/>
+          <img src="inera-logo-header.svg" alt="inera-logo-header.svg" width="600px" height="auto"/>
         </td>
       </tr>
       <tr>
         <td>
-inera-logo-header.svg          <br/>
-          <img src="inera-logo-header.svg" alt="inera-logo-header.svg" width="600px" height="auto"/>
+overgang-blandad-drift.svg          <br/>
+          <img src="overgang-blandad-drift.svg" alt="overgang-blandad-drift.svg" width="600px" height="auto"/>
         </td>
       </tr>
       <tr>

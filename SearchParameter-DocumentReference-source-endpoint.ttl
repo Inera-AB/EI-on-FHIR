@@ -1,0 +1,47 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint> a fhir:SearchParameter ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "DocumentReference-source-endpoint"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: SearchParameter DocumentReference-source-endpoint</b></p><a name=\"DocumentReference-source-endpoint\"> </a><a name=\"hcDocumentReference-source-endpoint\"> </a><h2>SourceEndpoint</h2><p>Parameter <code>source-endpoint</code>:<code>reference</code></p><div><p>Producentens endpoint i tjänstekatalogen (extension sourceEndpoint).</p>\n</div><table class=\"grid\"><tr><td>Resurs</td><td><a href=\"http://hl7.org/fhir/R5/documentreference.html\">DocumentReference</a></td></tr><tr><td>Uttryck</td><td><code>DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint').value</code></td></tr><tr><td>Bearbetningsläge</td><td>Normal</td></tr><tr><td>Målresurser</td><td><a href=\"http://hl7.org/fhir/R5/endpoint.html\">Endpoint</a></td></tr><tr><td>Multipler</td><td><ul><li>multipleAnd: Det är upp till servern om parametern får upprepas för att ange flera värden som alla måste vara sanna</li><li>multipleOr: Det är upp till servern om parametern kan ha flera värden (separerade med kommatecken) där minst ett måste vara sant</li></ul></td></tr></table></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "SourceEndpoint"] ; # 
+  fhir:title [ fhir:v "Sök på producentens endpoint"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v false] ; # 
+  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "Inera AB"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Inera AB" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://www.inera.se" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Producentens endpoint i tjänstekatalogen (extension sourceEndpoint)."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "SE" ] ;
+       fhir:display [ fhir:v "Sweden" ]
+     ] )
+  ] ) ; # 
+  fhir:code [ fhir:v "source-endpoint"] ; # 
+  fhir:base ( [ fhir:v "DocumentReference"] ) ; # 
+  fhir:type [ fhir:v "reference"] ; # 
+  fhir:expression [ fhir:v "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint').value"] ; # 
+  fhir:processingMode [ fhir:v "normal"] ; # 
+  fhir:target ( [ fhir:v "Endpoint"] ) . # 
+
+# -------------------------------------------------------------------------------------
+

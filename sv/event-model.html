@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>Händelsemodell och övergång - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<link href="inera.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="inera-thumbnail.png"/>
+<link rel="shortcut icon" href="inera-thumbnail.png"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"8"}
+    h3,h4,h5,h6{--heading-prefix:"8"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <div id="inera-nav">
+  <a id="inera-logo" data-no-external="true" href="https://www.inera.se">
+    <img height="50" alt="Inera" src="inera-logo-header.svg"/>
+  </a>
+</div>
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  Sweden
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul class="nav navbar-nav">
+  <li><a href="index.html">Hem</a></li>
+  <li><a href="introduction.html">Inledning</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="information-basis.html">Informationsunderlag</a></li>
+      <li><a href="use-cases.html">Användningsfall</a></li>
+      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
+      <li><a href="mappings.html">Mappning till profiler</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="error-handling.html">Felhantering</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
+      <li><a href="testing.html">Testning och validering</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
+      <li><a href="downloads.html">Nedladdningar</a></li>
+      <li><a href="version-history.html">Versionshistorik</a></li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artefakter</a></li>
+  <li><a href="https://fhir.inera.se/" target="_blank" rel="noopener">FHIR på Inera <span aria-hidden="true">&#8599;</span></a></li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Händelsemodell och övergång</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <h2>Händelsemodell och övergång</h2>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p><!-- white space is critical inside of capture --></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#registrering-från-producent-till-fhir-ei" id="markdown-toc-registrering-från-producent-till-fhir-ei">Registrering, från producent till FHIR-EI</a></li>
+  <li><a href="#notiser-från-fhir-ei-till-prenumerant" id="markdown-toc-notiser-från-fhir-ei-till-prenumerant">Notiser, från FHIR-EI till prenumerant</a></li>
+  <li><a href="#lagringstider" id="markdown-toc-lagringstider">Lagringstider</a></li>
+  <li><a href="#övergången-i-tre-steg" id="markdown-toc-övergången-i-tre-steg">Övergången i tre steg</a></li>
+  <li><a href="#ansvar-under-övergången" id="markdown-toc-ansvar-under-övergången">Ansvar under övergången</a></li>
+  <li><a href="#mappning-av-update" id="markdown-toc-mappning-av-update">Mappning av Update</a></li>
+  <li><a href="#adressregister-i-adaptern" id="markdown-toc-adressregister-i-adaptern">Adressregister i adaptern</a></li>
+  <li><a href="#överlämning-från-adaptern" id="markdown-toc-överlämning-från-adaptern">Överlämning från adaptern</a></li>
+</ul>
+
+</div>
+<p>Leveransgarantin är minst den samma som idag: en ändring i källsystemet ska nå indexet utan förlust, i rätt ordning per post, och kunna återhämtas efter avbrott. Det gäller både dagens RIV-TA-producenter och framtida FHIR-producenter.</p>
+
+<h3 id="registrering-från-producent-till-fhir-ei">Registrering, från producent till FHIR-EI</h3>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Krav</th>
+      <th>Innebörd</th>
+      <th>Hur det uppfylls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Idempotens</td>
+      <td>Samma händelse två gånger ger samma resultat</td>
+      <td>Uppdatering och avregistrering sker villkorat på producentbunden <code class="language-plaintext highlighter-rouge">identifier</code></td>
+    </tr>
+    <tr>
+      <td>Ordning per post</td>
+      <td>Sena eller omkastade händelser skriver inte över nyare</td>
+      <td>En uppdatering med äldre <code class="language-plaintext highlighter-rouge">contentLastUpdated</code> än den lagrade ignoreras. En avregistrering kan bara upphävas av en ny registrering med senare <code class="language-plaintext highlighter-rouge">contentLastUpdated</code></td>
+    </tr>
+    <tr>
+      <td>Minst en leverans</td>
+      <td>Ingen händelse går förlorad</td>
+      <td>Producent eller adapter försöker igen tills FHIR-EI kvitterat. Ej levererbara händelser hamnar i en kö för manuell hantering</td>
+    </tr>
+    <tr>
+      <td>Atomicitet</td>
+      <td>En samling ändringar registreras helt eller inte alls</td>
+      <td><code class="language-plaintext highlighter-rouge">transaction</code>-Bundle</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>En ignorerad uppdatering besvaras med <code class="language-plaintext highlighter-rouge">200 OK</code> och den lagrade versionen, med oförändrad <code class="language-plaintext highlighter-rouge">ETag</code>. Producenten ser att inget skrevs och försöker inte igen. Samtidiga uppdateringar av samma post hanteras med versionsvillkor (<code class="language-plaintext highlighter-rouge">If-Match</code> på <code class="language-plaintext highlighter-rouge">ETag</code>) eller med regeln om <code class="language-plaintext highlighter-rouge">contentLastUpdated</code>.</p>
+
+<h3 id="notiser-från-fhir-ei-till-prenumerant">Notiser, från FHIR-EI till prenumerant</h3>
+
+<p>Principen är att prenumerationen ger snabbhet och avstämningen ger korrekthet. En konsument ska kunna återställa en korrekt bild även om den missat notiser.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Fråga</th>
+      <th>Regel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Kan notiser komma flera gånger?</td>
+      <td>Ja. Varje notis bär ett löpande händelsenummer i <code class="language-plaintext highlighter-rouge">SubscriptionStatus</code>. Konsumenten deduplicerar på händelsenummer och postens <code class="language-plaintext highlighter-rouge">meta.versionId</code></td>
+    </tr>
+    <tr>
+      <td>Garanteras ordning?</td>
+      <td>Bara per post, via <code class="language-plaintext highlighter-rouge">meta.versionId</code>. Konsumenten ignorerar en notis om en äldre version än den den redan har. Ingen ordning garanteras mellan poster</td>
+    </tr>
+    <tr>
+      <td>Hur upptäcks missade notiser?</td>
+      <td>Luckor i händelsenumren, uteblivna heartbeat-notiser eller fel vid anrop av <code class="language-plaintext highlighter-rouge">$status</code> på prenumerationen</td>
+    </tr>
+    <tr>
+      <td>Hur återhämtar sig konsumenten?</td>
+      <td>Kortare avbrott: <code class="language-plaintext highlighter-rouge">$events</code> för att hämta missade händelser ur händelseloggen. Längre avbrott: inkrementell avstämning med <code class="language-plaintext highlighter-rouge">_lastUpdated</code> inklusive avregistrerade poster. Avbrott längre än gravstenarnas lagringstid, eller ny konsument: <code class="language-plaintext highlighter-rouge">$export</code> och full omladdning</td>
+    </tr>
+    <tr>
+      <td>Hur syns borttag?</td>
+      <td>Som uppdatering till status <code class="language-plaintext highlighter-rouge">superseded</code> eller <code class="language-plaintext highlighter-rouge">entered-in-error</code>. Gravstenen finns kvar under lagringstiden, så borttaget syns även vid avstämning</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="lagringstider">Lagringstider</h3>
+
+<p>Två lagringstider ska fastställas. Båda härleds från samma fråga: hur långt avbrott ska en konsument klara utan full omladdning?</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Lagringstid</th>
+      <th>Vad den styr</th>
+      <th>Dimensioneras efter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Händelselogg</td>
+      <td>Hur långt bakåt en konsument kan hämta missade notiser med <code class="language-plaintext highlighter-rouge">$events</code></td>
+      <td>Normala driftavbrott hos konsumenter; kort, eftersom avstämning tar vid efteråt</td>
+    </tr>
+    <tr>
+      <td>Gravstenar</td>
+      <td>Hur länge en avregistrerad post syns vid inkrementell avstämning och <code class="language-plaintext highlighter-rouge">_since</code>-export</td>
+      <td>Det längsta tillåtna avbrottet för alla synkande konsumenter, inklusive en framtida synk mot eHM</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Värdena är en <a href="open-issues.html">öppen fråga</a>.</p>
+
+<hr />
+
+<h3 id="övergången-i-tre-steg">Övergången i tre steg</h3>
+
+<ol>
+  <li><strong>Spegling.</strong> Dagens engagemangsindex är fortsatt master. En adapter prenumererar på det via ProcessNotification och skriver motsvarande indexposter i FHIR-EI. Grundladdning sker med ett engångsuttag. Inga producenter behöver ändras.</li>
+  <li><strong>Blandad drift.</strong> Källsystem som kan FHIR registrerar direkt i FHIR-EI. Adaptern fortsätter för övriga. Adaptern måste skriva tillbaka FHIR-registrerade poster till dagens engagemangsindex så länge konsumenter läser därifrån.</li>
+  <li><strong>Byte av master.</strong> När NPÖ och 1177 läser från FHIR-EI blir det master. Dagens engagemangsindex kan då speglas från FHIR-EI eller avvecklas.</li>
+</ol>
+
+<figure>
+  <img src="overgang-blandad-drift.svg" alt="Steg 2, blandad drift: RIV-TA-källsystem skickar Update till dagens engagemangsindex, som via ProcessNotification och adaptern når FHIR-EI. FHIR-källsystem skriver direkt till FHIR-EI med villkorad PUT. NPÖ och 1177 söker och får notiser från FHIR-EI. En streckad pil visar en senare aggregering till eHM:s patientindex." style="max-width:100%;height:auto" />
+  <figcaption>Steg 2, blandad drift. Synken till eHM är streckad eftersom den inte ingår i första iterationen.</figcaption>
+</figure>
+
+<p>RIV-TA-producenter når FHIR-EI via dagens index och adaptern; FHIR-producenter skriver direkt.</p>
+
+<h3 id="ansvar-under-övergången">Ansvar under övergången</h3>
+
+<p>Adaptern speglar dagens engagemangsindex utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos producenterna, genom deras registrering i dagens engagemangsindex.</p>
+
+<h3 id="mappning-av-update">Mappning av Update</h3>
+
+<p>Engagemangsposter för samma patient, logiska adress och tjänstedomän slås ihop till en indexpost, med dagens kategorier som informationsmängder. Varje indexpost blir en villkorad <code class="language-plaintext highlighter-rouge">PUT</code> i en <code class="language-plaintext highlighter-rouge">transaction</code>, med fältmappningen under <a href="mappings.html">Mappning till profiler</a>.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Fält</th>
+      <th>Regel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">identifier</code></td>
+      <td>System = adapterns endpoint-URL, som för alla producenter. Värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän, så att samma kombination alltid ger samma post</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sourceEndpoint</code>, <code class="language-plaintext highlighter-rouge">content.attachment.url</code></td>
+      <td>Endpoint och adress enligt adressregistret nedan</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">logicalAddress</code></td>
+      <td>logicalAddress från engagemangsposterna</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sourceSystem</code></td>
+      <td>sourceSystem från de ingående engagemangsposterna</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">contentLastUpdated</code></td>
+      <td>Den senaste mostRecentContent bland de ingående engagemangsposterna</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">content.profile[category]</code></td>
+      <td>En Coding per kategori bland de ingående engagemangsposterna</td>
+    </tr>
+    <tr>
+      <td>Avregistrering</td>
+      <td>deleteFlag på den sista ingående engagemangsposten ger status <code class="language-plaintext highlighter-rouge">superseded</code>, <code class="language-plaintext highlighter-rouge">registrationStatus</code> <code class="language-plaintext highlighter-rouge">withdrawn</code> och <code class="language-plaintext highlighter-rouge">deregistrationReason</code> <code class="language-plaintext highlighter-rouge">transition-adapter</code>, eftersom dagens kontrakt inte bär någon orsak</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">registeringProducer</code></td>
+      <td>Adapterns egen endpoint i tjänstekatalogen</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="adressregister-i-adaptern">Adressregister i adaptern</h3>
+
+<p>Tjänstekatalogen har ingen endpoint per logisk adress. Där är den logiska adressen en organisations HSA-id, och organisationen listar sina endpoints i <code class="language-plaintext highlighter-rouge">Organization.endpoint</code>. Tjänstekatalogen har inte heller TAK:s uppgift om vilken logisk adress och vilket tjänstekontrakt som routas till vilken producent.</p>
+
+<p>Adaptern håller därför ett eget adressregister, byggt genom att samköra TAK med tjänstekatalogen:</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Nyckel</th>
+      <th>Värde</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Logisk adress och tjänstedomän (via tjänstekontrakt i TAK)</td>
+      <td>Endpoint i tjänstekatalogen som posten ska peka på</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Två varianter är möjliga för värdet:</p>
+
+<ol>
+  <li><strong>Tjänsteplattformens endpoint för tjänstekontraktet.</strong> Konsumenten anropar tjänsteplattformen med RIV-TA och anger postens <code class="language-plaintext highlighter-rouge">logicalAddress</code>.</li>
+  <li><strong>EHDS-bryggans FHIR-yta för vårdgivaren</strong> (<code class="language-plaintext highlighter-rouge">/fhir/{vg-hsa-id}/</code>). Konsumenten hämtar informationen med FHIR, och bryggan översätter till RIV-TA. Bryggan använder vårdgivarens HSA-id som logisk adress, medan dagens engagemangsposter kan ha vårdenhetens eller källsystemets. Det måste stämmas av mot TAK innan varianten används.</li>
+</ol>
+
+<p>Samma tanke finns i EHDS-bryggan, som håller ett eget register från vårdgivare till endpoint.</p>
+
+<h3 id="överlämning-från-adaptern">Överlämning från adaptern</h3>
+
+<p>När ett källsystem börjar registrera direkt i FHIR-EI får dess poster en ny endpoint, och därmed nya poster, eftersom en post gäller patient × endpoint × tjänst. Adaptern avregistrerar då sina poster för källsystemet med <code class="language-plaintext highlighter-rouge">deregistrationReason</code> <code class="language-plaintext highlighter-rouge">transition-adapter</code>. Prenumeranter ser en avregistrering och en ny registrering för samma information. Om det behövs en operation som flyttar ägarskapet i stället är en <a href="open-issues.html">öppen fråga</a>.</p>
+
+<p>Se exemplet <a href="DocumentReference-IndexpostFranAdapter.html">Indexpost speglad av övergångsadaptern</a>.</p>
+
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
+          Genererad 
+  <span title="2026-10-26 20:06:00 +0000">
+    2026-10-26
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Länkar: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Innehållsförteckning</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-rapport</a>
+                 
+                
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

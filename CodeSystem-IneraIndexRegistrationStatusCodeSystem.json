@@ -1,0 +1,52 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "IneraIndexRegistrationStatusCodeSystem",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraIndexRegistrationStatusCodeSystem</b></p><a name=\"IneraIndexRegistrationStatusCodeSystem\"> </a><a name=\"hcIneraIndexRegistrationStatusCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code> definierar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">active<a name=\"IneraIndexRegistrationStatusCodeSystem-active\"> </a></td><td>Registrerad</td><td>Informationen finns tillgänglig hos producenten. Basstatus current.</td></tr><tr><td style=\"white-space:nowrap\">withdrawn<a name=\"IneraIndexRegistrationStatusCodeSystem-withdrawn\"> </a></td><td>Indragen</td><td>Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded.</td></tr><tr><td style=\"white-space:nowrap\">entered-in-error<a name=\"IneraIndexRegistrationStatusCodeSystem-entered-in-error\"> </a></td><td>Felregistrerad</td><td>Posten skulle aldrig ha funnits. Basstatus entered-in-error.</td></tr></table></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",
+  "identifier" : [{
+    "value" : "IneraIndexRegistrationStatusCodeSystem"
+  }],
+  "version" : "0.1.0",
+  "name" : "IneraIndexRegistrationStatusCodeSystem",
+  "title" : "Kodsystem för registreringsstatus",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-10-26",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 3,
+  "concept" : [{
+    "code" : "active",
+    "display" : "Registrerad",
+    "definition" : "Informationen finns tillgänglig hos producenten. Basstatus current."
+  },
+  {
+    "code" : "withdrawn",
+    "display" : "Indragen",
+    "definition" : "Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded."
+  },
+  {
+    "code" : "entered-in-error",
+    "display" : "Felregistrerad",
+    "definition" : "Posten skulle aldrig ha funnits. Basstatus entered-in-error."
+  }]
+}

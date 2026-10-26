@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Säkerhet och behörighet - Inera FHIR Implementation Guide Template v2.3.0</title>
+    <title>Spärr, loggning och behörighet - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -50,8 +50,8 @@
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"11"}
-    h3,h4,h5,h6{--heading-prefix:"11"}</style>
+    <style type="text/css">h2{--heading-prefix:"16"}
+    h3,h4,h5,h6{--heading-prefix:"16"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -63,13 +63,13 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">Inera FHIR Implementation Guide Template</span>
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
             <br/>
-            <span style="display:inline-block;">2.3.0 - ci-build
+            <span style="display:inline-block;">0.1.0 - ci-build
 
 
 
-  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+  Sweden
 
 
             </span>
@@ -92,7 +92,7 @@
               <span class="icon-bar"> </span>
               <span class="icon-bar"> </span>
             </button>
-            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
@@ -103,6 +103,10 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
       <li><a href="mappings.html">Mappning till profiler</a></li>
     </ul>
   </li>
@@ -110,10 +114,11 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Säkerhet och behörighet</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -121,6 +126,7 @@
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
       <li><a href="downloads.html">Nedladdningar</a></li>
       <li><a href="version-history.html">Versionshistorik</a></li>
     </ul>
@@ -143,7 +149,7 @@
     <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
       <div class="container">  <!-- container -->
         <ul class="breadcrumb">
-          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Säkerhet och behörighet</b></li>
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Spärr, loggning och behörighet</b></li>
 
         </ul>
       </div>  <!-- /container -->
@@ -163,8 +169,8 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">Inera FHIR Implementation Guide Template - Lokal utvecklingsbygge (v2.3.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/template/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
-  <h2>Säkerhet och behörighet</h2>
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <h2>Spärr, loggning och behörighet</h2>
   
 
 
@@ -180,10 +186,76 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div>
-<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#alla-operationer" id="markdown-toc-alla-operationer">Alla operationer</a></li>
+  <li><a href="#prenumerationer" id="markdown-toc-prenumerationer">Prenumerationer</a></li>
+  <li><a href="#producenter" id="markdown-toc-producenter">Producenter</a></li>
+  <li><a href="#granularitet" id="markdown-toc-granularitet">Granularitet</a></li>
+  <li><a href="#allmänna-krav" id="markdown-toc-allmänna-krav">Allmänna krav</a></li>
+</ul>
+
 </div>
-<p><em>Beskriv de säkerhets- och behörighetsförutsättningar som gäller för att ansluta till och använda denna IG:s gränssnitt, t.ex. autentiseringsmetod, behörighetsmodell och eventuella krav på samtycke. Hänvisa till Ineras generella säkerhetskrav på <a href="https://fhir.inera.se/">FHIR på Inera</a> där tillämpligt.</em></p>
+<p>FHIR-EI är sin egen åtkomstkontrollpunkt. Komponenten anropar spärrtjänsten, loggar i loggtjänsten och filtrerar svaren innan de lämnas ut, på samma sätt som EHDS-bryggan. Konsumenterna får alltså bara se poster de har rätt att se. Det är en första hypotes som behöver bekräftas.</p>
+
+<p>Skälet är att indexet självt är skyddsvärd information: att en patient har en post hos en viss vårdenhet är en uppgift om patienten.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Funktion</th>
+      <th>Vad FHIR-EI gör</th>
+      <th>Beroende</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Åtkomstkontext</td>
+      <td>Kräver i varje anrop vem som frågar (HSA-id eller invånare), för vilken vårdgivare och vårdenhet, i vilket uppdrag, med vilket syfte (<code class="language-plaintext highlighter-rouge">purposeOfUse</code>), samt samtycke eller nödåtkomst där det krävs</td>
+      <td>Säkerhetstjänst, token med kontextanspråk</td>
+    </tr>
+    <tr>
+      <td>Spärrkontroll</td>
+      <td>Frågar spärrtjänsten med åtkomstkontexten och tar bort poster som omfattas av spärr</td>
+      <td>Spärrtjänsten, på sikt en FHIR-baserad spärrtjänst</td>
+    </tr>
+    <tr>
+      <td>Filtrering</td>
+      <td>Tar bort poster utanför frågande aktörs behörighet. Om konsumenten får veta att poster filtrerats (till exempel "information finns men kräver samtycke") beror på lagstiftningen för syftet. Det styrs av <code class="language-plaintext highlighter-rouge">purposeOfUse</code> i frågan och av spärrtjänstens svar, som FHIR-EI för vidare i sitt svar</td>
+      <td>Spärrtjänsten, policy per konsument (NPÖ, 1177)</td>
+    </tr>
+    <tr>
+      <td>Ombud</td>
+      <td>För 1177: tillämpar fullmakt när någon söker för en annan person</td>
+      <td>Fullmaktsarkitekturen</td>
+    </tr>
+    <tr>
+      <td>Loggning</td>
+      <td>Loggar både varje sökning och varje utlämnad post som åtkomst till patientuppgift</td>
+      <td>Loggtjänsten</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="alla-operationer">Alla operationer</h3>
+
+<p>Kontrollen gäller alla operationer: sökning, läsning, skrivning, prenumeration, inkrementell avstämning och export. Filtreringen sker i FHIR-EI innan svaret lämnas ut, aldrig bara i den komponent som presenterar svaret. Export kräver egen behörighet för systemkonsumenten och loggas per uttag.</p>
+
+<h3 id="prenumerationer">Prenumerationer</h3>
+
+<p>Prenumerationer filtreras på samma sätt. En konsument får bara notis om poster den skulle ha fått i en sökning. Det, och <code class="language-plaintext highlighter-rouge">id-only</code>-innehåll, hindrar att notiser läcker förekomst av spärrad information. Se <a href="subscriptions.html">Prenumeration</a>.</p>
+
+<h3 id="producenter">Producenter</h3>
+
+<p>Producenternas skrivningar filtreras inte men auktoriseras. Producentens identitet är dess endpoint i tjänstekatalogen, och en producent får bara registrera för vårdgivare som listar endpointen där. Se <a href="rest-interactions.html">REST-interaktioner och sökparametrar</a>. <code class="language-plaintext highlighter-rouge">meta.source</code> används aldrig ensamt för behörighetskontroll.</p>
+
+<h3 id="granularitet">Granularitet</h3>
+
+<p>Spärrar gäller idag på vårdgivar- och vårdenhetsnivå. Med indexposter per tjänst går det längre fram att spärra eller filtrera per tjänst utan ändrad modell.</p>
+
+<h3 id="allmänna-krav">Allmänna krav</h3>
+
+<p>Ineras generella säkerhetskrav för FHIR-gränssnitt på <a href="https://fhir.inera.se/">FHIR på Inera</a> gäller. Exakt tokenformat och vilka anspråk åtkomstkontexten bär specificeras inte i denna version.</p>
 
 
 
@@ -210,10 +282,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
 
-          IG © 2024+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
-          Paket inera.core.template#2.3.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-26 15:17:00 +0000">
+  <span title="2026-10-26 20:06:00 +0000">
     2026-10-26
   </span>
 

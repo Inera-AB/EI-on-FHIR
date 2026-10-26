@@ -1,26 +1,37 @@
-# Roller och ansvar - Inera FHIR Implementation Guide Template v2.3.0
+# Roller och ansvar - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
 
 ## Roller och ansvar
 
-**Lista de system eller mänskliga roller som deltar i användningsfallen (se [Användningsfall](use-cases.md)). Beskriv för varje roll dess verksamhetsansvar i sammanhanget för denna IG — vem som ansvarar för vad, inte hur anropen tekniskt går till.**
+Sex roller deltar i [användningsfallen](use-cases.md), plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.
 
 | | |
 | :--- | :--- |
-| **[Rollens namn]** | **Beskriv rollen och ansvarsområdena för denna aktör.** |
-| **[Rollens namn]** | **Beskriv rollen och ansvarsområdena för denna aktör.** |
+| FHIR-EI | Lagrar indexposter. Är sin egen åtkomstkontrollpunkt: kontrollerar behörighet och spärrar, filtrerar och loggar alla anrop. Auktoriserar producenternas skrivningar mot den autentiserade producentidentiteten. Skickar notiser till prenumeranter och håller händelselogg och gravstenar under sina lagringstider |
+| Producent | Registrerar, uppdaterar och avregistrerar indexposter, så att indexet speglar vilken information producenten håller. Identifieras med sin endpoint i tjänstekatalogen. Försöker igen tills FHIR-EI kvitterat |
+| Övergångsadapter | Speglar dagens engagemangsindex till FHIR-EI utan egen affärslogik, gör grundladdningen och skriver tillbaka FHIR-registrerade poster till dagens index. Har ombudsroll och håller ett adressregister från logisk adress och tjänstedomän till endpoint |
+| Konsument | Söker i eller prenumererar på indexet för en patient, inom sitt uppdrag och syfte. Stämmer av efter avbrott. Hämtar informationen från producenternas endpoints |
+| Systemkonsument | Gör massuttag för grundladdning och återsynk, till exempel en framtida synk till eHM:s patientindex |
+| Tjänsteägare | Publicerar tjänstens tillämpning av indexprofilen i tjänstens IG |
 
-**Ange för varje roll vad den förväntas kunna göra vid implementering av denna IG, t.ex. med HL7 FHIR:s terminologi för förmågor där det är lämpligt.**
+Tjänstekatalogen är auktoritativ för producenternas endpoints, och för vilka vårdgivare som listar dem.
+
+### Förväntningar
 
 | | |
 | :--- | :--- |
-| **[Rollens namn]** | **Ange förväntningen, t.ex. "SHALL kunna producera en [Resurs] som uppfyller [Profil]."** |
-| **[Rollens namn]** | **Ange förväntningen, t.ex. "SHALL kunna konsumera och bearbeta en [Resurs] som uppfyller [Profil]."** |
+| FHIR-EI | SHALL uppfylla[CapabilityStatement för FHIR-EI](CapabilityStatement-IneraIndexServer.md) |
+| Producent | SHALL registrera poster som uppfyller[Indexpost](StructureDefinition-IneraIndexEntry.md)och tjänstens tillämpning, med villkorad uppdatering på`identifier` |
+| Producent | SHALL avregistrera med villkorad uppdatering till status`superseded`eller`entered-in-error`och ange`deregistrationReason`; aldrig med delete |
+| Producent | SHALL NOT ändra`identifier`eller`registeringProducer`på en befintlig post |
+| Producent | SHALL använda sin endpoint-URL i tjänstekatalogen som`identifier.system`och`registeringProducer` |
+| Producent | SHALL ange`logicalAddress`när endpointen adresseras med logisk adress |
+| Producent | SHALL försöka igen tills FHIR-EI kvitterat, och lägga ej levererbara händelser i en kö för manuell hantering |
+| Konsument | SHALL skicka åtkomstkontext i varje anrop; se[Spärr, loggning och behörighet](security.md) |
+| Konsument | SHALL deduplicera notiser och ignorera en notis om en äldre version än den den redan har; se[Händelsemodell och övergång](event-model.md) |
+| Konsument | SHALL ignorera kodningar i`type`och`content.profile`som den inte förstår |
+| Tjänsteägare | SHALL publicera tillämpningen som en profil med[Indexpost](StructureDefinition-IneraIndexEntry.md)som förälder |
 
-Fr.o.m. FHIR R5 kan `CapabilityStatement` uttrycka denna typ av förväntningar formellt via elementet `obligations`. Om denna IG definierar formella CapabilityStatements, se [CapabilityStatement](capabilitystatement.md) under Implementering.
+### Ansvar under övergången
 
-**Referera till eller återge kortfattat det arbetsflöde där dessa roller interagerar — vad som utlöser flödet, i vilken ordning rollerna agerar och vad resultatet blir. Se [Informationsunderlag](information-basis.md) för den fullständiga, auktoritativa beskrivningen.**
-
--------
-
-> **Vägledning för författare:** Referera till relevanta nationella föreskrifter eller RIVTA-tjänstekontrakt där det är tillämpligt.
+Adaptern speglar dagens engagemangsindex utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos producenterna, genom deras registrering i dagens engagemangsindex.
 

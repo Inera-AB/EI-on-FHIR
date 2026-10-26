@@ -1,3 +1,50 @@
 {
-  "codeSystems" : []
+  "codeSystems" : [{
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraDeregistrationReasonValueSet",
+    "title" : "Orsaker till avregistrering",
+    "description" : "Alla orsaker till avregistrering av en indexpost.",
+    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"],
+    "uses" : {
+    },
+    "StructureDefinition-DeregistrationReason.html" : "Orsak till avregistrering"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementCategoryValueSet",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraEngagementCategoryValueSet",
+    "title" : "Kategorier inom tjänstedomän",
+    "description" : "Alla kategorier i kodverket för kategorier inom tjänstedomän.",
+    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"],
+    "uses" : {
+    },
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraIndexRegistrationStatusValueSet",
+    "title" : "Registreringsstatus för indexposter",
+    "description" : "Alla livscykeltillstånd för en indexpost.",
+    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"],
+    "uses" : {
+    },
+    "StructureDefinition-RegistrationStatus.html" : "Registreringsstatus"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraServiceDomainValueSet",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraServiceDomainValueSet",
+    "title" : "Tjänstedomäner",
+    "description" : "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner.",
+    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"],
+    "uses" : {
+    },
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
+  }]
 }
