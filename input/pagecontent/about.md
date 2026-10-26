@@ -1,13 +1,9 @@
 ### Styrning och förvaltning
 
-FHIR-profiler förvaltas av Inera: [Källkod](https://github.com/inera-ab).
+IG:n förvaltas av Inera. Källkoden finns på [GitHub](https://github.com/Inera-AB/EI-on-FHIR). Ändringsförslag och felrapporter lämnas som issues där.
 
 En beskrivning av krav på följsamhet samt vägledning vid implementering av Ineras FHIR-IG:ar finns på [Inera FHIR-landningssidan](https://fhir.inera.se/).
 
-Landningssidan ger en översikt av krav på system som vill ansluta sig till Ineras tjänster via FHIR.
-
-Landningssidan erbjuder även stöd för utvecklare som vill förstå hur de arbetar med Ineras FHIR-standarder, inklusive en guide för att läsa en Implementation Guide och instruktioner för hur man använder FHIR-verktyg som valideringsuppsättning.
-
 ---
 
-Se även [Nedladdningar](downloads.html) och [Versionshistorik](version-history.html).
+Se även [Öppna frågor](open-issues.html), [Nedladdningar](downloads.html) och [Versionshistorik](version-history.html).

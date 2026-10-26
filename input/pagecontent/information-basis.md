@@ -1,21 +1,11 @@
-Denna sida beskriver informationsunderlaget som denna Implementation Guide bygger på. Detaljerade begrepps- och informationsmodeller, samt fullständiga processbeskrivningar, återfinns i den informationsspecifikation som anges nedan — de upprepas inte här för att undvika dubbeldokumentation som kan glida isär över tid.
-
-*Ange vilken informationsspecifikation denna IG baseras på.*
+FHIR-EI realiserar samma informationsmängd som dagens engagemangsindex, i en FHIR-form som kan växa mot finare informationsmängder. Informationsunderlaget är därför dagens engagemangsindex och dess tjänstekontrakt.
 
 | | |
 |---|---|
-| **Informationsspecifikation** | *[Namn på informationsspecifikationen]([länk till publicerat dokument])* |
-| **Version** | *[Version/datum för den informationsspecifikation som denna IG realiserar]* |
+| **Informationsunderlag** | Tjänstedomänen `riv:itintegration:engagementindex` med tjänstekontrakten FindContent, Update och ProcessNotification |
+| **Version** | Den version av tjänstedomänen som dagens engagemangsindex implementerar |
+{:.grid}
 
-**Länkar:**
+Det finns ingen fristående informationsspecifikation för FHIR-EI. Begrepp och principer beskrivs under [Inledning](introduction.html), och hur fälten i dagens engagemangsindex motsvaras av element i profilerna beskrivs under [Mappning till profiler](mappings.html).
 
-- *[Länk till publicerad informationsspecifikation]*
-- *[Länk till begreppsmodell]*
-- *[Länk till informationsmodell]*
-- *[Länk till ev. externa mappningsdokument]*
-
-Se [Mappning till profiler](mappings.html) för vilka delar av informationsspecifikationen som denna IG realiserar och eventuella avvikelser eller tillägg i FHIR-realiseringen.
-
----
-
-> **Vägledning för författare:** Håll denna sida kort. Användningsfall samt roller och ansvar beskrivs under [Användningsfall](use-cases.html) och [Roller och ansvar](roles-and-responsibilities.html).
+Användningsfall samt roller och ansvar beskrivs under [Användningsfall](use-cases.html) och [Roller och ansvar](roles-and-responsibilities.html).

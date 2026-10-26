@@ -18,9 +18,4 @@ permissions:
 jobs:
   release:
     uses: Inera-AB/fhir-ig-workflows/.github/workflows/release.yml@v1
-    # The template is published on fhir.inera.se as an example but kept out
-    # of the FHIR package registry. An IG made from the template removes
-    # these two lines so that its packages reach packages.fhir.org.
-    with:
-      package-feed: false
     secrets: inherit

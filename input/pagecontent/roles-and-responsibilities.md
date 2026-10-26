@@ -1,21 +1,25 @@
-*Lista de system eller mänskliga roller som deltar i användningsfallen (se [Användningsfall](use-cases.html)). Beskriv för varje roll dess verksamhetsansvar i sammanhanget för denna IG — vem som ansvarar för vad, inte hur anropen tekniskt går till.*
+Fem roller deltar i [användningsfallen](use-cases.html), plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.
 
 | Roll | Ansvar |
-|------|--------|
-| *[Rollens namn]* | *Beskriv rollen och ansvarsområdena för denna aktör.* |
-| *[Rollens namn]* | *Beskriv rollen och ansvarsområdena för denna aktör.* |
+|---|---|
+| FHIR-EI | Lagrar indexposter och källsystemens endpoints. Är sin egen åtkomstkontrollpunkt: kontrollerar spärrar, filtrerar och loggar alla konsumentanrop. Auktoriserar producenternas skrivningar. Skickar notiser till prenumeranter |
+| Producent | Registrerar, uppdaterar och tar bort indexposter för sitt källsystem, så att indexet speglar vilken information källsystemet håller. Försöker igen tills FHIR-EI kvitterat |
+| Adapter | Under övergången: speglar dagens engagemangsindex till FHIR-EI, gör grundladdningen och skriver tillbaka FHIR-registrerade poster till dagens index |
+| Konsument | Söker i eller prenumererar på indexet för en patient, inom sitt uppdrag och syfte. Hämtar informationen från källsystemen |
+| Systemkonsument | Gör massuttag för grundladdning och återsynk, till exempel en framtida synk till eHM:s patientindex |
+{:.grid}
 
-*Ange för varje roll vad den förväntas kunna göra vid implementering av denna IG, t.ex. med HL7 FHIR:s terminologi för förmågor där det är lämpligt.*
+### Förväntningar
 
 | Roll | Förväntning |
-|------|-------------|
-| *[Rollens namn]* | *Ange förväntningen, t.ex. "SHALL kunna producera en [Resurs] som uppfyller [Profil]."* |
-| *[Rollens namn]* | *Ange förväntningen, t.ex. "SHALL kunna konsumera och bearbeta en [Resurs] som uppfyller [Profil]."* |
+|---|---|
+| FHIR-EI | SHALL uppfylla [CapabilityStatement för FHIR-EI](CapabilityStatement-IneraEngagementIndexServer.html) |
+| Producent | SHALL registrera poster som uppfyller [Indexpost](StructureDefinition-IneraEngagementIndexEntry.html), med villkorad uppdatering och villkorat borttag på `identifier` |
+| Producent | SHALL ange `mostRecentContent` med minst sekundprecision, så att ordningen per post kan avgöras |
+| Producent | SHALL försöka igen tills FHIR-EI kvitterat, och lägga ej levererbara händelser i en kö för manuell hantering |
+| Konsument | SHALL skicka åtkomstkontext i varje anrop; se [Spärr, loggning och behörighet](security.html) |
+| Konsument | SHALL kunna hantera alla kodningsnivåer i `type` som den inte förstår genom att ignorera dem |
+| Adapter | SHALL mappa Update till villkorad `PUT` eller `DELETE` i en `transaction`; se [Händelsemodell och övergång](event-model.html) |
+{:.grid}
 
-Fr.o.m. FHIR R5 kan `CapabilityStatement` uttrycka denna typ av förväntningar formellt via elementet `obligations`. Om denna IG definierar formella CapabilityStatements, se [CapabilityStatement](capabilitystatement.html) under Implementering.
-
-*Referera till eller återge kortfattat det arbetsflöde där dessa roller interagerar — vad som utlöser flödet, i vilken ordning rollerna agerar och vad resultatet blir. Se [Informationsunderlag](information-basis.html) för den fullständiga, auktoritativa beskrivningen.*
-
----
-
-> **Vägledning för författare:** Referera till relevanta nationella föreskrifter eller RIVTA-tjänstekontrakt där det är tillämpligt.
+Vem som svarar för att en indexpost är korrekt när den härrör från adaptern är en [öppen fråga](open-issues.html).

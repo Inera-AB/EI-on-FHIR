@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 464" role="img" aria-labelledby="title" font-family="Arial, Helvetica, sans-serif" font-size="13">
+  <title id="title">I blandad drift når båda producentvägarna FHIR-EI</title>
+  <defs>
+    <marker id="ei-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#727373"/>
+    </marker>
+  </defs>
+  <rect width="760" height="464" fill="#FFFFFF"/>
+  <text x="24" y="34" font-size="15" font-weight="600" fill="#353636">I blandad drift når båda producentvägarna FHIR-EI</text>
+
+  <g fill="none" stroke="#727373" stroke-width="1.25">
+    <path d="M112 128V184" marker-end="url(#ei-arrow)"/>
+    <path d="M112 240V284" marker-end="url(#ei-arrow)"/>
+    <path d="M380 128V276" marker-end="url(#ei-arrow)"/>
+    <path d="M200 312H284" marker-end="url(#ei-arrow)"/>
+    <path d="M476 312H564" marker-end="url(#ei-arrow)"/>
+    <path d="M380 348V412H564" stroke-dasharray="4 4" marker-end="url(#ei-arrow)"/>
+  </g>
+
+  <rect x="24" y="80" width="176" height="48" rx="8" fill="none" stroke="#727373" stroke-width="1.25"/>
+  <text x="112" y="108" text-anchor="middle" font-weight="600" fill="#353636">RIV-TA-källsystem</text>
+
+  <rect x="24" y="184" width="176" height="56" rx="8" fill="none" stroke="#727373" stroke-width="1.25"/>
+  <text x="112" y="208" text-anchor="middle" font-weight="600" fill="#353636">Engagemangsindex</text>
+  <text x="112" y="224" text-anchor="middle" font-size="11.5" fill="#727373">dagens, master i steg 1</text>
+
+  <rect x="24" y="284" width="176" height="56" rx="8" fill="none" stroke="#727373" stroke-width="1.25"/>
+  <text x="112" y="308" text-anchor="middle" font-weight="600" fill="#353636">Adapter</text>
+  <text x="112" y="324" text-anchor="middle" font-size="11.5" fill="#727373">speglar dagens index</text>
+
+  <rect x="284" y="80" width="192" height="48" rx="8" fill="none" stroke="#727373" stroke-width="1.25"/>
+  <text x="380" y="108" text-anchor="middle" font-weight="600" fill="#353636">FHIR-källsystem</text>
+
+  <rect x="284" y="276" width="192" height="72" rx="8" fill="#F6E6EC" stroke="#A33662" stroke-width="2"/>
+  <text x="380" y="300" text-anchor="middle" font-weight="600" fill="#353636">FHIR-EI</text>
+  <text x="380" y="316" text-anchor="middle" font-size="11.5" fill="#353636">indexposter (EpisodeOfCare)</text>
+  <text x="380" y="332" text-anchor="middle" font-size="11.5" fill="#353636">spärr, logg, filtrering</text>
+
+  <rect x="564" y="288" width="172" height="48" rx="8" fill="none" stroke="#727373" stroke-width="1.25"/>
+  <text x="650" y="316" text-anchor="middle" font-weight="600" fill="#353636">NPÖ och 1177</text>
+
+  <rect x="564" y="384" width="172" height="56" rx="8" fill="none" stroke="#727373" stroke-width="1.25" stroke-dasharray="4 4"/>
+  <text x="650" y="408" text-anchor="middle" font-weight="600" fill="#353636">eHM:s patientindex</text>
+  <text x="650" y="424" text-anchor="middle" font-size="11.5" fill="#727373">tunt index, senare</text>
+
+  <text x="120" y="160" font-size="11.5" fill="#727373">Update</text>
+  <text x="120" y="266" font-size="11.5" fill="#727373">ProcessNotification</text>
+  <text x="388" y="206" font-size="11.5" fill="#727373">PUT / DELETE</text>
+  <text x="242" y="304" text-anchor="middle" font-size="11.5" fill="#727373">transaction</text>
+  <text x="520" y="304" text-anchor="middle" font-size="11.5" fill="#727373">sök · notis</text>
+  <text x="472" y="404" text-anchor="middle" font-size="11.5" fill="#727373">aggregering</text>
+</svg>
