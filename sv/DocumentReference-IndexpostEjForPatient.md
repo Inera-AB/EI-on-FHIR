@@ -6,7 +6,7 @@ Senast uppdaterad: 2026-10-23 09:12:40+0200
 
 Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
 
-Säkerhetsetikett: [no disclosure to patient, family or caregivers without attending provider's authorization (Detaljer: ActCode kod NOPAT = 'no disclosure to patient, family or caregivers without attending provider's authorization')](http://terminology.hl7.org/7.4.0/CodeSystem-v3-ActCode.html)
+Säkerhetsetikett: [no disclosure to patient, family or caregivers without attending provider's authorization (Detaljer: ActCode kod NOPAT = 'no disclosure to patient, family or caregivers without attending provider's authorization')](http://terminology.hl7.org/7.5.0/CodeSystem-v3-ActCode.html)
 
 **Producentens endpoint**: [https://tjanstekatalog.example.org/fhir/Endpoint/journal-a](https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 

@@ -25,8 +25,8 @@
     "sources" : ["2.16.840.1.113883.4.642.3.21"],
     "uses" : {
     },
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-IneraIndexSubscription.html" : "Prenumeration på indexposter (FHIR-EI)"
+    "StructureDefinition-IneraIndexSubscription.html" : "Prenumeration på indexposter (FHIR-EI)",
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/all-resource-types",
@@ -205,10 +205,10 @@
     "sources" : ["2.16.840.1.113883.4.642.3.45"],
     "uses" : {
     },
+    "StructureDefinition-LogicalAddress.html" : "Logisk adress",
     "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-LogicalAddress.html" : "Logisk adress"
+    "StructureDefinition-SourceSystem.html" : "Källsystem"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/identifier-use",
@@ -222,10 +222,10 @@
     "sources" : ["2.16.840.1.113883.4.642.3.57"],
     "uses" : {
     },
+    "StructureDefinition-LogicalAddress.html" : "Logisk adress",
     "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-LogicalAddress.html" : "Logisk adress"
+    "StructureDefinition-SourceSystem.html" : "Källsystem"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/languages",
@@ -241,8 +241,8 @@
     "2.16.840.1.113883.4.642.3.20"],
     "uses" : {
     },
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-IneraIndexSubscription.html" : "Prenumeration på indexposter (FHIR-EI)"
+    "StructureDefinition-IneraIndexSubscription.html" : "Prenumeration på indexposter (FHIR-EI)",
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/mimetypes",
@@ -256,8 +256,8 @@
     "sources" : ["2.16.840.1.113883.4.642.3.1024"],
     "uses" : {
     },
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-IneraIndexSubscription.html" : "Prenumeration på indexposter (FHIR-EI)"
+    "StructureDefinition-IneraIndexSubscription.html" : "Prenumeration på indexposter (FHIR-EI)",
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/referenced-item-category",

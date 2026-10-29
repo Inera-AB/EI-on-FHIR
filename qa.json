@@ -6,8 +6,8 @@
   "status" : "draft",
   "package-id" : "inera.ei.engagementindex",
   "ig-ver" : "0.1.0",
-  "date" : "Mon, 26 Oct, 2026 22:11:12 +0000",
-  "dateISO8601" : "2026-10-26T22:11:12+00:00",
+  "date" : "Thu, 29 Oct, 2026 09:05:52 +0000",
+  "dateISO8601" : "2026-10-29T09:05:52+00:00",
   "errs" : 0,
   "warnings" : 39,
   "hints" : 106,
@@ -16,5 +16,5 @@
   "suppressed-warnings" : 2,
   "version" : "5.0.0",
   "tool" : "6.0.0-snapshot1 (3)",
-  "maxMemory" : 893064704
+  "maxMemory" : 752388648
 }

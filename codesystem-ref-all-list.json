@@ -63,9 +63,9 @@
     "oids" : ["2.16.840.1.113883.4.642.4.1802"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R5/valueset-all-resource-types.html" : "All Resource Types",
+    "http://hl7.org/fhir/R5/valueset-resource-types.html" : "Resource Types",
     "http://hl7.org/fhir/R5/valueset-subscription-types.html" : "Types used with Subscriptions",
-    "http://hl7.org/fhir/R5/valueset-resource-types.html" : "Resource Types"
+    "http://hl7.org/fhir/R5/valueset-all-resource-types.html" : "All Resource Types"
   },
   {
     "url" : "http://hl7.org/fhir/identifier-use",
@@ -188,7 +188,7 @@
     "oids" : ["2.16.840.1.113883.5.4"],
     "uses" : {
     },
-    "http://terminology.hl7.org/7.4.0/ValueSet-v3-ActCode.html" : "v3 Code System ActCode"
+    "http://terminology.hl7.org/7.5.0/ValueSet-v3-ActCode.html" : "v3 Code System ActCode"
   },
   {
     "url" : "http://terminology.hl7.org/CodeSystem/v3-HL7DocumentFormatCodes",
@@ -200,7 +200,7 @@
     "oids" : ["2.16.840.1.113883.4.642.1.1407"],
     "uses" : {
     },
-    "http://terminology.hl7.org/7.4.0/ValueSet-v3-HL7FormatCodes.html" : "HL7 ValueSet of Format Codes for use with Document Sharing"
+    "http://terminology.hl7.org/7.5.0/ValueSet-v3-HL7FormatCodes.html" : "HL7 ValueSet of Format Codes for use with Document Sharing"
   },
   {
     "url" : "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",

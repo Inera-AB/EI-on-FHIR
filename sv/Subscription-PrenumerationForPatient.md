@@ -14,7 +14,7 @@ Profil: [Prenumeration på indexposter (FHIR-EI)](StructureDefinition-IneraIndex
 
 > **filterBy****resourceType**: [http://hl7.org/fhir/StructureDefinition/DocumentReference](http://hl7.org/fhir/R5/documentreference.html)**filterParameter**: type**value**: https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description
 
-**channelType**: [SubscriptionChannel Type Codes: rest-hook](http://terminology.hl7.org/7.4.0/CodeSystem-subscription-channel-type.html#subscription-channel-type-rest-hook) (Rest Hook)
+**channelType**: [SubscriptionChannel Type Codes: rest-hook](http://terminology.hl7.org/7.5.0/CodeSystem-subscription-channel-type.html#subscription-channel-type-rest-hook) (Rest Hook)
 
 **endpoint**: [https://konsument.example.org/fhir/notifieringar](https://konsument.example.org/fhir/notifieringar)
 
