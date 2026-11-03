@@ -48,7 +48,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"14"}
     h3,h4,h5,h6{--heading-prefix:"14"}</style>
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -189,6 +188,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <p><!-- white space is critical inside of capture --></p>
 <div class="markdown-toc">
 <ul id="markdown-toc">
+  <li><a href="#ofullständigt-svar" id="markdown-toc-ofullständigt-svar">Ofullständigt svar</a></li>
   <li><a href="#paginering" id="markdown-toc-paginering">Paginering</a></li>
   <li><a href="#filtrerade-poster" id="markdown-toc-filtrerade-poster">Filtrerade poster</a></li>
   <li><a href="#exempel" id="markdown-toc-exempel">Exempel</a></li>
@@ -249,6 +249,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </tbody>
 </table>
 
+<h3 id="ofullständigt-svar">Ofullständigt svar</h3>
+
+<p>När FHIR-EI vet att ett svar kan vara ofullständigt innehåller sökresultatet en <code class="language-plaintext highlighter-rouge">OperationOutcome</code> i <code class="language-plaintext highlighter-rouge">Bundle.issues</code>, med <code class="language-plaintext highlighter-rouge">issue.code = incomplete</code> och en beskrivning av vilka vårdgivare eller endpoints det gäller. Det inträffar till exempel när en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen. Konsumenten SHALL kunna visa att uppgifter kan saknas, i stället för att tolka svaret som komplett. Se exemplet <a href="Bundle-SokresultatOfullstandigt.html">Ofullständigt sökresultat</a>.</p>
+
 <h3 id="paginering">Paginering</h3>
 
 <p>En sökning kan ge flera sidor. Klienten följer länken <code class="language-plaintext highlighter-rouge">next</code> i Bundlen.</p>
@@ -261,6 +265,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <ul>
   <li><a href="Bundle-SokresultatForPatient.html">Sökresultat för en patient</a></li>
+  <li><a href="Bundle-SokresultatOfullstandigt.html">Ofullständigt sökresultat</a></li>
   <li><a href="Bundle-RegistreringTransaction.html">Registrering och avregistrering i en transaction</a></li>
 </ul>
 
@@ -292,8 +297,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

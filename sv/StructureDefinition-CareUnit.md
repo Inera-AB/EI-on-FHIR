@@ -76,7 +76,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-CareUnit.csv), 
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Vårdenheten där informationen finns, som HSA-id. Motsvarar careUnitId i dagens engagemangsindex.",
+  "description" : "Vårdenheten där informationen finns, som HSA-id, när den är känd. Kan saknas när indexet fylls utifrån eHM:s patientindex, som bara anger vårdgivare. Motsvarar careUnitId i dagens engagemangsindex.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -104,7 +104,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-CareUnit.csv), 
       "id" : "Extension",
       "path" : "Extension",
       "short" : "Vårdenhet",
-      "definition" : "Vårdenheten där informationen finns, som HSA-id. Motsvarar careUnitId i dagens engagemangsindex."
+      "definition" : "Vårdenheten där informationen finns, som HSA-id, när den är känd. Kan saknas när indexet fylls utifrån eHM:s patientindex, som bara anger vårdgivare. Motsvarar careUnitId i dagens engagemangsindex."
     },
     {
       "id" : "Extension.extension",

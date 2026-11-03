@@ -14,7 +14,7 @@
   "name" : "IneraEngagementIndex",
   "title" : "FHIR-baserat engagemangsindex (FHIR-EI)",
   "status" : "draft",
-  "date" : "2026-10-29T09:05:52+00:00",
+  "date" : "2026-11-03T13:59:09+00:00",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -77,6 +77,22 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "ValueSet"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "ValueSet-IneraIndexPopulationMethodValueSet.html"
+      }],
+      "reference" : {
+        "reference" : "ValueSet/IneraIndexPopulationMethodValueSet"
+      },
+      "name" : "Försörjningssätt",
+      "description" : "Alla försörjningssätt för indexposter.",
+      "isExample" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "StructureDefinition:resource"
       },
       {
@@ -87,8 +103,25 @@
         "reference" : "StructureDefinition/IneraIndexEntry"
       },
       "name" : "Indexpost (FHIR-EI)",
-      "description" : "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska.",
+      "description" : "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten betyder samma sak oavsett hur den har kommit till: registrerad av producenten, fylld av Ineras\nlokaliseringstjänst eller speglad från dagens engagemangsindex. Försörjningssättet framgår av `meta.tag`.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska.",
       "isExample" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "DocumentReference"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "DocumentReference-IndexpostFranLokaliseringstjanst.html"
+      }],
+      "reference" : {
+        "reference" : "DocumentReference/IndexpostFranLokaliseringstjanst"
+      },
+      "name" : "Indexpost fylld av lokaliseringstjänsten",
+      "description" : "Lokaliseringstjänsten har slagit upp patientens vårdgivare i eHM:s patientindex och ställt en riktad fråga till journalsystem C. Vårdgivaren anges med organisationsnummer, och vårdenhet saknas eftersom patientindexet inte anger den.",
+      "isExample" : true,
+      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
     },
     {
       "extension" : [{
@@ -196,6 +229,22 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "CodeSystem-IneraIndexPopulationMethodCodeSystem.html"
+      }],
+      "reference" : {
+        "reference" : "CodeSystem/IneraIndexPopulationMethodCodeSystem"
+      },
+      "name" : "Kodsystem för försörjningssätt",
+      "description" : "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt.",
+      "isExample" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "CodeSystem"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
         "valueUri" : "CodeSystem-IneraEngagementCategoryCodeSystem.html"
       }],
       "reference" : {
@@ -266,7 +315,7 @@
         "reference" : "StructureDefinition/SourceSystem"
       },
       "name" : "Källsystem",
-      "description" : "Källsystemet enligt dagens engagemangsindex, som HSA-id. Sätts av övergångsadaptern, eftersom registrerande producent då är adaptern och inte källsystemet. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex.",
+      "description" : "Källsystemet eller journalsystemet som håller informationen, när den registrerande parten inte är källan själv: källsystemet enligt dagens engagemangsindex vid spegling, eller journalsystemet enligt eHM:s patientindex vid Inera-försörjd cache. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex.",
       "isExample" : false
     },
     {
@@ -284,6 +333,22 @@
       "name" : "Logisk adress",
       "description" : "Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.",
       "isExample" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Bundle"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "Bundle-SokresultatOfullstandigt.html"
+      }],
+      "reference" : {
+        "reference" : "Bundle/SokresultatOfullstandigt"
+      },
+      "name" : "Ofullständigt sökresultat",
+      "description" : "Svar på en sökning där en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen. Bundlen innehåller de poster som gick att bekräfta, och en OperationOutcome i Bundle.issues anger vilken källa som saknas, så att konsumenten kan visa att uppgifter kan saknas.",
+      "isExample" : true
     },
     {
       "extension" : [{
@@ -396,7 +461,7 @@
         "reference" : "StructureDefinition/RegisteringProducer"
       },
       "name" : "Registrerande producent",
-      "description" : "Producentens identitet: den Endpoint i tjänstekatalogen som den autentiserade klienten är bunden till, som absolut referens. För en direktansluten producent är det samma endpoint som i sourceEndpoint. Referensen är också producentens namnrymd i identifier.system. FHIR-EI kontrollerar värdet mot den autentiserade klienten. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex.",
+      "description" : "Den registrerande partens identitet: den Endpoint i tjänstekatalogen som den autentiserade klienten är bunden till, som absolut referens. Parten är producenten, en indexeringsagent med producentens identitet, Ineras lokaliseringstjänst eller övergångsadaptern. För en producent är det samma endpoint som i sourceEndpoint. Referensen är också partens namnrymd i identifier.system. FHIR-EI kontrollerar värdet mot den autentiserade klienten. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex.",
       "isExample" : false
     },
     {
@@ -524,7 +589,7 @@
         "reference" : "StructureDefinition/CareUnit"
       },
       "name" : "Vårdenhet",
-      "description" : "Vårdenheten där informationen finns, som HSA-id. Motsvarar careUnitId i dagens engagemangsindex.",
+      "description" : "Vårdenheten där informationen finns, som HSA-id, när den är känd. Kan saknas när indexet fylls utifrån eHM:s patientindex, som bara anger vårdgivare. Motsvarar careUnitId i dagens engagemangsindex.",
       "isExample" : false
     }],
     "page" : {
@@ -569,6 +634,12 @@
         "generation" : "markdown"
       },
       {
+        "sourceUrl" : "population.html",
+        "name" : "population.html",
+        "title" : "Försörjning av indexet",
+        "generation" : "markdown"
+      },
+      {
         "sourceUrl" : "information-sets.html",
         "name" : "information-sets.html",
         "title" : "Kodverk för tjänster och informationsmängder",
@@ -602,12 +673,6 @@
         "sourceUrl" : "subscriptions.html",
         "name" : "subscriptions.html",
         "title" : "Prenumeration",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "producer-support.html",
-        "name" : "producer-support.html",
-        "title" : "Stöd för producenter",
         "generation" : "markdown"
       },
       {

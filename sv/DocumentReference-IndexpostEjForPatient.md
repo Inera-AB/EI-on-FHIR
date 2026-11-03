@@ -6,15 +6,17 @@ Senast uppdaterad: 2026-10-23 09:12:40+0200
 
 Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
 
+Tagg: [Producentregistrering (Detaljer: Kodsystem för försörjningssätt kod producer = 'Producentregistrering')](CodeSystem-IneraIndexPopulationMethodCodeSystem.md)
+
 Säkerhetsetikett: [no disclosure to patient, family or caregivers without attending provider's authorization (Detaljer: ActCode kod NOPAT = 'no disclosure to patient, family or caregivers without attending provider's authorization')](http://terminology.hl7.org/7.5.0/CodeSystem-v3-ActCode.html)
 
 **Producentens endpoint**: [https://tjanstekatalog.example.org/fhir/Endpoint/journal-a](https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 
-**Vårdenhet**: `urn:oid:1.2.752.29.4.19`/SE0000000000-VE03
-
 **Registrerande producent**: [https://tjanstekatalog.example.org/fhir/Endpoint/journal-a](https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 
 **Registreringsstatus**: active
+
+**Vårdenhet**: `urn:oid:1.2.752.29.4.19`/SE0000000000-VE03
 
 **Innehållets senaste ändring**: 2026-10-23 09:12:31+0200
 
@@ -55,19 +57,16 @@ Säkerhetsetikett: [no disclosure to patient, family or caregivers without atten
     "security" : [{
       "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
       "code" : "NOPAT"
+    }],
+    "tag" : [{
+      "system" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+      "code" : "producer"
     }]
   },
   "extension" : [{
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
     "valueReference" : {
       "reference" : "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"
-    }
-  },
-  {
-    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
-    "valueIdentifier" : {
-      "system" : "urn:oid:1.2.752.29.4.19",
-      "value" : "SE0000000000-VE03"
     }
   },
   {
@@ -79,6 +78,13 @@ Säkerhetsetikett: [no disclosure to patient, family or caregivers without atten
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
     "valueCode" : "active"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
+    "valueIdentifier" : {
+      "system" : "urn:oid:1.2.752.29.4.19",
+      "value" : "SE0000000000-VE03"
+    }
   },
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated",

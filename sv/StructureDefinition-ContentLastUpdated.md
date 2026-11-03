@@ -9,7 +9,7 @@
 **Användningar:**
 
 * Använd denna Extension: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
-* Exempel för denna Extension: [Bundle/RegistreringTransaction](Bundle-RegistreringTransaction.md), [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md), [DocumentReference/IndexpostEjForPatient](DocumentReference-IndexpostEjForPatient.md), [DocumentReference/IndexpostFhirProducent](DocumentReference-IndexpostFhirProducent.md)... Show 2 more, [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md) and [DocumentReference/IndexpostIndragen](DocumentReference-IndexpostIndragen.md)
+* Exempel för denna Extension: [Bundle/RegistreringTransaction](Bundle-RegistreringTransaction.md), [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md), [Bundle/SokresultatOfullstandigt](Bundle-SokresultatOfullstandigt.md), [DocumentReference/IndexpostEjForPatient](DocumentReference-IndexpostEjForPatient.md)... Show 4 more, [DocumentReference/IndexpostFhirProducent](DocumentReference-IndexpostFhirProducent.md), [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md), [DocumentReference/IndexpostFranLokaliseringstjanst](DocumentReference-IndexpostFranLokaliseringstjanst.md) and [DocumentReference/IndexpostIndragen](DocumentReference-IndexpostIndragen.md)
 * Sökparametrar som använder denna Extension: [Sök på innehållets senaste ändring](SearchParameter-DocumentReference-content-last-updated.md)
 
 Du kan också kontrollera [användningar i FHIR IG-statistiken](https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/ContentLastUpdated)

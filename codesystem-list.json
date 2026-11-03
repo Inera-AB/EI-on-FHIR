@@ -16,6 +16,14 @@
     "description" : "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."
   },
   {
+    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraIndexPopulationMethodCodeSystem",
+    "title" : "Kodsystem för försörjningssätt",
+    "description" : "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt."
+  },
+  {
     "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",
     "version" : "0.1.0",
     "status" : "draft",

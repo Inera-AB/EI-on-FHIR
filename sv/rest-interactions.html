@@ -48,10 +48,9 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"11"}
-    h3,h4,h5,h6{--heading-prefix:"11"}</style>
+    <style type="text/css">h2{--heading-prefix:"12"}
+    h3,h4,h5,h6{--heading-prefix:"12"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -190,9 +189,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <div class="markdown-toc">
 <ul id="markdown-toc">
   <li><a href="#sökparametrar" id="markdown-toc-sökparametrar">Sökparametrar</a></li>
+  <li><a href="#läs--och-skriv-api" id="markdown-toc-läs--och-skriv-api">Läs- och skriv-API</a></li>
   <li><a href="#endpoint" id="markdown-toc-endpoint">Endpoint</a></li>
   <li><a href="#villkorad-uppdatering" id="markdown-toc-villkorad-uppdatering">Villkorad uppdatering</a></li>
-  <li><a href="#producentidentitet-och-skrivbehörighet" id="markdown-toc-producentidentitet-och-skrivbehörighet">Producentidentitet och skrivbehörighet</a></li>
+  <li><a href="#identitet-och-skrivbehörighet" id="markdown-toc-identitet-och-skrivbehörighet">Identitet och skrivbehörighet</a></li>
 </ul>
 
 </div>
@@ -228,13 +228,13 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Registrera eller uppdatera post</td>
-      <td>Producent</td>
-      <td>Villkorad <code class="language-plaintext highlighter-rouge">PUT DocumentReference?identifier=&lt;producent&gt;|&lt;id&gt;</code>, eller <code class="language-plaintext highlighter-rouge">transaction</code>-Bundle för flera</td>
+      <td>Registrerande part</td>
+      <td>Villkorad <code class="language-plaintext highlighter-rouge">PUT DocumentReference?identifier=&lt;part&gt;|&lt;id&gt;</code>, eller <code class="language-plaintext highlighter-rouge">transaction</code>-Bundle för flera</td>
       <td>Update</td>
     </tr>
     <tr>
       <td>Avregistrera post</td>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>Villkorad <code class="language-plaintext highlighter-rouge">PUT</code> med <code class="language-plaintext highlighter-rouge">status</code> = <code class="language-plaintext highlighter-rouge">superseded</code> eller <code class="language-plaintext highlighter-rouge">entered-in-error</code> och <code class="language-plaintext highlighter-rouge">deregistrationReason</code></td>
       <td>Update med deleteFlag</td>
     </tr>
@@ -351,6 +351,12 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <hr />
 
+<h3 id="läs--och-skriv-api">Läs- och skriv-API</h3>
+
+<p>Läs-, prenumerations- och export-API:et är detsamma för alla <a href="population.html">försörjningssätt</a>. Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten kan skriva via samma API eller, om den är en del av FHIR-EI, direkt i indexet; reglerna för indexposten och livscykeln är desamma.</p>
+
+<p>När FHIR-EI vet att ett svar kan vara ofullständigt, till exempel när en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen, innehåller sökresultatet en <code class="language-plaintext highlighter-rouge">OperationOutcome</code> i <code class="language-plaintext highlighter-rouge">Bundle.issues</code>; se <a href="expected-responses.html">Förväntade svar</a>.</p>
+
 <h3 id="endpoint">Endpoint</h3>
 
 <p>Varje post har exakt en endpoint, som refereras i tjänstekatalogen med extension <a href="StructureDefinition-SourceEndpoint.html">sourceEndpoint</a>. Katalogen är auktoritativ för endpointens egenskaper. Adressen finns också i <code class="language-plaintext highlighter-rouge">content.attachment.url</code>, så att konsumenten kan anropa källan utan ett extra uppslag.</p>
@@ -361,17 +367,17 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="villkorad-uppdatering">Villkorad uppdatering</h3>
 
-<p>En producent registrerar, uppdaterar och avregistrerar poster med villkorad <code class="language-plaintext highlighter-rouge">PUT</code> på <code class="language-plaintext highlighter-rouge">identifier</code>:</p>
+<p>En registrerande part registrerar, uppdaterar och avregistrerar poster med villkorad <code class="language-plaintext highlighter-rouge">PUT</code> på <code class="language-plaintext highlighter-rouge">identifier</code>:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT [base]/DocumentReference?identifier=https://tjanstekatalog.example.org/fhir/Endpoint/journal-a|7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33
 </code></pre></div></div>
 
-<p>Villkoret utvärderas bara mot anropande producents egna poster. En producent kan alltså aldrig träffa en annan producents post, och svaret avslöjar inte om en identifierare finns hos någon annan.</p>
+<p>Villkoret utvärderas bara mot den anropande partens egna poster. En part kan alltså aldrig träffa en annan parts post, och svaret avslöjar inte om en identifierare finns hos någon annan.</p>
 
 <table class="grid">
   <thead>
     <tr>
-      <th>Träffar bland producentens egna poster</th>
+      <th>Träffar bland partens egna poster</th>
       <th>Resultat</th>
     </tr>
   </thead>
@@ -393,13 +399,13 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>Posten i kroppen har inget <code class="language-plaintext highlighter-rouge">id</code>. Flera poster registreras i en <code class="language-plaintext highlighter-rouge">transaction</code>-Bundle, som i exemplet <a href="Bundle-RegistreringTransaction.html">Registrering och avregistrering i en transaction</a>.</p>
 
-<p>Samtidiga uppdateringar av samma post hanteras med versionsvillkor (<code class="language-plaintext highlighter-rouge">If-Match</code> på <code class="language-plaintext highlighter-rouge">ETag</code>) eller med regeln om <code class="language-plaintext highlighter-rouge">contentLastUpdated</code> under <a href="event-model.html">Händelsemodell och övergång</a>. En producent får inte ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post.</p>
+<p>Samtidiga uppdateringar av samma post hanteras med versionsvillkor (<code class="language-plaintext highlighter-rouge">If-Match</code> på <code class="language-plaintext highlighter-rouge">ETag</code>) eller med regeln om <code class="language-plaintext highlighter-rouge">contentLastUpdated</code> under <a href="event-model.html">Händelsemodell och övergång</a>. En registrerande part får inte ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post.</p>
 
 <p>Interaktionen <code class="language-plaintext highlighter-rouge">delete</code> stöds inte. Gravstenar rensas av FHIR-EI efter lagringstiden.</p>
 
-<h3 id="producentidentitet-och-skrivbehörighet">Producentidentitet och skrivbehörighet</h3>
+<h3 id="identitet-och-skrivbehörighet">Identitet och skrivbehörighet</h3>
 
-<p>En producents identitet är dess Endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en sådan endpoint, via en betrodd koppling mellan klientidentitet (certifikat eller token) och endpoint. Vid varje skrivning kontrollerar FHIR-EI:</p>
+<p>En registrerande parts identitet är dess Endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en sådan endpoint, via en betrodd koppling mellan klientidentitet (certifikat eller token) och endpoint. Vid varje skrivning kontrollerar FHIR-EI:</p>
 
 <table class="grid">
   <thead>
@@ -410,7 +416,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </thead>
   <tbody>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td><code class="language-plaintext highlighter-rouge">registeringProducer</code> är en absolut referens till den endpoint klienten är bunden till</td>
     </tr>
     <tr>
@@ -419,7 +425,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Endpoint</td>
-      <td>För en direktansluten producent är <code class="language-plaintext highlighter-rouge">sourceEndpoint</code> samma endpoint som <code class="language-plaintext highlighter-rouge">registeringProducer</code></td>
+      <td>För en producent eller indexeringsagent är <code class="language-plaintext highlighter-rouge">sourceEndpoint</code> samma endpoint som <code class="language-plaintext highlighter-rouge">registeringProducer</code></td>
     </tr>
     <tr>
       <td>Vårdgivare</td>
@@ -428,9 +434,9 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </tbody>
 </table>
 
-<p>Övergångsadaptern har en ombudsroll: den är registrerad i tjänstekatalogen med en egen endpoint och får registrera poster vars <code class="language-plaintext highlighter-rouge">sourceEndpoint</code> är en annan endpoint, men bara för kombinationer av logisk adress och tjänstedomän som finns i dess adressregister. Se <a href="event-model.html">Händelsemodell och övergång</a>.</p>
+<p>Övergångsadaptern och lokaliseringstjänsten har ombudsroll. De är registrerade i tjänstekatalogen med egna endpoints och får registrera poster vars <code class="language-plaintext highlighter-rouge">sourceEndpoint</code> är en annan endpoint, men bara inom sitt underlag: adaptern för kombinationer av logisk adress och tjänstedomän i sitt adressregister, lokaliseringstjänsten för vårdgivare som eHM:s patientindex anger för patienten. Se <a href="population.html">Försörjning av indexet</a>.</p>
 
-<p>En producent får inte ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post. <code class="language-plaintext highlighter-rouge">meta.source</code> används aldrig ensamt för behörighetskontroll.</p>
+<p>En registrerande part får inte ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post. <code class="language-plaintext highlighter-rouge">meta.source</code> används aldrig ensamt för behörighetskontroll.</p>
 
 
 
@@ -460,8 +466,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

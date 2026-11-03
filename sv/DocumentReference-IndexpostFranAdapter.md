@@ -6,13 +6,15 @@ Senast uppdaterad: 2026-10-21 08:05:12+0200
 
 Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
 
-**Producentens endpoint**: [https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation](https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation)
+Tagg: [Spegling av dagens engagemangsindex (Detaljer: Kodsystem för försörjningssätt kod mirror = 'Spegling av dagens engagemangsindex')](CodeSystem-IneraIndexPopulationMethodCodeSystem.md)
 
-**Vårdenhet**: `urn:oid:1.2.752.29.4.19`/SE0000000000-VE02
+**Producentens endpoint**: [https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation](https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation)
 
 **Registrerande producent**: [https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter](https://tjanstekatalog.example.org/fhir/Endpoint/overgangsadapter)
 
 **Registreringsstatus**: active
+
+**Vårdenhet**: `urn:oid:1.2.752.29.4.19`/SE0000000000-VE02
 
 **Logisk adress**: `urn:oid:1.2.752.29.4.19`/SE0000000000-VE02
 
@@ -57,19 +59,16 @@ Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
   "id" : "IndexpostFranAdapter",
   "meta" : {
     "lastUpdated" : "2026-10-21T08:05:12+02:00",
-    "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
+    "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"],
+    "tag" : [{
+      "system" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+      "code" : "mirror"
+    }]
   },
   "extension" : [{
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
     "valueReference" : {
       "reference" : "https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation"
-    }
-  },
-  {
-    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
-    "valueIdentifier" : {
-      "system" : "urn:oid:1.2.752.29.4.19",
-      "value" : "SE0000000000-VE02"
     }
   },
   {
@@ -81,6 +80,13 @@ Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
     "valueCode" : "active"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
+    "valueIdentifier" : {
+      "system" : "urn:oid:1.2.752.29.4.19",
+      "value" : "SE0000000000-VE02"
+    }
   },
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress",

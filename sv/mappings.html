@@ -48,10 +48,9 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"10"}
-    h3,h4,h5,h6{--heading-prefix:"10"}</style>
+    <style type="text/css">h2{--heading-prefix:"11"}
+    h3,h4,h5,h6{--heading-prefix:"11"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -211,7 +210,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <tbody>
     <tr>
       <td>Identitet</td>
-      <td><code class="language-plaintext highlighter-rouge">identifier</code>, stabil och producentbunden: <code class="language-plaintext highlighter-rouge">system</code> = producentens endpoint-URL i tjänstekatalogen, <code class="language-plaintext highlighter-rouge">value</code> = producentens id för posten</td>
+      <td><code class="language-plaintext highlighter-rouge">identifier</code>, stabil och bunden till den registrerande parten: <code class="language-plaintext highlighter-rouge">system</code> = partens endpoint-URL i tjänstekatalogen, <code class="language-plaintext highlighter-rouge">value</code> = partens id för posten</td>
       <td>businessObjectInstanceIdentifier</td>
     </tr>
     <tr>
@@ -241,22 +240,22 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Källsystem</td>
-      <td>Extension <a href="StructureDefinition-SourceSystem.html">sourceSystem</a> (HSA-id), satt av övergångsadaptern</td>
+      <td>Extension <a href="StructureDefinition-SourceSystem.html">sourceSystem</a>, när den registrerande parten inte är källan: källsystemet vid spegling, journalsystemet vid Inera-försörjd cache</td>
       <td>sourceSystem</td>
     </tr>
     <tr>
       <td>Vårdgivare</td>
-      <td><code class="language-plaintext highlighter-rouge">custodian</code>, som logisk referens med HSA-id</td>
+      <td><code class="language-plaintext highlighter-rouge">custodian</code>, som logisk referens med HSA-id eller organisationsnummer</td>
       <td>dataController</td>
     </tr>
     <tr>
       <td>Vårdenhet</td>
-      <td>Extension <a href="StructureDefinition-CareUnit.html">careUnit</a> (HSA-id)</td>
+      <td>Extension <a href="StructureDefinition-CareUnit.html">careUnit</a> (HSA-id, 0..*), när den är känd</td>
       <td>careUnitId</td>
     </tr>
     <tr>
-      <td>Registrerande producent</td>
-      <td>Extension <a href="StructureDefinition-RegisteringProducer.html">registeringProducer</a>: absolut referens till producentens Endpoint i tjänstekatalogen; kontrolleras av FHIR-EI mot autentiserad klient</td>
+      <td>Registrerande part</td>
+      <td>Extension <a href="StructureDefinition-RegisteringProducer.html">registeringProducer</a>: absolut referens till den registrerande partens Endpoint i tjänstekatalogen; kontrolleras av FHIR-EI mot autentiserad klient</td>
       <td>owner</td>
     </tr>
     <tr>
@@ -273,6 +272,11 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>Status</td>
       <td><code class="language-plaintext highlighter-rouge">status</code> + extensions <a href="StructureDefinition-RegistrationStatus.html">registrationStatus</a> och <a href="StructureDefinition-DeregistrationReason.html">deregistrationReason</a></td>
       <td>deleteFlag</td>
+    </tr>
+    <tr>
+      <td>Försörjningssätt</td>
+      <td><code class="language-plaintext highlighter-rouge">meta.tag</code> ur <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html">kodsystemet för försörjningssätt</a>; sätts av FHIR-EI</td>
+      <td>–</td>
     </tr>
   </tbody>
 </table>
@@ -298,6 +302,21 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>HSA-id-system</td>
       <td><code class="language-plaintext highlighter-rouge">urn:oid:1.2.752.29.4.19</code>, som i HL7 Swedens basprofiler och tjänstekatalogen. FHIR-EI SHALL även ta emot RIV-TA:s <code class="language-plaintext highlighter-rouge">urn:oid:1.2.752.129.2.1.4.1</code> och lagra värdet med basprofilernas system</td>
       <td>Samma identifierarrymd har två OID:er. Specen ska bygga på svenska basprofiler, och EHDS-bryggan behandlar redan båda som samma rymd</td>
+    </tr>
+    <tr>
+      <td>Vårdgivare med organisationsnummer</td>
+      <td><code class="language-plaintext highlighter-rouge">custodian.identifier</code> får ha systemet <code class="language-plaintext highlighter-rouge">urn:oid:2.5.4.97</code></td>
+      <td>eHM:s patientindex är nycklat på organisationsnummer, och Inera-försörjd cache utgår från det</td>
+    </tr>
+    <tr>
+      <td>Vårdenhet valfri</td>
+      <td><code class="language-plaintext highlighter-rouge">careUnit</code> är 0..*</td>
+      <td>eHM:s patientindex anger inte vårdenhet. Tillämpningen per tjänst kan göra den obligatorisk</td>
+    </tr>
+    <tr>
+      <td>Försörjningssätt</td>
+      <td><code class="language-plaintext highlighter-rouge">meta.tag</code> med kod <code class="language-plaintext highlighter-rouge">producer</code>, <code class="language-plaintext highlighter-rouge">cache</code> eller <code class="language-plaintext highlighter-rouge">mirror</code></td>
+      <td>Specen är neutral till hur indexet fylls, men den som felsöker och stämmer av behöver se det</td>
     </tr>
     <tr>
       <td>Profil-id</td>
@@ -365,8 +384,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

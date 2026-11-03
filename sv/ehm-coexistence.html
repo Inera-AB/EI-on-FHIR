@@ -48,10 +48,9 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"9"}
-    h3,h4,h5,h6{--heading-prefix:"9"}</style>
+    <style type="text/css">h2{--heading-prefix:"10"}
+    h3,h4,h5,h6{--heading-prefix:"10"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -187,10 +186,49 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div>
-<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#två-riktningar" id="markdown-toc-två-riktningar">Två riktningar</a></li>
+  <li><a href="#om-det-tunna-indexet-härleds-ur-fhir-ei" id="markdown-toc-om-det-tunna-indexet-härleds-ur-fhir-ei">Om det tunna indexet härleds ur FHIR-EI</a></li>
+  <li><a href="#om-fhir-ei-fylls-utifrån-det-tunna-indexet" id="markdown-toc-om-fhir-ei-fylls-utifrån-det-tunna-indexet">Om FHIR-EI fylls utifrån det tunna indexet</a></li>
+</ul>
+
 </div>
-<p>FHIR-EI och eHM:s patientindex samexisterar. Inera tar inte ansvar för vårdgivarnas registrering i eHM:s index i första iterationen. FHIR-EI ska ändå klara de tre fall som en senare synk på vårdgivarnas vägnar förutsätter, med borttag som det viktigaste.</p>
+<p>FHIR-EI och eHM:s patientindex samexisterar. Enligt promemorian S2026/01360 (juni 2026) får patientindexet innehålla patientens identitetsbeteckning, vårdgivarens organisationsnummer, vilket journalsystem som har uppgifter om patienten och vårdgivarens elektroniska kontaktuppgifter. Förordningen lägger till anropsadresser till informationssystem och tekniska tjänster. Vårdenhet, tjänst, informationsmängd och senast uppdaterad ingår inte. Lagen föreslås träda i kraft 1 juli 2027, med detaljer i föreskrifter från eHM.</p>
+
+<p>Det tunna indexet är alltså nycklat på organisationsnummer och journalsystem. Det kan inte ensamt bära spärr på vårdenhetsnivå eller svara på vilka informationsmängder som finns. Därför tillåter indexposten vårdgivare med organisationsnummer och saknad vårdenhet; se <a href="information-model.html">Indexposten</a>.</p>
+
+<h3 id="två-riktningar">Två riktningar</h3>
+
+<p>Förhållandet mellan indexen kan gå åt två håll, och IG:n tillåter båda. Vilken riktning som gäller avgörs av tjänstens <a href="population.html">försörjningssätt</a>.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Riktning</th>
+      <th>Innebörd</th>
+      <th>Försörjning i FHIR-EI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Det tunna indexet är sanning för var</td>
+      <td>FHIR-EI fylls utifrån eHM:s patientindex och riktade frågor till källorna. Vårdgivarna registrerar bara hos eHM</td>
+      <td>Inera-försörjd cache</td>
+    </tr>
+    <tr>
+      <td>Det rika indexet härleder det tunna</td>
+      <td>FHIR-EI fylls av producenterna eller genom spegling, och det tunna indexet härleds ur det, eventuellt av Inera för vårdgivarnas räkning</td>
+      <td>Producentregistrering eller spegling</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Den andra riktningen förutsätter att Inera får rådighet över uppgifterna och tillåtelse att lämna dem till eHM. Promemorian lägger uppgiftsskyldigheten på vårdgivaren, så ett sådant upplägg behöver godkännas av vårdgivarna och accepteras av eHM. Inera tar inte det ansvaret i första iterationen.</p>
+
+<h3 id="om-det-tunna-indexet-härleds-ur-fhir-ei">Om det tunna indexet härleds ur FHIR-EI</h3>
+
+<p>FHIR-EI ska klara de tre fall som en synk på vårdgivarnas vägnar förutsätter, med borttag som det viktigaste.</p>
 
 <table class="grid">
   <thead>
@@ -221,11 +259,13 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>Eftersom borttag är avregistreringar och inte raderingar, finns de med som vanliga poster i ett <code class="language-plaintext highlighter-rouge">_since</code>-uttag. Hur kontrollsummor och antal per vårdgivare och dag exponeras är inte specificerat än.</p>
 
-<p>Nästa steg är att torrsimma de tre fallen mot eHM:s API-specifikationer för patientindexet: nyckel, granularitet, API och semantik för borttag.</p>
+<p>Att härleda det tunna indexet blir en aggregering: alla aktiva poster för samma patient, vårdgivare och journalsystem blir en post i eHM:s index. En avregistrering i FHIR-EI ska bara leda till borttag i det tunna indexet när den sista aktiva posten för den kombinationen avregistrerats.</p>
 
-<h3 id="härledning-av-det-tunna-indexet">Härledning av det tunna indexet</h3>
+<h3 id="om-fhir-ei-fylls-utifrån-det-tunna-indexet">Om FHIR-EI fylls utifrån det tunna indexet</h3>
 
-<p>Att härleda det tunna indexet blir en aggregering: alla aktiva poster för samma patient och vårdgivare (eller vårdenhet) blir en post i eHM:s index. En avregistrering i FHIR-EI ska bara leda till borttag i det tunna indexet när den sista aktiva posten för den kombinationen avregistrerats. Exakt nyckel och granularitet beror på eHM:s krav; se <a href="open-issues.html">Öppna frågor</a>.</p>
+<p>Lokaliseringstjänsten läser eHM:s patientindex för att veta vilka vårdgivare och journalsystem patienten har, och frågar källorna om resten; se <a href="population.html">Försörjning av indexet</a>. Kvaliteten och täckningsgraden i eHM:s index blir då en beroendepunkt som Inera inte styr.</p>
+
+<p>Nästa steg är att torrsimma båda riktningarna mot eHM:s API-specifikationer för patientindexet när de finns.</p>
 
 
 
@@ -255,8 +295,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

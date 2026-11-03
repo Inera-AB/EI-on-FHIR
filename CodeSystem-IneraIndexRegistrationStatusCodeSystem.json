@@ -3,7 +3,7 @@
   "id" : "IneraIndexRegistrationStatusCodeSystem",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraIndexRegistrationStatusCodeSystem</b></p><a name=\"IneraIndexRegistrationStatusCodeSystem\"> </a><a name=\"hcIneraIndexRegistrationStatusCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code> definierar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">active<a name=\"IneraIndexRegistrationStatusCodeSystem-active\"> </a></td><td>Registrerad</td><td>Informationen finns tillgänglig hos producenten. Basstatus current.</td></tr><tr><td style=\"white-space:nowrap\">withdrawn<a name=\"IneraIndexRegistrationStatusCodeSystem-withdrawn\"> </a></td><td>Indragen</td><td>Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded.</td></tr><tr><td style=\"white-space:nowrap\">entered-in-error<a name=\"IneraIndexRegistrationStatusCodeSystem-entered-in-error\"> </a></td><td>Felregistrerad</td><td>Posten skulle aldrig ha funnits. Basstatus entered-in-error.</td></tr></table></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraIndexRegistrationStatusCodeSystem</b></p><a name=\"IneraIndexRegistrationStatusCodeSystem\"> </a><a name=\"hcIneraIndexRegistrationStatusCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code> definierar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">active<a name=\"IneraIndexRegistrationStatusCodeSystem-active\"> </a></td><td>Registrerad</td><td>Informationen finns tillgänglig hos producenten. Basstatus current.</td></tr><tr><td style=\"white-space:nowrap\">withdrawn<a name=\"IneraIndexRegistrationStatusCodeSystem-withdrawn\"> </a></td><td>Indragen</td><td>Posten har avsiktligt och varaktigt dragits tillbaka. Basstatus superseded.</td></tr><tr><td style=\"white-space:nowrap\">entered-in-error<a name=\"IneraIndexRegistrationStatusCodeSystem-entered-in-error\"> </a></td><td>Felregistrerad</td><td>Posten skulle aldrig ha funnits. Basstatus entered-in-error.</td></tr></table></div>"
   },
   "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",
   "identifier" : [{
@@ -42,7 +42,7 @@
   {
     "code" : "withdrawn",
     "display" : "Indragen",
-    "definition" : "Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded."
+    "definition" : "Posten har avsiktligt och varaktigt dragits tillbaka. Basstatus superseded."
   },
   {
     "code" : "entered-in-error",

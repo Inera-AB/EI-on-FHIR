@@ -48,10 +48,9 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"8"}
-    h3,h4,h5,h6{--heading-prefix:"8"}</style>
+    <style type="text/css">h2{--heading-prefix:"9"}
+    h3,h4,h5,h6{--heading-prefix:"9"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -189,20 +188,16 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <p><!-- white space is critical inside of capture --></p>
 <div class="markdown-toc">
 <ul id="markdown-toc">
-  <li><a href="#registrering-från-producent-till-fhir-ei" id="markdown-toc-registrering-från-producent-till-fhir-ei">Registrering, från producent till FHIR-EI</a></li>
+  <li><a href="#registrering-från-registrerande-part-till-fhir-ei" id="markdown-toc-registrering-från-registrerande-part-till-fhir-ei">Registrering, från registrerande part till FHIR-EI</a></li>
   <li><a href="#notiser-från-fhir-ei-till-prenumerant" id="markdown-toc-notiser-från-fhir-ei-till-prenumerant">Notiser, från FHIR-EI till prenumerant</a></li>
   <li><a href="#lagringstider" id="markdown-toc-lagringstider">Lagringstider</a></li>
   <li><a href="#övergång-per-tjänst" id="markdown-toc-övergång-per-tjänst">Övergång per tjänst</a></li>
-  <li><a href="#ansvar-under-övergången" id="markdown-toc-ansvar-under-övergången">Ansvar under övergången</a></li>
-  <li><a href="#mappning-av-update" id="markdown-toc-mappning-av-update">Mappning av Update</a></li>
-  <li><a href="#adressregister-i-adaptern" id="markdown-toc-adressregister-i-adaptern">Adressregister i adaptern</a></li>
-  <li><a href="#överlämning-från-adaptern" id="markdown-toc-överlämning-från-adaptern">Överlämning från adaptern</a></li>
 </ul>
 
 </div>
-<p>Leveransgarantin är minst den samma som idag: en ändring i källsystemet ska nå indexet utan förlust, i rätt ordning per post, och kunna återhämtas efter avbrott. Det gäller både dagens RIV-TA-producenter och framtida FHIR-producenter.</p>
+<p>Leveransgarantin är minst den samma som idag: en ändring i källsystemet ska nå indexet utan förlust, i rätt ordning per post, och kunna återhämtas efter avbrott. Det gäller alla <a href="population.html">försörjningssätt</a>. Vid producentregistrering och spegling uppfylls den av kraven nedan. Vid Inera-försörjd cache uppfylls den av färskhållningen: en inaktuell cachepost bekräftas mot källan innan den lämnas ut.</p>
 
-<h3 id="registrering-från-producent-till-fhir-ei">Registrering, från producent till FHIR-EI</h3>
+<h3 id="registrering-från-registrerande-part-till-fhir-ei">Registrering, från registrerande part till FHIR-EI</h3>
 
 <table class="grid">
   <thead>
@@ -216,7 +211,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <tr>
       <td>Idempotens</td>
       <td>Samma händelse två gånger ger samma resultat</td>
-      <td>Uppdatering och avregistrering sker villkorat på producentbunden <code class="language-plaintext highlighter-rouge">identifier</code></td>
+      <td>Uppdatering och avregistrering sker villkorat på <code class="language-plaintext highlighter-rouge">identifier</code>, som är bunden till den registrerande parten</td>
     </tr>
     <tr>
       <td>Ordning per post</td>
@@ -226,7 +221,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <tr>
       <td>Minst en leverans</td>
       <td>Ingen händelse går förlorad</td>
-      <td>Producent eller adapter försöker igen tills FHIR-EI kvitterat. Ej levererbara händelser hamnar i en kö för manuell hantering</td>
+      <td>Den registrerande parten försöker igen tills FHIR-EI kvitterat. Ej levererbara händelser hamnar i en kö för manuell hantering</td>
     </tr>
     <tr>
       <td>Atomicitet</td>
@@ -307,12 +302,14 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>Övergången görs per tjänst. Dagens konsumenter läser engagemangsindex per tjänstedomän: de aggregerande tjänsterna på tjänsteplattformen frågar FindContent per tjänstedomän för att hitta vilka logiska adresser de ska anropa, och NPÖ och 1177 Journalen går via dem. Det ska bekräftas; se <a href="open-issues.html">Öppna frågor</a>. Varje tjänst kan därför gå över i egen takt, utan att andra tjänster påverkas och utan att NPÖ och 1177 behöver ändras först.</p>
 
+<p>Lägena beskriver konsumenternas byte. Hur FHIR-EI fylls för tjänsten väljs för sig; se <a href="population.html">Försörjning av indexet</a>.</p>
+
 <table class="grid">
   <thead>
     <tr>
       <th>Läge</th>
       <th>Vem läser</th>
-      <th>Vem skriver</th>
+      <th>Hur FHIR-EI fylls</th>
       <th>Villkor för att gå vidare</th>
       <th>Väg tillbaka</th>
     </tr>
@@ -321,16 +318,16 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <tr>
       <td>0. Bara engagemangsindex</td>
       <td>Dagens konsumenter, via engagemangsindex</td>
-      <td>RIV-producenter, till engagemangsindex</td>
-      <td>Tjänstens tillämpning är publicerad, och tjänstedomänens uppdelning i tjänster är beslutad</td>
+      <td>–</td>
+      <td>Tjänstens tillämpning är publicerad, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade</td>
       <td>–</td>
     </tr>
     <tr>
-      <td>1. Spegling</td>
+      <td>1. Parallell försörjning</td>
       <td>Engagemangsindex; FHIR-EI läses parallellt för jämförelse</td>
-      <td>Adaptern speglar tjänstens poster</td>
-      <td>Avstämningen visar samma antal per vårdgivare och dag under en överenskommen period</td>
-      <td>Stäng av speglingen för tjänsten</td>
+      <td>Med tjänstens valda försörjningssätt: spegling, Inera-försörjd cache eller producentregistrering</td>
+      <td>Avstämningen visar samma svar under en överenskommen period</td>
+      <td>Stäng av försörjningen för tjänsten</td>
     </tr>
     <tr>
       <td>2. Konsumenten byter</td>
@@ -340,16 +337,16 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>Peka konsumenten mot engagemangsindex igen</td>
     </tr>
     <tr>
-      <td>3. FHIR-producenter</td>
-      <td>Konsumenter som kan FHIR hämtar direkt från producenterna</td>
-      <td>FHIR-producenter, direkt eller via <a href="producer-support.html">indexeringsagent</a>; adaptern för övriga</td>
-      <td>Inga RIV-producenter kvar för tjänstedomänen</td>
+      <td>3. Källorna går över</td>
+      <td>Konsumenter som kan FHIR hämtar direkt från källorna</td>
+      <td>Källor går från spegling till producentregistrering eller Inera-försörjd cache</td>
+      <td>Ingen källa speglas längre från engagemangsindex för tjänstedomänen</td>
       <td>–</td>
     </tr>
     <tr>
       <td>4. Avveckling</td>
       <td>FHIR-EI</td>
-      <td>FHIR-producenter</td>
+      <td>Producentregistrering eller Inera-försörjd cache</td>
       <td>–</td>
       <td>–</td>
     </tr>
@@ -357,15 +354,13 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </table>
 
 <figure>
-  <img src="overgang-blandad-drift.svg" alt="Läge 3 för en tjänst: RIV-TA-källsystem skickar Update till dagens engagemangsindex, som via ProcessNotification och adaptern når FHIR-EI. FHIR-källsystem skriver direkt till FHIR-EI med villkorad PUT. NPÖ och 1177 söker och får notiser från FHIR-EI. En streckad pil visar en senare aggregering till eHM:s patientindex." style="max-width:100%;height:auto" />
-  <figcaption>Läge 3 för en tjänst: FHIR-producenter skriver direkt, RIV-TA-producenter når FHIR-EI via dagens index och adaptern. Synken till eHM är streckad eftersom den inte ingår i första iterationen.</figcaption>
+  <img src="overgang-blandad-drift.svg" alt="Läge 3 för en tjänst som kombinerar spegling och producentregistrering: RIV-TA-källsystem skickar Update till dagens engagemangsindex, som via ProcessNotification och adaptern når FHIR-EI. FHIR-källsystem skriver direkt till FHIR-EI med villkorad PUT. NPÖ och 1177 söker och får notiser från FHIR-EI. En streckad pil visar en senare aggregering till eHM:s patientindex." style="max-width:100%;height:auto" />
+  <figcaption>Läge 3 för en tjänst som kombinerar spegling och producentregistrering: FHIR-källor skriver direkt, RIV-TA-källor når FHIR-EI via dagens index och adaptern. Synken till eHM är streckad eftersom den inte ingår i första iterationen.</figcaption>
 </figure>
 
 <h4 id="konsumenten-först">Konsumenten först</h4>
 
-<p>En producent får registrera en tjänst enbart i FHIR-EI först när tjänstens konsumenter läser FHIR-EI och kan hämta med FHIR. En producent som bara har en FHIR-endpoint kan ändå inte nås av en konsument som läser engagemangsindex och anropar med RIV-TA, och en producent som har kvar RIV-TA uppdaterar engagemangsindex själv. Adaptern skriver därför inte tillbaka FHIR-registrerade poster till dagens engagemangsindex.</p>
-
-<p>Adapterns konfiguration per tjänstedomän anger om den ska spegla tjänsten och om dess poster ska dras in. Eftersom adaptern aldrig skriver till dagens engagemangsindex uppstår ingen rundgång via ProcessNotification. Om återskrivning ändå skulle behövas i ett undantagsfall måste adaptern känna igen och hoppa över sina egna poster.</p>
+<p>En källa får sluta uppdatera dagens engagemangsindex för en tjänst först när tjänstens konsumenter läser FHIR-EI och kan hämta med FHIR. En källa som bara har en FHIR-endpoint kan ändå inte nås av en konsument som läser engagemangsindex och anropar med RIV-TA, och en källa som har kvar RIV-TA uppdaterar engagemangsindex själv. Ingenting skrivs därför tillbaka från FHIR-EI till dagens engagemangsindex, och det uppstår ingen rundgång via ProcessNotification.</p>
 
 <h4 id="uppdelning-avstämning-och-första-tjänst">Uppdelning, avstämning och första tjänst</h4>
 
@@ -379,105 +374,20 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <tbody>
     <tr>
       <td>Uppdelning i tjänster</td>
-      <td>Beslutas före läge 1. Dagens engagemangsindex har en mostRecentContent per kategori, medan en indexpost har en tidpunkt för alla sina informationsmängder. En kategori vars konsumenter filtrerar på aktualitet bryts ut till en egen tjänst innan speglingen startar</td>
+      <td>Beslutas före läge 1. Dagens engagemangsindex har en mostRecentContent per kategori, medan en indexpost har en tidpunkt för alla sina informationsmängder. En kategori vars konsumenter filtrerar på aktualitet bryts ut till en egen tjänst innan försörjningen startar</td>
     </tr>
     <tr>
       <td>Avstämning</td>
-      <td>Grundladdning och spegling görs per tjänstedomän. Antal och kontrollsummor per vårdgivare, dag och tjänstedomän i dagens engagemangsindex jämförs med FHIR-EI. Avstämningen är villkoret för att gå från läge 1 till läge 2</td>
+      <td>Vid spegling och producentregistrering jämförs antal och kontrollsummor per vårdgivare, dag och tjänstedomän i dagens engagemangsindex med FHIR-EI. Vid Inera-försörjd cache, som fylls lat, jämförs i stället svaren för ett urval patienter. Avstämningen är villkoret för att gå från läge 1 till läge 2</td>
     </tr>
     <tr>
       <td>Första tjänst</td>
-      <td>En tjänst med publicerad eller nära förestående IG, få producenter och en konsument via en aggregerande tjänst som Inera förvaltar, så att läge 1 och 2 kan genomföras helt inom Inera</td>
+      <td>En tjänst med publicerad eller nära förestående IG, få källor och en konsument via en aggregerande tjänst som Inera förvaltar, så att läge 1 och 2 kan genomföras helt inom Inera</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="ansvar-under-övergången">Ansvar under övergången</h3>
-
-<p>Adaptern speglar dagens engagemangsindex utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos producenterna, genom deras registrering i dagens engagemangsindex.</p>
-
-<h3 id="mappning-av-update">Mappning av Update</h3>
-
-<p>Engagemangsposter för samma patient, logiska adress och tjänstedomän slås ihop till en indexpost, med dagens kategorier som informationsmängder. Varje indexpost blir en villkorad <code class="language-plaintext highlighter-rouge">PUT</code> i en <code class="language-plaintext highlighter-rouge">transaction</code>, med fältmappningen under <a href="mappings.html">Mappning till profiler</a>.</p>
-
-<table class="grid">
-  <thead>
-    <tr>
-      <th>Fält</th>
-      <th>Regel</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">identifier</code></td>
-      <td>System = adapterns endpoint-URL, som för alla producenter. Värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän, så att samma kombination alltid ger samma post</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">sourceEndpoint</code>, <code class="language-plaintext highlighter-rouge">content.attachment.url</code></td>
-      <td>Endpoint och adress enligt adressregistret nedan</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">logicalAddress</code></td>
-      <td>logicalAddress från engagemangsposterna</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">sourceSystem</code></td>
-      <td>sourceSystem från de ingående engagemangsposterna</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">contentLastUpdated</code></td>
-      <td>Den senaste mostRecentContent bland de ingående engagemangsposterna</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">content.profile[category]</code></td>
-      <td>En Coding per kategori bland de ingående engagemangsposterna</td>
-    </tr>
-    <tr>
-      <td>Avregistrering</td>
-      <td>deleteFlag på den sista ingående engagemangsposten ger status <code class="language-plaintext highlighter-rouge">superseded</code>, <code class="language-plaintext highlighter-rouge">registrationStatus</code> <code class="language-plaintext highlighter-rouge">withdrawn</code> och <code class="language-plaintext highlighter-rouge">deregistrationReason</code> <code class="language-plaintext highlighter-rouge">transition-adapter</code>, eftersom dagens kontrakt inte bär någon orsak</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">registeringProducer</code></td>
-      <td>Adapterns egen endpoint i tjänstekatalogen</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="adressregister-i-adaptern">Adressregister i adaptern</h3>
-
-<p>Tjänstekatalogen har ingen endpoint per logisk adress. Där är den logiska adressen en organisations HSA-id, och organisationen listar sina endpoints i <code class="language-plaintext highlighter-rouge">Organization.endpoint</code>. Tjänstekatalogen har inte heller TAK:s uppgift om vilken logisk adress och vilket tjänstekontrakt som routas till vilken producent.</p>
-
-<p>Adaptern håller därför ett eget adressregister, byggt genom att samköra TAK med tjänstekatalogen:</p>
-
-<table class="grid">
-  <thead>
-    <tr>
-      <th>Nyckel</th>
-      <th>Värde</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Logisk adress och tjänstedomän (via tjänstekontrakt i TAK)</td>
-      <td>Endpoint i tjänstekatalogen som posten ska peka på</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Två varianter är möjliga för värdet:</p>
-
-<ol>
-  <li><strong>Tjänsteplattformens endpoint för tjänstekontraktet.</strong> Konsumenten anropar tjänsteplattformen med RIV-TA och anger postens <code class="language-plaintext highlighter-rouge">logicalAddress</code>.</li>
-  <li><strong>EHDS-bryggans FHIR-yta för vårdgivaren</strong> (<code class="language-plaintext highlighter-rouge">/fhir/{vg-hsa-id}/</code>). Konsumenten hämtar informationen med FHIR, och bryggan översätter till RIV-TA. Bryggan använder vårdgivarens HSA-id som logisk adress, medan dagens engagemangsposter kan ha vårdenhetens eller källsystemets. Det måste stämmas av mot TAK innan varianten används.</li>
-</ol>
-
-<p>Samma tanke finns i EHDS-bryggan, som håller ett eget register från vårdgivare till endpoint.</p>
-
-<h3 id="överlämning-från-adaptern">Överlämning från adaptern</h3>
-
-<p>När ett källsystem börjar registrera en tjänst direkt i FHIR-EI får dess poster en ny endpoint, och därmed nya poster, eftersom en post gäller patient × endpoint × tjänst. Adressregistret markerar då kombinationen av källsystem och tjänstedomän som överlämnad. Adaptern drar in sina poster för kombinationen med <code class="language-plaintext highlighter-rouge">deregistrationReason</code> <code class="language-plaintext highlighter-rouge">transition-adapter</code> och slutar spegla den. Annars skulle konsumenterna se två poster för samma information under övergången. Prenumeranter ser en avregistrering och en ny registrering. Om det behövs en operation som flyttar ägarskapet i stället är en <a href="open-issues.html">öppen fråga</a>.</p>
-
-<p>Se exemplet <a href="DocumentReference-IndexpostFranAdapter.html">Indexpost speglad av övergångsadaptern</a>.</p>
+<p>Hur adaptern speglar dagens engagemangsindex, dess adressregister och överlämningen när en källa slutar speglas beskrivs under <a href="population.html">Försörjning av indexet</a>.</p>
 
 
 
@@ -507,8 +417,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

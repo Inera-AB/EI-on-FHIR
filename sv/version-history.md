@@ -6,9 +6,9 @@ Den här sidan beskriver vad som har ändrats i varje version. Listan över alla
 
 -------
 
-### [0.1.0] — opublicerad
+#### [0.1.0] — opublicerad
 
-#### Features
+##### Features
 
 * Första utkastet av FHIR-EI, byggt från specen **FHIR-baserad engagemangsindexkomponent**
 * FHIR R5. Indexposten är en profilerad `DocumentReference` med en post per patient × endpoint × tjänst
@@ -25,6 +25,11 @@ Den här sidan beskriver vad som har ändrats i varje version. Listan över alla
 * Övergång per tjänst i fem lägen, med regeln att konsumenten byter först och utan återskrivning till dagens engagemangsindex
 * Uppdateringsregler per tjänst: en `SubscriptionTopic` per informationsmängd och `obligation` i tillämpningsprofilen
 * Ett index för både NPÖ och 1177, med prövning per syfte och säkerhetsetiketter i `meta.security`
-* Sidan Stöd för producenter: direkt registrering, indexeringsagent som bygger på FHIR Subscriptions, och övergångsadaptern
+* Neutral försörjning: konsumentkontraktet är detsamma oavsett om en tjänsts indexposter fylls genom producentregistrering, Inera-försörjd cache (lokaliseringstjänst utifrån eHM:s patientindex och riktade frågor) eller spegling av dagens engagemangsindex. Ny sida Försörjning av indexet, som ersätter Stöd för producenter
+* Försörjningssätt i `meta.tag`, nytt kodsystem för försörjningssätt och ny avregistreringsorsak `not-at-source`
+* Vårdgivaren får anges med organisationsnummer, och vårdenhet är valfri, eftersom eHM:s patientindex är nycklat på vårdgivare och journalsystem
+* Ofullständiga sökresultat redovisas med en `OperationOutcome` i `Bundle.issues`
+* Övergångens lägen beskriver konsumenternas byte, oberoende av försörjningssätt
+* Samexistens med eHM:s patientindex i två riktningar
 * Sidor om indexposten, händelsemodell och övergång, samexistens med eHM:s patientindex, prenumeration, spärr och loggning samt öppna frågor
 

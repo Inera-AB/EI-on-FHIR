@@ -8,7 +8,7 @@ Detta är beskrivningen av FHIR-baserat engagemangsindex (FHIR-EI). IG:n är en 
 
 ### Begrepp
 
-FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangsindex klarar, och vara byggt så att ett tunt index hos eHM kan härledas ur det senare.
+FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangsindex klarar, och kunna samexistera med eHM:s tunna patientindex: antingen härleds det tunna indexet ur det rika, eller så fylls det rika utifrån det tunna.
 
 | | |
 | :--- | :--- |
@@ -18,8 +18,11 @@ FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangs
 | Tillämpning | En tjänsts profil av den gemensamma indexprofilen, som bestämmer vad indexet svarar på för just den tjänsten. Se[Indexposten](information-model.md) |
 | Endpoint | Producentens åtkomstpunkt, registrerad i tjänstekatalogen |
 | Logisk adress | Den adress en RIV-TA-konsument anger mot tjänsteplattformen. I tjänstekatalogen är den en organisations HSA-id |
-| Producent | System som registrerar, uppdaterar och avregistrerar indexposter: källsystemet eller övergångsadaptern. Identifieras med sin endpoint i tjänstekatalogen |
-| Indexeringsagent | Komponent som prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar. Se[Stöd för producenter](producer-support.md) |
+| Producent | Källsystem som håller informationen och exponerar den via en endpoint |
+| Försörjning | Hur en tjänsts indexposter fylls och hålls aktuella: producentregistrering, Inera-försörjd cache eller spegling av dagens engagemangsindex. Se[Försörjning av indexet](population.md) |
+| Registrerande part | System som skriver indexposter: en producent, en indexeringsagent, lokaliseringstjänsten eller övergångsadaptern. Identifieras med sin endpoint i tjänstekatalogen |
+| Indexeringsagent | Komponent som prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar |
+| Lokaliseringstjänst | Ineras komponent som fyller indexet som en cache, utifrån eHM:s patientindex och riktade frågor till källorna |
 | Konsument | Tjänst som söker i eller prenumererar på indexet, till exempel NPÖ och 1177 |
 | Tunt index | eHM:s patientindex kopplat till NDI |
 
@@ -29,10 +32,11 @@ FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangs
 
 1. **Pekare, inte innehåll.**Indexet svarar på var och när, aldrig vad. Profilen förbjuder de element i DocumentReference som skulle beskriva eller bära journalinnehåll.
 1. **Minst lika god förmåga som idag.**Det gäller aktualitet, leveransgarantier, borttag och återhämtning.
-1. **Registrera en gång.**Indexposten bär det som behövs för att härleda ett tunt index, även om Inera inte tar det ansvaret i första iterationen.
+1. **Registrera en gång.**Vårdgivarna ska inte behöva registrera samma vårdrelation två gånger. Indexposten bär det som behövs för att härleda ett tunt index, och indexet kan också fyllas utifrån ett tunt index.
 1. **Övergång utan krav på producenterna.**Befintliga uppdateringar till engagemangsindex mappas in, så att källsystem kan gå över till FHIR i egen takt.
 1. **Indexet är självt skyddsvärd information.**Att en patient har en post hos en viss vårdenhet är en uppgift om patienten. Komponenten tillämpar därför spärr, loggning och filtrering.
 1. **Profilering enligt Ineras tre-lagersmodell, ovanpå svenska basprofiler.**I denna version bygger profilen direkt på FHIR:s basresurser; se[Öppna frågor](open-issues.md).
+1. **Neutral försörjning.**Konsumentkontraktet är detsamma oavsett hur en tjänsts indexposter fylls. Försörjningen är ett val per tjänst; se[Försörjning av indexet](population.md).
 
 -------
 

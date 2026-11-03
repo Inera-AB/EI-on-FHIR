@@ -206,9 +206,9 @@
     "uses" : {
     },
     "StructureDefinition-LogicalAddress.html" : "Logisk adress",
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
+    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-SourceSystem.html" : "Källsystem"
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/identifier-use",
@@ -223,9 +223,9 @@
     "uses" : {
     },
     "StructureDefinition-LogicalAddress.html" : "Logisk adress",
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
+    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-SourceSystem.html" : "Källsystem"
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/languages",
@@ -286,8 +286,8 @@
     "sources" : ["2.16.840.1.113883.4.642.3.27"],
     "uses" : {
     },
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
-    "StructureDefinition-RegisteringProducer.html" : "Registrerande producent"
+    "StructureDefinition-RegisteringProducer.html" : "Registrerande producent",
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/search-comparator",
@@ -473,6 +473,18 @@
     "title" : "Kategorier inom tjänstedomän",
     "description" : "Alla kategorier i kodverket för kategorier inom tjänstedomän.",
     "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"],
+    "uses" : {
+    },
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraIndexPopulationMethodValueSet",
+    "title" : "Försörjningssätt",
+    "description" : "Alla försörjningssätt för indexposter.",
+    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"],
     "uses" : {
     },
     "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"

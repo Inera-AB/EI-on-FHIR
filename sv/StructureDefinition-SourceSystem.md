@@ -9,7 +9,7 @@
 **Användningar:**
 
 * Använd denna Extension: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
-* Exempel för denna Extension: [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md) and [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md)
+* Exempel för denna Extension: [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md), [Bundle/SokresultatOfullstandigt](Bundle-SokresultatOfullstandigt.md), [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md) and [DocumentReference/IndexpostFranLokaliseringstjanst](DocumentReference-IndexpostFranLokaliseringstjanst.md)
 
 Du kan också kontrollera [användningar i FHIR IG-statistiken](https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/SourceSystem)
 
@@ -76,7 +76,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-SourceSystem.cs
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Källsystemet enligt dagens engagemangsindex, som HSA-id. Sätts av övergångsadaptern, eftersom registrerande producent då är adaptern och inte källsystemet. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex.",
+  "description" : "Källsystemet eller journalsystemet som håller informationen, när den registrerande parten inte är källan själv: källsystemet enligt dagens engagemangsindex vid spegling, eller journalsystemet enligt eHM:s patientindex vid Inera-försörjd cache. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -104,7 +104,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-SourceSystem.cs
       "id" : "Extension",
       "path" : "Extension",
       "short" : "Källsystem",
-      "definition" : "Källsystemet enligt dagens engagemangsindex, som HSA-id. Sätts av övergångsadaptern, eftersom registrerande producent då är adaptern och inte källsystemet. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex."
+      "definition" : "Källsystemet eller journalsystemet som håller informationen, när den registrerande parten inte är källan själv: källsystemet enligt dagens engagemangsindex vid spegling, eller journalsystemet enligt eHM:s patientindex vid Inera-försörjd cache. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex."
     },
     {
       "id" : "Extension.extension",
@@ -127,8 +127,8 @@ Andra representationer av profilen: [CSV](../StructureDefinition-SourceSystem.cs
     {
       "id" : "Extension.value[x].system",
       "path" : "Extension.value[x].system",
-      "min" : 1,
-      "patternUri" : "urn:oid:1.2.752.29.4.19"
+      "short" : "Identifierarsystem, t.ex. HSA-id för källsystemet",
+      "min" : 1
     },
     {
       "id" : "Extension.value[x].value",

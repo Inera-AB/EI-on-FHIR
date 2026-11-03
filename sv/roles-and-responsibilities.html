@@ -48,7 +48,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"5"}
     h3,h4,h5,h6{--heading-prefix:"5"}</style>
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -194,7 +193,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </ul>
 
 </div>
-<p>Sju roller deltar i <a href="use-cases.html">användningsfallen</a>, plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.</p>
+<p>Åtta roller deltar i <a href="use-cases.html">användningsfallen</a>, plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.</p>
 
 <table class="grid">
   <thead>
@@ -210,7 +209,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Producent</td>
-      <td>Registrerar, uppdaterar och avregistrerar indexposter, så att indexet speglar vilken information producenten håller. Identifieras med sin endpoint i tjänstekatalogen. Försöker igen tills FHIR-EI kvitterat</td>
+      <td>Håller informationen och exponerar den via en endpoint. Vid producentregistrering registrerar, uppdaterar och avregistrerar den också indexposter, själv eller via indexeringsagent, och försöker igen tills FHIR-EI kvitterat. Identifieras med sin endpoint i tjänstekatalogen</td>
     </tr>
     <tr>
       <td>Övergångsadapter</td>
@@ -218,7 +217,11 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Indexeringsagent</td>
-      <td>Prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar; se <a href="producer-support.html">Stöd för producenter</a></td>
+      <td>Prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar; se <a href="population.html">Försörjning av indexet</a></td>
+    </tr>
+    <tr>
+      <td>Lokaliseringstjänst</td>
+      <td>Fyller indexet som en cache utifrån eHM:s patientindex och riktade frågor till källorna, och håller det färskt med prenumerationer eller tidsgräns. Har ombudsroll inom de vårdgivare eHM:s patientindex anger</td>
     </tr>
     <tr>
       <td>Konsument</td>
@@ -230,7 +233,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Tjänsteägare</td>
-      <td>Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics och producentens skyldigheter i tjänstens IG</td>
+      <td>Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics och den registrerande partens skyldigheter i tjänstens IG. Beslutar tillsammans med Inera om tjänstens försörjningssätt</td>
     </tr>
   </tbody>
 </table>
@@ -252,27 +255,27 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>SHALL uppfylla <a href="CapabilityStatement-IneraIndexServer.html">CapabilityStatement för FHIR-EI</a></td>
     </tr>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>SHALL registrera poster som uppfyller <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> och tjänstens tillämpning, med villkorad uppdatering på <code class="language-plaintext highlighter-rouge">identifier</code></td>
     </tr>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>SHALL avregistrera med villkorad uppdatering till status <code class="language-plaintext highlighter-rouge">superseded</code> eller <code class="language-plaintext highlighter-rouge">entered-in-error</code> och ange <code class="language-plaintext highlighter-rouge">deregistrationReason</code>; aldrig med delete</td>
     </tr>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>SHALL NOT ändra <code class="language-plaintext highlighter-rouge">identifier</code> eller <code class="language-plaintext highlighter-rouge">registeringProducer</code> på en befintlig post</td>
     </tr>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>SHALL använda sin endpoint-URL i tjänstekatalogen som <code class="language-plaintext highlighter-rouge">identifier.system</code> och <code class="language-plaintext highlighter-rouge">registeringProducer</code></td>
     </tr>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>SHALL ange <code class="language-plaintext highlighter-rouge">logicalAddress</code> när endpointen adresseras med logisk adress</td>
     </tr>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>SHALL försöka igen tills FHIR-EI kvitterat, och lägga ej levererbara händelser i en kö för manuell hantering</td>
     </tr>
     <tr>
@@ -288,6 +291,14 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>SHALL ignorera kodningar i <code class="language-plaintext highlighter-rouge">type</code> och <code class="language-plaintext highlighter-rouge">content.profile</code> som den inte förstår</td>
     </tr>
     <tr>
+      <td>Konsument</td>
+      <td>SHALL kunna visa att uppgifter kan saknas när sökresultatet innehåller en <code class="language-plaintext highlighter-rouge">OperationOutcome</code>; se <a href="expected-responses.html">Förväntade svar</a></td>
+    </tr>
+    <tr>
+      <td>Lokaliseringstjänst</td>
+      <td>SHALL bekräfta en inaktuell cachepost mot källan innan den lämnas ut, och SHALL redovisa källor som inte svarat som ett ofullständigt svar</td>
+    </tr>
+    <tr>
       <td>Tjänsteägare</td>
       <td>SHALL publicera tillämpningen som en profil med <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> som förälder</td>
     </tr>
@@ -297,10 +308,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Producent</td>
-      <td>SHALL NOT registrera en tjänst enbart i FHIR-EI förrän tjänstens konsumenter läser FHIR-EI; se <a href="event-model.html">Händelsemodell och övergång</a></td>
+      <td>SHALL NOT sluta uppdatera dagens engagemangsindex för en tjänst förrän tjänstens konsumenter läser FHIR-EI; se <a href="event-model.html">Händelsemodell och övergång</a></td>
     </tr>
     <tr>
-      <td>Producent</td>
+      <td>Registrerande part</td>
       <td>MAY märka en post med säkerhetsetiketter i <code class="language-plaintext highlighter-rouge">meta.security</code>, till exempel <code class="language-plaintext highlighter-rouge">NOPAT</code>; se <a href="security.html">Spärr, loggning och behörighet</a></td>
     </tr>
   </tbody>
@@ -308,7 +319,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="ansvar-under-övergången">Ansvar under övergången</h3>
 
-<p>Adaptern speglar dagens engagemangsindex utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos producenterna, genom deras registrering i dagens engagemangsindex.</p>
+<p>Ansvaret för att indexposterna är korrekta följer försörjningssättet. Vid producentregistrering ligger det hos producenten. Vid spegling ligger det kvar hos källorna, genom deras registrering i dagens engagemangsindex, eftersom adaptern speglar utan egen affärslogik. Vid Inera-försörjd cache ligger ansvaret för cachen hos Inera, medan vårdgivarna ansvarar för sin registrering hos eHM och källorna för sina svar på den riktade frågan.</p>
 
 
 
@@ -338,8 +349,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

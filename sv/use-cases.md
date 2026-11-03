@@ -8,13 +8,13 @@ API:et skiljer på tre sätt att läsa indexet: sökning vid behov, löpande upp
 
 En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. FHIR-EI kontrollerar behörighet och spärrar, filtrerar bort poster som konsumenten inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.
 
-### Registrera eller uppdatera indexposter
+### Fylla indexet
 
-En producent har fått ny eller ändrad information om en patient inom en tjänst. Producenten, eller övergångsadaptern för källsystem som fortfarande använder RIV-TA, registrerar eller uppdaterar motsvarande indexpost. Uppdateringen är idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.
+En källa har fått ny eller ändrad information om en patient inom en tjänst, och indexet ska spegla det. Hur det sker beror på tjänstens [försörjningssätt](population.md): producenten registrerar själv eller via en indexeringsagent, Ineras lokaliseringstjänst frågar källan när posten behövs och håller den färsk med prenumeration, eller övergångsadaptern speglar dagens engagemangsindex för källor som fortfarande använder RIV-TA. Oavsett sätt är uppdateringen idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.
 
 ### Avregistrera indexposter
 
-En producent håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Producenten avregistrerar posten och anger orsaken. Posten ligger kvar som gravsten under en lagringstid, så att avregistreringen syns för prenumeranter och vid avstämning. Motsvarar Update med deleteFlag.
+En källa håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Den registrerande parten avregistrerar posten och anger orsaken. Posten ligger kvar som gravsten under en lagringstid, så att avregistreringen syns för prenumeranter och vid avstämning. Motsvarar Update med deleteFlag.
 
 ### Prenumerera på ändringar
 

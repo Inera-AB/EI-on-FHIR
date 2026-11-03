@@ -46,7 +46,7 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
   }],
   "caseSensitive" : true,
   "content" : "complete",
-  "count" : 4,
+  "count" : 5,
   "concept" : [{
     "code" : "entered-in-error",
     "display" : "Felregistrering",
@@ -61,6 +61,11 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
     "code" : "purged",
     "display" : "Gallring",
     "definition" : "Informationen har gallrats hos producenten. Används med registreringsstatus withdrawn."
+  },
+  {
+    "code" : "not-at-source",
+    "display" : "Finns inte längre hos källan",
+    "definition" : "Källan uppger, på en riktad fråga från lokaliseringstjänsten, att den inte längre har information om patienten inom tjänsten. Används med registreringsstatus withdrawn."
   },
   {
     "code" : "transition-adapter",

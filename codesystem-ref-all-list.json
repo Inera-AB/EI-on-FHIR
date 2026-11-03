@@ -63,9 +63,9 @@
     "oids" : ["2.16.840.1.113883.4.642.4.1802"],
     "uses" : {
     },
-    "http://hl7.org/fhir/R5/valueset-resource-types.html" : "Resource Types",
+    "http://hl7.org/fhir/R5/valueset-all-resource-types.html" : "All Resource Types",
     "http://hl7.org/fhir/R5/valueset-subscription-types.html" : "Types used with Subscriptions",
-    "http://hl7.org/fhir/R5/valueset-all-resource-types.html" : "All Resource Types"
+    "http://hl7.org/fhir/R5/valueset-resource-types.html" : "Resource Types"
   },
   {
     "url" : "http://hl7.org/fhir/identifier-use",
@@ -235,6 +235,17 @@
     "uses" : {
     },
     "ValueSet-IneraEngagementCategoryValueSet.html" : "Kategorier inom tjänstedomän"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraIndexPopulationMethodCodeSystem",
+    "title" : "Kodsystem för försörjningssätt",
+    "description" : "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt.",
+    "uses" : {
+    },
+    "ValueSet-IneraIndexPopulationMethodValueSet.html" : "Försörjningssätt"
   },
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",

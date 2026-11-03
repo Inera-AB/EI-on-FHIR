@@ -48,7 +48,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"20"}
     h3,h4,h5,h6{--heading-prefix:"20"}</style>
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -202,7 +201,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><strong>Federation.</strong> Dagens engagemangsindex kan vara hierarkiskt, där regionala index vidarebefordrar till det nationella via ProcessNotification. Ska FHIR-EI stödja en sådan topologi, eller bara ett nationellt index?</li>
   <li><strong>Latens.</strong> Vilket krav gäller från ändring i källsystemet till synlig indexpost? Vad klarar dagens engagemangsindex i praktiken?</li>
   <li><strong>Lagringstider.</strong> Hur långt avbrott ska en konsument klara utan full omladdning? Svaret sätter både händelseloggens och gravstenarnas lagringstid.</li>
-  <li><strong>eHM:s tunna index.</strong> Torrsimma borttag, grundladdning och återsynk mot eHM:s API-specifikationer.</li>
+  <li><strong>eHM:s tunna index.</strong> Torrsimma båda riktningarna, och borttag, grundladdning och återsynk, mot eHM:s API-specifikationer när de finns. Granulariteten är besvarad: vårdgivare (organisationsnummer) och journalsystem, inte vårdenhet; se <a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a>.</li>
   <li><strong>R5-beroende.</strong> Tidplanen för svenska basprofiler i R5, och om konsumenter och producenter är redo för R5. Denna version bygger direkt på FHIR:s basresurser.</li>
 </ul>
 
@@ -212,7 +211,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><strong>Bulk Data i R5.</strong> Bulk Data Access finns bara publicerad för R4, så <code class="language-plaintext highlighter-rouge">$export</code> kan inte refereras formellt från denna R5-IG. Kravet står i text. Följs upp när Bulk Data publiceras för R5.</li>
   <li><strong>Kodverk.</strong> Var förvaltas tjänstedomäner och kategorier som FHIR-kodsystem, och med vilken canonical? Denna IG har utdrag under sin egen canonical.</li>
   <li><strong>Kontrollsummor.</strong> Hur exponeras antal och kontrollsummor per vårdgivare och dag för återsynk?</li>
-  <li><strong>Koppling mellan klient och endpoint.</strong> Producentens identitet är dess endpoint i tjänstekatalogen. Hur binds ett klientcertifikat eller en token till en endpoint? Tjänstekatalogens Endpoint har i dag ingen identifierare för det producerande systemet, så kopplingen kräver antingen en sådan i tjänstekatalogen eller ett register i FHIR-EI.</li>
+  <li><strong>Koppling mellan klient och endpoint.</strong> Den registrerande partens identitet är dess endpoint i tjänstekatalogen. Hur binds ett klientcertifikat eller en token till en endpoint? Tjänstekatalogens Endpoint har i dag ingen identifierare för det producerande systemet, så kopplingen kräver antingen en sådan i tjänstekatalogen eller ett register i FHIR-EI.</li>
   <li><strong>Adressregistrets innehåll.</strong> Vilken variant ska adaptern peka på för RIV-TA-källor: tjänsteplattformens endpoint per tjänstekontrakt, eller EHDS-bryggans FHIR-yta per vårdgivare? Bryggan använder vårdgivarens HSA-id som logisk adress; dagens engagemangsposter kan ha vårdenhetens eller källsystemets.</li>
   <li><strong>Överlämning från adaptern.</strong> När ett källsystem går över till FHIR blir det en avregistrering och en ny registrering per post. Räcker det, eller behövs en operation som flyttar ägarskapet?</li>
   <li><strong>Behörighet per vårdgivare.</strong> Regeln att en producent bara får registrera för vårdgivare som listar dess endpoint i tjänstekatalogen förutsätter att vårdgivarna håller sina listningar aktuella. Hur säkerställs det?</li>
@@ -224,6 +223,12 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><strong>Avregistrering via indexeringsagenten.</strong> Hur vet agenten att informationen inte längre finns hos producenten?</li>
   <li><strong>R4-tjänster.</strong> Publiceras deras tillämpning i ett separat R5-paket, eller går tjänsterna över till R5?</li>
   <li><strong>Första tjänst.</strong> Vilken tjänst går först genom övergången?</li>
+  <li><strong>Försörjningssätt per tjänst.</strong> Vem beslutar, och var anges det, så att lokaliseringstjänsten och adaptern vet vilka endpoints de ska fylla?</li>
+  <li><strong>Riktad fråga.</strong> Egen operation (till exempel <code class="language-plaintext highlighter-rouge">$inventory</code>) eller <code class="language-plaintext highlighter-rouge">batch</code> med <code class="language-plaintext highlighter-rouge">_summary=count</code>? Definieras den i denna IG eller i tjänsternas IG:er? Och svarar den med vårdenhet?</li>
+  <li><strong>Lokaliseringstjänstens behörighet.</strong> Under vilket ändamål och med vilken identitet frågar den källorna, och hur loggas frågan hos källan och i FHIR-EI?</li>
+  <li><strong>Lokaliseringstjänstens placering.</strong> Del av FHIR-EI eller en separat komponent som skriver via API:et?</li>
+  <li><strong>Tidsgränser.</strong> Hur länge är en cachepost färsk när källan saknar prenumeration, och hur länge väntar FHIR-EI på en källa innan svaret redovisas som ofullständigt?</li>
+  <li><strong>Post utan vårdenhet.</strong> Räcker fail-closed vid inre spärr, eller behöver den riktade frågan alltid ange vårdenhet?</li>
 </ul>
 
 
@@ -254,8 +259,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

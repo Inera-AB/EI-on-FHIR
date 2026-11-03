@@ -48,7 +48,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"6"}
     h3,h4,h5,h6{--heading-prefix:"6"}</style>
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -190,7 +189,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <div class="markdown-toc">
 <ul id="markdown-toc">
   <li><a href="#granularitet" id="markdown-toc-granularitet">Granularitet</a></li>
-  <li><a href="#producent-endpoint-och-logisk-adress" id="markdown-toc-producent-endpoint-och-logisk-adress">Producent, endpoint och logisk adress</a></li>
+  <li><a href="#registrerande-part-endpoint-och-logisk-adress" id="markdown-toc-registrerande-part-endpoint-och-logisk-adress">Registrerande part, endpoint och logisk adress</a></li>
   <li><a href="#tillämpning-per-tjänst" id="markdown-toc-tillämpning-per-tjänst">Tillämpning per tjänst</a></li>
   <li><a href="#tidpunkter" id="markdown-toc-tidpunkter">Tidpunkter</a></li>
   <li><a href="#livscykel" id="markdown-toc-livscykel">Livscykel</a></li>
@@ -198,20 +197,20 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </ul>
 
 </div>
-<p>Indexposten är en pekare: den anger att en producent, via en endpoint, har information om en patient inom en tjänst. Posten representeras med profilen <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> på R5 <code class="language-plaintext highlighter-rouge">DocumentReference</code>. Hur varje element motsvarar dagens engagemangsindex beskrivs under <a href="mappings.html">Mappning till profiler</a>.</p>
+<p>Indexposten är en pekare: den anger att en producent, via en endpoint, har information om en patient inom en tjänst. Vem som har skrivit posten påverkar inte vad den betyder; se <a href="population.html">Försörjning av indexet</a>. Posten representeras med profilen <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> på R5 <code class="language-plaintext highlighter-rouge">DocumentReference</code>. Hur varje element motsvarar dagens engagemangsindex beskrivs under <a href="mappings.html">Mappning till profiler</a>.</p>
 
 <h3 id="granularitet">Granularitet</h3>
 
 <p>Det finns en post per patient × endpoint × tjänst. En tjänst är en IG och motsvarar tjänstedomän i dagens modell. En post kan bära flera informationsmängder. Tidpunkten för senaste ändring gäller hela posten. En informationsmängd som behöver en egen tidpunkt bryts ut till en egen tjänst.</p>
 
-<h3 id="producent-endpoint-och-logisk-adress">Producent, endpoint och logisk adress</h3>
+<h3 id="registrerande-part-endpoint-och-logisk-adress">Registrerande part, endpoint och logisk adress</h3>
 
-<p>Producentens identitet är dess endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en Endpoint där, och postens <a href="StructureDefinition-RegisteringProducer.html">registeringProducer</a> är en absolut referens till den endpointen. Samma URL är producentens namnrymd i <code class="language-plaintext highlighter-rouge">identifier.system</code>, så att FHIR-EI kan kontrollera namnrymden utan ett eget register.</p>
+<p>Den registrerande partens identitet är dess endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en Endpoint där, och postens <a href="StructureDefinition-RegisteringProducer.html">registeringProducer</a> är en absolut referens till den endpointen. Samma URL är partens namnrymd i <code class="language-plaintext highlighter-rouge">identifier.system</code>, så att FHIR-EI kan kontrollera namnrymden utan ett eget register.</p>
 
 <table class="grid">
   <thead>
     <tr>
-      <th>Producent</th>
+      <th>Registrerande part</th>
       <th>registeringProducer</th>
       <th>sourceEndpoint</th>
       <th>logicalAddress</th>
@@ -225,6 +224,18 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>Utelämnas</td>
     </tr>
     <tr>
+      <td>Indexeringsagent</td>
+      <td>Producentens endpoint; agenten skriver med producentens identitet</td>
+      <td>Samma endpoint</td>
+      <td>Utelämnas</td>
+    </tr>
+    <tr>
+      <td>Lokaliseringstjänsten</td>
+      <td>Lokaliseringstjänstens egen endpoint</td>
+      <td>Källans endpoint i tjänstekatalogen, uppslagen via vårdgivaren i eHM:s patientindex</td>
+      <td>När källans endpoint adresseras med logisk adress</td>
+    </tr>
+    <tr>
       <td>Övergångsadaptern</td>
       <td>Adapterns egen endpoint</td>
       <td>Endpoint enligt adapterns adressregister, t.ex. tjänsteplattformens endpoint för tjänstekontraktet</td>
@@ -235,7 +246,9 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>En endpoint i tjänstekatalogen kan delas av många logiska adresser, till exempel tjänsteplattformens adress för ett tjänstekontrakt. Posten bär därför den <a href="StructureDefinition-LogicalAddress.html">logiska adressen</a> separat när endpointen adresseras med logisk adress. I tjänstekatalogen är den logiska adressen en organisations HSA-id, så konsumenten kan slå upp den där.</p>
 
-<p>Poster från adaptern bär också <a href="StructureDefinition-SourceSystem.html">källsystemet</a> från dagens engagemangsindex, eftersom registrerande producent då är adaptern.</p>
+<p>När den registrerande parten inte är källan själv bär posten också <a href="StructureDefinition-SourceSystem.html">källsystemet</a>: källsystemet från dagens engagemangsindex vid spegling, eller journalsystemet från eHM:s patientindex vid Inera-försörjd cache.</p>
+
+<p>Vårdgivaren i <code class="language-plaintext highlighter-rouge">custodian</code> anges med HSA-id eller organisationsnummer (<code class="language-plaintext highlighter-rouge">urn:oid:2.5.4.97</code>). eHM:s patientindex är nycklat på organisationsnummer, och tjänstekatalogen har båda på den juridiska personen. <a href="StructureDefinition-CareUnit.html">Vårdenheten</a> anges när den är känd; den kan saknas när indexet fylls utifrån eHM:s patientindex.</p>
 
 <h3 id="tillämpning-per-tjänst">Tillämpning per tjänst</h3>
 
@@ -251,9 +264,14 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </thead>
   <tbody>
     <tr>
-      <td>Patient, tjänst, endpoint, producent, vårdgivare</td>
+      <td>Patient, tjänst, endpoint, registrerande part, vårdgivare</td>
       <td>Obligatoriska</td>
       <td>Inget</td>
+    </tr>
+    <tr>
+      <td>Vårdenhet</td>
+      <td>0..*</td>
+      <td>Om den är obligatorisk. Försörjning utifrån eHM:s patientindex känner bara vårdgivaren</td>
     </tr>
     <tr>
       <td>Informationsmängder</td>
@@ -302,12 +320,12 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
     </tr>
     <tr>
       <td>Extensionen <code class="language-plaintext highlighter-rouge">obligation</code> i tillämpningsprofilen</td>
-      <td>Vilka element producenten ska fylla i</td>
+      <td>Vilka element den registrerande parten ska fylla i</td>
     </tr>
   </tbody>
 </table>
 
-<p><code class="language-plaintext highlighter-rouge">contentLastUpdated</code> är tidpunkten för den senaste händelse som uppfyller tjänstens topic. Samma topics driver <a href="producer-support.html">indexeringsagenten</a>.</p>
+<p><code class="language-plaintext highlighter-rouge">contentLastUpdated</code> är tidpunkten för den senaste händelse som uppfyller tjänstens topic. Samma topics driver indexeringsagenten och lokaliseringstjänstens prenumerationer; se <a href="population.html">Försörjning av indexet</a>.</p>
 
 <p>Tillämpningsprofilen har indexprofilen som förälder och är därför en R5-profil. En tjänst vars IG är R4 publicerar sin tillämpning i ett separat R5-paket och anger sina topics med canonical, som i Subscriptions Backport.</p>
 
@@ -324,7 +342,7 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
   <tbody>
     <tr>
       <td>Innehållets senaste ändring</td>
-      <td>När det kliniska innehållet i källsystemet senast ändrades, enligt producenten</td>
+      <td>När det kliniska innehållet i källsystemet senast ändrades, enligt källan: producentens registrering, källans svar på en riktad fråga eller mostRecentContent i dagens engagemangsindex</td>
       <td>Extension <a href="StructureDefinition-ContentLastUpdated.html">contentLastUpdated</a></td>
     </tr>
     <tr>
@@ -361,7 +379,7 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
       <td>Ja</td>
     </tr>
     <tr>
-      <td>Indragen: producenten har dragit tillbaka posten (avslutat engagemang, gallring)</td>
+      <td>Indragen: posten har dragits tillbaka (avslutat engagemang, gallring, eller källan uppger att informationen inte längre finns)</td>
       <td><code class="language-plaintext highlighter-rouge">superseded</code></td>
       <td><code class="language-plaintext highlighter-rouge">withdrawn</code></td>
       <td>Nej; syns vid explicit statusfilter, ändringssökning och export</td>
@@ -377,7 +395,7 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
 
 <p><code class="language-plaintext highlighter-rouge">DocumentReference.status</code> har en obligatorisk bindning till <code class="language-plaintext highlighter-rouge">current | superseded | entered-in-error</code> och kan inte utökas med egna koder. Den exakta semantiken bärs därför av extensionen <code class="language-plaintext highlighter-rouge">registrationStatus</code>. En generisk FHIR-konsument som inte förstår extensionen ser ändå på basvärdet att posten inte längre är aktuell. Profilens invarianter håller basvärdet och extensionen i takt.</p>
 
-<p><code class="language-plaintext highlighter-rouge">withdrawn</code> är valt framför <code class="language-plaintext highlighter-rouge">unavailable</code>, eftersom det uttrycker en avsiktlig och bestående handling av producenten. <code class="language-plaintext highlighter-rouge">unavailable</code> kan läsas som ett tillfälligt driftavbrott, och det ska indexet inte uttrycka.</p>
+<p><code class="language-plaintext highlighter-rouge">withdrawn</code> är valt framför <code class="language-plaintext highlighter-rouge">unavailable</code>, eftersom det uttrycker en avsiktlig och bestående handling. <code class="language-plaintext highlighter-rouge">unavailable</code> kan läsas som ett tillfälligt driftavbrott, och det ska indexet inte uttrycka.</p>
 
 <p>Orsaken anges i <a href="StructureDefinition-DeregistrationReason.html">deregistrationReason</a>, som finns om och endast om posten inte är registrerad. En indragen post ligger kvar som gravsten under gravstenarnas lagringstid och rensas sedan fysiskt. Se <a href="event-model.html">Händelsemodell och övergång</a>.</p>
 
@@ -385,6 +403,7 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
 
 <ul>
   <li><a href="DocumentReference-IndexpostFhirProducent.html">Registrerad indexpost från en FHIR-producent</a></li>
+  <li><a href="DocumentReference-IndexpostFranLokaliseringstjanst.html">Indexpost fylld av lokaliseringstjänsten</a></li>
   <li><a href="DocumentReference-IndexpostFranAdapter.html">Indexpost speglad av övergångsadaptern</a></li>
   <li><a href="DocumentReference-IndexpostIndragen.html">Indragen indexpost</a></li>
 </ul>
@@ -417,8 +436,8 @@ Parent: https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexE
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

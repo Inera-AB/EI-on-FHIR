@@ -4,7 +4,7 @@
 
 **Användningar:**
 
-* Exempel för denna Profil: [DocumentReference/IndexpostEjForPatient](DocumentReference-IndexpostEjForPatient.md), [DocumentReference/IndexpostFhirProducent](DocumentReference-IndexpostFhirProducent.md), [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md) and [DocumentReference/IndexpostIndragen](DocumentReference-IndexpostIndragen.md)
+* Exempel för denna Profil: [DocumentReference/IndexpostEjForPatient](DocumentReference-IndexpostEjForPatient.md), [DocumentReference/IndexpostFhirProducent](DocumentReference-IndexpostFhirProducent.md), [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md), [DocumentReference/IndexpostFranLokaliseringstjanst](DocumentReference-IndexpostFranLokaliseringstjanst.md) and [DocumentReference/IndexpostIndragen](DocumentReference-IndexpostIndragen.md)
 * CapabilityStatements som använder denna Profil: [FHIR-EI server](CapabilityStatement-IneraIndexServer.md)
 
 Du kan också kontrollera [användningar i FHIR IG-statistiken](https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/IneraIndexEntry)
@@ -87,7 +87,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska.",
+  "description" : "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten betyder samma sak oavsett hur den har kommit till: registrerad av producenten, fylld av Ineras\nlokaliseringstjänst eller speglad från dagens engagemangsindex. Försörjningssättet framgår av `meta.tag`.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -157,7 +157,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
       {
         "key" : "inera-ei-producer-namespace",
         "severity" : "error",
-        "human" : "Minst en identifierare har producentens namnrymd: identifier.system är samma URL som referensen i registeringProducer.",
+        "human" : "Minst en identifierare har den registrerande partens namnrymd: identifier.system är samma URL som referensen i registeringProducer.",
         "expression" : "identifier.system contains extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer').value.reference",
         "source" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"
       }]
@@ -174,6 +174,42 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
       "mustSupport" : true
     },
     {
+      "id" : "DocumentReference.meta.tag",
+      "path" : "DocumentReference.meta.tag",
+      "slicing" : {
+        "discriminator" : [{
+          "type" : "value",
+          "path" : "system"
+        }],
+        "rules" : "open"
+      },
+      "mustSupport" : true
+    },
+    {
+      "id" : "DocumentReference.meta.tag:populationMethod",
+      "path" : "DocumentReference.meta.tag",
+      "sliceName" : "populationMethod",
+      "short" : "Försörjningssätt: producentregistrering, Inera-försörjd cache eller spegling (sätts av FHIR-EI)",
+      "min" : 0,
+      "max" : "1",
+      "mustSupport" : true,
+      "binding" : {
+        "strength" : "required",
+        "valueSet" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet"
+      }
+    },
+    {
+      "id" : "DocumentReference.meta.tag:populationMethod.system",
+      "path" : "DocumentReference.meta.tag.system",
+      "min" : 1,
+      "patternUri" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"
+    },
+    {
+      "id" : "DocumentReference.meta.tag:populationMethod.code",
+      "path" : "DocumentReference.meta.tag.code",
+      "min" : 1
+    },
+    {
       "id" : "DocumentReference.extension",
       "path" : "DocumentReference.extension",
       "slicing" : {
@@ -184,7 +220,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
         "ordered" : false,
         "rules" : "open"
       },
-      "min" : 4
+      "min" : 3
     },
     {
       "id" : "DocumentReference.extension:sourceEndpoint",
@@ -202,8 +238,8 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
       "id" : "DocumentReference.extension:careUnit",
       "path" : "DocumentReference.extension",
       "sliceName" : "careUnit",
-      "min" : 1,
-      "max" : "1",
+      "min" : 0,
+      "max" : "*",
       "type" : [{
         "code" : "Extension",
         "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit"]
@@ -285,21 +321,21 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
     {
       "id" : "DocumentReference.identifier",
       "path" : "DocumentReference.identifier",
-      "short" : "Producentens id för posten; nyckel för villkorad uppdatering",
+      "short" : "Registrerande partens id för posten; nyckel för villkorad uppdatering",
       "min" : 1,
       "mustSupport" : true
     },
     {
       "id" : "DocumentReference.identifier.system",
       "path" : "DocumentReference.identifier.system",
-      "short" : "Producentens namnrymd: samma URL som registeringProducer",
+      "short" : "Registrerande partens namnrymd: samma URL som registeringProducer",
       "min" : 1,
       "mustSupport" : true
     },
     {
       "id" : "DocumentReference.identifier.value",
       "path" : "DocumentReference.identifier.value",
-      "short" : "Producentens id för posten",
+      "short" : "Registrerande partens id för posten",
       "min" : 1,
       "mustSupport" : true
     },
@@ -450,7 +486,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
     {
       "id" : "DocumentReference.custodian",
       "path" : "DocumentReference.custodian",
-      "short" : "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id",
+      "short" : "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer",
       "min" : 1,
       "mustSupport" : true
     },
@@ -458,13 +494,20 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
       "id" : "DocumentReference.custodian.identifier",
       "path" : "DocumentReference.custodian.identifier",
       "min" : 1,
+      "constraint" : [{
+        "key" : "inera-ei-custodian-identifier",
+        "severity" : "error",
+        "human" : "Vårdgivaren identifieras med HSA-id eller organisationsnummer.",
+        "expression" : "system = 'urn:oid:1.2.752.29.4.19' or system = 'urn:oid:2.5.4.97'",
+        "source" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"
+      }],
       "mustSupport" : true
     },
     {
       "id" : "DocumentReference.custodian.identifier.system",
       "path" : "DocumentReference.custodian.identifier.system",
       "min" : 1,
-      "patternUri" : "urn:oid:1.2.752.29.4.19"
+      "mustSupport" : true
     },
     {
       "id" : "DocumentReference.custodian.identifier.value",

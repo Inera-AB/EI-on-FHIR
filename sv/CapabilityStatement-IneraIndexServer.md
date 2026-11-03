@@ -48,7 +48,7 @@
     "resource" : [{
       "type" : "DocumentReference",
       "profile" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry",
-      "documentation" : "Indexposter. En producent får bara skapa, uppdatera och avregistrera poster som tillhör dess registrerade identitet. Avregistrering sker med villkorad uppdatering, aldrig med delete. En sökning utan status-parameter returnerar bara poster med status current.",
+      "documentation" : "Indexposter. Läs-, prenumerations- och export-API:et är detsamma oavsett hur en tjänsts poster fylls: producentregistrering, Inera-försörjd cache eller spegling av dagens engagemangsindex. En registrerande part får bara skapa, uppdatera och avregistrera poster som tillhör dess registrerade identitet. Avregistrering sker med villkorad uppdatering, aldrig med delete. En sökning utan status-parameter returnerar bara poster med status current. När svaret kan vara ofullständigt innehåller det en OperationOutcome i Bundle.issues.",
       "interaction" : [{
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation",
@@ -186,6 +186,16 @@
         "definition" : "http://hl7.org/fhir/SearchParameter/Resource-lastUpdated",
         "type" : "date",
         "documentation" : "Inkrementell avstämning, tillsammans med status=current,superseded,entered-in-error."
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation",
+          "valueCode" : "SHOULD"
+        }],
+        "name" : "_tag",
+        "definition" : "http://hl7.org/fhir/SearchParameter/Resource-tag",
+        "type" : "token",
+        "documentation" : "Försörjningssätt, för felsökning och avstämning."
       }]
     },
     {

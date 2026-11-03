@@ -15,11 +15,14 @@ FHIR-EI är en ny komponent som pekar ut var det finns information om en patient
 IG:n omfattar:
 
 * informationsmodell för indexposten ([Indexposten](information-model.md), profil [Indexpost](StructureDefinition-IneraIndexEntry.md))
+* [försörjning av indexet](population.md): producentregistrering, Inera-försörjd cache eller spegling av dagens engagemangsindex
 * [kodverk för tjänster och informationsmängder](information-sets.md)
 * [API för sökning, registrering](rest-interactions.md) och [prenumeration](subscriptions.md)
 * [händelsemodell och leveransgarantier](event-model.md), inklusive övergången från dagens engagemangsindex
 * [spärr, loggning och filtrering](security.md) av svar
 * [samexistens med eHM:s patientindex](ehm-coexistence.md): borttag, grundladdning och återsynk
+
+IG:n är neutral till hur indexet fylls. Konsumenterna läser samma API oavsett om en tjänsts indexposter registreras av producenterna, fylls av Inera utifrån eHM:s patientindex och riktade frågor till källorna, eller speglas från dagens engagemangsindex. Försörjningen väljs per tjänst.
 
 Utanför IG:n ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll.
 

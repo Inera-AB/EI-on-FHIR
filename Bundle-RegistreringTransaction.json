@@ -11,19 +11,12 @@
       },
       "text" : {
         "status" : "extensions",
-        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"DocumentReference_null\"> </a><p class=\"res-header-id\"><b>Genererad berättande text: DocumentReference </b></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profil: <a href=\"StructureDefinition-IneraIndexEntry.html\">Indexpost (FHIR-EI)</a></p></div><p><b>Producentens endpoint</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE01</p><p><b>Registrerande producent</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registreringsstatus</b>: active</p><p><b>Innehållets senaste ändring</b>: 2026-10-20 14:31:55+0200</p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</code>/7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33</p><p><b>status</b>: Current</p><p><b>type</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}\">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Url</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"https://journal-a.example.org/fhir\">https://journal-a.example.org/fhir</a></td></tr></table><h3>Profiles</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Value[x]</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo\">Kodsystem för kategorier inom tjänstedomän: voo</a> (voo)</td></tr></table></blockquote></div>"
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"DocumentReference_null\"> </a><p class=\"res-header-id\"><b>Genererad berättande text: DocumentReference </b></p><div style=\"display: inline-block; background-color: #fbffeb; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profil: <a href=\"StructureDefinition-IneraIndexEntry.html\">Indexpost (FHIR-EI)</a></p></div><p><b>Producentens endpoint</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registrerande producent</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registreringsstatus</b>: active</p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE01</p><p><b>Innehållets senaste ändring</b>: 2026-10-20 14:31:55+0200</p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</code>/7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33</p><p><b>status</b>: Current</p><p><b>type</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}\">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Url</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"https://journal-a.example.org/fhir\">https://journal-a.example.org/fhir</a></td></tr></table><h3>Profiles</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Value[x]</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo\">Kodsystem för kategorier inom tjänstedomän: voo</a> (voo)</td></tr></table></blockquote></div>"
       },
       "extension" : [{
         "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
         "valueReference" : {
           "reference" : "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"
-        }
-      },
-      {
-        "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
-        "valueIdentifier" : {
-          "system" : "urn:oid:1.2.752.29.4.19",
-          "value" : "SE0000000000-VE01"
         }
       },
       {
@@ -35,6 +28,13 @@
       {
         "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
         "valueCode" : "active"
+      },
+      {
+        "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
+        "valueIdentifier" : {
+          "system" : "urn:oid:1.2.752.29.4.19",
+          "value" : "SE0000000000-VE01"
+        }
       },
       {
         "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated",
@@ -90,19 +90,12 @@
       },
       "text" : {
         "status" : "extensions",
-        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"DocumentReference_null\"> </a><p class=\"res-header-id\"><b>Genererad berättande text: DocumentReference </b></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profil: <a href=\"StructureDefinition-IneraIndexEntry.html\">Indexpost (FHIR-EI)</a></p></div><p><b>Producentens endpoint</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE01</p><p><b>Registrerande producent</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registreringsstatus</b>: entered-in-error</p><p><b>Innehållets senaste ändring</b>: 2026-10-20 14:31:55+0200</p><p><b>Orsak till avregistrering</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem entered-in-error}\">Felregistrering</span></p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</code>/9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a</p><p><b>status</b>: Entered in Error</p><p><b>type</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}\">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Url</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"https://journal-a.example.org/fhir\">https://journal-a.example.org/fhir</a></td></tr></table></blockquote></div>"
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"DocumentReference_null\"> </a><p class=\"res-header-id\"><b>Genererad berättande text: DocumentReference </b></p><div style=\"display: inline-block; background-color: #fbffeb; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profil: <a href=\"StructureDefinition-IneraIndexEntry.html\">Indexpost (FHIR-EI)</a></p></div><p><b>Producentens endpoint</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registrerande producent</b>: <a href=\"https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\">https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</a></p><p><b>Registreringsstatus</b>: entered-in-error</p><p><b>Vårdenhet</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE01</p><p><b>Innehållets senaste ändring</b>: 2026-10-20 14:31:55+0200</p><p><b>Orsak till avregistrering</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem entered-in-error}\">Felregistrering</span></p><p><b>identifier</b>: <code>https://tjanstekatalog.example.org/fhir/Endpoint/journal-a</code>/9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a</p><p><b>status</b>: Entered in Error</p><p><b>type</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}\">riv:clinicalprocess:healthcond:description</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Url</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"https://journal-a.example.org/fhir\">https://journal-a.example.org/fhir</a></td></tr></table></blockquote></div>"
       },
       "extension" : [{
         "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
         "valueReference" : {
           "reference" : "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"
-        }
-      },
-      {
-        "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
-        "valueIdentifier" : {
-          "system" : "urn:oid:1.2.752.29.4.19",
-          "value" : "SE0000000000-VE01"
         }
       },
       {
@@ -114,6 +107,13 @@
       {
         "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
         "valueCode" : "entered-in-error"
+      },
+      {
+        "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
+        "valueIdentifier" : {
+          "system" : "urn:oid:1.2.752.29.4.19",
+          "value" : "SE0000000000-VE01"
+        }
       },
       {
         "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated",

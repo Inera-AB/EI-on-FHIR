@@ -52,10 +52,9 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"23.23"}
-    h3,h4,h5,h6{--heading-prefix:"23.23"}</style>
+    <style type="text/css">h2{--heading-prefix:"23.26"}
+    h3,h4,h5,h6{--heading-prefix:"23.26"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -108,6 +107,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -119,7 +119,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -248,12 +247,16 @@
      <a href="http://hl7.org/fhir/R5/resource.html#Meta#XMeta.security">fhir:security</a> ( [
        <a href="http://hl7.org/fhir/R5/datatypes.html#Coding#XCoding.system">fhir:system</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;http://terminology.hl7.org/CodeSystem/v3-ActCode&quot;^^xsd:anyURI ] ;
        <a href="http://hl7.org/fhir/R5/datatypes.html#Coding#XCoding.code">fhir:code</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#code">fhir:v</a> &quot;NOPAT&quot; ]
+     ] ) ;
+     <a href="http://hl7.org/fhir/R5/resource.html#Meta#XMeta.tag">fhir:tag</a> ( [
+       <a href="http://hl7.org/fhir/R5/datatypes.html#Coding#XCoding.system">fhir:system</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;^^xsd:anyURI ] ;
+       <a href="http://hl7.org/fhir/R5/datatypes.html#Coding#XCoding.code">fhir:code</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#code">fhir:v</a> &quot;producer&quot; ]
      ] )
   ] ; # 
   <a href="http://hl7.org/fhir/R5/resource.html#XDocumentReference.language">fhir:language</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#code">fhir:v</a> &quot;sv&quot;] ; # 
   <a href="http://hl7.org/fhir/R5/domainresource.html#XDocumentReference.text">fhir:text</a> [
      <a href="http://hl7.org/fhir/R5/narrative.html#Narrative#XNarrative.status">fhir:status</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#code">fhir:v</a> &quot;extensions&quot; ] ;
-     <a href="http://hl7.org/fhir/R5/narrative.html#Narrative#XNarrative.div">fhir:div</a> [ <a href="http://hl7.org/fhir/R5/narrative.html#xhtml">fhir:v</a> &quot;&lt;div xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;&lt;p class=\&quot;res-header-id\&quot;&gt;&lt;b&gt;Genererad berättande text: DocumentReference IndexpostEjForPatient&lt;/b&gt;&lt;/p&gt;&lt;a name=\&quot;IndexpostEjForPatient\&quot;&gt; &lt;/a&gt;&lt;a name=\&quot;hcIndexpostEjForPatient\&quot;&gt; &lt;/a&gt;&lt;div style=\&quot;display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\&quot;&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Senast uppdaterad: 2026-10-23 09:12:40+0200&lt;/p&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Profil: &lt;a href=\&quot;StructureDefinition-IneraIndexEntry.html\&quot;&gt;Indexpost (FHIR-EI)&lt;/a&gt;&lt;/p&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Säkerhetsetikett: &lt;a href=\&quot;http://terminology.hl7.org/7.5.0/CodeSystem-v3-ActCode.html\&quot;&gt;no disclosure to patient, family or caregivers without attending provider's authorization (Detaljer: ActCode kod NOPAT = 'no disclosure to patient, family or caregivers without attending provider's authorization')&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;p&gt;&lt;b&gt;Producentens endpoint&lt;/b&gt;: &lt;a href=\&quot;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\&quot;&gt;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Vårdenhet&lt;/b&gt;: &lt;code&gt;urn:oid:1.2.752.29.4.19&lt;/code&gt;/SE0000000000-VE03&lt;/p&gt;&lt;p&gt;&lt;b&gt;Registrerande producent&lt;/b&gt;: &lt;a href=\&quot;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\&quot;&gt;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Registreringsstatus&lt;/b&gt;: active&lt;/p&gt;&lt;p&gt;&lt;b&gt;Innehållets senaste ändring&lt;/b&gt;: 2026-10-23 09:12:31+0200&lt;/p&gt;&lt;p&gt;&lt;b&gt;identifier&lt;/b&gt;: &lt;code&gt;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&lt;/code&gt;/3c4d5e6f-7a8b-4c9d-8e0f-1a2b3c4d5e6f&lt;/p&gt;&lt;p&gt;&lt;b&gt;status&lt;/b&gt;: Current&lt;/p&gt;&lt;p&gt;&lt;b&gt;type&lt;/b&gt;: &lt;span title=\&quot;Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}, {urn:ietf:rfc:3986 https://example.org/fhir/ImplementationGuide/vardochomsorgsdokumentation}\&quot;&gt;riv:clinicalprocess:healthcond:description&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;subject&lt;/b&gt;: Identifier: &lt;code&gt;http://electronichealth.se/identifier/personnummer&lt;/code&gt;/191212121212&lt;/p&gt;&lt;p&gt;&lt;b&gt;custodian&lt;/b&gt;: Identifier: &lt;code&gt;urn:oid:1.2.752.29.4.19&lt;/code&gt;/SE0000000000-VG01&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;content&lt;/b&gt;&lt;/p&gt;&lt;h3&gt;Attachments&lt;/h3&gt;&lt;table class=\&quot;grid\&quot;&gt;&lt;tr&gt;&lt;td style=\&quot;display: none\&quot;&gt;-&lt;/td&gt;&lt;td&gt;&lt;b&gt;Url&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=\&quot;display: none\&quot;&gt;*&lt;/td&gt;&lt;td&gt;&lt;a href=\&quot;https://journal-a.example.org/fhir\&quot;&gt;https://journal-a.example.org/fhir&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;profile&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;value&lt;/b&gt;: &lt;a href=\&quot;CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo\&quot;&gt;Kodsystem för kategorier inom tjänstedomän: voo&lt;/a&gt; (voo)&lt;/p&gt;&lt;/blockquote&gt;&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;profile&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;value&lt;/b&gt;: &lt;a href=\&quot;http://hl7.org/fhir/R5/composition.html\&quot;&gt;Composition&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/div&gt;&quot;^^rdf:XMLLiteral ]
+     <a href="http://hl7.org/fhir/R5/narrative.html#Narrative#XNarrative.div">fhir:div</a> [ <a href="http://hl7.org/fhir/R5/narrative.html#xhtml">fhir:v</a> &quot;&lt;div xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;&lt;p class=\&quot;res-header-id\&quot;&gt;&lt;b&gt;Genererad berättande text: DocumentReference IndexpostEjForPatient&lt;/b&gt;&lt;/p&gt;&lt;a name=\&quot;IndexpostEjForPatient\&quot;&gt; &lt;/a&gt;&lt;a name=\&quot;hcIndexpostEjForPatient\&quot;&gt; &lt;/a&gt;&lt;div style=\&quot;display: inline-block; background-color: #fbffeb; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\&quot;&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Senast uppdaterad: 2026-10-23 09:12:40+0200&lt;/p&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Profil: &lt;a href=\&quot;StructureDefinition-IneraIndexEntry.html\&quot;&gt;Indexpost (FHIR-EI)&lt;/a&gt;&lt;/p&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Tagg: &lt;a href=\&quot;CodeSystem-IneraIndexPopulationMethodCodeSystem.html\&quot;&gt;Producentregistrering (Detaljer: Kodsystem för försörjningssätt kod producer = 'Producentregistrering')&lt;/a&gt;&lt;/p&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Säkerhetsetikett: &lt;a href=\&quot;http://terminology.hl7.org/7.5.0/CodeSystem-v3-ActCode.html\&quot;&gt;no disclosure to patient, family or caregivers without attending provider's authorization (Detaljer: ActCode kod NOPAT = 'no disclosure to patient, family or caregivers without attending provider's authorization')&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;p&gt;&lt;b&gt;Producentens endpoint&lt;/b&gt;: &lt;a href=\&quot;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\&quot;&gt;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Registrerande producent&lt;/b&gt;: &lt;a href=\&quot;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a\&quot;&gt;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Registreringsstatus&lt;/b&gt;: active&lt;/p&gt;&lt;p&gt;&lt;b&gt;Vårdenhet&lt;/b&gt;: &lt;code&gt;urn:oid:1.2.752.29.4.19&lt;/code&gt;/SE0000000000-VE03&lt;/p&gt;&lt;p&gt;&lt;b&gt;Innehållets senaste ändring&lt;/b&gt;: 2026-10-23 09:12:31+0200&lt;/p&gt;&lt;p&gt;&lt;b&gt;identifier&lt;/b&gt;: &lt;code&gt;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&lt;/code&gt;/3c4d5e6f-7a8b-4c9d-8e0f-1a2b3c4d5e6f&lt;/p&gt;&lt;p&gt;&lt;b&gt;status&lt;/b&gt;: Current&lt;/p&gt;&lt;p&gt;&lt;b&gt;type&lt;/b&gt;: &lt;span title=\&quot;Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}, {urn:ietf:rfc:3986 https://example.org/fhir/ImplementationGuide/vardochomsorgsdokumentation}\&quot;&gt;riv:clinicalprocess:healthcond:description&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;subject&lt;/b&gt;: Identifier: &lt;code&gt;http://electronichealth.se/identifier/personnummer&lt;/code&gt;/191212121212&lt;/p&gt;&lt;p&gt;&lt;b&gt;custodian&lt;/b&gt;: Identifier: &lt;code&gt;urn:oid:1.2.752.29.4.19&lt;/code&gt;/SE0000000000-VG01&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;content&lt;/b&gt;&lt;/p&gt;&lt;h3&gt;Attachments&lt;/h3&gt;&lt;table class=\&quot;grid\&quot;&gt;&lt;tr&gt;&lt;td style=\&quot;display: none\&quot;&gt;-&lt;/td&gt;&lt;td&gt;&lt;b&gt;Url&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=\&quot;display: none\&quot;&gt;*&lt;/td&gt;&lt;td&gt;&lt;a href=\&quot;https://journal-a.example.org/fhir\&quot;&gt;https://journal-a.example.org/fhir&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;profile&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;value&lt;/b&gt;: &lt;a href=\&quot;CodeSystem-IneraEngagementCategoryCodeSystem.html#IneraEngagementCategoryCodeSystem-voo\&quot;&gt;Kodsystem för kategorier inom tjänstedomän: voo&lt;/a&gt; (voo)&lt;/p&gt;&lt;/blockquote&gt;&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;profile&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;value&lt;/b&gt;: &lt;a href=\&quot;http://hl7.org/fhir/R5/composition.html\&quot;&gt;Composition&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/div&gt;&quot;^^rdf:XMLLiteral ]
   ] ; # 
   <a href="http://hl7.org/fhir/R5/domainresource.html#XDocumentReference.extension">fhir:extension</a> ( [
      <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.url">fhir:url</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint&quot;^^xsd:anyURI ] ;
@@ -261,13 +264,6 @@
        <a href="http://hl7.org/fhir/R5/references.html#Reference">a</a> fhir:Reference ;
        <a href="http://hl7.org/fhir/R5/rdf.html#reference">fhir:link</a> &lt;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&gt; ;
        <a href="http://hl7.org/fhir/R5/references.html#Reference#XReference.reference">fhir:reference</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;https://tjanstekatalog.example.org/fhir/Endpoint/journal-a&quot; ]
-     ]
-  ] [
-     <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.url">fhir:url</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit&quot;^^xsd:anyURI ] ;
-     <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">fhir:value</a> [
-       <a href="http://hl7.org/fhir/R5/datatypes.html#Identifier">a</a> fhir:Identifier ;
-       <a href="http://hl7.org/fhir/R5/datatypes.html#Identifier#XIdentifier.system">fhir:system</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;urn:oid:1.2.752.29.4.19&quot;^^xsd:anyURI ] ;
-       <a href="http://hl7.org/fhir/R5/datatypes.html#Identifier#XIdentifier.value">fhir:value</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;SE0000000000-VE03&quot; ]
      ]
   ] [
      <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.url">fhir:url</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer&quot;^^xsd:anyURI ] ;
@@ -281,6 +277,13 @@
      <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">fhir:value</a> [
        <a href="http://hl7.org/fhir/R5/datatypes.html#code">a</a> fhir:code ;
        <a href="http://hl7.org/fhir/R5/datatypes.html#code">fhir:v</a> &quot;active&quot;
+     ]
+  ] [
+     <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.url">fhir:url</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit&quot;^^xsd:anyURI ] ;
+     <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.value_x_">fhir:value</a> [
+       <a href="http://hl7.org/fhir/R5/datatypes.html#Identifier">a</a> fhir:Identifier ;
+       <a href="http://hl7.org/fhir/R5/datatypes.html#Identifier#XIdentifier.system">fhir:system</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;urn:oid:1.2.752.29.4.19&quot;^^xsd:anyURI ] ;
+       <a href="http://hl7.org/fhir/R5/datatypes.html#Identifier#XIdentifier.value">fhir:value</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;SE0000000000-VE03&quot; ]
      ]
   ] [
      <a href="http://hl7.org/fhir/R5/extensibility.html#Extension#XExtension.url">fhir:url</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#uri">fhir:v</a> &quot;https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated&quot;^^xsd:anyURI ] ;
@@ -369,8 +372,8 @@
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

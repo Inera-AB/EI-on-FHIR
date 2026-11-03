@@ -4,7 +4,6 @@
 
 * [Hem](index.md)
 * [Nedladdningar](downloads.md)
-* [Stöd för producenter](producer-support.md)
 * [Prenumeration](subscriptions.md)
 * [Testning och validering](testing.md)
 * [Förväntade svar](expected-responses.md)
@@ -21,6 +20,7 @@
 * [Kodverk för tjänster och informationsmängder](information-sets.md)
 * [Om](about.md)
 * [Mappning till profiler](mappings.md)
+* [Försörjning av indexet](population.md)
 * [Öppna frågor](open-issues.md)
 * [Händelsemodell och övergång](event-model.md)
 * [Roller och ansvar](roles-and-responsibilities.md)
@@ -32,6 +32,7 @@
 
 * [Kodsystem för orsaker till avregistrering](CodeSystem-IneraDeregistrationReasonCodeSystem.md)
 * [Kodsystem för kategorier inom tjänstedomän](CodeSystem-IneraEngagementCategoryCodeSystem.md)
+* [Kodsystem för försörjningssätt](CodeSystem-IneraIndexPopulationMethodCodeSystem.md)
 * [Kodsystem för registreringsstatus](CodeSystem-IneraIndexRegistrationStatusCodeSystem.md)
 * [Kodsystem för tjänstedomäner](CodeSystem-IneraServiceDomainCodeSystem.md)
 
@@ -39,6 +40,7 @@
 
 * [Orsaker till avregistrering](ValueSet-IneraDeregistrationReasonValueSet.md)
 * [Kategorier inom tjänstedomän](ValueSet-IneraEngagementCategoryValueSet.md)
+* [Försörjningssätt](ValueSet-IneraIndexPopulationMethodValueSet.md)
 * [Registreringsstatus för indexposter](ValueSet-IneraIndexRegistrationStatusValueSet.md)
 * [Tjänstedomäner](ValueSet-IneraServiceDomainValueSet.md)
 
@@ -79,8 +81,10 @@
 
 * [RegistreringTransaction (Bundle)](Bundle-RegistreringTransaction.md)
 * [SokresultatForPatient (Bundle)](Bundle-SokresultatForPatient.md)
+* [SokresultatOfullstandigt (Bundle)](Bundle-SokresultatOfullstandigt.md)
 * [IndexpostEjForPatient (DocumentReference)](DocumentReference-IndexpostEjForPatient.md)
 * [IndexpostFhirProducent (DocumentReference)](DocumentReference-IndexpostFhirProducent.md)
 * [IndexpostFranAdapter (DocumentReference)](DocumentReference-IndexpostFranAdapter.md)
+* [IndexpostFranLokaliseringstjanst (DocumentReference)](DocumentReference-IndexpostFranLokaliseringstjanst.md)
 * [IndexpostIndragen (DocumentReference)](DocumentReference-IndexpostIndragen.md)
 * [PrenumerationForPatient (Subscription)](Subscription-PrenumerationForPatient.md)

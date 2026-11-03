@@ -1,0 +1,61 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "IneraIndexPopulationMethodCodeSystem"] ; # 
+  fhir:language [ fhir:v "sv"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraIndexPopulationMethodCodeSystem</b></p><a name=\"IneraIndexPopulationMethodCodeSystem\"> </a><a name=\"hcIneraIndexPopulationMethodCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code> definierar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">producer<a name=\"IneraIndexPopulationMethodCodeSystem-producer\"> </a></td><td>Producentregistrering</td><td>Producenten har registrerat posten, direkt eller via en indexeringsagent.</td></tr><tr><td style=\"white-space:nowrap\">cache<a name=\"IneraIndexPopulationMethodCodeSystem-cache\"> </a></td><td>Inera-försörjd cache</td><td>Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan.</td></tr><tr><td style=\"white-space:nowrap\">mirror<a name=\"IneraIndexPopulationMethodCodeSystem-mirror\"> </a></td><td>Spegling av dagens engagemangsindex</td><td>Övergångsadaptern har speglat posten från dagens engagemangsindex.</td></tr></table></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"^^xsd:anyURI] ; # 
+  fhir:identifier ( [
+     fhir:value [ fhir:v "IneraIndexPopulationMethodCodeSystem" ]
+  ] ) ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IneraIndexPopulationMethodCodeSystem"] ; # 
+  fhir:title [ fhir:v "Kodsystem för försörjningssätt"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v false] ; # 
+  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "Inera AB"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Inera AB" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://www.inera.se" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "SE" ] ;
+       fhir:display [ fhir:v "Sweden" ]
+     ] )
+  ] ) ; # 
+  fhir:caseSensitive [ fhir:v true] ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "3"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "producer" ] ;
+     fhir:display [ fhir:v "Producentregistrering" ] ;
+     fhir:definition [ fhir:v "Producenten har registrerat posten, direkt eller via en indexeringsagent." ]
+  ] [
+     fhir:code [ fhir:v "cache" ] ;
+     fhir:display [ fhir:v "Inera-försörjd cache" ] ;
+     fhir:definition [ fhir:v "Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan." ]
+  ] [
+     fhir:code [ fhir:v "mirror" ] ;
+     fhir:display [ fhir:v "Spegling av dagens engagemangsindex" ] ;
+     fhir:definition [ fhir:v "Övergångsadaptern har speglat posten från dagens engagemangsindex." ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

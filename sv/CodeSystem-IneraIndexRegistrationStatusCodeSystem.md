@@ -55,7 +55,7 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
   {
     "code" : "withdrawn",
     "display" : "Indragen",
-    "definition" : "Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded."
+    "definition" : "Posten har avsiktligt och varaktigt dragits tillbaka. Basstatus superseded."
   },
   {
     "code" : "entered-in-error",

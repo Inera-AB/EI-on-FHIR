@@ -1,0 +1,53 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "IneraIndexPopulationMethodCodeSystem",
+  "language" : "sv",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraIndexPopulationMethodCodeSystem</b></p><a name=\"IneraIndexPopulationMethodCodeSystem\"> </a><a name=\"hcIneraIndexPopulationMethodCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code> definierar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">producer<a name=\"IneraIndexPopulationMethodCodeSystem-producer\"> </a></td><td>Producentregistrering</td><td>Producenten har registrerat posten, direkt eller via en indexeringsagent.</td></tr><tr><td style=\"white-space:nowrap\">cache<a name=\"IneraIndexPopulationMethodCodeSystem-cache\"> </a></td><td>Inera-försörjd cache</td><td>Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan.</td></tr><tr><td style=\"white-space:nowrap\">mirror<a name=\"IneraIndexPopulationMethodCodeSystem-mirror\"> </a></td><td>Spegling av dagens engagemangsindex</td><td>Övergångsadaptern har speglat posten från dagens engagemangsindex.</td></tr></table></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+  "identifier" : [{
+    "value" : "IneraIndexPopulationMethodCodeSystem"
+  }],
+  "version" : "0.1.0",
+  "name" : "IneraIndexPopulationMethodCodeSystem",
+  "title" : "Kodsystem för försörjningssätt",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-10-26",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 3,
+  "concept" : [{
+    "code" : "producer",
+    "display" : "Producentregistrering",
+    "definition" : "Producenten har registrerat posten, direkt eller via en indexeringsagent."
+  },
+  {
+    "code" : "cache",
+    "display" : "Inera-försörjd cache",
+    "definition" : "Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan."
+  },
+  {
+    "code" : "mirror",
+    "display" : "Spegling av dagens engagemangsindex",
+    "definition" : "Övergångsadaptern har speglat posten från dagens engagemangsindex."
+  }]
+}

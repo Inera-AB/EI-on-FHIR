@@ -20,6 +20,13 @@
   "name" : "IneraEngagementCategoryCodeSystem"
 },
 {
+  "id" : "IneraIndexPopulationMethodCodeSystem",
+  "type" : "CodeSystem",
+  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+  "version" : "0.1.0",
+  "name" : "IneraIndexPopulationMethodCodeSystem"
+},
+{
   "id" : "IneraIndexRegistrationStatusCodeSystem",
   "type" : "CodeSystem",
   "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",
@@ -144,6 +151,13 @@
   "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementCategoryValueSet",
   "version" : "0.1.0",
   "name" : "IneraEngagementCategoryValueSet"
+},
+{
+  "id" : "IneraIndexPopulationMethodValueSet",
+  "type" : "ValueSet",
+  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet",
+  "version" : "0.1.0",
+  "name" : "IneraIndexPopulationMethodValueSet"
 },
 {
   "id" : "IneraIndexRegistrationStatusValueSet",

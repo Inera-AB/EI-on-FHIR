@@ -4,7 +4,6 @@
 
 * [Hem](sv/index.md)
 * [Nedladdningar](sv/downloads.md)
-* [Stöd för producenter](sv/producer-support.md)
 * [Prenumeration](sv/subscriptions.md)
 * [Testning och validering](sv/testing.md)
 * [Förväntade svar](sv/expected-responses.md)
@@ -21,6 +20,7 @@
 * [Kodverk för tjänster och informationsmängder](sv/information-sets.md)
 * [Om](sv/about.md)
 * [Mappning till profiler](sv/mappings.md)
+* [Försörjning av indexet](sv/population.md)
 * [Öppna frågor](sv/open-issues.md)
 * [Händelsemodell och övergång](sv/event-model.md)
 * [Roller och ansvar](sv/roles-and-responsibilities.md)
@@ -32,6 +32,7 @@
 
 * [Kodsystem för orsaker till avregistrering](sv/CodeSystem-IneraDeregistrationReasonCodeSystem.md)
 * [Kodsystem för kategorier inom tjänstedomän](sv/CodeSystem-IneraEngagementCategoryCodeSystem.md)
+* [Kodsystem för försörjningssätt](sv/CodeSystem-IneraIndexPopulationMethodCodeSystem.md)
 * [Kodsystem för registreringsstatus](sv/CodeSystem-IneraIndexRegistrationStatusCodeSystem.md)
 * [Kodsystem för tjänstedomäner](sv/CodeSystem-IneraServiceDomainCodeSystem.md)
 
@@ -39,6 +40,7 @@
 
 * [Orsaker till avregistrering](sv/ValueSet-IneraDeregistrationReasonValueSet.md)
 * [Kategorier inom tjänstedomän](sv/ValueSet-IneraEngagementCategoryValueSet.md)
+* [Försörjningssätt](sv/ValueSet-IneraIndexPopulationMethodValueSet.md)
 * [Registreringsstatus för indexposter](sv/ValueSet-IneraIndexRegistrationStatusValueSet.md)
 * [Tjänstedomäner](sv/ValueSet-IneraServiceDomainValueSet.md)
 
@@ -79,8 +81,10 @@
 
 * [RegistreringTransaction (Bundle)](sv/Bundle-RegistreringTransaction.md)
 * [SokresultatForPatient (Bundle)](sv/Bundle-SokresultatForPatient.md)
+* [SokresultatOfullstandigt (Bundle)](sv/Bundle-SokresultatOfullstandigt.md)
 * [IndexpostEjForPatient (DocumentReference)](sv/DocumentReference-IndexpostEjForPatient.md)
 * [IndexpostFhirProducent (DocumentReference)](sv/DocumentReference-IndexpostFhirProducent.md)
 * [IndexpostFranAdapter (DocumentReference)](sv/DocumentReference-IndexpostFranAdapter.md)
+* [IndexpostFranLokaliseringstjanst (DocumentReference)](sv/DocumentReference-IndexpostFranLokaliseringstjanst.md)
 * [IndexpostIndragen (DocumentReference)](sv/DocumentReference-IndexpostIndragen.md)
 * [PrenumerationForPatient (Subscription)](sv/Subscription-PrenumerationForPatient.md)

@@ -48,7 +48,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"4"}
     h3,h4,h5,h6{--heading-prefix:"4"}</style>
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -190,7 +189,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <div class="markdown-toc">
 <ul id="markdown-toc">
   <li><a href="#sök-var-information-finns-om-en-patient" id="markdown-toc-sök-var-information-finns-om-en-patient">Sök var information finns om en patient</a></li>
-  <li><a href="#registrera-eller-uppdatera-indexposter" id="markdown-toc-registrera-eller-uppdatera-indexposter">Registrera eller uppdatera indexposter</a></li>
+  <li><a href="#fylla-indexet" id="markdown-toc-fylla-indexet">Fylla indexet</a></li>
   <li><a href="#avregistrera-indexposter" id="markdown-toc-avregistrera-indexposter">Avregistrera indexposter</a></li>
   <li><a href="#prenumerera-på-ändringar" id="markdown-toc-prenumerera-på-ändringar">Prenumerera på ändringar</a></li>
   <li><a href="#stäm-av-efter-avbrott" id="markdown-toc-stäm-av-efter-avbrott">Stäm av efter avbrott</a></li>
@@ -205,13 +204,13 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. FHIR-EI kontrollerar behörighet och spärrar, filtrerar bort poster som konsumenten inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.</p>
 
-<h3 id="registrera-eller-uppdatera-indexposter">Registrera eller uppdatera indexposter</h3>
+<h3 id="fylla-indexet">Fylla indexet</h3>
 
-<p>En producent har fått ny eller ändrad information om en patient inom en tjänst. Producenten, eller övergångsadaptern för källsystem som fortfarande använder RIV-TA, registrerar eller uppdaterar motsvarande indexpost. Uppdateringen är idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.</p>
+<p>En källa har fått ny eller ändrad information om en patient inom en tjänst, och indexet ska spegla det. Hur det sker beror på tjänstens <a href="population.html">försörjningssätt</a>: producenten registrerar själv eller via en indexeringsagent, Ineras lokaliseringstjänst frågar källan när posten behövs och håller den färsk med prenumeration, eller övergångsadaptern speglar dagens engagemangsindex för källor som fortfarande använder RIV-TA. Oavsett sätt är uppdateringen idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.</p>
 
 <h3 id="avregistrera-indexposter">Avregistrera indexposter</h3>
 
-<p>En producent håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Producenten avregistrerar posten och anger orsaken. Posten ligger kvar som gravsten under en lagringstid, så att avregistreringen syns för prenumeranter och vid avstämning. Motsvarar Update med deleteFlag.</p>
+<p>En källa håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Den registrerande parten avregistrerar posten och anger orsaken. Posten ligger kvar som gravsten under en lagringstid, så att avregistreringen syns för prenumeranter och vid avstämning. Motsvarar Update med deleteFlag.</p>
 
 <h3 id="prenumerera-på-ändringar">Prenumerera på ändringar</h3>
 
@@ -261,8 +260,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

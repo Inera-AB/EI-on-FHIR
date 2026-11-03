@@ -48,7 +48,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"17"}
     h3,h4,h5,h6{--heading-prefix:"17"}</style>
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -195,6 +194,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><a href="#prenumerationer" id="markdown-toc-prenumerationer">Prenumerationer</a></li>
   <li><a href="#producenter" id="markdown-toc-producenter">Producenter</a></li>
   <li><a href="#granularitet" id="markdown-toc-granularitet">Granularitet</a></li>
+  <li><a href="#vårdgivare-och-vårdenhet-i-spärrkontrollen" id="markdown-toc-vårdgivare-och-vårdenhet-i-spärrkontrollen">Vårdgivare och vårdenhet i spärrkontrollen</a></li>
   <li><a href="#allmänna-krav" id="markdown-toc-allmänna-krav">Allmänna krav</a></li>
 </ul>
 
@@ -284,7 +284,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="säkerhetsetiketter">Säkerhetsetiketter</h3>
 
-<p>En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Producenten kan därför märka en post med säkerhetsetiketter i <code class="language-plaintext highlighter-rouge">meta.security</code>, till exempel <code class="language-plaintext highlighter-rouge">NOPAT</code> ur HL7:s kodsystem <code class="language-plaintext highlighter-rouge">v3-ActCode</code>: inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande. FHIR-EI tillämpar etiketterna per syfte. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177. Se exemplet <a href="DocumentReference-IndexpostEjForPatient.html">Indexpost som inte visas för patient eller närstående</a>.</p>
+<p>En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Den registrerande parten kan därför märka en post med säkerhetsetiketter i <code class="language-plaintext highlighter-rouge">meta.security</code>, till exempel <code class="language-plaintext highlighter-rouge">NOPAT</code> ur HL7:s kodsystem <code class="language-plaintext highlighter-rouge">v3-ActCode</code>: inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande. FHIR-EI tillämpar etiketterna per syfte. Vid Inera-försörjd cache måste den riktade frågan kunna returnera etiketterna; dagens engagemangsindex har ingen motsvarighet, så speglade poster saknar dem. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177. Se exemplet <a href="DocumentReference-IndexpostEjForPatient.html">Indexpost som inte visas för patient eller närstående</a>.</p>
 
 <h3 id="prenumerationer">Prenumerationer</h3>
 
@@ -292,11 +292,17 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="producenter">Producenter</h3>
 
-<p>Producenternas skrivningar filtreras inte men auktoriseras. Producentens identitet är dess endpoint i tjänstekatalogen, och en producent får bara registrera för vårdgivare som listar endpointen där. Se <a href="rest-interactions.html">REST-interaktioner och sökparametrar</a>. <code class="language-plaintext highlighter-rouge">meta.source</code> används aldrig ensamt för behörighetskontroll.</p>
+<p>Skrivningar från registrerande parter filtreras inte men auktoriseras. Partens identitet är dess endpoint i tjänstekatalogen. En producent får bara registrera för vårdgivare som listar endpointen där; övergångsadaptern och lokaliseringstjänsten bara inom sitt underlag. Se <a href="rest-interactions.html">REST-interaktioner och sökparametrar</a>. <code class="language-plaintext highlighter-rouge">meta.source</code> används aldrig ensamt för behörighetskontroll.</p>
 
 <h3 id="granularitet">Granularitet</h3>
 
 <p>Spärrar gäller idag på vårdgivar- och vårdenhetsnivå. Med indexposter per tjänst går det längre fram att spärra eller filtrera per tjänst utan ändrad modell.</p>
+
+<h3 id="vårdgivare-och-vårdenhet-i-spärrkontrollen">Vårdgivare och vårdenhet i spärrkontrollen</h3>
+
+<p>Yttre spärr prövas mot vårdgivaren. När posten anger vårdgivaren med organisationsnummer slår FHIR-EI upp vårdgivarens HSA-id i tjänstekatalogen, som har båda på den juridiska personen.</p>
+
+<p>Inre spärr prövas mot vårdenheten i <code class="language-plaintext highlighter-rouge">careUnit</code>. En post utan <code class="language-plaintext highlighter-rouge">careUnit</code>, vilket kan förekomma vid <a href="population.html">Inera-försörjd cache</a>, lämnas inte ut om patienten har en inre spärr hos vårdgivaren (fail-closed). Det kan dölja information som patienten inte har spärrat, så regeln är en <a href="open-issues.html">öppen fråga</a>.</p>
 
 <h3 id="allmänna-krav">Allmänna krav</h3>
 
@@ -330,8 +336,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

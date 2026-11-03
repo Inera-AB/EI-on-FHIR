@@ -6,13 +6,15 @@ Senast uppdaterad: 2026-10-22 10:15:41+0200
 
 Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
 
-**Producentens endpoint**: [https://tjanstekatalog.example.org/fhir/Endpoint/journal-a](https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
+Tagg: [Producentregistrering (Detaljer: Kodsystem för försörjningssätt kod producer = 'Producentregistrering')](CodeSystem-IneraIndexPopulationMethodCodeSystem.md)
 
-**Vårdenhet**: `urn:oid:1.2.752.29.4.19`/SE0000000000-VE01
+**Producentens endpoint**: [https://tjanstekatalog.example.org/fhir/Endpoint/journal-a](https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 
 **Registrerande producent**: [https://tjanstekatalog.example.org/fhir/Endpoint/journal-a](https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 
 **Registreringsstatus**: withdrawn
+
+**Vårdenhet**: `urn:oid:1.2.752.29.4.19`/SE0000000000-VE01
 
 **Innehållets senaste ändring**: 2026-10-22 10:15:30+0200
 
@@ -55,19 +57,16 @@ Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
   "id" : "IndexpostIndragen",
   "meta" : {
     "lastUpdated" : "2026-10-22T10:15:41+02:00",
-    "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
+    "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"],
+    "tag" : [{
+      "system" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+      "code" : "producer"
+    }]
   },
   "extension" : [{
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
     "valueReference" : {
       "reference" : "https://tjanstekatalog.example.org/fhir/Endpoint/journal-a"
-    }
-  },
-  {
-    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
-    "valueIdentifier" : {
-      "system" : "urn:oid:1.2.752.29.4.19",
-      "value" : "SE0000000000-VE01"
     }
   },
   {
@@ -79,6 +78,13 @@ Profil: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
     "valueCode" : "withdrawn"
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
+    "valueIdentifier" : {
+      "system" : "urn:oid:1.2.752.29.4.19",
+      "value" : "SE0000000000-VE01"
+    }
   },
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated",

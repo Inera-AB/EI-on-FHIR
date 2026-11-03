@@ -18,6 +18,15 @@
     "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"]
   },
   {
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet",
+    "version" : "0.1.0",
+    "status" : "draft",
+    "name" : "IneraIndexPopulationMethodValueSet",
+    "title" : "Försörjningssätt",
+    "description" : "Alla försörjningssätt för indexposter.",
+    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"]
+  },
+  {
     "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet",
     "version" : "0.1.0",
     "status" : "draft",

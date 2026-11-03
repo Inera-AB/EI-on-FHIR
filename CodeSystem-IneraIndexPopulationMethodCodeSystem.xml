@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="IneraIndexPopulationMethodCodeSystem"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: CodeSystem IneraIndexPopulationMethodCodeSystem</b></p><a name="IneraIndexPopulationMethodCodeSystem"> </a><a name="hcIneraIndexPopulationMethodCodeSystem"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code> definierar följande koder:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">producer<a name="IneraIndexPopulationMethodCodeSystem-producer"> </a></td><td>Producentregistrering</td><td>Producenten har registrerat posten, direkt eller via en indexeringsagent.</td></tr><tr><td style="white-space:nowrap">cache<a name="IneraIndexPopulationMethodCodeSystem-cache"> </a></td><td>Inera-försörjd cache</td><td>Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan.</td></tr><tr><td style="white-space:nowrap">mirror<a name="IneraIndexPopulationMethodCodeSystem-mirror"> </a></td><td>Spegling av dagens engagemangsindex</td><td>Övergångsadaptern har speglat posten från dagens engagemangsindex.</td></tr></table></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"/>
+  <identifier>
+    <value value="IneraIndexPopulationMethodCodeSystem"/>
+  </identifier>
+  <version value="0.1.0"/>
+  <name value="IneraIndexPopulationMethodCodeSystem"/>
+  <title value="Kodsystem för försörjningssätt"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-10-26"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <caseSensitive value="true"/>
+  <content value="complete"/>
+  <count value="3"/>
+  <concept>
+    <code value="producer"/>
+    <display value="Producentregistrering"/>
+    <definition value="Producenten har registrerat posten, direkt eller via en indexeringsagent."/>
+  </concept>
+  <concept>
+    <code value="cache"/>
+    <display value="Inera-försörjd cache"/>
+    <definition value="Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan."/>
+  </concept>
+  <concept>
+    <code value="mirror"/>
+    <display value="Spegling av dagens engagemangsindex"/>
+    <definition value="Övergångsadaptern har speglat posten från dagens engagemangsindex."/>
+  </concept>
+</CodeSystem>

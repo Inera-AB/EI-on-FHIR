@@ -49,7 +49,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"23.13"}
     h3,h4,h5,h6{--heading-prefix:"23.13"}</style>
@@ -105,6 +104,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -116,7 +116,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -311,7 +310,7 @@ Element-ID:     <code>
   <p><b>Användningar:</b></p>
 <ul>
  <li>Använd denna Extension: <a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></li>
- <li>Exempel för denna Extension: <a href="Bundle-RegistreringTransaction.html">Bundle/RegistreringTransaction</a>, <a href="Bundle-SokresultatForPatient.html">Bundle/SokresultatForPatient</a>, <a href="DocumentReference-IndexpostEjForPatient.html">DocumentReference/IndexpostEjForPatient</a>, <a href="DocumentReference-IndexpostFhirProducent.html">DocumentReference/IndexpostFhirProducent</a><span id="rr_ex">... <button type="button" style="cursor: pointer; border: 1px grey solid; background-color: #fcdcb3; padding: 0 3px; margin: 0; color: black; font: inherit" onClick="var s = document.getElementById('rr_ex'); s.innerHTML = document.getElementById('rr2_ex').innerHTML; var a = s.querySelector('a'); if (a) a.focus();">Show 2 more</button></span><span id="rr2_ex" style="display: none">, <a href="DocumentReference-IndexpostFranAdapter.html">DocumentReference/IndexpostFranAdapter</a> and <a href="DocumentReference-IndexpostIndragen.html">DocumentReference/IndexpostIndragen</a></span></li>
+ <li>Exempel för denna Extension: <a href="Bundle-RegistreringTransaction.html">Bundle/RegistreringTransaction</a>, <a href="Bundle-SokresultatForPatient.html">Bundle/SokresultatForPatient</a>, <a href="Bundle-SokresultatOfullstandigt.html">Bundle/SokresultatOfullstandigt</a>, <a href="DocumentReference-IndexpostEjForPatient.html">DocumentReference/IndexpostEjForPatient</a><span id="rr_ex">... <button type="button" style="cursor: pointer; border: 1px grey solid; background-color: #fcdcb3; padding: 0 3px; margin: 0; color: black; font: inherit" onClick="var s = document.getElementById('rr_ex'); s.innerHTML = document.getElementById('rr2_ex').innerHTML; var a = s.querySelector('a'); if (a) a.focus();">Show 4 more</button></span><span id="rr2_ex" style="display: none">, <a href="DocumentReference-IndexpostFhirProducent.html">DocumentReference/IndexpostFhirProducent</a>, <a href="DocumentReference-IndexpostFranAdapter.html">DocumentReference/IndexpostFranAdapter</a>, <a href="DocumentReference-IndexpostFranLokaliseringstjanst.html">DocumentReference/IndexpostFranLokaliseringstjanst</a> and <a href="DocumentReference-IndexpostIndragen.html">DocumentReference/IndexpostIndragen</a></span></li>
 </ul>
 <p>Du kan också kontrollera <a href="https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/RegistrationStatus">användningar i FHIR IG-statistiken</a></p>
 
@@ -381,7 +380,7 @@ Element-ID:     <code>
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#code">code</a></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">Value of extension</span><br class="binding"/><span class="xhtPieceBold binding">Bindning: </span><a href="ValueSet-IneraIndexRegistrationStatusValueSet.html" title="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" class="binding">Registreringsstatus för indexposter</a><span class="binding"> (</span><a href="http://hl7.org/fhir/R5/terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set." class="binding">required</a><span class="binding">)</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbRegistrationStatusD-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegistrationStatusD'), 'constraint', document.getElementById('cbRegistrationStatusD-constraint').checked, document.getElementById('ppRegistrationStatusD'));
 document.getElementById('cbRegistrationStatusD-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -420,10 +419,10 @@ filterDesc(document.getElementById('RegistrationStatusD'), 'obligation', documen
     <td>Extension.value[x]</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
     </td>
     <td>
-      <a style="opacity: 0.50" href="ValueSet-IneraIndexRegistrationStatusValueSet.html">Registreringsstatus för indexposter</a>
+      <a href="ValueSet-IneraIndexRegistrationStatusValueSet.html" class="unchangedStyle">Registreringsstatus för indexposter</a>
       <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen är inte uttryckligen angiven, vilket innebär att den är fast till den version som tillhandahålls i denna specifikation">&#x1F4E6;0.1.0</td>
@@ -458,7 +457,7 @@ filterDesc(document.getElementById('RegistrationStatusD'), 'obligation', documen
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">0..0</td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
-<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/><br/><span class="xhtPieceBold">Slicing Note: </span>The rules on this element (including its children) apply to all the slices, but are not repeated in them</td></tr>
+<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/></td></tr>
 <tr fhir="generated-heirarchy" id="s-ac" class="xhtRowBorder0 xhtRowOdd" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck10.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_primitive.png" alt="" style="background-color: #F7F7F7; background-color: inherit" title="Primitiv datatyp" class="hierarchy"/> <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0" class="sr-only">Extension.</span><a no-external="true" href="StructureDefinition-RegistrationStatus-definitions.html#Extension.url" title="Source of the definition for the extension code - a logical name or a URL." data-no-external="true">url</a><a name="s-Extension.url"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">1..1</td>
@@ -469,7 +468,7 @@ filterDesc(document.getElementById('RegistrationStatusD'), 'obligation', documen
 <td style="" class="hierarchy xhtCellBorder0">1..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#code">code</a></td>
 <td style="" class="hierarchy xhtCellBorder0">Value of extension<br class="binding"/><span class="xhtPieceBold binding">Bindning: </span><a href="ValueSet-IneraIndexRegistrationStatusValueSet.html" title="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" class="binding">Registreringsstatus för indexposter</a><span class="binding"> (</span><a href="http://hl7.org/fhir/R5/terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set." class="binding">required</a><span class="binding">)</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbRegistrationStatusS-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegistrationStatusS'), 'constraint', document.getElementById('cbRegistrationStatusS-constraint').checked, document.getElementById('ppRegistrationStatusS'));
 document.getElementById('cbRegistrationStatusS-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -507,10 +506,10 @@ filterDesc(document.getElementById('RegistrationStatusS'), 'obligation', documen
     <td>Extension.value[x]</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
     </td>
     <td>
-      <a style="opacity: 1.0" href="ValueSet-IneraIndexRegistrationStatusValueSet.html">Registreringsstatus för indexposter</a>
+      <a href="ValueSet-IneraIndexRegistrationStatusValueSet.html">Registreringsstatus för indexposter</a>
       <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen är inte uttryckligen angiven, vilket innebär att den är fast till den version som tillhandahålls i denna specifikation">&#x1F4E6;0.1.0</td>
@@ -635,7 +634,7 @@ Sammanfattning
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#code">code</a></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">Value of extension</span><br class="binding"/><span class="xhtPieceBold binding">Bindning: </span><a href="ValueSet-IneraIndexRegistrationStatusValueSet.html" title="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" class="binding">Registreringsstatus för indexposter</a><span class="binding"> (</span><a href="http://hl7.org/fhir/R5/terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set." class="binding">required</a><span class="binding">)</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbRegistrationStatusDA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegistrationStatusDA'), 'constraint', document.getElementById('cbRegistrationStatusDA-constraint').checked, document.getElementById('ppRegistrationStatusDA'));
 document.getElementById('cbRegistrationStatusDA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -671,10 +670,10 @@ filterDesc(document.getElementById('RegistrationStatusDA'), 'obligation', docume
     <td>Extension.value[x]</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
     </td>
     <td>
-      <a style="opacity: 0.50" href="ValueSet-IneraIndexRegistrationStatusValueSet.html">Registreringsstatus för indexposter</a>
+      <a href="ValueSet-IneraIndexRegistrationStatusValueSet.html" class="unchangedStyle">Registreringsstatus för indexposter</a>
       <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen är inte uttryckligen angiven, vilket innebär att den är fast till den version som tillhandahålls i denna specifikation">&#x1F4E6;0.1.0</td>
@@ -708,7 +707,7 @@ filterDesc(document.getElementById('RegistrationStatusDA'), 'obligation', docume
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">0..0</td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
-<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/><br/><span class="xhtPieceBold">Slicing Note: </span>The rules on this element (including its children) apply to all the slices, but are not repeated in them</td></tr>
+<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/></td></tr>
 <tr fhir="generated-heirarchy" id="sa-ac" class="xhtRowBorder0 xhtRowOdd" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck10.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_primitive.png" alt="" style="background-color: #F7F7F7; background-color: inherit" title="Primitiv datatyp" class="hierarchy"/> <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0" class="sr-only">Extension.</span><a no-external="true" href="StructureDefinition-RegistrationStatus-definitions.html#Extension.url" title="Source of the definition for the extension code - a logical name or a URL." data-no-external="true">url</a><a name="sa-Extension.url"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">1..1</td>
@@ -719,7 +718,7 @@ filterDesc(document.getElementById('RegistrationStatusDA'), 'obligation', docume
 <td style="" class="hierarchy xhtCellBorder0">1..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#code">code</a></td>
 <td style="" class="hierarchy xhtCellBorder0">Value of extension<br class="binding"/><span class="xhtPieceBold binding">Bindning: </span><a href="ValueSet-IneraIndexRegistrationStatusValueSet.html" title="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" class="binding">Registreringsstatus för indexposter</a><span class="binding"> (</span><a href="http://hl7.org/fhir/R5/terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set." class="binding">required</a><span class="binding">)</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbRegistrationStatusSA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('RegistrationStatusSA'), 'constraint', document.getElementById('cbRegistrationStatusSA-constraint').checked, document.getElementById('ppRegistrationStatusSA'));
 document.getElementById('cbRegistrationStatusSA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -755,10 +754,10 @@ filterDesc(document.getElementById('RegistrationStatusSA'), 'obligation', docume
     <td>Extension.value[x]</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
     </td>
     <td>
-      <a style="opacity: 1.0" href="ValueSet-IneraIndexRegistrationStatusValueSet.html">Registreringsstatus för indexposter</a>
+      <a href="ValueSet-IneraIndexRegistrationStatusValueSet.html">Registreringsstatus för indexposter</a>
       <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen är inte uttryckligen angiven, vilket innebär att den är fast till den version som tillhandahålls i denna specifikation">&#x1F4E6;0.1.0</td>
@@ -886,8 +885,8 @@ Sammanfattning
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

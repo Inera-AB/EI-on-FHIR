@@ -48,7 +48,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"22"}
     h3,h4,h5,h6{--heading-prefix:"22"}</style>
@@ -104,6 +103,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -115,7 +115,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -195,9 +194,9 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <hr />
 
-<h3 id="010--opublicerad">[0.1.0] — opublicerad</h3>
+<h4 id="010--opublicerad">[0.1.0] — opublicerad</h4>
 
-<h4 id="features">Features</h4>
+<h5 id="features">Features</h5>
 
 <ul>
   <li>Första utkastet av FHIR-EI, byggt från specen <em>FHIR-baserad engagemangsindexkomponent</em></li>
@@ -215,7 +214,12 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li>Övergång per tjänst i fem lägen, med regeln att konsumenten byter först och utan återskrivning till dagens engagemangsindex</li>
   <li>Uppdateringsregler per tjänst: en <code class="language-plaintext highlighter-rouge">SubscriptionTopic</code> per informationsmängd och <code class="language-plaintext highlighter-rouge">obligation</code> i tillämpningsprofilen</li>
   <li>Ett index för både NPÖ och 1177, med prövning per syfte och säkerhetsetiketter i <code class="language-plaintext highlighter-rouge">meta.security</code></li>
-  <li>Sidan Stöd för producenter: direkt registrering, indexeringsagent som bygger på FHIR Subscriptions, och övergångsadaptern</li>
+  <li>Neutral försörjning: konsumentkontraktet är detsamma oavsett om en tjänsts indexposter fylls genom producentregistrering, Inera-försörjd cache (lokaliseringstjänst utifrån eHM:s patientindex och riktade frågor) eller spegling av dagens engagemangsindex. Ny sida Försörjning av indexet, som ersätter Stöd för producenter</li>
+  <li>Försörjningssätt i <code class="language-plaintext highlighter-rouge">meta.tag</code>, nytt kodsystem för försörjningssätt och ny avregistreringsorsak <code class="language-plaintext highlighter-rouge">not-at-source</code></li>
+  <li>Vårdgivaren får anges med organisationsnummer, och vårdenhet är valfri, eftersom eHM:s patientindex är nycklat på vårdgivare och journalsystem</li>
+  <li>Ofullständiga sökresultat redovisas med en <code class="language-plaintext highlighter-rouge">OperationOutcome</code> i <code class="language-plaintext highlighter-rouge">Bundle.issues</code></li>
+  <li>Övergångens lägen beskriver konsumenternas byte, oberoende av försörjningssätt</li>
+  <li>Samexistens med eHM:s patientindex i två riktningar</li>
   <li>Sidor om indexposten, händelsemodell och övergång, samexistens med eHM:s patientindex, prenumeration, spärr och loggning samt öppna frågor</li>
 </ul>
 
@@ -247,8 +251,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>

@@ -49,7 +49,6 @@
 	  <script type="text/javascript" src="assets/js/prism.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
-    <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
     <style type="text/css">h2{--heading-prefix:"23.9"}
     h3,h4,h5,h6{--heading-prefix:"23.9"}</style>
@@ -105,6 +104,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -116,7 +116,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
@@ -391,7 +390,7 @@ Element-ID:     <code>
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string" class="xhtPieceDeEmphasized">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">The value that is unique</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbLogicalAddressD-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressD'), 'constraint', document.getElementById('cbLogicalAddressD-constraint').checked, document.getElementById('ppLogicalAddressD'));
 document.getElementById('cbLogicalAddressD-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -432,7 +431,7 @@ filterDesc(document.getElementById('LogicalAddressD'), 'obligation', document.ge
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">0..0</td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
-<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/><br/><span class="xhtPieceBold">Slicing Note: </span>The rules on this element (including its children) apply to all the slices, but are not repeated in them</td></tr>
+<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/></td></tr>
 <tr fhir="generated-heirarchy" id="s-ac" class="xhtRowBorder0 xhtRowOdd" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck10.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_primitive.png" alt="" style="background-color: #F7F7F7; background-color: inherit" title="Primitiv datatyp" class="hierarchy"/> <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0" class="sr-only">Extension.</span><a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension.url" title="Source of the definition for the extension code - a logical name or a URL." data-no-external="true">url</a><a name="s-Extension.url"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">1..1</td>
@@ -483,7 +482,7 @@ filterDesc(document.getElementById('LogicalAddressD'), 'obligation', document.ge
 <td style="" class="hierarchy xhtCellBorder0">0..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/references.html">Reference</a>(<a href="http://hl7.org/fhir/R5/organization.html">Organization</a>)</td>
 <td style="" class="hierarchy xhtCellBorder0">Organization that issued id (may be just text)</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbLogicalAddressS-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressS'), 'constraint', document.getElementById('cbLogicalAddressS-constraint').checked, document.getElementById('ppLogicalAddressS'));
 document.getElementById('cbLogicalAddressS-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -521,10 +520,10 @@ filterDesc(document.getElementById('LogicalAddressS'), 'obligation', document.ge
     <td>Extension.value[x].use</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
     </td>
     <td title="Identifies the purpose for this identifier, if known .">
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/valueset-identifier-use.html">IdentifierUse</a>
+      <a href="http://hl7.org/fhir/R5/valueset-identifier-use.html">IdentifierUse</a>
       <button data-clipboard-text="http://hl7.org/fhir/ValueSet/identifier-use|5.0.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen anges uttryckligen vara 5.0.0">&#x1F4CD;5.0.0</td>
@@ -536,10 +535,10 @@ filterDesc(document.getElementById('LogicalAddressS'), 'obligation', document.ge
     <td>Extension.value[x].type</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[extensible]">extensible</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[extensible]">extensible</a>
     </td>
     <td title="A coded type for an identifier that can be used to determine which identifier to use for a specific purpose.">
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/valueset-identifier-type.html">Identifier Type Codes</a>
+      <a href="http://hl7.org/fhir/R5/valueset-identifier-type.html">Identifier Type Codes</a>
       <button data-clipboard-text="http://hl7.org/fhir/ValueSet/identifier-type|5.0.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen anges uttryckligen vara 5.0.0">&#x1F4CD;5.0.0</td>
@@ -685,7 +684,7 @@ Sammanfattning
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string" class="xhtPieceDeEmphasized">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">The value that is unique</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbLogicalAddressDA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressDA'), 'constraint', document.getElementById('cbLogicalAddressDA-constraint').checked, document.getElementById('ppLogicalAddressDA'));
 document.getElementById('cbLogicalAddressDA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -722,7 +721,7 @@ filterDesc(document.getElementById('LogicalAddressDA'), 'obligation', document.g
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">0..0</td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
-<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/><br/><span class="xhtPieceBold">Slicing Note: </span>The rules on this element (including its children) apply to all the slices, but are not repeated in them</td></tr>
+<td style="" class="hierarchy xhtCellBorder0">Extension<br/><span class="xhtPieceBold">Skiva: </span>Oordnad, Öppen av value:url<br/></td></tr>
 <tr fhir="generated-heirarchy" id="sa-ac" class="xhtRowBorder0 xhtRowOdd" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck10.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_primitive.png" alt="" style="background-color: #F7F7F7; background-color: inherit" title="Primitiv datatyp" class="hierarchy"/> <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0" class="sr-only">Extension.</span><a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension.url" title="Source of the definition for the extension code - a logical name or a URL." data-no-external="true">url</a><a name="sa-Extension.url"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">1..1</td>
@@ -773,7 +772,7 @@ filterDesc(document.getElementById('LogicalAddressDA'), 'obligation', document.g
 <td style="" class="hierarchy xhtCellBorder0">0..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/references.html">Reference</a>(<a href="http://hl7.org/fhir/R5/organization.html">Organization</a>)</td>
 <td style="" class="hierarchy xhtCellBorder0">Organization that issued id (may be just text)</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // adb64ca1-e0ce-4960-b323-f6324cfe34df
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 2b83b4d9-fd67-40f3-a78d-3b556c6edca7
 document.getElementById('cbLogicalAddressSA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressSA'), 'constraint', document.getElementById('cbLogicalAddressSA-constraint').checked, document.getElementById('ppLogicalAddressSA'));
 document.getElementById('cbLogicalAddressSA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -809,10 +808,10 @@ filterDesc(document.getElementById('LogicalAddressSA'), 'obligation', document.g
     <td>Extension.value[x].use</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[required]">required</a>
     </td>
     <td title="Identifies the purpose for this identifier, if known .">
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/valueset-identifier-use.html">IdentifierUse</a>
+      <a href="http://hl7.org/fhir/R5/valueset-identifier-use.html">IdentifierUse</a>
       <button data-clipboard-text="http://hl7.org/fhir/ValueSet/identifier-use|5.0.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen anges uttryckligen vara 5.0.0">&#x1F4CD;5.0.0</td>
@@ -824,10 +823,10 @@ filterDesc(document.getElementById('LogicalAddressSA'), 'obligation', document.g
     <td>Extension.value[x].type</td>
     <td>Base</td>
     <td>
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[extensible]">extensible</a>
+      <a href="http://hl7.org/fhir/R5/terminologies.html#Enumeration[extensible]">extensible</a>
     </td>
     <td title="A coded type for an identifier that can be used to determine which identifier to use for a specific purpose.">
-      <a style="opacity: 1.0" href="http://hl7.org/fhir/R5/valueset-identifier-type.html">Identifier Type Codes</a>
+      <a href="http://hl7.org/fhir/R5/valueset-identifier-type.html">Identifier Type Codes</a>
       <button data-clipboard-text="http://hl7.org/fhir/ValueSet/identifier-type|5.0.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"></button>
     </td>
     <td title="Versionen anges uttryckligen vara 5.0.0">&#x1F4CD;5.0.0</td>
@@ -966,8 +965,8 @@ Sammanfattning
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-10-29 09:05:00 +0000">
-    2026-10-29
+  <span title="2026-11-03 13:59:00 +0000">
+    2026-11-03
   </span>
 
           <br/>
