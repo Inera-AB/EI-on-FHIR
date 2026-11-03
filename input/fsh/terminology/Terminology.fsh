@@ -41,7 +41,7 @@ Description: "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde 
 * ^caseSensitive = true
 * ^content = #complete
 * #active "Registrerad" "Informationen finns tillgänglig hos producenten. Basstatus current."
-* #withdrawn "Indragen" "Producenten har avsiktligt och varaktigt dragit tillbaka posten. Basstatus superseded."
+* #withdrawn "Indragen" "Posten har avsiktligt och varaktigt dragits tillbaka. Basstatus superseded."
 * #entered-in-error "Felregistrerad" "Posten skulle aldrig ha funnits. Basstatus entered-in-error."
 
 ValueSet: IneraIndexRegistrationStatusValueSet
@@ -61,6 +61,7 @@ Description: "Varför en indexpost avregistreras. Orsaken avgör hur mottagare, 
 * #entered-in-error "Felregistrering" "Posten skulle aldrig ha registrerats. Används med registreringsstatus entered-in-error."
 * #ended "Avslutat engagemang" "Producenten håller inte längre information om patienten inom tjänsten. Används med registreringsstatus withdrawn."
 * #purged "Gallring" "Informationen har gallrats hos producenten. Används med registreringsstatus withdrawn."
+* #not-at-source "Finns inte längre hos källan" "Källan uppger, på en riktad fråga från lokaliseringstjänsten, att den inte längre har information om patienten inom tjänsten. Används med registreringsstatus withdrawn."
 * #transition-adapter "Avregistrering via övergångsadapter" "Posten avregistrerades i dagens engagemangsindex, vars kontrakt inte bär någon orsak. Används med registreringsstatus withdrawn."
 
 ValueSet: IneraDeregistrationReasonValueSet
@@ -69,3 +70,21 @@ Title: "Orsaker till avregistrering"
 Description: "Alla orsaker till avregistrering av en indexpost."
 * insert IneraMetadata(IneraDeregistrationReasonValueSet)
 * include codes from system IneraDeregistrationReasonCodeSystem
+
+CodeSystem: IneraIndexPopulationMethodCodeSystem
+Id: IneraIndexPopulationMethodCodeSystem
+Title: "Kodsystem för försörjningssätt"
+Description: "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt."
+* insert IneraMetadata(IneraIndexPopulationMethodCodeSystem)
+* ^caseSensitive = true
+* ^content = #complete
+* #producer "Producentregistrering" "Producenten har registrerat posten, direkt eller via en indexeringsagent."
+* #cache "Inera-försörjd cache" "Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan."
+* #mirror "Spegling av dagens engagemangsindex" "Övergångsadaptern har speglat posten från dagens engagemangsindex."
+
+ValueSet: IneraIndexPopulationMethodValueSet
+Id: IneraIndexPopulationMethodValueSet
+Title: "Försörjningssätt"
+Description: "Alla försörjningssätt för indexposter."
+* insert IneraMetadata(IneraIndexPopulationMethodValueSet)
+* include codes from system IneraIndexPopulationMethodCodeSystem

@@ -40,6 +40,8 @@ pages:
     title: Roller och ansvar
   information-model.md:
     title: Indexposten
+  population.md:
+    title: Försörjning av indexet
   information-sets.md:
     title: Kodverk för tjänster och informationsmängder
   event-model.md:
@@ -52,8 +54,6 @@ pages:
     title: REST-interaktioner och sökparametrar
   subscriptions.md:
     title: Prenumeration
-  producer-support.md:
-    title: Stöd för producenter
   expected-responses.md:
     title: Förväntade svar
   capabilitystatement.md:

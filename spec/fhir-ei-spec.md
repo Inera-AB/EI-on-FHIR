@@ -11,11 +11,14 @@ Specen beskriver en ny EI-komponent för FHIR (arbetsnamn FHIR-EI). Komponenten 
 Specen omfattar:
 
 - informationsmodell för indexposten
+- försörjning av indexet: de sätt en tjänsts indexposter kan fyllas och hållas aktuella
 - kodverk för informationsmängder
 - API för sökning, registrering och prenumeration
 - händelsemodell och leveransgarantier, inklusive övergången från dagens engagemangsindex
 - spärr, loggning och filtrering av svar
 - samexistens med eHM:s patientindex: borttag, grundladdning och återsynk
+
+Specen är neutral till hur indexet fylls. Konsumenterna läser samma API oavsett om en tjänsts indexposter registreras av producenterna, fylls av Inera utifrån eHM:s patientindex och riktade frågor till källorna, eller speglas från dagens engagemangsindex. Försörjningen väljs per tjänst.
 
 Utanför specen ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll.
 
@@ -23,18 +26,22 @@ Första konsumenter är NPÖ och 1177.
 
 ## Begrepp och arkitekturprinciper
 
-Komponenten är ett rikt index av pekare. Den ska klara minst det dagens engagemangsindex klarar och vara byggd så att ett tunt index hos eHM kan härledas ur den senare.
+Komponenten är ett rikt index av pekare. Den ska klara minst det dagens engagemangsindex klarar och vara byggd så att den kan samexistera med ett tunt index hos eHM: antingen härleds det tunna indexet ur det rika, eller så fylls det rika utifrån det tunna.
 
 | Begrepp | Betydelse |
 |---|---|
-| Indexpost | En pekare: patient × endpoint × tjänst, med de informationsmängder som finns och tidpunkt för senaste innehåll |
+| Indexpost | En pekare: patient × endpoint × tjänst, med de informationsmängder som finns och tidpunkt för senaste innehåll. Samma innebörd oavsett hur posten har kommit till |
 | Tjänst | En IG; motsvarar tjänstedomän i dagens modell |
 | Informationsmängd | En profil eller resurs inom en tjänst; motsvarar kategori i dagens modell |
 | Tillämpning | En tjänsts profil av den gemensamma indexprofilen, som bestämmer vad indexet svarar på för just den tjänsten |
 | Endpoint | Producentens åtkomstpunkt, registrerad i tjänstekatalogen |
 | Logisk adress | Adressen en RIV-TA-konsument anger mot tjänsteplattformen. I tjänstekatalogen är den en organisations HSA-id, inte en egen endpoint |
-| Producent | System som registrerar, uppdaterar och avregistrerar indexposter (källsystemet eller övergångsadaptern). Identifieras med sin endpoint i tjänstekatalogen |
+| Producent | Källsystem som håller informationen och exponerar den via en endpoint |
+| Försörjning | Hur en tjänsts indexposter fylls och hålls aktuella: producentregistrering, Inera-försörjd cache eller spegling av dagens engagemangsindex |
+| Registrerande part | System som skriver indexposter: en producent, en indexeringsagent, övergångsadaptern eller lokaliseringstjänsten. Identifieras med sin endpoint i tjänstekatalogen |
 | Indexeringsagent | Komponent som prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar |
+| Lokaliseringstjänst | Ineras komponent som fyller indexet som en cache, utifrån eHM:s patientindex och riktade frågor till källorna |
+| Övergångsadapter | Komponent som speglar dagens engagemangsindex till FHIR-EI |
 | Konsument | Tjänst som söker i eller prenumererar på indexet, till exempel NPÖ och 1177 |
 | Tunt index | eHM:s patientindex kopplat till NDI |
 
@@ -42,14 +49,15 @@ Principer:
 
 1. Pekare, inte innehåll. Indexet svarar på var och när, aldrig vad.
 2. Minst lika god förmåga som idag. Det gäller aktualitet, leveransgarantier, borttag och återhämtning.
-3. Registrera en gång. Indexposten ska bära det som behövs för att härleda ett tunt index, även om Inera inte tar det ansvaret i första iterationen.
+3. Registrera en gång. Vårdgivarna ska inte behöva registrera samma vårdrelation två gånger. Indexposten bär det som behövs för att härleda ett tunt index, och indexet kan också fyllas utifrån ett tunt index.
 4. Övergång utan krav på producenterna. Befintliga uppdateringar till engagemangsindex mappas in, så att källsystem kan gå över till FHIR i egen takt.
 5. Indexet är självt skyddsvärd information. Att en patient har en post hos en viss vårdenhet är en uppgift om patienten. Komponenten tillämpar därför spärr, loggning och filtrering.
 6. Profilering enligt Ineras tre-lagersmodell, ovanpå svenska basprofiler.
+7. Neutral försörjning. Konsumentkontraktet är detsamma oavsett hur en tjänsts indexposter fylls. Försörjningen är ett val per tjänst, inte en egenskap hos indexet.
 
 ## Informationsmodell: indexposten som pekare
 
-Indexposten är en pekare: den anger att en producent, via en endpoint, har information om en patient inom en tjänst. Posten definieras i en gemensam logisk modell och representeras i FHIR R5 som en profilerad `DocumentReference`. Det är samma mönster som NHS NRL och IHE MHD. I R5 har DocumentReference breddats till att referera innehåll av alla slag, inte bara dokument.
+Indexposten är en pekare: den anger att en producent, via en endpoint, har information om en patient inom en tjänst. Vem som har skrivit posten påverkar inte vad den betyder. Posten definieras i en gemensam logisk modell och representeras i FHIR R5 som en profilerad `DocumentReference`. Det är samma mönster som NHS NRL och IHE MHD. I R5 har DocumentReference breddats till att referera innehåll av alla slag, inte bara dokument.
 
 Tre begrepp hålls isär:
 
@@ -67,7 +75,8 @@ Vad indexet svarar på bestäms per tjänst: bara var det finns information, ell
 
 | Element | Gemensam modell | Tillämpningen per tjänst bestämmer |
 |---|---|---|
-| Patient, tjänst, endpoint, producent, vårdgivare | Obligatoriska | Inget |
+| Patient, tjänst, endpoint, registrerande part, vårdgivare | Obligatoriska | Inget |
+| Vårdenhet | 0..* | Om den är obligatorisk. Försörjning utifrån eHM:s patientindex känner bara vårdgivaren |
 | Informationsmängder | 0..* | Om de anges, och vilka värden som är tillåtna |
 | Innehållets senaste ändring | 0..1 | Om den är obligatorisk, och vad som räknas som ändring |
 | Status och livscykel | Obligatoriska | Inget |
@@ -75,9 +84,9 @@ Vad indexet svarar på bestäms per tjänst: bara var det finns information, ell
 Uppdateringsregler. Tillämpningen bestämmer vad som räknas som en ändring, och den regeln ska vara maskinläsbar. Varje tjänst publicerar därför, utöver tillämpningsprofilen:
 
 - en `SubscriptionTopic` per informationsmängd, som anger vilka ändringar i tjänstens innehållsresurser som räknas (`resourceTrigger` med `supportedInteraction`, `queryCriteria` och `fhirPathCriteria`), till exempel att en Observation skapas eller går till `final`
-- extensionen `obligation` på de element i tillämpningsprofilen som producenten ska fylla i
+- extensionen `obligation` på de element i tillämpningsprofilen som den registrerande parten ska fylla i
 
-`contentLastUpdated` är tidpunkten för den senaste händelse som uppfyller tjänstens topic. Samma topics driver indexeringsagenten, se avsnittet om stöd för producenter.
+`contentLastUpdated` är tidpunkten för den senaste händelse som uppfyller tjänstens topic, oavsett försörjningssätt. Samma topics driver indexeringsagenten och lokaliseringstjänstens prenumerationer, se avsnittet om försörjning.
 
 Tillämpningsprofilen har indexprofilen som förälder och är därför en R5-profil. En tjänst vars IG är R4 publicerar sin tillämpning i ett separat R5-paket och anger sina topics med canonical, som i Subscriptions Backport.
 
@@ -85,38 +94,41 @@ Tillämpningsprofilen har indexprofilen som förälder och är därför en R5-pr
 
 | Element | FHIR R5 DocumentReference | Dagens engagemangsindex |
 |---|---|---|
-| Identitet | `identifier`, stabil och producentbunden: `system` = producentens endpoint-URL i tjänstekatalogen (se nedan), `value` = producentens id för posten | businessObjectInstanceIdentifier |
+| Identitet | `identifier`, stabil och bunden till registrerande part: `system` = den registrerande partens endpoint-URL i tjänstekatalogen (se nedan), `value` = partens id för posten | businessObjectInstanceIdentifier |
 | Patient | `subject` → Patient med identifier (personnummer, samordningsnummer) | registeredResidentIdentification |
 | Tjänst | `type`: tjänstedomän under övergången, IG:ns canonical därefter | serviceDomain |
 | Informationsmängder | `content.profile`: dagens kategori som Coding, profilens canonical därefter | categorization |
 | Endpoint | extension `sourceEndpoint` → Endpoint i tjänstekatalogen, en per post; `content.attachment.url` = endpointens adress | logicalAddress, via adapterns adressregister |
 | Logisk adress | extension `logicalAddress` (HSA-id), när endpointen adresseras med logisk adress | logicalAddress |
-| Källsystem | extension `sourceSystem` (HSA-id, 0..*), satt av övergångsadaptern | sourceSystem |
-| Vårdgivare | `custodian` | dataController |
-| Vårdenhet | extension `careUnit` (HSA-id) | careUnitId |
-| Registrerande producent | extension `registeringProducer` → producentens Endpoint i tjänstekatalogen (absolut referens); kontrolleras av FHIR-EI mot autentiserad klient | owner |
+| Källsystem | extension `sourceSystem` (0..*): källsystemet eller journalsystemet, när registrerande part inte är källsystemet självt | sourceSystem |
+| Vårdgivare | `custodian`, med HSA-id eller organisationsnummer | dataController |
+| Vårdenhet | extension `careUnit` (HSA-id, 0..*), när den är känd | careUnitId |
+| Registrerande part | extension `registeringProducer` → den registrerande partens Endpoint i tjänstekatalogen (absolut referens); kontrolleras av FHIR-EI mot autentiserad klient | owner |
+| Försörjningssätt | `meta.tag` ur kodsystemet för försörjningssätt; sätts av FHIR-EI | – |
 | Innehållets senaste ändring | extension `contentLastUpdated` (dateTime) | mostRecentContent |
 | Postens senaste ändring | `meta.lastUpdated`, `_history` | updateTime, creationTime |
 | Status | `status` + extensions registrationStatus och `deregistrationReason` | deleteFlag |
 
 `meta.source` används bara för spårbarhet. Konsumenter känner igen indexposter på `meta.profile`.
 
-### Producent, endpoint och logisk adress
+### Registrerande part, endpoint och logisk adress
 
-Producentens identitet är dess endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en Endpoint där, och `registeringProducer` är en absolut referens till den. Samma URL är producentens namnrymd i `identifier.system`, så FHIR-EI kan kontrollera namnrymden utan ett eget register.
+Den registrerande partens identitet är dess endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en Endpoint där, och `registeringProducer` är en absolut referens till den. Samma URL är partens namnrymd i `identifier.system`, så FHIR-EI kan kontrollera namnrymden utan ett eget register.
 
-| Producent | registeringProducer | sourceEndpoint | logicalAddress |
+| Registrerande part | registeringProducer | sourceEndpoint | logicalAddress |
 |---|---|---|---|
 | Direktansluten FHIR-producent | Producentens endpoint | Samma endpoint | Utelämnas |
+| Indexeringsagent | Producentens endpoint; agenten skriver med producentens identitet | Samma endpoint | Utelämnas |
+| Lokaliseringstjänsten | Lokaliseringstjänstens egen endpoint | Källans endpoint i tjänstekatalogen, uppslagen via vårdgivaren i eHM:s patientindex | När källans endpoint adresseras med logisk adress |
 | Övergångsadaptern | Adapterns egen endpoint | Endpoint enligt adapterns adressregister, t.ex. tjänsteplattformens endpoint för tjänstekontraktet | Logisk adress från dagens engagemangsindex |
 
-I tjänstekatalogen är den logiska adressen en organisations HSA-id, och organisationen listar sina endpoints. En endpoint kan delas av många logiska adresser, till exempel tjänsteplattformens adress för ett tjänstekontrakt. Posten bär därför den logiska adressen separat när endpointen adresseras med logisk adress. Poster från adaptern bär också källsystemet, eftersom registrerande producent då är adaptern.
+I tjänstekatalogen är den logiska adressen en organisations HSA-id, och organisationen listar sina endpoints. En endpoint kan delas av många logiska adresser, till exempel tjänsteplattformens adress för ett tjänstekontrakt. Posten bär därför den logiska adressen separat när endpointen adresseras med logisk adress. När den registrerande parten inte är källan själv bär posten också källsystemet eller journalsystemet i `sourceSystem`.
 
-HSA-id anges med systemet `urn:oid:1.2.752.29.4.19`, som i HL7 Swedens basprofiler och tjänstekatalogen. FHIR-EI tar även emot RIV-TA:s `urn:oid:1.2.752.129.2.1.4.1` för samma identifierarrymd och lagrar värdet med basprofilernas system.
+HSA-id anges med systemet `urn:oid:1.2.752.29.4.19`, som i HL7 Swedens basprofiler och tjänstekatalogen. FHIR-EI tar även emot RIV-TA:s `urn:oid:1.2.752.129.2.1.4.1` för samma identifierarrymd och lagrar värdet med basprofilernas system. Vårdgivaren får också anges med organisationsnummer (`urn:oid:2.5.4.97`, tio siffror utan bindestreck), eftersom eHM:s patientindex är nycklat på organisationsnummer. Tjänstekatalogen har båda på den juridiska personen.
 
 ### Tidpunkter
 
-- `contentLastUpdated`: när det kliniska innehållet i källsystemet senast ändrades, enligt producenten.
+- `contentLastUpdated`: när det kliniska innehållet i källsystemet senast ändrades, enligt källan: producentens registrering, källans svar på en riktad fråga eller mostRecentContent i dagens engagemangsindex.
 - `meta.lastUpdated`: när indexposten senast ändrades i FHIR-EI. Sätts av servern.
 - Mottagningstid: när FHIR-EI senast tog emot en rapport om posten. Loggas för drift och avstämning, inte sökbar.
 
@@ -127,10 +139,10 @@ En uppdatering av posten ändrar inte `contentLastUpdated` om innehållet är of
 | Logiskt tillstånd | R5 `status` (basvärde) | Extension `registrationStatus` | Synlig i standardsökning |
 |---|---|---|---|
 | Registrerad: informationen finns tillgänglig | `current` | `active` | Ja |
-| Indragen: producenten har dragit tillbaka posten (avslutat engagemang, gallring) | `superseded` | `withdrawn` | Nej; syns vid explicit statusfilter, ändringssökning och export |
+| Indragen: posten har dragits tillbaka (avslutat engagemang, gallring, eller källan uppger att informationen inte längre finns) | `superseded` | `withdrawn` | Nej; syns vid explicit statusfilter, ändringssökning och export |
 | Felregistrerad: posten skulle aldrig ha funnits | `entered-in-error` | `entered-in-error` | Som indragen |
 
-`DocumentReference.status` har en obligatorisk bindning till `current | superseded | entered-in-error` och kan inte utökas med egna koder. Den exakta semantiken bärs därför av extensionen `registrationStatus`. En generisk FHIR-konsument som inte förstår extensionen ser ändå på basvärdet att posten inte längre är aktuell. `withdrawn` är valt framför `unavailable`, eftersom det uttrycker en avsiktlig och bestående handling av producenten. `unavailable` kan läsas som ett tillfälligt driftavbrott, och det ska indexet inte uttrycka. Orsaken anges i `deregistrationReason`. En indragen post ligger kvar som gravsten under gravstenarnas lagringstid och rensas sedan fysiskt.
+`DocumentReference.status` har en obligatorisk bindning till `current | superseded | entered-in-error` och kan inte utökas med egna koder. Den exakta semantiken bärs därför av extensionen `registrationStatus`. En generisk FHIR-konsument som inte förstår extensionen ser ändå på basvärdet att posten inte längre är aktuell. `withdrawn` är valt framför `unavailable`, eftersom det uttrycker en avsiktlig och bestående handling. `unavailable` kan läsas som ett tillfälligt driftavbrott, och det ska indexet inte uttrycka. Orsaken anges i `deregistrationReason`. En indragen post ligger kvar som gravsten under gravstenarnas lagringstid och rensas sedan fysiskt.
 
 Skiss i FSH:
 
@@ -140,23 +152,24 @@ Parent: DocumentReference  // FHIR R5
 Id: inera-index-entry
 Title: "Indexpost (FHIR-EI)"
 Description: "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst."
-* identifier 1..* MS  // system = producentens endpoint-URL
+* meta.tag MS  // försörjningssätt, sätts av FHIR-EI
+* identifier 1..* MS  // system = registrerande partens endpoint-URL
 * status MS  // basvärde: current | superseded | entered-in-error
 * type 1..1 MS  // tjänst (IG)
 * subject 1..1 MS
 * subject only Reference(Patient)
 * subject.type = "Patient"  // logisk referens; möjliggör patient:identifier
 * subject.identifier 1..1
-* custodian 1..1 MS
+* custodian 1..1 MS  // HSA-id eller organisationsnummer
 * content 1..1 MS
 * content.attachment.url 1..1 MS
 * content.profile MS  // informationsmängder; kardinalitet sätts per tjänst
 * extension contains
     SourceEndpoint named sourceEndpoint 1..1 MS and
-    CareUnit named careUnit 1..1 MS and
+    CareUnit named careUnit 0..* MS and                        // när vårdenheten är känd
     RegisteringProducer named registeringProducer 1..1 MS and  // Reference(Endpoint) i tjänstekatalogen
     LogicalAddress named logicalAddress 0..1 MS and            // när endpointen adresseras med logisk adress
-    SourceSystem named sourceSystem 0..* MS and                // satt av övergångsadaptern
+    SourceSystem named sourceSystem 0..* MS and                // när registrerande part inte är källan
     ContentLastUpdated named contentLastUpdated 0..1 MS and
     RegistrationStatus named registrationStatus 1..1 MS and
     DeregistrationReason named deregistrationReason 0..1 MS
@@ -167,7 +180,7 @@ Description: "Gemensam indexpost. Anger att en producent via en endpoint har inf
 CodeSystem: IndexRegistrationStatus
 Id: index-registration-status
 * #active "Registrerad" "Informationen finns tillgänglig hos producenten."
-* #withdrawn "Indragen" "Producenten har avsiktligt och varaktigt dragit tillbaka posten."
+* #withdrawn "Indragen" "Posten har avsiktligt och varaktigt dragits tillbaka."
 * #entered-in-error "Felregistrerad" "Posten skulle aldrig ha funnits."
 
 // Tillämpning per tjänst, publiceras i tjänstens IG
@@ -189,7 +202,84 @@ Tjänst och informationsmängd är två nivåer i samma hierarki: en tjänst är
 
 Regel för uppdelning: en informationsmängd som behöver en egen tidpunkt för senaste ändring bryts ut till en egen tjänst. Tjänstegränsen följer alltså behovet av aktualitetsinformation, inte bara den kliniska domänen.
 
-En mappningstabell mellan tjänstedomän/kategori och IG/profil publiceras tillsammans med den gemensamma indexprofilen. Övergångsadaptern använder den för att fylla i de nya kodningarna på poster som bara kommer med tjänstedomän.
+En mappningstabell mellan tjänstedomän/kategori och IG/profil publiceras tillsammans med den gemensamma indexprofilen. Övergångsadaptern och lokaliseringstjänsten använder den för att fylla i de nya kodningarna på poster som bara kommer med tjänstedomän.
+
+## Försörjning av indexet
+
+Konsumentkontraktet är detsamma för alla tjänster: indexposter enligt indexprofilen och tjänstens tillämpning, samma sökning, prenumeration, livscykel och åtkomstkontroll. Det som kan skilja mellan tjänster är hur posterna fylls och hålls aktuella. Tre försörjningssätt är möjliga:
+
+| | Producentregistrering | Inera-försörjd cache | Spegling av dagens engagemangsindex |
+|---|---|---|---|
+| Registrerande part | Producenten, direkt eller via indexeringsagent | Lokaliseringstjänsten | Övergångsadaptern |
+| Underlag för var | Producentens egen registrering | eHM:s patientindex | Dagens engagemangsindex |
+| Underlag för vad och när | Producentens registrering enligt tjänstens topics | Riktad fråga till källan, färskhållen med prenumeration eller tidsgräns | Engagemangsposterna |
+| Vad som krävs av källan | Registrera ändringar, eller stödja prenumeration för indexeringsagenten | Svara på en enhetlig, billig riktad fråga; helst stödja prenumeration | Inget nytt |
+| Hur ett fel visar sig | Saknad post, alltså en tyst lucka | En extra fråga, och om källan inte svarar ett ofullständigt svar | Som i dagens engagemangsindex |
+| Typiskt användningsområde | Källor som själva vill och kan hålla indexet aktuellt | Källor med FHIR-stöd, när vårdgivarna bara ska registrera hos eHM | RIV-TA-källor, bland annat bakom EHDS-bryggan |
+
+Val per tjänst. Tjänsteägaren beslutar, tillsammans med Inera, vilka försörjningssätt tjänsten använder. En tjänst kan kombinera dem per endpoint, till exempel spegling för RIV-TA-källor och Inera-försörjd cache för FHIR-källor. Samma kombination av patient, endpoint och tjänst får bara fyllas med ett försörjningssätt åt gången, så att konsumenterna aldrig ser dubbla poster. Försörjningssättet framgår av postens `meta.tag`, så att den som felsöker eller stämmer av kan se var en post kommer ifrån; konsumenterna behöver inte bry sig om det.
+
+Gemensamma regler. Oavsett försörjningssätt gäller:
+
+- `contentLastUpdated` betyder samma sak: tidpunkten för den senaste händelse som uppfyller tjänstens topic.
+- En post dras in med status och `deregistrationReason`, aldrig med radering, och notiser skickas på samma sätt.
+- Den registrerande parten identifieras med sin endpoint i tjänstekatalogen och skriver i sin egen namnrymd.
+- Ett känt fel i försörjningen redovisas som ett ofullständigt svar, inte som en tom träfflista.
+
+### Producentregistrering
+
+Producenten registrerar själv eller via en indexeringsagent:
+
+| Väg | För vem | Vad producenten behöver |
+|---|---|---|
+| Direkt registrering | Producenter som själva vill hantera indexet | Upptäcka ändringar enligt tjänstens topics, skicka villkorad `PUT` och sköta omförsök, ordning och avregistrering |
+| Indexeringsagent | Producenter med en FHIR-server | Stöd för FHIR Subscriptions och tjänstens topics; inget annat |
+
+Indexeringsagenten. Producentens FHIR-server stöder tjänstens `SubscriptionTopic`, vilket är standard i R5 och finns för R4 via Subscriptions Backport. Agenten prenumererar med `content = empty` eller `id-only`. Notisens `focus` och `additionalContext` pekar på resursen och patienten, så agenten läser aldrig journalinnehållet. Agenten översätter varje händelse till en indexpost: tjänst och informationsmängd från topic, endpoint och identitet från sin konfiguration, och `contentLastUpdated` från händelsens `timestamp`. Den sköter det som är svårt att få rätt hos varje producent: omförsök tills FHIR-EI kvitterat, ordning per post, avregistrering, kön för ej levererbara händelser och avstämning per dag.
+
+Indexlogiken implementeras då en gång, och en agent kan tjäna flera producenter, till exempel en per region eller plattform. Agenten kan placeras nära producenten, som EHDS-bryggans proxy mot tjänsteplattformen. Den autentiserar sig med en token bunden till producentens endpoint i tjänstekatalogen, till exempel enligt SMART Backend Services, och registrerar med producentens endpoint som `registeringProducer`.
+
+Avregistrering kräver att agenten vet när informationen inte längre finns. Det kräver antingen att tjänstens topics också uttrycker det, eller att agenten stämmer av mot producenten; se öppna frågor.
+
+### Inera-försörjd cache
+
+eHM:s patientindex är auktoritativt för var patienten har vårdrelationer. Lokaliseringstjänsten bygger tjänstens indexposter som en cache: den fyller dem lat genom riktade frågor till källorna och håller dem färska med prenumerationer, eller med en tidsgräns där källan saknar stöd för prenumeration. Vårdgivarna registrerar bara hos eHM. Ett fel i försörjningen leder till en extra fråga till källan, inte till en tyst lucka.
+
+Läsning när cacheposten saknas eller är inaktuell:
+
+1. Lokaliseringstjänsten slår upp patientens vårdgivare (organisationsnummer) och journalsystem i eHM:s patientindex.
+2. Den slår upp vårdgivarnas endpoints för tjänsten i tjänstekatalogen.
+3. Den ställer en riktad fråga till de endpoints som saknas i cachen eller är inaktuella, parallellt och med en tidsgräns. Svaret anger vilka informationsmängder som finns för patienten och när de senast ändrades.
+4. Den skriver eller uppdaterar indexposterna. En endpoint som uppger att den inte har något för patienten inom tjänsten får sin post indragen med orsaken att informationen inte längre finns hos källan.
+5. FHIR-EI svarar konsumenten. Källor som inte svarade inom tidsgränsen redovisas som ett ofullständigt svar.
+
+Färskhållning efter första läsningen:
+
+| Källans förmåga | Färskhållning |
+|---|---|
+| Stöder prenumeration | Lokaliseringstjänsten prenumererar på tjänstens topics för hela endpointen med `id-only`. En notis markerar cacheposten som inaktuell eller uppdaterar `contentLastUpdated`. Luckor i händelseräknaren upptäcks med `$status` och hämtas med `$events`; vid behov ställs den riktade frågan igen |
+| Saknar prenumeration | Cacheposten blir inaktuell när tidsgränsen löper ut, och nästa läsning går via den riktade frågan |
+
+Den riktade frågan är inte fastställd. Två varianter är möjliga: en egen operation (till exempel `$inventory`, som då definieras i denna IG) eller en `batch`-Bundle med `GET [Resurs]?patient=…&_summary=count` per resurstyp. Frågan är en åtkomst till uppgifter om patienten och ska prövas och loggas hos källan. RIV-TA-källor kan inte svara på frågan utan att hämta innehåll, och försörjs därför med spegling.
+
+Begränsningar. eHM:s patientindex anger vårdgivare och journalsystem, inte vårdenhet. Om den riktade frågan inte heller anger vårdenhet saknar posten `careUnit`, och inre spärr kan då inte prövas utifrån indexet; se avsnittet om spärr. Första visningen för en patient blir en fan-out till alla källor hos patientens vårdgivare, och kvaliteten i eHM:s index blir en beroendepunkt som Inera inte styr.
+
+### Spegling av dagens engagemangsindex
+
+Övergångsadaptern speglar dagens engagemangsindex till FHIR-EI per tjänstedomän. Det är försörjningssättet för RIV-TA-källor, som inte kan svara på en riktad fråga utan att hämta innehåll, bland annat källor bakom EHDS-bryggan.
+
+Ansvar. Adaptern speglar utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos källorna, genom deras registrering i dagens engagemangsindex. Adapterns konfiguration per tjänstedomän anger om den ska spegla tjänsten och om dess poster ska dras in. Adaptern skriver aldrig till dagens engagemangsindex.
+
+Mappning av Update. Engagemangsposter för samma patient, logiska adress och tjänstedomän slås ihop till en indexpost, med dagens kategorier som informationsmängder. Varje post blir en villkorad `PUT` i en `transaction`, med fältmappningen i avsnittet om informationsmodell. `contentLastUpdated` sätts till den senaste mostRecentContent bland de ingående engagemangsposterna. deleteFlag på den sista ingående engagemangsposten mappas till avregistrering med status `superseded`. Dagens kontrakt bär ingen orsak, så adaptern sätter `deregistrationReason` till en kod för avregistrering via övergångsadapter.
+
+Adaptern sätter `logicalAddress` och `sourceSystem` från engagemangsposterna, och `registeringProducer` till sin egen endpoint. Postens `identifier.system` blir därmed adapterns endpoint-URL, och värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän.
+
+Adressregister. Tjänstekatalogen har ingen endpoint per logisk adress, och den har inte TAK:s uppgift om vilken logisk adress och vilket tjänstekontrakt som routas till vilken producent. Adaptern håller därför ett eget adressregister, byggt genom att samköra TAK med tjänstekatalogen. Nyckeln är logisk adress och tjänstedomän, och värdet är den endpoint i tjänstekatalogen som posten ska peka på. Samma tänk finns i EHDS-bryggan, som håller ett eget register från vårdgivare till endpoint. Två varianter är möjliga för värdet:
+
+1. Tjänsteplattformens endpoint för tjänstekontraktet. Konsumenten anropar tjänsteplattformen med RIV-TA och anger postens `logicalAddress`.
+2. EHDS-bryggans FHIR-yta för vårdgivaren (`/fhir/{vg-hsa-id}/`). Konsumenten hämtar med FHIR, och bryggan översätter till RIV-TA. Bryggan använder vårdgivarens HSA-id som logisk adress, medan dagens engagemangsposter kan ha vårdenhetens eller källsystemets, så det måste stämmas av mot TAK.
+
+Överlämning. När en källa går från spegling till producentregistrering eller Inera-försörjd cache för en tjänst får dess poster en ny registrerande part, och ofta en ny endpoint. Adressregistret markerar då kombinationen av källsystem och tjänstedomän som överlämnad. Adaptern drar in sina poster för kombinationen med orsaken avregistrering via övergångsadapter och slutar spegla den. Annars skulle konsumenterna se två poster för samma information. Prenumeranter ser en avregistrering och en ny registrering.
 
 ## API: sökning, registrering och prenumeration
 
@@ -200,52 +290,56 @@ Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får v
 | Sök indexposter för en patient | Konsument | `GET DocumentReference?patient:identifier=…&type=…` (standard: `status=current`) | FindContent |
 | Filtrera på informationsmängd | Konsument | Standardparametrarna `format-code` / `format-canonical` (på `content.profile`) | FindContent med kategori |
 | Filtrera på aktualitet | Konsument | Nationell sökparameter `content-last-updated=gt…` | FindContent med tidsfilter |
-| Registrera eller uppdatera post | Producent | Villkorad `PUT DocumentReference?identifier=<producent>\|<id>`, eller `transaction`-Bundle för flera | Update |
-| Avregistrera post | Producent | Villkorad `PUT` med `status` = `superseded` eller `entered-in-error` och `deregistrationReason` | Update med deleteFlag |
+| Registrera eller uppdatera post | Registrerande part | Villkorad `PUT DocumentReference?identifier=<part>\|<id>`, eller `transaction`-Bundle för flera | Update |
+| Avregistrera post | Registrerande part | Villkorad `PUT` med `status` = `superseded` eller `entered-in-error` och `deregistrationReason` | Update med deleteFlag |
 | Prenumerera på ändringar | Konsument | R5 `Subscription` på `SubscriptionTopic` `indexpost-andrad` | ProcessNotification |
 | Inkrementell avstämning | Konsument | `GET DocumentReference?_lastUpdated=gt…&status=current,superseded,entered-in-error` | Saknas |
 | Massuttag | Systemkonsument | Bulk Data `$export` med `_type=DocumentReference` och `_since` | Saknas |
 
 Sökparametrar. Sökning på patient görs med modifieraren `:identifier` (`patient:identifier=`), som är obligatorisk för servern. Patienten är en logisk referens med personnummer eller samordningsnummer, och indexet har inga Patient-resurser. En kedjad sökning (`patient.identifier=`) skulle kräva att referensen löses upp till en Patient i FHIR-EI, medan `:identifier` söker direkt på referensens identifierare. Indexposten anger därför `subject.type = Patient`, så att servern kan avgöra att referensen gäller en patient. Vårdgivaren söks på samma sätt, med `custodian:identifier=` och HSA-id. `content-last-updated` och `source-endpoint` är nationella sökparametrar. De definieras som `SearchParameter`-resurser i IG:n och annonseras i FHIR-EI:s `CapabilityStatement`, tillsammans med vilka prenumerationsfilter som stöds.
 
+Läs- och skriv-API. Läs-, prenumerations- och export-API:et är detsamma för alla försörjningssätt. Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten kan skriva via samma API eller, om den är en del av FHIR-EI, direkt i indexet; reglerna för indexposten och livscykeln är desamma.
+
+Ofullständigt svar. När FHIR-EI vet att ett svar kan vara ofullständigt, till exempel när en källa inte svarade på en riktad fråga inom tidsgränsen, innehåller sökresultatet en `OperationOutcome` i `Bundle.issues` som anger vilka vårdgivare eller endpoints det gäller. Konsumenten ska kunna visa att uppgifter kan saknas. Det gör att ett fel i försörjningen syns i stället för att bli en tyst lucka.
+
 Endpoint. Varje post har exakt en endpoint, som refereras i tjänstekatalogen. Katalogen är auktoritativ för endpointens egenskaper. Adressen finns också i `content.attachment.url`, så att konsumenten kan anropa källan utan ett extra uppslag.
 
 Logisk adress. När endpointen adresseras med logisk adress, som tjänsteplattformen för RIV-TA, bär posten också `logicalAddress`, och konsumenten anger den i anropet. Den logiska adressen är en organisations HSA-id i tjänstekatalogen och kan slås upp där.
 
-Villkorad uppdatering. Villkoret utvärderas bara mot anropande producents egna poster. En producent kan därför aldrig träffa en annan producents post, och svaret avslöjar inte om en identifierare finns hos någon annan:
+Villkorad uppdatering. Villkoret utvärderas bara mot den anropande registrerande partens egna poster. En part kan därför aldrig träffa en annan parts post, och svaret avslöjar inte om en identifierare finns hos någon annan:
 
-| Träffar bland producentens egna poster | Resultat |
+| Träffar bland partens egna poster | Resultat |
 |---|---|
 | 0 | Posten skapas |
 | 1 | Posten uppdateras |
 | Fler än 1 | Avvisas med `412 Precondition Failed`; ingen post ändras |
 
-Samtidiga uppdateringar av samma post hanteras med versionsvillkor (`If-Match` på `ETag`) eller med regeln om `contentLastUpdated` i avsnittet om händelser. En producent får inte ändra `identifier` eller `registeringProducer` på en befintlig post.
+Samtidiga uppdateringar av samma post hanteras med versionsvillkor (`If-Match` på `ETag`) eller med regeln om `contentLastUpdated` i avsnittet om händelser. En registrerande part får inte ändra `identifier` eller `registeringProducer` på en befintlig post.
 
-Prenumeration. R5 har topic-baserade prenumerationer inbyggda, inklusive operationerna `$status` och `$events`. Topic `indexpost-andrad` triggar på skapande, uppdatering och avregistrering. Avregistrering syns som en uppdatering till status `superseded` eller `entered-in-error`, inte som en radering. Filter stöds på patient (`patient:identifier`), `type` och vårdgivare (`custodian:identifier`). Standardinnehåll är `id-only`, så att notisen inte bär mer patientinformation än nödvändigt.
+Prenumeration. R5 har topic-baserade prenumerationer inbyggda, inklusive operationerna `$status` och `$events`. Topic `indexpost-andrad` triggar på skapande, uppdatering och avregistrering. Avregistrering syns som en uppdatering till status `superseded` eller `entered-in-error`, inte som en radering. Filter stöds på patient (`patient:identifier`), `type` och vårdgivare (`custodian:identifier`). Standardinnehåll är `id-only`, så att notisen inte bär mer patientinformation än nödvändigt. Notiser skickas när en post ändras, oavsett vilket försörjningssätt som ändrade den.
 
 Massuttag kompletterar men ersätter inte prenumeration. Bulk Data är asynkront och inte avsett för realtidsutbyte. Ett `_since`-uttag innehåller även avregistrerade poster inom lagringstiden, så att en konsument kan upptäcka borttag utan att ha fått notisen.
 
-Producentidentitet och skrivbehörighet. En producents identitet är dess Endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en sådan endpoint, via en betrodd koppling mellan klientidentitet (certifikat eller token) och endpoint. Vid varje skrivning kontrollerar FHIR-EI:
+Identitet och skrivbehörighet. En registrerande parts identitet är dess Endpoint i tjänstekatalogen. FHIR-EI binder den autentiserade klienten till en sådan endpoint, via en betrodd koppling mellan klientidentitet (certifikat eller token) och endpoint. Vid varje skrivning kontrollerar FHIR-EI:
 
 | Kontroll | Regel |
 |---|---|
-| Producent | `registeringProducer` är en absolut referens till den endpoint klienten är bunden till |
+| Registrerande part | `registeringProducer` är en absolut referens till den endpoint klienten är bunden till |
 | Namnrymd | `identifier.system` är samma URL som `registeringProducer`. Kontrollen är en strängjämförelse och kräver inget register över namnrymder |
-| Endpoint | För en direktansluten producent är `sourceEndpoint` samma endpoint som `registeringProducer` |
+| Endpoint | För en producent eller indexeringsagent är `sourceEndpoint` samma endpoint som `registeringProducer` |
 | Vårdgivare | Vårdgivaren i `custodian`, eller en underliggande enhet via `partOf`, listar `sourceEndpoint` i `Organization.endpoint` i tjänstekatalogen |
 
-Övergångsadaptern har en ombudsroll. Den är registrerad i tjänstekatalogen med en egen endpoint och får registrera poster vars `sourceEndpoint` är en annan endpoint, men bara för kombinationer av logisk adress och tjänstedomän som finns i dess adressregister. `meta.source` används aldrig ensamt för behörighetskontroll.
+Övergångsadaptern och lokaliseringstjänsten har ombudsroll. De är registrerade i tjänstekatalogen med egna endpoints och får registrera poster vars `sourceEndpoint` är en annan endpoint, men bara inom sitt underlag: adaptern för kombinationer av logisk adress och tjänstedomän i sitt adressregister, lokaliseringstjänsten för vårdgivare som eHM:s patientindex anger för patienten. `meta.source` används aldrig ensamt för behörighetskontroll.
 
 ## Registrering, händelsemodell och övergång
 
-Leveransgarantin är minst den samma som idag: en ändring i källsystemet ska nå indexet utan förlust, i rätt ordning per post, och kunna återhämtas efter avbrott. Det gäller både dagens RIV-TA-producenter och framtida FHIR-producenter.
+Leveransgarantin är minst den samma som idag: en ändring i källsystemet ska nå indexet utan förlust, i rätt ordning per post, och kunna återhämtas efter avbrott. Det gäller alla försörjningssätt. Vid producentregistrering och spegling uppfylls den av kraven nedan. Vid Inera-försörjd cache uppfylls den av färskhållningen: en inaktuell cachepost bekräftas mot källan innan den lämnas ut, se avsnittet om försörjning.
 
-Krav på registreringen, från producent till FHIR-EI:
+Krav på registreringen, från registrerande part till FHIR-EI:
 
-- **Idempotens.** Uppdatering och avregistrering sker villkorat på producentbunden `identifier`. Samma händelse två gånger ger samma resultat.
+- **Idempotens.** Uppdatering och avregistrering sker villkorat på `identifier`, som är bunden till den registrerande parten. Samma händelse två gånger ger samma resultat.
 - **Ordning per post.** En uppdatering med äldre `contentLastUpdated` än den lagrade ignoreras, så att sena eller omkastade händelser inte skriver över nyare. En avregistrering kan bara upphävas av en ny registrering med senare `contentLastUpdated`.
-- **Minst en leverans.** Producent eller adapter försöker igen tills FHIR-EI kvitterat. Ej levererbara händelser hamnar i en kö för manuell hantering.
+- **Minst en leverans.** Den registrerande parten försöker igen tills FHIR-EI kvitterat. Ej levererbara händelser hamnar i en kö för manuell hantering.
 - **Atomicitet.** En `transaction`-Bundle registreras helt eller inte alls.
 
 Krav på notiserna, från FHIR-EI till prenumerant. Principen är att prenumerationen ger snabbhet och avstämningen ger korrekthet. En konsument ska kunna återställa en korrekt bild även om den missat notiser.
@@ -265,58 +359,27 @@ Två lagringstider ska fastställas. Båda härleds från samma fråga: hur lån
 | Händelselogg | Hur långt bakåt en konsument kan hämta missade notiser med `$events` | Normala driftavbrott hos konsumenter; kort, eftersom avstämning tar vid efteråt |
 | Gravstenar | Hur länge en avregistrerad post syns vid inkrementell avstämning och `_since`-export | Det längsta tillåtna avbrottet för alla synkande konsumenter, inklusive en framtida synk mot eHM |
 
-Övergången görs per tjänst. Dagens konsumenter läser engagemangsindex per tjänstedomän: de aggregerande tjänsterna på tjänsteplattformen frågar FindContent per tjänstedomän för att hitta vilka logiska adresser de ska anropa, och NPÖ och 1177 Journalen går via dem (att bekräfta, se öppna frågor). Varje tjänst kan därför gå över i egen takt, utan att andra tjänster påverkas och utan att NPÖ och 1177 behöver ändras först.
+Övergången görs per tjänst. Dagens konsumenter läser engagemangsindex per tjänstedomän: de aggregerande tjänsterna på tjänsteplattformen frågar FindContent per tjänstedomän för att hitta vilka logiska adresser de ska anropa, och NPÖ och 1177 Journalen går via dem (att bekräfta, se öppna frågor). Varje tjänst kan därför gå över i egen takt, utan att andra tjänster påverkas och utan att NPÖ och 1177 behöver ändras först. Lägena beskriver konsumenternas byte; hur FHIR-EI fylls för tjänsten väljs för sig, se avsnittet om försörjning.
 
-| Läge | Vem läser | Vem skriver | Villkor för att gå vidare | Väg tillbaka |
+| Läge | Vem läser | Hur FHIR-EI fylls | Villkor för att gå vidare | Väg tillbaka |
 |---|---|---|---|---|
-| 0. Bara engagemangsindex | Dagens konsumenter, via engagemangsindex | RIV-producenter, till engagemangsindex | Tjänstens tillämpning är publicerad, och tjänstedomänens uppdelning i tjänster är beslutad | – |
-| 1. Spegling | Engagemangsindex; FHIR-EI läses parallellt för jämförelse | Adaptern speglar tjänstens poster | Avstämningen visar samma antal per vårdgivare och dag under en överenskommen period | Stäng av speglingen för tjänsten |
+| 0. Bara engagemangsindex | Dagens konsumenter, via engagemangsindex | – | Tjänstens tillämpning är publicerad, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade | – |
+| 1. Parallell försörjning | Engagemangsindex; FHIR-EI läses parallellt för jämförelse | Med tjänstens valda försörjningssätt: spegling, Inera-försörjd cache eller producentregistrering | Avstämningen visar samma svar under en överenskommen period | Stäng av försörjningen för tjänsten |
 | 2. Konsumenten byter | Tjänstedomänens aggregerande tjänst läser FHIR-EI | Som i läge 1 | Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften | Peka konsumenten mot engagemangsindex igen |
-| 3. FHIR-producenter | Konsumenter som kan FHIR hämtar direkt från producenterna | FHIR-producenter, direkt eller via indexeringsagent; adaptern för övriga | Inga RIV-producenter kvar för tjänstedomänen | – |
-| 4. Avveckling | FHIR-EI | FHIR-producenter | – | – |
+| 3. Källorna går över | Konsumenter som kan FHIR hämtar direkt från källorna | Källor går från spegling till producentregistrering eller Inera-försörjd cache | Ingen källa speglas längre från engagemangsindex för tjänstedomänen | – |
+| 4. Avveckling | FHIR-EI | Producentregistrering eller Inera-försörjd cache | – | – |
 
-Konsumenten först. En producent får registrera en tjänst enbart i FHIR-EI först när tjänstens konsumenter läser FHIR-EI och kan hämta med FHIR. En producent som bara har en FHIR-endpoint kan ändå inte nås av en konsument som läser engagemangsindex och anropar med RIV-TA, och en producent som har kvar RIV-TA uppdaterar engagemangsindex själv. Adaptern skriver därför inte tillbaka FHIR-registrerade poster till dagens engagemangsindex.
+Konsumenten först. En källa får sluta uppdatera dagens engagemangsindex för en tjänst först när tjänstens konsumenter läser FHIR-EI och kan hämta med FHIR. En källa som bara har en FHIR-endpoint kan ändå inte nås av en konsument som läser engagemangsindex och anropar med RIV-TA, och en källa som har kvar RIV-TA uppdaterar engagemangsindex själv. Ingenting skrivs därför tillbaka från FHIR-EI till dagens engagemangsindex, och det uppstår ingen rundgång via ProcessNotification.
 
-Adapterns konfiguration per tjänstedomän anger om den ska spegla tjänsten och om dess poster ska dras in. Eftersom adaptern aldrig skriver till dagens engagemangsindex uppstår ingen rundgång via ProcessNotification. Om återskrivning ändå skulle behövas i ett undantagsfall måste adaptern känna igen och hoppa över sina egna poster.
+Uppdelningen i tjänster beslutas före läge 1. Dagens engagemangsindex har en mostRecentContent per kategori, medan en indexpost har en tidpunkt för alla sina informationsmängder. En kategori vars konsumenter filtrerar på aktualitet bryts ut till en egen tjänst innan försörjningen startar; det är dyrt att ändra efteråt.
 
-Uppdelningen i tjänster beslutas före läge 1. Dagens engagemangsindex har en mostRecentContent per kategori, medan en indexpost har en tidpunkt för alla sina informationsmängder. En kategori vars konsumenter filtrerar på aktualitet bryts ut till en egen tjänst innan speglingen startar; det är dyrt att ändra efteråt.
+Avstämning som godkännande. Vid spegling och producentregistrering jämförs antal och kontrollsummor per vårdgivare, dag och tjänstedomän i dagens engagemangsindex med FHIR-EI. Vid Inera-försörjd cache, som fylls lat, jämförs i stället svaren för ett urval patienter. Avstämningen är villkoret för att gå från läge 1 till läge 2.
 
-Avstämning som godkännande. Grundladdning och spegling görs per tjänstedomän. Antal och kontrollsummor per vårdgivare, dag och tjänstedomän i dagens engagemangsindex jämförs med FHIR-EI, och avstämningen är villkoret för att gå från läge 1 till läge 2.
+Första tjänst. Den första tjänsten bör ha en publicerad eller nära förestående IG, få källor och en konsument via en aggregerande tjänst som Inera förvaltar, så att läge 1 och 2 kan genomföras helt inom Inera.
 
-Första tjänst. Den första tjänsten bör ha en publicerad eller nära förestående IG, få producenter och en konsument via en aggregerande tjänst som Inera förvaltar, så att läge 1 och 2 kan genomföras helt inom Inera.
+![läge 3 för en tjänst · producentregistrering och spegling](../input/images/overgang-blandad-drift.svg)
 
-![läge 3 för en tjänst · FHIR-producenter och adapter](../input/images/overgang-blandad-drift.svg)
-
-RIV-TA-producenter når FHIR-EI via dagens index och adaptern; FHIR-producenter skriver direkt. Synken till eHM är streckad eftersom den inte ingår i första iterationen.
-
-Ansvar under övergången. Adaptern speglar dagens engagemangsindex utan egen affärslogik. Ansvaret för att indexposterna är korrekta ligger därför kvar hos producenterna, genom deras registrering i dagens engagemangsindex.
-
-Mappning av Update till FHIR: engagemangsposter för samma patient, logiska adress och tjänstedomän slås ihop till en indexpost, med dagens kategorier som informationsmängder. Varje post blir en villkorad `PUT` i en `transaction`, med fältmappningen i avsnittet om informationsmodell. `contentLastUpdated` sätts till den senaste mostRecentContent bland de ingående engagemangsposterna. deleteFlag på den sista ingående engagemangsposten mappas till avregistrering med status `supersed``ed`. Dagens kontrakt bär ingen orsak, så adaptern sätter `deregistrationReason` till en kod för avregistrering via övergångsadapter.
-
-Adaptern sätter `logicalAddress` och `sourceSystem` från engagemangsposterna, och `registeringProducer` till sin egen endpoint. Postens `identifier.system` blir därmed adapterns endpoint-URL, och värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän.
-
-Adressregister i adaptern. Tjänstekatalogen har ingen endpoint per logisk adress, och den har inte TAK:s uppgift om vilken logisk adress och vilket tjänstekontrakt som routas till vilken producent. Adaptern håller därför ett eget adressregister, byggt genom att samköra TAK med tjänstekatalogen. Nyckeln är logisk adress och tjänstedomän, och värdet är den endpoint i tjänstekatalogen som posten ska peka på. Samma tänk finns i EHDS-bryggan, som håller ett eget register från vårdgivare till endpoint. Två varianter är möjliga för värdet:
-
-1. Tjänsteplattformens endpoint för tjänstekontraktet. Konsumenten anropar tjänsteplattformen med RIV-TA och anger postens `logicalAddress`.
-2. EHDS-bryggans FHIR-yta för vårdgivaren (`/fhir/{vg-hsa-id}/`). Konsumenten hämtar med FHIR, och bryggan översätter till RIV-TA. Bryggan använder vårdgivarens HSA-id som logisk adress, medan dagens engagemangsposter kan ha vårdenhetens eller källsystemets, så det måste stämmas av mot TAK.
-
-Överlämning från adaptern. När ett källsystem börjar registrera en tjänst direkt i FHIR-EI får dess poster en ny endpoint, och därmed nya poster, eftersom en post gäller patient × endpoint × tjänst. Adressregistret markerar då kombinationen av källsystem och tjänstedomän som överlämnad. Adaptern drar in sina poster för kombinationen med orsaken avregistrering via övergångsadapter och slutar spegla den. Annars skulle konsumenterna se två poster för samma information under övergången. Prenumeranter ser en avregistrering och en ny registrering.
-
-## Stöd för producenter
-
-En producent kan registrera på tre sätt:
-
-| Väg | För vem | Vad producenten behöver |
-|---|---|---|
-| Direkt registrering | Producenter som själva vill hantera indexet | Upptäcka ändringar enligt tjänstens topics, skicka villkorad `PUT` och sköta omförsök, ordning och avregistrering |
-| Indexeringsagent | Producenter med en FHIR-server | Stöd för FHIR Subscriptions och tjänstens topics; inget annat |
-| Övergångsadaptern | Producenter som har kvar RIV-TA | Inget nytt; registreringen i dagens engagemangsindex speglas |
-
-Indexeringsagenten. Producentens FHIR-server stöder tjänstens `SubscriptionTopic`, vilket är standard i R5 och finns för R4 via Subscriptions Backport. Agenten prenumererar med `content = empty` eller `id-only`. Notisens `focus` och `additionalContext` pekar på resursen och patienten, så agenten läser aldrig journalinnehållet. Agenten översätter varje händelse till en indexpost: tjänst och informationsmängd från topic, endpoint och producentidentitet från sin konfiguration, och `contentLastUpdated` från händelsens `timestamp`. Den sköter det som är svårt att få rätt hos varje producent: omförsök tills FHIR-EI kvitterat, ordning per post, avregistrering, kön för ej levererbara händelser och avstämning per dag.
-
-Indexlogiken implementeras då en gång, och en agent kan tjäna flera producenter, till exempel en per region eller plattform. Agenten kan placeras nära producenten, som EHDS-bryggans proxy mot tjänsteplattformen. Den autentiserar sig med en token bunden till producentens endpoint i tjänstekatalogen, till exempel enligt SMART Backend Services, och registrerar med producentens endpoint som `registeringProducer`.
-
-Avregistrering kräver att agenten vet när informationen inte längre finns. Det kräver antingen att tjänstens topics också uttrycker det, eller att agenten stämmer av mot producenten; se öppna frågor.
+Bilden visar läge 3 för en tjänst som kombinerar spegling och producentregistrering: RIV-TA-källor når FHIR-EI via dagens index och adaptern, FHIR-källor skriver direkt. Synken till eHM är streckad eftersom den inte ingår i första iterationen.
 
 ## Spärr, loggning och filtrering
 
@@ -339,19 +402,30 @@ Ett index, prövning per syfte. NPÖ och 1177 använder samma indexposter. Det s
 | Samtycke och nödåtkomst | Krävs | Ersätts av inloggning och identitet |
 | Särskilda begränsningar | – | Till exempel vårdgivarens fördröjda visning och sekretess mot vårdnadshavare för unga |
 
-Säkerhetsetiketter. En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Producenten kan därför märka en post med säkerhetsetiketter i `meta.security`, till exempel `NOPAT` ur HL7:s kodsystem ActCode (inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande). FHIR-EI tillämpar etiketterna per syfte. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177.
+Säkerhetsetiketter. En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Producenten kan därför märka en post med säkerhetsetiketter i `meta.security`, till exempel `NOPAT` ur HL7:s kodsystem ActCode (inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande). FHIR-EI tillämpar etiketterna per syfte. Vid Inera-försörjd cache måste den riktade frågan kunna returnera etiketterna; dagens engagemangsindex har ingen motsvarighet, så speglade poster saknar dem. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177.
 
 Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma.
 
 Prenumerationer filtreras på samma sätt. En konsument får bara notis om poster den skulle ha fått i en sökning. Det, och `id-only`-innehåll, hindrar att notiser läcker förekomst av spärrad information.
 
-Kontrollen gäller alla operationer: sökning, läsning, skrivning, prenumeration, inkrementell avstämning och export. Filtreringen sker i FHIR-EI innan svaret lämnas ut, aldrig bara i den komponent som presenterar svaret. Producenternas skrivningar filtreras inte men auktoriseras mot den autentiserade producentidentiteten, se API-avsnittet. Export kräver egen behörighet för systemkonsumenten och loggas per uttag.
+Kontrollen gäller alla operationer: sökning, läsning, skrivning, prenumeration, inkrementell avstämning och export. Filtreringen sker i FHIR-EI innan svaret lämnas ut, aldrig bara i den komponent som presenterar svaret. Skrivningar från registrerande parter filtreras inte men auktoriseras mot den autentiserade identiteten, se API-avsnittet. Export kräver egen behörighet för systemkonsumenten och loggas per uttag.
 
 Granularitet: spärrar gäller idag på vårdgivar- och vårdenhetsnivå. Med indexposter per tjänst går det längre fram att spärra eller filtrera per tjänst utan ändrad modell.
 
+Vårdgivare och vårdenhet i spärrkontrollen. Yttre spärr prövas mot vårdgivaren. När posten anger vårdgivaren med organisationsnummer slår FHIR-EI upp vårdgivarens HSA-id i tjänstekatalogen, som har båda på den juridiska personen. Inre spärr prövas mot vårdenheten i `careUnit`. En post utan `careUnit`, vilket kan förekomma vid Inera-försörjd cache, lämnas inte ut om patienten har en inre spärr hos vårdgivaren (fail-closed). Det kan dölja information som patienten inte har spärrat, så regeln är en öppen fråga.
+
 ## Samexistens med eHM:s patientindex
 
-FHIR-EI och eHM:s patientindex samexisterar. Inera tar inte ansvar för vårdgivarnas registrering i eHM:s index i första iterationen. Komponenten ska ändå klara de tre fall som en senare synk på vårdgivarnas vägnar förutsätter, med borttag som det viktigaste.
+FHIR-EI och eHM:s patientindex samexisterar. Enligt promemorian S2026/01360 (juni 2026) får patientindexet innehålla patientens identitetsbeteckning, vårdgivarens organisationsnummer, vilket journalsystem som har uppgifter om patienten och vårdgivarens elektroniska kontaktuppgifter. Förordningen lägger till anropsadresser till informationssystem och tekniska tjänster. Vårdenhet, tjänst, informationsmängd och senast uppdaterad ingår inte. Lagen föreslås träda i kraft 1 juli 2027, med detaljer i föreskrifter från eHM.
+
+Det tunna indexet är alltså nycklat på organisationsnummer och journalsystem, och det kan inte ensamt bära spärr på vårdenhetsnivå eller svara på vilka informationsmängder som finns. Förhållandet mellan indexen kan gå åt två håll, och specen tillåter båda:
+
+| Riktning | Innebörd | Försörjning i FHIR-EI |
+|---|---|---|
+| Det tunna indexet är sanning för var | FHIR-EI fylls utifrån eHM:s patientindex och riktade frågor till källorna. Vårdgivarna registrerar bara hos eHM | Inera-försörjd cache |
+| Det rika indexet härleder det tunna | FHIR-EI fylls av producenterna eller genom spegling, och det tunna indexet härleds ur det, eventuellt av Inera för vårdgivarnas räkning | Producentregistrering eller spegling |
+
+Den andra riktningen förutsätter att Inera får rådighet över uppgifterna och tillåtelse att lämna dem till eHM. Promemorian lägger uppgiftsskyldigheten på vårdgivaren, så ett sådant upplägg behöver godkännas av vårdgivarna och accepteras av eHM. Inera tar inte det ansvaret i första iterationen. FHIR-EI ska ändå klara de tre fall som en sådan synk förutsätter, med borttag som det viktigaste:
 
 | Fall | Krav på FHIR-EI | FHIR-mekanism |
 |---|---|---|
@@ -359,21 +433,22 @@ FHIR-EI och eHM:s patientindex samexisterar. Inera tar inte ansvar för vårdgiv
 | Grundladdning | FHIR-EI laddas initialt från dagens engagemangsindex. Senare ska ett tunt index kunna laddas från FHIR-EI. | Engångsuttag via adaptern; Bulk Data `$export` med `_type=DocumentReference` |
 | Återsynk | Avvikelser efter avbrott hittas och rättas utan full omladdning, även för borttag som missats. | Inkrementell avstämning med `_lastUpdated` eller `$export` med `_since`, inklusive gravstenar; kontrollsummor eller antal per vårdgivare och dag |
 
-Nästa steg är att torrsimma de tre fallen mot eHM:s API-specifikationer för patientindexet: nyckel, granularitet, API och semantik för borttag.
+Att härleda det tunna indexet blir en aggregering: alla aktiva poster för samma patient, vårdgivare och journalsystem blir en post i eHM:s index. En avregistrering i FHIR-EI ska bara leda till borttag i det tunna indexet när den sista aktiva posten för den kombinationen avregistrerats.
 
-Att härleda det tunna indexet blir en aggregering: alla aktiva poster för samma patient och vårdgivare (eller vårdenhet) blir en post i eHM:s index. En avregistrering i FHIR-EI ska bara leda till borttag i det tunna indexet när den sista aktiva posten för den kombinationen avregistrerats. Exakt nyckel och granularitet beror på eHM:s krav, se öppna frågor.
+Nästa steg är att torrsimma båda riktningarna mot eHM:s API-specifikationer för patientindexet när de finns.
 
 ## Öppna frågor
 
 - [ ] Federation: dagens engagemangsindex kan vara hierarkiskt, där regionala index vidarebefordrar till det nationella via ProcessNotification. Ska FHIR-EI stödja en sådan topologi, eller bara ett nationellt index? (Den här frågan ersätter den tidigare om aggregering. Den andra tolkningen, att producenter registrerar en post per domän i stället för per journalobjekt, är besvarad av granularitetsbeslutet.)
 - [ ] Latens: vilket krav gäller från ändring i källsystemet till synlig indexpost? Vad klarar dagens engagemangsindex i praktiken?
 - [ ] Lagringstider: hur långt avbrott ska en konsument klara utan full omladdning? Svaret sätter både händelseloggens och gravstenarnas lagringstid.
-- [ ] eHM:s tunna index: torrsimma borttag, grundladdning och återsynk mot eHM:s API-specifikationer.
+- [x] Vilken granularitet får eHM:s patientindex: vårdgivare, vårdenhet eller endpoint? Svar: vårdgivare (organisationsnummer) och journalsystem, inte vårdenhet och inte tjänst eller informationsmängd; se avsnittet om samexistens.
+- [ ] eHM:s tunna index: torrsimma båda riktningarna, och borttag, grundladdning och återsynk, mot eHM:s API-specifikationer när de finns.
 - [ ] R5-beroende: tidplanen för svenska basprofiler i R5, och om konsumenter och producenter är redo för R5.
 - [ ] Koppling mellan klient och endpoint: hur binds ett klientcertifikat eller en token till en endpoint i tjänstekatalogen? Tjänstekatalogens Endpoint har i dag ingen identifierare för det producerande systemet, så kopplingen kräver antingen en sådan där eller ett register i FHIR-EI.
 - [ ] Adressregistret: ska adaptern peka på tjänsteplattformens endpoint per tjänstekontrakt eller på EHDS-bryggans FHIR-yta per vårdgivare? Bryggan använder vårdgivarens HSA-id som logisk adress; dagens engagemangsposter kan ha vårdenhetens eller källsystemets.
 - [ ] Överlämning från adaptern: räcker avregistrering och ny registrering när ett källsystem går över till FHIR, eller behövs en operation som flyttar ägarskapet?
-- [ ] Behörighet per vårdgivare: regeln att en producent bara får registrera för vårdgivare som listar dess endpoint i tjänstekatalogen förutsätter att vårdgivarna håller sina listningar aktuella. Hur säkerställs det?
+- [ ] Behörighet per vårdgivare: regeln att en producent eller indexeringsagent bara får registrera för vårdgivare som listar dess endpoint i tjänstekatalogen förutsätter att vårdgivarna håller sina listningar aktuella. Hur säkerställs det?
 - [ ] Aggregerande tjänster: stämmer det att de är dagens huvudsakliga konsumenter av engagemangsindex, per tjänstedomän? Övergången per tjänst bygger på det.
 - [ ] Spärr och samtycke i dagens kedja: var filtreras de i dag, i den aggregerande tjänsten eller hos konsumenten? Om FHIR-EI också filtrerar kan läge 2 ge dubbel filtrering eller ändrat beteende.
 - [ ] Juridik: täcker vårdgivarnas ändamål och Ineras personuppgiftsbiträdesavtal att samma index används för sammanhållen journalföring och för patientens direktåtkomst?
@@ -382,3 +457,9 @@ Att härleda det tunna indexet blir en aggregering: alla aktiva poster för samm
 - [ ] Avregistrering via indexeringsagenten: hur vet agenten att informationen inte längre finns hos producenten?
 - [ ] R4-tjänster: publiceras deras tillämpning i ett separat R5-paket, eller går tjänsterna över till R5?
 - [ ] Första tjänst: vilken tjänst går först genom övergången?
+- [ ] Försörjningssätt per tjänst: vem beslutar, och var anges det, så att lokaliseringstjänsten och adaptern vet vilka endpoints de ska fylla?
+- [ ] Riktad fråga: egen operation (till exempel `$inventory`) eller `batch` med `_summary=count`? Vem definierar den, denna IG eller tjänsternas IG:er? Och svarar den med vårdenhet?
+- [ ] Lokaliseringstjänstens behörighet: under vilket ändamål och med vilken identitet frågar den källorna, och hur loggas frågan hos källan och i FHIR-EI?
+- [ ] Lokaliseringstjänstens placering: del av FHIR-EI eller en separat komponent som skriver via API:et?
+- [ ] Tidsgränser: hur länge är en cachepost färsk när källan saknar prenumeration, och hur länge väntar FHIR-EI på en källa innan svaret redovisas som ofullständigt?
+- [ ] Post utan vårdenhet: räcker fail-closed vid inre spärr, eller behöver den riktade frågan alltid ange vårdenhet?

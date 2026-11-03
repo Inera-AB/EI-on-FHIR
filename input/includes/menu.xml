@@ -8,6 +8,7 @@
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
       <li><a href="event-model.html">Händelsemodell och övergång</a></li>
       <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
@@ -19,7 +20,6 @@
     <ul class="dropdown-menu">
       <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
       <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="producer-support.html">Stöd för producenter</a></li>
       <li><a href="expected-responses.html">Förväntade svar</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>

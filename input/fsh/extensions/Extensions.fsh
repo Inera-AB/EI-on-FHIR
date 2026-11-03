@@ -10,7 +10,7 @@ Context: DocumentReference
 Extension: CareUnit
 Id: CareUnit
 Title: "Vårdenhet"
-Description: "Vårdenheten där informationen finns, som HSA-id. Motsvarar careUnitId i dagens engagemangsindex."
+Description: "Vårdenheten där informationen finns, som HSA-id, när den är känd. Kan saknas när indexet fylls utifrån eHM:s patientindex, som bara anger vårdgivare. Motsvarar careUnitId i dagens engagemangsindex."
 Context: DocumentReference
 * insert IneraMetadata(CareUnit)
 * value[x] 1..1
@@ -22,7 +22,7 @@ Context: DocumentReference
 Extension: RegisteringProducer
 Id: RegisteringProducer
 Title: "Registrerande producent"
-Description: "Producentens identitet: den Endpoint i tjänstekatalogen som den autentiserade klienten är bunden till, som absolut referens. För en direktansluten producent är det samma endpoint som i sourceEndpoint. Referensen är också producentens namnrymd i identifier.system. FHIR-EI kontrollerar värdet mot den autentiserade klienten. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex."
+Description: "Den registrerande partens identitet: den Endpoint i tjänstekatalogen som den autentiserade klienten är bunden till, som absolut referens. Parten är producenten, en indexeringsagent med producentens identitet, Ineras lokaliseringstjänst eller övergångsadaptern. För en producent är det samma endpoint som i sourceEndpoint. Referensen är också partens namnrymd i identifier.system. FHIR-EI kontrollerar värdet mot den autentiserade klienten. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex."
 Context: DocumentReference
 * insert IneraMetadata(RegisteringProducer)
 * value[x] 1..1
@@ -45,13 +45,13 @@ Context: DocumentReference
 Extension: SourceSystem
 Id: SourceSystem
 Title: "Källsystem"
-Description: "Källsystemet enligt dagens engagemangsindex, som HSA-id. Sätts av övergångsadaptern, eftersom registrerande producent då är adaptern och inte källsystemet. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex."
+Description: "Källsystemet eller journalsystemet som håller informationen, när den registrerande parten inte är källan själv: källsystemet enligt dagens engagemangsindex vid spegling, eller journalsystemet enligt eHM:s patientindex vid Inera-försörjd cache. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex."
 Context: DocumentReference
 * insert IneraMetadata(SourceSystem)
 * value[x] 1..1
 * value[x] only Identifier
 * valueIdentifier.system 1..1
-* valueIdentifier.system = $hsaid
+* valueIdentifier.system ^short = "Identifierarsystem, t.ex. HSA-id för källsystemet"
 * valueIdentifier.value 1..1
 
 Extension: ContentLastUpdated

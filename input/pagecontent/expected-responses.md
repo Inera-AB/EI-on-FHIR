@@ -12,6 +12,10 @@ Svaren följer FHIR R5:s RESTful API. Tabellen visar de svar som är specifika f
 | `$export` | `202 Accepted` med `Content-Location` | Enligt Bulk Data Access |
 {:.grid}
 
+### Ofullständigt svar
+
+När FHIR-EI vet att ett svar kan vara ofullständigt innehåller sökresultatet en `OperationOutcome` i `Bundle.issues`, med `issue.code = incomplete` och en beskrivning av vilka vårdgivare eller endpoints det gäller. Det inträffar till exempel när en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen. Konsumenten SHALL kunna visa att uppgifter kan saknas, i stället för att tolka svaret som komplett. Se exemplet [Ofullständigt sökresultat](Bundle-SokresultatOfullstandigt.html).
+
 ### Paginering
 
 En sökning kan ge flera sidor. Klienten följer länken `next` i Bundlen.
@@ -23,4 +27,5 @@ Om konsumenten får veta att poster filtrerats bort, till exempel "information f
 ### Exempel
 
 - [Sökresultat för en patient](Bundle-SokresultatForPatient.html)
+- [Ofullständigt sökresultat](Bundle-SokresultatOfullstandigt.html)
 - [Registrering och avregistrering i en transaction](Bundle-RegistreringTransaction.html)

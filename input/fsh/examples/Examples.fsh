@@ -16,6 +16,7 @@ Title: "Registrerad indexpost från en FHIR-producent"
 Description: "Journalsystem A har vård- och omsorgsdokumentation om patienten. Tjänsten anges med både tjänstedomän och IG-canonical, och informationsmängden med både kategori och profil-canonical."
 Usage: #example
 * meta.lastUpdated = "2026-10-20T14:32:07+02:00"
+* meta.tag[populationMethod] = $population-method#producer
 * extension[sourceEndpoint].valueReference = Reference(https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 * extension[careUnit].valueIdentifier.system = $hsaid
 * extension[careUnit].valueIdentifier.value = "SE0000000000-VE01"
@@ -39,6 +40,7 @@ Title: "Indexpost som inte visas för patient eller närstående"
 Description: "Producenten har märkt posten med säkerhetsetiketten NOPAT. FHIR-EI lämnar inte ut den vid patientens direktåtkomst eller till ombud och vårdnadshavare, men vid sammanhållen journalföring prövas den som vanligt."
 Usage: #example
 * meta.lastUpdated = "2026-10-23T09:12:40+02:00"
+* meta.tag[populationMethod] = $population-method#producer
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActCode#NOPAT
 * extension[sourceEndpoint].valueReference = Reference(https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 * extension[careUnit].valueIdentifier.system = $hsaid
@@ -63,6 +65,7 @@ Title: "Indexpost speglad av övergångsadaptern"
 Description: "Adaptern har slagit ihop dagens engagemangsposter för samma patient, logiska adress och tjänstedomän till en indexpost, med dagens kategori som informationsmängd. Endpointen är tjänsteplattformens endpoint för tjänstekontraktet, enligt adapterns adressregister, och den logiska adressen anges separat. Registrerande producent är adaptern, och källsystemet behålls."
 Usage: #example
 * meta.lastUpdated = "2026-10-21T08:05:12+02:00"
+* meta.tag[populationMethod] = $population-method#mirror
 * extension[sourceEndpoint].valueReference = Reference(https://tjanstekatalog.example.org/fhir/Endpoint/ntjp-getcaredocumentation)
 * extension[careUnit].valueIdentifier.system = $hsaid
 * extension[careUnit].valueIdentifier.value = "SE0000000000-VE02"
@@ -88,6 +91,7 @@ Title: "Indragen indexpost"
 Description: "Producenten har dragit tillbaka posten eftersom engagemanget är avslutat. Posten ligger kvar som gravsten under gravstenarnas lagringstid och syns vid avstämning och export, men inte i en standardsökning."
 Usage: #example
 * meta.lastUpdated = "2026-10-22T10:15:41+02:00"
+* meta.tag[populationMethod] = $population-method#producer
 * extension[sourceEndpoint].valueReference = Reference(https://tjanstekatalog.example.org/fhir/Endpoint/journal-a)
 * extension[careUnit].valueIdentifier.system = $hsaid
 * extension[careUnit].valueIdentifier.value = "SE0000000000-VE01"
@@ -103,6 +107,59 @@ Usage: #example
 * insert TestCustodian(SE0000000000-VG01)
 * content.attachment.url = "https://journal-a.example.org/fhir"
 * content.profile[category].valueCoding = $engagement-category#voo
+
+// Populated by Inera's locator from eHM's patient index and a targeted query to the source. The
+// patient index gives the care provider by organisation number and the record system, but not the
+// care unit, so the entry has no careUnit.
+Instance: IndexpostFranLokaliseringstjanst
+InstanceOf: IneraIndexEntry
+Title: "Indexpost fylld av lokaliseringstjänsten"
+Description: "Lokaliseringstjänsten har slagit upp patientens vårdgivare i eHM:s patientindex och ställt en riktad fråga till journalsystem C. Vårdgivaren anges med organisationsnummer, och vårdenhet saknas eftersom patientindexet inte anger den."
+Usage: #example
+* meta.lastUpdated = "2026-10-24T11:02:18+02:00"
+* meta.tag[populationMethod] = $population-method#cache
+* extension[sourceEndpoint].valueReference = Reference(https://tjanstekatalog.example.org/fhir/Endpoint/journal-c)
+* extension[registeringProducer].valueReference.reference = "https://tjanstekatalog.example.org/fhir/Endpoint/lokaliseringstjanst"
+* extension[sourceSystem].valueIdentifier.system = $hsaid
+* extension[sourceSystem].valueIdentifier.value = "SE0000000000-SYS3"
+* extension[contentLastUpdated].valueDateTime = "2026-10-24T09:47:03+02:00"
+* extension[registrationStatus].valueCode = #active
+* identifier.system = "https://tjanstekatalog.example.org/fhir/Endpoint/lokaliseringstjanst"
+* identifier.value = "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f"
+* status = #current
+* type.coding[serviceDomain] = $service-domain#riv:clinicalprocess:healthcond:description
+* insert TestPatient
+* custodian.identifier.system = $orgnr
+* custodian.identifier.value = "0000000000"
+* content.attachment.url = "https://journal-c.example.org/fhir"
+* content.profile[category].valueCoding = $engagement-category#voo
+
+// GET DocumentReference?patient:identifier=… against a service populated as an Inera cache, where one
+// source did not answer the targeted query in time.
+Instance: SokresultatOfullstandigt
+InstanceOf: Bundle
+Title: "Ofullständigt sökresultat"
+Description: "Svar på en sökning där en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen. Bundlen innehåller de poster som gick att bekräfta, och en OperationOutcome i Bundle.issues anger vilken källa som saknas, så att konsumenten kan visa att uppgifter kan saknas."
+Usage: #example
+* type = #searchset
+* total = 1
+* link[0].relation = #self
+* link[0].url = "https://ei.example.org/fhir/DocumentReference?patient:identifier=http://electronichealth.se/identifier/personnummer|191212121212"
+* entry[0].fullUrl = "https://ei.example.org/fhir/DocumentReference/IndexpostFranLokaliseringstjanst"
+* entry[0].resource = IndexpostFranLokaliseringstjanst
+* entry[0].search.mode = #match
+* issues = KallaSvaradeInte
+
+Instance: KallaSvaradeInte
+InstanceOf: OperationOutcome
+Usage: #inline
+* id = "kalla-svarade-inte"
+* text.status = #generated
+* text.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Källan svarade inte inom tidsgränsen. Uppgifter kan saknas för vårdgivare 0000000000.</p></div>"
+* issue[0].severity = #warning
+* issue[0].code = #incomplete
+* issue[0].details.text = "Källan svarade inte inom tidsgränsen. Uppgifter kan saknas för vårdgivaren."
+* issue[0].diagnostics = "Vårdgivare 0000000000 (organisationsnummer), endpoint https://tjanstekatalog.example.org/fhir/Endpoint/journal-d"
 
 // A producer registers and deregisters its entries with conditional PUTs in one transaction.
 // The entries carry no id: the server resolves each one from its identifier.
