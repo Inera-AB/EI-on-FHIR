@@ -211,7 +211,7 @@ git push origin 1.2.0
 
 `input/pagecontent/version-history.md` is the IG's change log. The publisher's `history.html` lists the published versions; the change log describes what changed in each.
 
-Write each entry as `## [X.Y.Z] — YYYY-MM-DD` with `###` sections. The first line of `version-history.md`, `{::options header_offset="1" /}`, makes kramdown render them one level down (`<h3>`/`<h4>`), below the `<h2>` page title the template adds. Keep that line; without it IG Publisher reports a second `<h2>` on the page as an error.
+Write each entry as `## [X.Y.Z] — YYYY-MM-DD` with `###` sections. From IG Publisher 3.0.2 the publisher moves page headings one level down itself, so they render as `<h3>`/`<h4>` below the `<h2>` page title. The template's first line, `{::options header_offset="1" /}`, did the same for older publishers; with 3.0.2 it moves them two levels and the publisher reports skipped heading levels as errors, so this IG has removed it.
 
 ---
 
