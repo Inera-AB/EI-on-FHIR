@@ -31,7 +31,7 @@ Att indexet får användas för både sammanhållen journalföring och patienten
 
 ### Säkerhetsetiketter
 
-En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Producenten kan därför märka en post med säkerhetsetiketter i `meta.security`, till exempel `NOPAT` ur HL7:s kodsystem `v3-ActCode`: inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande. FHIR-EI tillämpar etiketterna per syfte. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177. Se exemplet [Indexpost som inte visas för patient eller närstående](DocumentReference-IndexpostEjForPatient.html).
+En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Den registrerande parten kan därför märka en post med säkerhetsetiketter i `meta.security`, till exempel `NOPAT` ur HL7:s kodsystem `v3-ActCode`: inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande. FHIR-EI tillämpar etiketterna per syfte. Vid Inera-försörjd cache måste den riktade frågan kunna returnera etiketterna; dagens engagemangsindex har ingen motsvarighet, så speglade poster saknar dem. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177. Se exemplet [Indexpost som inte visas för patient eller närstående](DocumentReference-IndexpostEjForPatient.html).
 
 ### Prenumerationer
 
@@ -39,11 +39,17 @@ Prenumerationer filtreras på samma sätt. En konsument får bara notis om poste
 
 ### Producenter
 
-Producenternas skrivningar filtreras inte men auktoriseras. Producentens identitet är dess endpoint i tjänstekatalogen, och en producent får bara registrera för vårdgivare som listar endpointen där. Se [REST-interaktioner och sökparametrar](rest-interactions.html). `meta.source` används aldrig ensamt för behörighetskontroll.
+Skrivningar från registrerande parter filtreras inte men auktoriseras. Partens identitet är dess endpoint i tjänstekatalogen. En producent får bara registrera för vårdgivare som listar endpointen där; övergångsadaptern och lokaliseringstjänsten bara inom sitt underlag. Se [REST-interaktioner och sökparametrar](rest-interactions.html). `meta.source` används aldrig ensamt för behörighetskontroll.
 
 ### Granularitet
 
 Spärrar gäller idag på vårdgivar- och vårdenhetsnivå. Med indexposter per tjänst går det längre fram att spärra eller filtrera per tjänst utan ändrad modell.
+
+### Vårdgivare och vårdenhet i spärrkontrollen
+
+Yttre spärr prövas mot vårdgivaren. När posten anger vårdgivaren med organisationsnummer slår FHIR-EI upp vårdgivarens HSA-id i tjänstekatalogen, som har båda på den juridiska personen.
+
+Inre spärr prövas mot vårdenheten i `careUnit`. En post utan `careUnit`, vilket kan förekomma vid [Inera-försörjd cache](population.html), lämnas inte ut om patienten har en inre spärr hos vårdgivaren (fail-closed). Det kan dölja information som patienten inte har spärrat, så regeln är en [öppen fråga](open-issues.html).
 
 ### Allmänna krav
 

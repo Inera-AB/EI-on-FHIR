@@ -14,10 +14,12 @@ Exemplen i IG:n visar giltiga instanser:
 | [Registrerad indexpost från en FHIR-producent](DocumentReference-IndexpostFhirProducent.html) | Indexpost |
 | [Indexpost som inte visas för patient eller närstående](DocumentReference-IndexpostEjForPatient.html) | Indexpost |
 | [Indexpost speglad av övergångsadaptern](DocumentReference-IndexpostFranAdapter.html) | Indexpost |
+| [Indexpost fylld av lokaliseringstjänsten](DocumentReference-IndexpostFranLokaliseringstjanst.html) | Indexpost |
 | [Indragen indexpost](DocumentReference-IndexpostIndragen.html) | Indexpost |
 | [Prenumeration på en patients indexposter](Subscription-PrenumerationForPatient.html) | Prenumeration på indexposter |
 | [Registrering och avregistrering i en transaction](Bundle-RegistreringTransaction.html) | Bundle |
 | [Sökresultat för en patient](Bundle-SokresultatForPatient.html) | Bundle |
+| [Ofullständigt sökresultat](Bundle-SokresultatOfullstandigt.html) | Bundle |
 {:.grid}
 
 Exemplen använder testpersonnumret 191212121212, påhittade HSA-id:n och påhittade adresser i tjänstekatalogen. Någon testmiljö för FHIR-EI finns inte än.

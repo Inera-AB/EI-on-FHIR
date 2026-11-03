@@ -8,6 +8,9 @@ Gemensam indexpost. Anger att en producent via en endpoint har information om en
 Det finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten
 för senaste ändring av innehållet gäller hela posten.
 
+Posten betyder samma sak oavsett hur den har kommit till: registrerad av producenten, fylld av Ineras
+lokaliseringstjänst eller speglad från dagens engagemangsindex. Försörjningssättet framgår av `meta.tag`.
+
 Posten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i
 tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska.
 """
@@ -18,10 +21,21 @@ tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för sen
 // shown to the patient, family or guardians without the attending provider's authorisation.
 * meta.security MS
 * meta.security ^short = "Säkerhetsetiketter som FHIR-EI tillämpar per syfte, t.ex. NOPAT"
+// How the entry was populated. Set by FHIR-EI; consumers read entries the same way regardless.
+* meta.tag MS
+* meta.tag ^slicing.discriminator.type = #value
+* meta.tag ^slicing.discriminator.path = "system"
+* meta.tag ^slicing.rules = #open
+* meta.tag contains populationMethod 0..1 MS
+* meta.tag[populationMethod] ^short = "Försörjningssätt: producentregistrering, Inera-försörjd cache eller spegling (sätts av FHIR-EI)"
+* meta.tag[populationMethod] from IneraIndexPopulationMethodValueSet (required)
+* meta.tag[populationMethod].system 1..1
+* meta.tag[populationMethod].system = $population-method
+* meta.tag[populationMethod].code 1..1
 
 * extension contains
     SourceEndpoint named sourceEndpoint 1..1 MS and
-    CareUnit named careUnit 1..1 MS and
+    CareUnit named careUnit 0..* MS and
     RegisteringProducer named registeringProducer 1..1 MS and
     LogicalAddress named logicalAddress 0..1 MS and
     SourceSystem named sourceSystem 0..* MS and
@@ -29,14 +43,14 @@ tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för sen
     RegistrationStatus named registrationStatus 1..1 MS and
     DeregistrationReason named deregistrationReason 0..1 MS
 
-// Identity: stable and bound to the producer. The producer may not change it on an existing entry.
-// The namespace is derived from the producer identity, so that FHIR-EI can check it without a register.
+// Identity: stable and bound to the registering party. The party may not change it on an existing entry.
+// The namespace is derived from the party's identity, so that FHIR-EI can check it without a register.
 * identifier 1..* MS
-* identifier ^short = "Producentens id för posten; nyckel för villkorad uppdatering"
+* identifier ^short = "Registrerande partens id för posten; nyckel för villkorad uppdatering"
 * identifier.system 1..1 MS
-* identifier.system ^short = "Producentens namnrymd: samma URL som registeringProducer"
+* identifier.system ^short = "Registrerande partens namnrymd: samma URL som registeringProducer"
 * identifier.value 1..1 MS
-* identifier.value ^short = "Producentens id för posten"
+* identifier.value ^short = "Registrerande partens id för posten"
 
 // The base status has a required binding that cannot be extended. The exact lifecycle state is
 // carried by the registrationStatus extension; the invariants keep the two consistent.
@@ -79,11 +93,12 @@ tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för sen
 * subject.identifier obeys inera-ei-patient-identifier
 
 * custodian 1..1 MS
-* custodian ^short = "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id"
+* custodian ^short = "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer"
 * custodian.identifier 1..1 MS
-* custodian.identifier.system 1..1
-* custodian.identifier.system = $hsaid
+* custodian.identifier.system 1..1 MS
 * custodian.identifier.value 1..1 MS
+// eHM's patient index is keyed on organisation number, so both identifier systems are allowed.
+* custodian.identifier obeys inera-ei-custodian-identifier
 
 * content 1..1 MS
 * content.attachment.url 1..1 MS
@@ -128,7 +143,7 @@ Severity: #error
 Expression: "extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason').exists() = extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus').where(value != 'active').exists()"
 
 Invariant: inera-ei-producer-namespace
-Description: "Minst en identifierare har producentens namnrymd: identifier.system är samma URL som referensen i registeringProducer."
+Description: "Minst en identifierare har den registrerande partens namnrymd: identifier.system är samma URL som referensen i registeringProducer."
 Severity: #error
 Expression: "identifier.system contains extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer').value.reference"
 
@@ -136,6 +151,11 @@ Invariant: inera-ei-service-coding
 Description: "Tjänsten anges med tjänstedomän, IG:ns canonical eller båda."
 Severity: #error
 Expression: "coding.where(system = 'https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem' or system = 'urn:ietf:rfc:3986').exists()"
+
+Invariant: inera-ei-custodian-identifier
+Description: "Vårdgivaren identifieras med HSA-id eller organisationsnummer."
+Severity: #error
+Expression: "system = 'urn:oid:1.2.752.29.4.19' or system = 'urn:oid:2.5.4.97'"
 
 Invariant: inera-ei-patient-identifier
 Description: "Patienten identifieras med personnummer eller samordningsnummer."

@@ -23,7 +23,7 @@ Title: "FHIR-EI server"
 * rest[0].resource[0]
   * type = #DocumentReference
   * profile = Canonical(IneraIndexEntry)
-  * documentation = "Indexposter. En producent får bara skapa, uppdatera och avregistrera poster som tillhör dess registrerade identitet. Avregistrering sker med villkorad uppdatering, aldrig med delete. En sökning utan status-parameter returnerar bara poster med status current."
+  * documentation = "Indexposter. Läs-, prenumerations- och export-API:et är detsamma oavsett hur en tjänsts poster fylls: producentregistrering, Inera-försörjd cache eller spegling av dagens engagemangsindex. En registrerande part får bara skapa, uppdatera och avregistrera poster som tillhör dess registrerade identitet. Avregistrering sker med villkorad uppdatering, aldrig med delete. En sökning utan status-parameter returnerar bara poster med status current. När svaret kan vara ofullständigt innehåller det en OperationOutcome i Bundle.issues."
   * versioning = #versioned
   * readHistory = true
   * updateCreate = true
@@ -52,6 +52,8 @@ Title: "FHIR-EI server"
   * insert SearchParam(source-endpoint, https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint, reference, SHALL)
   * insert SearchParam(_lastUpdated, http://hl7.org/fhir/SearchParameter/Resource-lastUpdated, date, SHALL)
   * searchParam[=].documentation = "Inkrementell avstämning, tillsammans med status=current,superseded,entered-in-error."
+  * insert SearchParam(_tag, http://hl7.org/fhir/SearchParameter/Resource-tag, token, SHOULD)
+  * searchParam[=].documentation = "Försörjningssätt, för felsökning och avstämning."
 
 // Subscriptions
 * rest[0].resource[+]
