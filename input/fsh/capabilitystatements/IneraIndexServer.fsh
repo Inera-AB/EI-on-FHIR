@@ -13,8 +13,8 @@ Title: "FHIR-EI server"
 * implementationGuide = "https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex"
 
 * rest[0].mode = #server
-* rest[0].documentation = "Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning. Se sidan Spärr, loggning och behörighet."
-* rest[0].security.description = "Se sidan Spärr, loggning och behörighet."
+* rest[0].documentation = "Alla anrop autentiseras och loggas. Sökning och läsning för visning sker i användarkontext, där FHIR-EI prövar spärr, samtycke och syfte. Registrering, prenumeration, inkrementell avstämning och export sker i systemkontext, där FHIR-EI prövar systemets behörighet och det mottagande systemet prövar per användare. Se sidan Spärr, loggning och behörighet."
+* rest[0].security.description = "Två åtkomstlägen: användarkontext med token som bär användarens kontextanspråk, och systemkontext enligt SMART Backend Services eller med klientcertifikat. Se sidan Spärr, loggning och behörighet."
 * rest[0]
   * insert Interaction(transaction, SHALL)
   * interaction[=].documentation = "Producenter registrerar och avregistrerar flera poster i en transaction-Bundle. Den registreras helt eller inte alls."
@@ -59,7 +59,7 @@ Title: "FHIR-EI server"
 * rest[0].resource[+]
   * type = #Subscription
   * profile = Canonical(IneraIndexSubscription)
-  * documentation = "Topic-baserade prenumerationer på topic indexpost-andrad. Notiser filtreras på samma sätt som sökningar."
+  * documentation = "Topic-baserade prenumerationer på topic indexpost-andrad, i systemkontext. Notiser filtreras på prenumerantens behörighet och bär bara postens id."
   * insert Interaction(create, SHALL)
   * insert Interaction(read, SHALL)
   * insert Interaction(update, SHALL)

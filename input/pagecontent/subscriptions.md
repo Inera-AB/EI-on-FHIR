@@ -1,4 +1,4 @@
-En konsument prenumererar på ändrade indexposter med R5:s inbyggda topic-baserade prenumerationer, profilerade som [Prenumeration på indexposter](StructureDefinition-IneraIndexSubscription.html). Prenumerationen ersätter ProcessNotification.
+En konsument prenumererar på ändrade indexposter med R5:s inbyggda topic-baserade prenumerationer, profilerade som [Prenumeration på indexposter](StructureDefinition-IneraIndexSubscription.html). Prenumerationen ersätter ProcessNotification. Den sker i systemkontext, eftersom den lever längre än en användares session; se [Spärr, loggning och behörighet](security.html).
 
 ### Topic `indexpost-andrad`
 
@@ -27,9 +27,9 @@ Se exemplet [Prenumeration på en patients indexposter](Subscription-Prenumerati
 
 ### Notiser
 
-Notisen är en `subscription-notification`-Bundle med en `SubscriptionStatus` och postens id, men utan posten. Konsumenten läser posten med `GET DocumentReference/[id]`, och läsningen går genom samma spärr, loggning och filtrering som en sökning.
+Notisen är en `subscription-notification`-Bundle med en `SubscriptionStatus` och postens id, men utan posten. Konsumenten läser posten med `GET DocumentReference/[id]`: i systemkontext för egen bearbetning, eller i användarkontext när posten ska visas för en användare. Läsningen i användarkontext går genom samma spärr, loggning och filtrering som en sökning.
 
-En konsument får bara notis om poster som den skulle ha fått i en sökning. Det, och `id-only`-innehåll, hindrar att notiser läcker förekomst av spärrad information.
+FHIR-EI filtrerar notiserna på prenumerantens behörighet, och på yttre spärr när prenumeranten agerar för en bestämd vårdgivare. Samtycke och nödåtkomst kan inte prövas utan en användare, så prenumeranten ansvarar för prövningen per användare när informationen visas. `id-only` gör att notisen inte för med sig mer om patienten än nödvändigt.
 
 ### Leverans och återhämtning
 
