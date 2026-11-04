@@ -20,7 +20,7 @@ Specen omfattar:
 
 Specen är neutral till hur indexet fylls. Konsumenterna läser samma API oavsett om en tjänsts indexposter registreras av producenterna, fylls av Inera utifrån eHM:s patientindex och riktade frågor till källorna, eller speglas från dagens engagemangsindex. Försörjningen väljs per tjänst.
 
-Utanför specen ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll.
+Utanför specen ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll. Den ska ändå kunna förse sådana lösningar med indexposter och notiser, i systemkontext; se avsnittet om komponenter och åtkomstlägen.
 
 Första konsumenter är NPÖ och 1177.
 
@@ -43,6 +43,11 @@ Komponenten är ett rikt index av pekare. Den ska klara minst det dagens engagem
 | Lokaliseringstjänst | Ineras komponent som fyller indexet som en cache, utifrån eHM:s patientindex och riktade frågor till källorna |
 | Övergångsadapter | Komponent som speglar dagens engagemangsindex till FHIR-EI |
 | Konsument | Tjänst som söker i eller prenumererar på indexet, till exempel NPÖ och 1177 |
+| Systemkonsument | Konsument som läser i systemkontext: prenumererar, stämmer av, gör massuttag eller håller en lokal kopia av innehåll aktuell |
+| Användarkontext | Åtkomstläge där anropet görs för en namngiven användare och bär användarens anspråk. FHIR-EI prövar spärr, samtycke och syfte och loggar per användare |
+| Systemkontext | Åtkomstläge utan användare. FHIR-EI prövar systemets behörighet, och det mottagande systemet prövar per användare när informationen visas |
+| Indexkärna | Den del av FHIR-EI som lagrar indexposterna och sköter skrivning, livscykel, händelselogg, prenumeration, avstämning och massuttag |
+| Åtkomstlager | Den del av FHIR-EI som tar emot sökning och läsning i användarkontext och prövar spärr, samtycke, syfte, fullmakt och säkerhetsetiketter |
 | Tunt index | eHM:s patientindex kopplat till NDI |
 
 Principer:
@@ -54,6 +59,7 @@ Principer:
 5. Indexet är självt skyddsvärd information. Att en patient har en post hos en viss vårdenhet är en uppgift om patienten. Komponenten tillämpar därför spärr, loggning och filtrering.
 6. Profilering enligt Ineras tre-lagersmodell, ovanpå svenska basprofiler.
 7. Neutral försörjning. Konsumentkontraktet är detsamma oavsett hur en tjänsts indexposter fylls. Försörjningen är ett val per tjänst, inte en egenskap hos indexet.
+8. Två åtkomstlägen. Varje operation sker i användarkontext eller i systemkontext. Prövning per användare kräver en användare: i användarkontext görs den i FHIR-EI, i systemkontext av det mottagande systemet när informationen visas.
 
 ## Informationsmodell: indexposten som pekare
 
@@ -249,7 +255,7 @@ Läsning när cacheposten saknas eller är inaktuell:
 
 1. Lokaliseringstjänsten slår upp patientens vårdgivare (organisationsnummer) och journalsystem i eHM:s patientindex.
 2. Den slår upp vårdgivarnas endpoints för tjänsten i tjänstekatalogen.
-3. Den ställer en riktad fråga till de endpoints som saknas i cachen eller är inaktuella, parallellt och med en tidsgräns. Svaret anger vilka informationsmängder som finns för patienten och när de senast ändrades.
+3. Den ställer en riktad fråga till de endpoints som saknas i cachen eller är inaktuella, parallellt, med en tidsgräns och med användarens kontext. Svaret anger vilka informationsmängder som finns för patienten och när de senast ändrades.
 4. Den skriver eller uppdaterar indexposterna. En endpoint som uppger att den inte har något för patienten inom tjänsten får sin post indragen med orsaken att informationen inte längre finns hos källan.
 5. FHIR-EI svarar konsumenten. Källor som inte svarade inom tidsgränsen redovisas som ett ofullständigt svar.
 
@@ -260,7 +266,7 @@ Färskhållning efter första läsningen:
 | Stöder prenumeration | Lokaliseringstjänsten prenumererar på tjänstens topics för hela endpointen med `id-only`. En notis markerar cacheposten som inaktuell eller uppdaterar `contentLastUpdated`. Luckor i händelseräknaren upptäcks med `$status` och hämtas med `$events`; vid behov ställs den riktade frågan igen |
 | Saknar prenumeration | Cacheposten blir inaktuell när tidsgränsen löper ut, och nästa läsning går via den riktade frågan |
 
-Den riktade frågan är inte fastställd. Två varianter är möjliga: en egen operation (till exempel `$inventory`, som då definieras i denna IG) eller en `batch`-Bundle med `GET [Resurs]?patient=…&_summary=count` per resurstyp. Frågan är en åtkomst till uppgifter om patienten och ska prövas och loggas hos källan. RIV-TA-källor kan inte svara på frågan utan att hämta innehåll, och försörjs därför med spegling.
+Den riktade frågan är inte fastställd. Två varianter är möjliga: en egen operation (till exempel `$inventory`, som då definieras i denna IG) eller en `batch`-Bundle med `GET [Resurs]?patient=…&_summary=count` per resurstyp. Frågan är en åtkomst till uppgifter om patienten och ska prövas och loggas hos källan. När en sökning utlöser frågan ställs den med användarens kontext, så att källan prövar och loggar mot användaren. Vid färskhållning finns ingen användare, och frågan och prenumerationen hos källan sker i systemkontext. RIV-TA-källor kan inte svara på frågan utan att hämta innehåll, och försörjs därför med spegling.
 
 Begränsningar. eHM:s patientindex anger vårdgivare och journalsystem, inte vårdenhet. Om den riktade frågan inte heller anger vårdenhet saknar posten `careUnit`, och inre spärr kan då inte prövas utifrån indexet; se avsnittet om spärr. Första visningen för en patient blir en fan-out till alla källor hos patientens vårdgivare, och kvaliteten i eHM:s index blir en beroendepunkt som Inera inte styr.
 
@@ -283,22 +289,22 @@ Adressregister. Tjänstekatalogen har ingen endpoint per logisk adress, och den 
 
 ## API: sökning, registrering och prenumeration
 
-Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får var sin FHIR R5-motsvarighet. API:et skiljer på tre användningsfall: sökning vid behov, löpande uppdatering via prenumeration och massuttag för avstämning. Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning, se avsnittet om spärr.
+Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får var sin FHIR R5-motsvarighet. API:et skiljer på tre användningsfall: sökning vid behov, löpande uppdatering via prenumeration och massuttag för avstämning. Alla anrop autentiseras och loggas. Vad FHIR-EI prövar beror på anropets åtkomstläge; se avsnitten om komponenter och åtkomstlägen och om spärr.
 
-| Operation | Aktör | FHIR-interaktion | Motsvarighet idag |
-|---|---|---|---|
-| Sök indexposter för en patient | Konsument | `GET DocumentReference?patient:identifier=…&type=…` (standard: `status=current`) | FindContent |
-| Filtrera på informationsmängd | Konsument | Standardparametrarna `format-code` / `format-canonical` (på `content.profile`) | FindContent med kategori |
-| Filtrera på aktualitet | Konsument | Nationell sökparameter `content-last-updated=gt…` | FindContent med tidsfilter |
-| Registrera eller uppdatera post | Registrerande part | Villkorad `PUT DocumentReference?identifier=<part>\|<id>`, eller `transaction`-Bundle för flera | Update |
-| Avregistrera post | Registrerande part | Villkorad `PUT` med `status` = `superseded` eller `entered-in-error` och `deregistrationReason` | Update med deleteFlag |
-| Prenumerera på ändringar | Konsument | R5 `Subscription` på `SubscriptionTopic` `indexpost-andrad` | ProcessNotification |
-| Inkrementell avstämning | Konsument | `GET DocumentReference?_lastUpdated=gt…&status=current,superseded,entered-in-error` | Saknas |
-| Massuttag | Systemkonsument | Bulk Data `$export` med `_type=DocumentReference` och `_since` | Saknas |
+| Operation | Aktör | FHIR-interaktion | Åtkomstläge | Motsvarighet idag |
+|---|---|---|---|---|
+| Sök indexposter för en patient | Konsument | `GET DocumentReference?patient:identifier=…&type=…` (standard: `status=current`) | Användarkontext | FindContent |
+| Filtrera på informationsmängd | Konsument | Standardparametrarna `format-code` / `format-canonical` (på `content.profile`) | Användarkontext | FindContent med kategori |
+| Filtrera på aktualitet | Konsument | Nationell sökparameter `content-last-updated=gt…` | Användarkontext | FindContent med tidsfilter |
+| Registrera eller uppdatera post | Registrerande part | Villkorad `PUT DocumentReference?identifier=<part>\|<id>`, eller `transaction`-Bundle för flera | Systemkontext | Update |
+| Avregistrera post | Registrerande part | Villkorad `PUT` med `status` = `superseded` eller `entered-in-error` och `deregistrationReason` | Systemkontext | Update med deleteFlag |
+| Prenumerera på ändringar | Konsument | R5 `Subscription` på `SubscriptionTopic` `indexpost-andrad` | Systemkontext | ProcessNotification |
+| Inkrementell avstämning | Konsument | `GET DocumentReference?_lastUpdated=gt…&status=current,superseded,entered-in-error` | Systemkontext | Saknas |
+| Massuttag | Systemkonsument | Bulk Data `$export` med `_type=DocumentReference` och `_since` | Systemkontext | Saknas |
 
 Sökparametrar. Sökning på patient görs med modifieraren `:identifier` (`patient:identifier=`), som är obligatorisk för servern. Patienten är en logisk referens med personnummer eller samordningsnummer, och indexet har inga Patient-resurser. En kedjad sökning (`patient.identifier=`) skulle kräva att referensen löses upp till en Patient i FHIR-EI, medan `:identifier` söker direkt på referensens identifierare. Indexposten anger därför `subject.type = Patient`, så att servern kan avgöra att referensen gäller en patient. Vårdgivaren söks på samma sätt, med `custodian:identifier=` och HSA-id. `content-last-updated` och `source-endpoint` är nationella sökparametrar. De definieras som `SearchParameter`-resurser i IG:n och annonseras i FHIR-EI:s `CapabilityStatement`, tillsammans med vilka prenumerationsfilter som stöds.
 
-Läs- och skriv-API. Läs-, prenumerations- och export-API:et är detsamma för alla försörjningssätt. Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten kan skriva via samma API eller, om den är en del av FHIR-EI, direkt i indexet; reglerna för indexposten och livscykeln är desamma.
+Läs- och skriv-API. Läs-, prenumerations- och export-API:et är detsamma för alla försörjningssätt. Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten skriver också via skriv-API:et, aldrig direkt i indexkärnan, så att reglerna för indexposten och livscykeln gäller på samma sätt; se avsnittet om komponenter och åtkomstlägen.
 
 Ofullständigt svar. När FHIR-EI vet att ett svar kan vara ofullständigt, till exempel när en källa inte svarade på en riktad fråga inom tidsgränsen, innehåller sökresultatet en `OperationOutcome` i `Bundle.issues` som anger vilka vårdgivare eller endpoints det gäller. Konsumenten ska kunna visa att uppgifter kan saknas. Det gör att ett fel i försörjningen syns i stället för att bli en tyst lucka.
 
@@ -381,13 +387,66 @@ Första tjänst. Den första tjänsten bör ha en publicerad eller nära förest
 
 Bilden visar läge 3 för en tjänst som kombinerar spegling och producentregistrering: RIV-TA-källor når FHIR-EI via dagens index och adaptern, FHIR-källor skriver direkt. Synken till eHM är streckad eftersom den inte ingår i första iterationen.
 
+## Komponenter och åtkomstlägen
+
+FHIR-EI används på två sätt som kräver olika säkerhetsmodell. När en användare öppnar en patient finns någon vars behörighet kan prövas. När ett system registrerar, prenumererar, stämmer av eller håller en lokal kopia aktuell finns ingen användare, och prövningen per användare kan inte göras i det ögonblicket. Specen skiljer därför på två åtkomstlägen och delar FHIR-EI efter dem.
+
+### Två åtkomstlägen
+
+| | Användarkontext | Systemkontext |
+|---|---|---|
+| När | Anropet görs för en namngiven användare: vårdpersonal, invånare eller ombud | Ingen användare: ett system anropar för egen räkning |
+| Autentisering | Token med användarens kontextanspråk från säkerhetstjänsten, till exempel genom token exchange från konsumentens session | Klientcertifikat eller signerad token enligt SMART Backend Services |
+| Vad FHIR-EI prövar | Spärr, samtycke, nödåtkomst, syfte, fullmakt och säkerhetsetiketter | Systemets behörighet: vilka tjänster och vilket syfte, och för registrerande parter vilket underlag |
+| Loggning i FHIR-EI | Per användare: varje sökning och varje utlämnad post | Per anrop och uttag, med systemets identitet |
+| Prövning per användare | I FHIR-EI, innan svaret lämnas ut | I det mottagande systemet, när informationen visas för en användare |
+
+| Operation | Åtkomstläge |
+|---|---|
+| Sökning och läsning för visning, till exempel i NPÖ och 1177 | Användarkontext |
+| Registrering och avregistrering | Systemkontext |
+| Prenumeration | Systemkontext |
+| Inkrementell avstämning och massuttag | Systemkontext |
+| Lokaliseringstjänstens riktade fråga, när en sökning träffar en saknad eller inaktuell cachepost | Användarkontext, som skickas vidare till källan |
+| Lokaliseringstjänstens färskhållning | Systemkontext |
+
+Ett system som tar emot indexposter i systemkontext är en betrodd mellanhand. Dess behörighet begränsas per tjänst och syfte och regleras i avtal, och det ansvarar för prövning och loggning per användare när informationen visas. Ett mellanläge är ett system som agerar för en bestämd vårdgivare. FHIR-EI kan då pröva yttre spärr mot den vårdgivaren redan i systemkontext, men inte samtycke eller nödåtkomst, som kräver en användare.
+
+### Läsmönster per tjänst
+
+Hur en tjänsts konsumenter läser avgör i vilket åtkomstläge läsningen sker, och det begränsar vilka försörjningssätt som passar:
+
+| Läsmönster | Exempel | Åtkomstläge | Försörjning |
+|---|---|---|---|
+| Vid behov: konsumenten söker när en användare öppnar patienten, och kan förhämta innehåll (pre-warm) | Översikten i NPÖ, journalen i 1177 | Användarkontext | Alla tre. Vid Inera-försörjd cache är det användarens sökning som utlöser den riktade frågan |
+| Synkat: en systemkonsument håller en lokal kopia av innehåll och uppdaterar den löpande | Läkemedelsordinationer och uppmärksamhetsinformation | Systemkontext | Producentregistrering eller spegling. Inera-försörjd cache passar dåligt, eftersom posterna bara fylls när någon söker |
+
+Förhämtning i användarkontext loggas hos källan som användarens åtkomst, även för informationsmängder som användaren sedan inte öppnar. En lokal kopia av innehåll är central lagring. Den ligger utanför specen och kräver egen rättslig grund, och dess ägare blir åtkomstkontrollpunkt för innehållet. FHIR-EI:s del är att förse den med indexposter och notiser i systemkontext.
+
+### Komponenter
+
+FHIR-EI delas efter åtkomstlägena, så att varje del kan förstås, testas och förvaltas för sig:
+
+| Komponent | Ansvar | Åtkomstläge |
+|---|---|---|
+| Indexkärna | Lagrar indexposterna. Skriv-API med livscykel och skrivbehörighet, händelselogg, prenumerationer, inkrementell avstämning och massuttag | Systemkontext |
+| Åtkomstlager | Sökning och läsning i användarkontext: spärr, samtycke, syfte, fullmakt, säkerhetsetiketter och loggning. Anropar lokaliseringstjänsten före sökningen i kärnan, för tjänster med Inera-försörjd cache | Användarkontext |
+| Försörjningskomponenter | Indexeringsagent, lokaliseringstjänst och övergångsadapter: registrerande parter som skriver via kärnans skriv-API | Systemkontext mot kärnan |
+
+Konsekvenser:
+
+- Kärnan har ingen logik för spärr, samtycke eller syfte. Den motsvarar i stort NHS Englands National Record Locator, med prenumerationer tillagda. I NRL ansvarar konsumenten för att användaren har rätt att ta del av informationen; FHIR-EI lägger den prövningen i åtkomstlagret.
+- Åtkomstlagrets prövning är densamma som EHDS-bryggan och framtida åtkomst till innehåll behöver. Den bör därför bygga på en gemensam beslutstjänst och inte vara specifik för indexet.
+- Försörjningskomponenterna skriver bara via skriv-API:et, aldrig direkt i kärnan. Kärnan förblir neutral till försörjningen, och en komponent kan läggas till eller avvecklas per tjänst, som övergångsadaptern när övergången är klar.
+- Lokaliseringstjänsten är den enda försörjningskomponenten i läsflödet. Åtkomstlagret anropar den med användarens kontext före sökningen i kärnan, och källor som inte svarar inom tidsgränsen redovisas som ett ofullständigt svar.
+
 ## Spärr, loggning och filtrering
 
-Initial hypotes: FHIR-EI är sin egen åtkomstkontrollpunkt. Komponenten anropar spärrtjänsten, loggar i loggtjänsten och filtrerar svaren innan de lämnas ut, på samma sätt som EHDS-bryggan. Konsumenterna får alltså bara se poster de har rätt att se.
+Initial hypotes: FHIR-EI är sin egen åtkomstkontrollpunkt för läsning i användarkontext. Åtkomstlagret anropar spärrtjänsten, loggar i loggtjänsten och filtrerar svaren innan de lämnas ut, på samma sätt som EHDS-bryggan. Konsumenterna får alltså bara se poster de har rätt att se.
 
 | Funktion | Vad komponenten gör | Beroende |
 |---|---|---|
-| Åtkomstkontext | Kräver i varje anrop vem som frågar (HSA-id eller invånare), för vilken vårdgivare och vårdenhet, i vilket uppdrag, med vilket syfte (`purposeOfUse`), samt samtycke eller nödåtkomst där det krävs | Säkerhetstjänst, token med kontextanspråk |
+| Åtkomstkontext | Kräver i varje anrop i användarkontext vem som frågar (HSA-id eller invånare), för vilken vårdgivare och vårdenhet, i vilket uppdrag, med vilket syfte (`purposeOfUse`), samt samtycke eller nödåtkomst där det krävs | Säkerhetstjänst, token med kontextanspråk |
 | Spärrkontroll | Frågar spärrtjänsten med åtkomstkontexten och tar bort poster som omfattas av spärr | Spärrtjänsten, på sikt en FHIR-baserad spärrtjänst |
 | Filtrering | Tar bort poster utanför frågande aktörs behörighet. Om konsumenten får veta att poster filtrerats (till exempel "information finns men kräver samtycke") beror på lagstiftningen för syftet. Det styrs av `purposeOfUse` i frågan och av spärrtjänstens svar, som FHIR-EI för vidare i sitt svar | Spärrtjänsten, policy per konsument (NPÖ, 1177) |
 | Ombud | För 1177: tillämpar fullmakt när någon söker för en annan person | Fullmaktsarkitekturen |
@@ -406,9 +465,9 @@ Säkerhetsetiketter. En post kan i sig avslöja uppgifter, till exempel för en 
 
 Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma.
 
-Prenumerationer filtreras på samma sätt. En konsument får bara notis om poster den skulle ha fått i en sökning. Det, och `id-only`-innehåll, hindrar att notiser läcker förekomst av spärrad information.
+Prenumerationer sker i systemkontext, eftersom de lever längre än en användares session. FHIR-EI filtrerar notiserna på systemets behörighet, och på yttre spärr när systemet agerar för en bestämd vårdgivare. Notisen bär bara postens id (`id-only`), så att den inte för med sig mer om patienten än nödvändigt. Det mottagande systemet läser posten i systemkontext för egen bearbetning, eller via åtkomstlagret i användarkontext när den ska visas, och ansvarar för prövningen per användare.
 
-Kontrollen gäller alla operationer: sökning, läsning, skrivning, prenumeration, inkrementell avstämning och export. Filtreringen sker i FHIR-EI innan svaret lämnas ut, aldrig bara i den komponent som presenterar svaret. Skrivningar från registrerande parter filtreras inte men auktoriseras mot den autentiserade identiteten, se API-avsnittet. Export kräver egen behörighet för systemkonsumenten och loggas per uttag.
+Kontrollen gäller alla operationer, men vad som prövas beror på åtkomstläget. I användarkontext filtrerar FHIR-EI svaret innan det lämnas ut, aldrig bara i den komponent som presenterar svaret. I systemkontext prövar FHIR-EI systemets behörighet, och det mottagande systemet ansvarar för prövningen per användare när informationen visas. Skrivningar från registrerande parter filtreras inte men auktoriseras mot den autentiserade identiteten, se API-avsnittet. Export kräver egen behörighet för systemkonsumenten och loggas per uttag.
 
 Granularitet: spärrar gäller idag på vårdgivar- och vårdenhetsnivå. Med indexposter per tjänst går det längre fram att spärra eller filtrera per tjänst utan ändrad modell.
 
@@ -459,7 +518,12 @@ Nästa steg är att torrsimma båda riktningarna mot eHM:s API-specifikationer f
 - [ ] Första tjänst: vilken tjänst går först genom övergången?
 - [ ] Försörjningssätt per tjänst: vem beslutar, och var anges det, så att lokaliseringstjänsten och adaptern vet vilka endpoints de ska fylla?
 - [ ] Riktad fråga: egen operation (till exempel `$inventory`) eller `batch` med `_summary=count`? Vem definierar den, denna IG eller tjänsternas IG:er? Och svarar den med vårdenhet?
-- [ ] Lokaliseringstjänstens behörighet: under vilket ändamål och med vilken identitet frågar den källorna, och hur loggas frågan hos källan och i FHIR-EI?
-- [ ] Lokaliseringstjänstens placering: del av FHIR-EI eller en separat komponent som skriver via API:et?
+- [ ] Lokaliseringstjänstens behörighet: när en sökning utlöser den riktade frågan ställs den med användarens kontext. Under vilket ändamål och med vilken identitet ställs den vid färskhållning, och hur loggas den hos källan och i FHIR-EI?
+- [x] Lokaliseringstjänstens placering: del av FHIR-EI eller en separat komponent som skriver via API:et? Svar: en försörjningskomponent som skriver via skriv-API:et och som åtkomstlagret anropar i läsflödet; se avsnittet om komponenter och åtkomstlägen.
 - [ ] Tidsgränser: hur länge är en cachepost färsk när källan saknar prenumeration, och hur länge väntar FHIR-EI på en källa innan svaret redovisas som ofullständigt?
 - [ ] Post utan vårdenhet: räcker fail-closed vid inre spärr, eller behöver den riktade frågan alltid ange vårdenhet?
+- [ ] Rättslig grund för systemkontext: med vilken grund får en systemkonsument ta emot indexposter och notiser om patienter utan att en användare har frågat, och hur regleras dess ansvar för prövning och loggning per användare?
+- [ ] Lokala kopior av innehåll: vilka tjänster behöver ett synkat läsmönster, till exempel läkemedelsordinationer och uppmärksamhetsinformation? Vem är personuppgiftsansvarig och åtkomstkontrollpunkt för en sådan kopia?
+- [ ] Gemensam beslutstjänst: ska åtkomstlagret använda samma beslutstjänst för spärr, samtycke och syfte som EHDS-bryggan och framtida åtkomst till innehåll?
+- [ ] Användarens kontext: hur får konsumenten en token med användarens anspråk till FHIR-EI, och hur skickar lokaliseringstjänsten den vidare till källorna, till exempel med token exchange?
+- [ ] Spärr i systemkontext: ska ett system som agerar för en bestämd vårdgivare få notiser filtrerade på yttre spärr redan i FHIR-EI, och hur anges vårdgivaren?

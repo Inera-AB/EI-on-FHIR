@@ -36,7 +36,8 @@ The specification and FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based 
 - **Coexistence with eHM's patient index in both directions.** The thin index (care provider by organisation number and record system) can be the source of truth for where, with FHIR-EI as an Inera cache, or be derived from FHIR-EI. Care provider may therefore be given by organisation number, and care unit is optional.
 - **One index for NPÖ and 1177.** Access is assessed per purpose of use, and producers can label entries with security labels such as `NOPAT`.
 - **Native R5 subscriptions** on the topic `indexpost-andrad`, with `id-only` notifications, `$status` and `$events`; reconciliation with `_lastUpdated`; bulk export with `$export`.
-- **FHIR-EI is its own access control point:** blocking (spärr), logging and filtering apply to every read, subscription and export.
+- **Two access modes.** Searches and reads for display run in user context, where FHIR-EI is its own access control point for blocking (spärr), consent, purpose of use and logging. Registration, subscriptions, reconciliation and export run in system context, where FHIR-EI checks the system's authorisation and the receiving system checks per user when the information is shown.
+- **Split by access mode.** An index core (storage, write API, lifecycle, events, subscriptions, export) with no blocking or consent logic, an access layer for user-context reads, and population components (indexing agent, locator, transition adapter) that write only through the write API.
 
 ### Related repositories
 
