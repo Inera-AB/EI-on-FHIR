@@ -207,8 +207,8 @@
     },
     "StructureDefinition-LogicalAddress.html" : "Logisk adress",
     "StructureDefinition-SourceSystem.html" : "Källsystem",
-    "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
+    "StructureDefinition-CareUnit.html" : "Vårdenhet"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/identifier-use",
@@ -224,8 +224,8 @@
     },
     "StructureDefinition-LogicalAddress.html" : "Logisk adress",
     "StructureDefinition-SourceSystem.html" : "Källsystem",
-    "StructureDefinition-CareUnit.html" : "Vårdenhet",
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
+    "StructureDefinition-CareUnit.html" : "Vårdenhet"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/languages",
@@ -286,8 +286,8 @@
     "sources" : ["2.16.840.1.113883.4.642.3.27"],
     "uses" : {
     },
-    "StructureDefinition-RegisteringProducer.html" : "Registrerande producent",
-    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)"
+    "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
+    "StructureDefinition-RegisteringProducer.html" : "Registrerande producent"
   },
   {
     "url" : "http://hl7.org/fhir/ValueSet/search-comparator",

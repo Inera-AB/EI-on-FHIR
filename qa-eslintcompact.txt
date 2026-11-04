@@ -1,8 +1,6 @@
 IneraEngagementIndex
 =========================================
 
-Generic: line 0, col 0, Error - The page skips a heading level: <h4> '[0.1.0] — opublicerad' (id=010--opublicerad) follows <h2> 'Versionshistorik', so it should be <h3>. Heading levels must not skip a level going down (WCAG compliance test) (STRUCTURE)
-Generic: line 0, col 0, Error - The page skips a heading level: <h5> 'Features' (id=features) follows <h3> '[0.1.0] — opublicerad' (id=010--opublicerad), so it should be <h4>. Heading levels must not skip a level going down (WCAG compliance test) (STRUCTURE)
 /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-RegistreringTransaction.json: line 34, col 50, Warning - Ingen definition kunde hittas för URL-värdet 'urn:oid:1.2.752.29.4.19' (INVALID)
 /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-RegistreringTransaction.json: line 51, col 10, Info - Ingen av de angivna codings finns i värdemängden 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|5.0.0), och en coding rekommenderas komma från denna värdemängd (koder = https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem#riv:clinicalprocess:healthcond:description) (CODEINVALID)
 /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-RegistreringTransaction.json: line 47, col 75, Warning - Ingen definition kunde hittas för URL-värdet 'http://electronichealth.se/identifier/personnummer' (INVALID)
@@ -175,5 +173,5 @@ Generic: line 0, col 0, Error - The page skips a heading level: <h5> 'Features' 
 /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/ValueSet-IneraServiceDomainValueSet.json: line 1, col 1398, Info - Värdemängden refererar till CodeSystem 'https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem' som har status 'fragment' (INVALID)
 /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/ValueSet-IneraServiceDomainValueSet.json: line 0, col 0, Warning - The resource ValueSet/IneraServiceDomainValueSet should have an OID assigned to cater for possible use with OID based terminology systems e.g. CDA usage (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/ig-guidance/oids.html) (BUSINESSRULE)
 
-err = 2, warn = 47, info = 124, broken links = 0
+err = 0, warn = 47, info = 124, broken links = 0
 IG Publisher Version: 3.0.2

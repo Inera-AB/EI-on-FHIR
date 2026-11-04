@@ -19,7 +19,7 @@
   fhir:name [ fhir:v "IneraEngagementIndex"] ; # 
   fhir:title [ fhir:v "FHIR-baserat engagemangsindex (FHIR-EI)"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
-  fhir:date [ fhir:v "2026-11-03T13:59:09+00:00"^^xsd:dateTime] ; # 
+  fhir:date [ fhir:v "2026-11-04T14:46:04+00:00"^^xsd:dateTime] ; # 
   fhir:publisher [ fhir:v "Inera AB"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "Inera AB" ] ;

@@ -14,7 +14,7 @@
   "name" : "IneraEngagementIndex",
   "title" : "FHIR-baserat engagemangsindex (FHIR-EI)",
   "status" : "draft",
-  "date" : "2026-11-03T13:59:09+00:00",
+  "date" : "2026-11-04T14:46:04+00:00",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",

@@ -1,10 +1,10 @@
 IneraEngagementIndex : Validation Results
 =========================================
 
-err = 2, warn = 47, info = 124, broken links = 0
+err = 0, warn = 47, info = 124, broken links = 0
 $--
 Generated $--. FHIR version $-- for inera.ei.engagementindex#$-- (canonical = https://fhir.inera.se/ig/engagementindex)
- Build Errors : 2 / 0 / 0
+ Build Errors : 0 / 0 / 0
  /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-RegistreringTransaction : 0 / 6 / 10
  /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-SokresultatForPatient : 0 / 8 / 14
  /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-SokresultatOfullstandigt : 0 / 3 / 8
@@ -42,8 +42,6 @@ Generated $--. FHIR version $-- for inera.ei.engagementindex#$-- (canonical = ht
 </table>
 
 == n/a ==
-ERROR: /home/runner/work/EI-on-FHIR/EI-on-FHIR/output/sv/version-history.html: The page skips a heading level: <h4> '[0.1.0] — opublicerad' (id=010--opublicerad) follows <h2> 'Versionshistorik', so it should be <h3>. Heading levels must not skip a level going down (WCAG compliance test)
-ERROR: /home/runner/work/EI-on-FHIR/EI-on-FHIR/output/sv/version-history.html: The page skips a heading level: <h5> 'Features' (id=features) follows <h3> '[0.1.0] — opublicerad' (id=010--opublicerad), so it should be <h4>. Heading levels must not skip a level going down (WCAG compliance test)
 
 
 == fsh-generated/resources/Bundle-RegistreringTransaction.json ==

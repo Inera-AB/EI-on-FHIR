@@ -6,9 +6,9 @@ Den här sidan beskriver vad som har ändrats i varje version. Listan över alla
 
 -------
 
-#### [0.1.0] — opublicerad
+### [0.1.0] — opublicerad
 
-##### Features
+#### Features
 
 * Första utkastet av FHIR-EI, byggt från specen **FHIR-baserad engagemangsindexkomponent**
 * FHIR R5. Indexposten är en profilerad `DocumentReference` med en post per patient × endpoint × tjänst

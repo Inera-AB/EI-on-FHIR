@@ -64,8 +64,8 @@
     "uses" : {
     },
     "http://hl7.org/fhir/R5/valueset-all-resource-types.html" : "All Resource Types",
-    "http://hl7.org/fhir/R5/valueset-subscription-types.html" : "Types used with Subscriptions",
-    "http://hl7.org/fhir/R5/valueset-resource-types.html" : "Resource Types"
+    "http://hl7.org/fhir/R5/valueset-resource-types.html" : "Resource Types",
+    "http://hl7.org/fhir/R5/valueset-subscription-types.html" : "Types used with Subscriptions"
   },
   {
     "url" : "http://hl7.org/fhir/identifier-use",
