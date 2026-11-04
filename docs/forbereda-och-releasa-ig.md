@@ -53,7 +53,7 @@ Görs en gång per IG-repo. Kolumnen *Mallen* anger vad mallen redan sköter.
 | 3 | Sätt `ig = fsh-generated/resources/ImplementationGuide-<id>.json` i `ig.ini`, med samma `id` som i `sushi-config.yaml`. | Nej. Missas lätt, och då hittar IG Publisher ingen IG |
 | 4 | Fyll i `publication-request.json` för första releasen (se nedan) med `"first": true`. | Filen finns med mallens värden |
 | 5 | Ta bort raderna `with:` och `package-feed: false` i `.github/workflows/release.yml`. Mallen håller sig själv utanför FHIR:s paketregister med dem, men IG:ns paket ska nå packages.fhir.org. | Kommentar i filen |
-| 6 | Töm `input/pagecontent/version-history.md` på mallens poster. **Behåll första raden** `{::options header_offset="1" /}`. | Raden finns i mallen |
+| 6 | Töm `input/pagecontent/version-history.md` på mallens poster. Med IG Publisher 3.0.2 eller senare ska även första raden `{::options header_offset="1" /}` tas bort: publishern flyttar själv ned rubrikerna en nivå, och raden gör att de hamnar två nivåer ner, vilket ger fel. | Raden finns i mallen |
 | 7 | Byt länken till paketet i `input/pagecontent/downloads.md` till `https://fhir.inera.se/ig/<namn>/package.tgz`, och motsvarande rad i `input/ignoreWarnings.txt`. | Nej |
 | 8 | Ge varje profil en egen version med `* ^version = "x.y.z"` om profilerna ska versionshanteras separat. | Exempelprofilen visar hur |
 | 9 | Slå på GitHub Pages för branchbyggen: Settings → Pages → *Deploy from a branch* → `gh-pages` / `(root)`. | Nej |
