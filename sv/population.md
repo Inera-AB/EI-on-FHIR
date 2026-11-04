@@ -18,6 +18,8 @@ Konsumentkontraktet är detsamma för alla tjänster: indexposter enligt [Indexp
 
 Tjänsteägaren beslutar, tillsammans med Inera, vilka försörjningssätt tjänsten använder. En tjänst kan kombinera dem per endpoint, till exempel spegling för RIV-TA-källor och Inera-försörjd cache för FHIR-källor. Samma kombination av patient, endpoint och tjänst får bara fyllas med ett försörjningssätt åt gången, så att konsumenterna aldrig ser dubbla poster.
 
+Tjänstens läsmönster begränsar valet. En tjänst vars systemkonsumenter håller en lokal kopia av innehåll aktuell, till exempel läkemedelsordinationer eller uppmärksamhetsinformation, behöver producentregistrering eller spegling. Inera-försörjd cache fylls bara när någon söker. Se läsmönster per tjänst under [Spärr, loggning och behörighet](security.md).
+
 Försörjningssättet framgår av postens `meta.tag` ur [kodsystemet för försörjningssätt](CodeSystem-IneraIndexPopulationMethodCodeSystem.md). FHIR-EI sätter det. Den som felsöker eller stämmer av kan se var en post kommer ifrån; konsumenterna behöver inte bry sig om det.
 
 ### Gemensamma regler
@@ -71,7 +73,7 @@ Läsning när cacheposten saknas eller är inaktuell:
 
 1. Lokaliseringstjänsten slår upp patientens vårdgivare (organisationsnummer) och journalsystem i eHM:s patientindex.
 1. Den slår upp vårdgivarnas endpoints för tjänsten i tjänstekatalogen.
-1. Den ställer en riktad fråga till de endpoints som saknas i cachen eller är inaktuella, parallellt och med en tidsgräns. Svaret anger vilka informationsmängder som finns för patienten och när de senast ändrades.
+1. Den ställer en riktad fråga till de endpoints som saknas i cachen eller är inaktuella, parallellt, med en tidsgräns och med användarens kontext. Svaret anger vilka informationsmängder som finns för patienten och när de senast ändrades.
 1. Den skriver eller uppdaterar indexposterna. En endpoint som uppger att den inte har något för patienten inom tjänsten får sin post indragen med`deregistrationReason``not-at-source`.
 1. FHIR-EI svarar konsumenten. Källor som inte svarade inom tidsgränsen redovisas som ett ofullständigt svar, som i exemplet[Ofullständigt sökresultat](Bundle-SokresultatOfullstandigt.md).
 
@@ -93,14 +95,14 @@ Färskhållning efter första läsningen:
 
 Se exemplet [Indexpost fylld av lokaliseringstjänsten](DocumentReference-IndexpostFranLokaliseringstjanst.md).
 
-Den riktade frågan är inte fastställd. Två varianter är möjliga: en egen operation (till exempel `$inventory`, som då definieras i denna IG) eller en `batch`-Bundle med `GET [Resurs]?patient=…&_summary=count` per resurstyp. Frågan är en åtkomst till uppgifter om patienten och ska prövas och loggas hos källan. RIV-TA-källor kan inte svara på frågan utan att hämta innehåll, och försörjs därför med spegling.
+Den riktade frågan är inte fastställd. Två varianter är möjliga: en egen operation (till exempel `$inventory`, som då definieras i denna IG) eller en `batch`-Bundle med `GET [Resurs]?patient=…&_summary=count` per resurstyp. Frågan är en åtkomst till uppgifter om patienten och ska prövas och loggas hos källan. När en sökning utlöser frågan ställs den med användarens kontext, så att källan prövar och loggar mot användaren. Vid färskhållning finns ingen användare, och frågan och prenumerationen hos källan sker i systemkontext. RIV-TA-källor kan inte svara på frågan utan att hämta innehåll, och försörjs därför med spegling.
 
 Begränsningar:
 
 * eHM:s patientindex anger vårdgivare och journalsystem, inte vårdenhet. Om den riktade frågan inte heller anger vårdenhet saknar posten `careUnit`, och inre spärr kan då inte prövas utifrån indexet; se [Spärr, loggning och behörighet](security.md).
 * Första visningen för en patient blir en fan-out till alla källor hos patientens vårdgivare.
 * Kvaliteten och täckningsgraden i eHM:s patientindex blir en beroendepunkt som Inera inte styr.
-* Lokaliseringstjänsten kan vara en del av FHIR-EI eller en separat komponent som skriver via API:et; se [Öppna frågor](open-issues.md).
+* Lokaliseringstjänsten är den enda försörjningskomponenten i läsflödet. Den skriver via skriv-API:et, och åtkomstlagret anropar den före sökningen i indexkärnan; se [Roller och ansvar](roles-and-responsibilities.md).
 
 -------
 

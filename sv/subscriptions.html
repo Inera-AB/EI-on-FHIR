@@ -195,7 +195,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </ul>
 
 </div>
-<p>En konsument prenumererar på ändrade indexposter med R5:s inbyggda topic-baserade prenumerationer, profilerade som <a href="StructureDefinition-IneraIndexSubscription.html">Prenumeration på indexposter</a>. Prenumerationen ersätter ProcessNotification.</p>
+<p>En konsument prenumererar på ändrade indexposter med R5:s inbyggda topic-baserade prenumerationer, profilerade som <a href="StructureDefinition-IneraIndexSubscription.html">Prenumeration på indexposter</a>. Prenumerationen ersätter ProcessNotification. Den sker i systemkontext, eftersom den lever längre än en användares session; se <a href="security.html">Spärr, loggning och behörighet</a>.</p>
 
 <h3 id="topic-indexpost-andrad">Topic <code class="language-plaintext highlighter-rouge">indexpost-andrad</code></h3>
 
@@ -265,9 +265,9 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="notiser">Notiser</h3>
 
-<p>Notisen är en <code class="language-plaintext highlighter-rouge">subscription-notification</code>-Bundle med en <code class="language-plaintext highlighter-rouge">SubscriptionStatus</code> och postens id, men utan posten. Konsumenten läser posten med <code class="language-plaintext highlighter-rouge">GET DocumentReference/[id]</code>, och läsningen går genom samma spärr, loggning och filtrering som en sökning.</p>
+<p>Notisen är en <code class="language-plaintext highlighter-rouge">subscription-notification</code>-Bundle med en <code class="language-plaintext highlighter-rouge">SubscriptionStatus</code> och postens id, men utan posten. Konsumenten läser posten med <code class="language-plaintext highlighter-rouge">GET DocumentReference/[id]</code>: i systemkontext för egen bearbetning, eller i användarkontext när posten ska visas för en användare. Läsningen i användarkontext går genom samma spärr, loggning och filtrering som en sökning.</p>
 
-<p>En konsument får bara notis om poster som den skulle ha fått i en sökning. Det, och <code class="language-plaintext highlighter-rouge">id-only</code>-innehåll, hindrar att notiser läcker förekomst av spärrad information.</p>
+<p>FHIR-EI filtrerar notiserna på prenumerantens behörighet, och på yttre spärr när prenumeranten agerar för en bestämd vårdgivare. Samtycke och nödåtkomst kan inte prövas utan en användare, så prenumeranten ansvarar för prövningen per användare när informationen visas. <code class="language-plaintext highlighter-rouge">id-only</code> gör att notisen inte för med sig mer om patienten än nödvändigt.</p>
 
 <h3 id="leverans-och-återhämtning">Leverans och återhämtning</h3>
 
@@ -301,7 +301,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 14:46:00 +0000">
+  <span title="2026-11-04 18:52:00 +0000">
     2026-11-04
   </span>
 

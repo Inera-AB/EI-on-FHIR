@@ -2,18 +2,18 @@
 
 ## REST-interaktioner och sökparametrar
 
-Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får var sin FHIR R5-motsvarighet. API:et skiljer på tre användningsfall: sökning vid behov, löpande uppdatering via prenumeration och massuttag för avstämning. Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning; se [Spärr, loggning och behörighet](security.md). De formella kraven finns i [CapabilityStatement för FHIR-EI](CapabilityStatement-IneraIndexServer.md).
+Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får var sin FHIR R5-motsvarighet. API:et skiljer på tre användningsfall: sökning vid behov, löpande uppdatering via prenumeration och massuttag för avstämning. Alla anrop autentiseras och loggas. Vad FHIR-EI prövar beror på anropets åtkomstläge, användarkontext eller systemkontext; se [Spärr, loggning och behörighet](security.md). De formella kraven finns i [CapabilityStatement för FHIR-EI](CapabilityStatement-IneraIndexServer.md).
 
-| | | | |
-| :--- | :--- | :--- | :--- |
-| Sök indexposter för en patient | Konsument | `GET DocumentReference?patient:identifier=…&type=…`(standard:`status=current`) | FindContent |
-| Filtrera på informationsmängd | Konsument | Standardparametrarna`format-code`/`format-canonical`(på`content.profile`) | FindContent med kategori |
-| Filtrera på aktualitet | Konsument | Nationell sökparameter`content-last-updated=gt…` | FindContent med tidsfilter |
-| Registrera eller uppdatera post | Registrerande part | Villkorad`PUT DocumentReference?identifier=<part>|<id>`, eller`transaction`-Bundle för flera | Update |
-| Avregistrera post | Registrerande part | Villkorad`PUT`med`status`=`superseded`eller`entered-in-error`och`deregistrationReason` | Update med deleteFlag |
-| Prenumerera på ändringar | Konsument | R5`Subscription`på`SubscriptionTopic``indexpost-andrad`; se[Prenumeration](subscriptions.md) | ProcessNotification |
-| Inkrementell avstämning | Konsument | `GET DocumentReference?_lastUpdated=gt…&status=current,superseded,entered-in-error` | Saknas |
-| Massuttag | Systemkonsument | Bulk Data`$export`med`_type=DocumentReference`och`_since` | Saknas |
+| | | | | |
+| :--- | :--- | :--- | :--- | :--- |
+| Sök indexposter för en patient | Konsument | `GET DocumentReference?patient:identifier=…&type=…`(standard:`status=current`) | Användarkontext | FindContent |
+| Filtrera på informationsmängd | Konsument | Standardparametrarna`format-code`/`format-canonical`(på`content.profile`) | Användarkontext | FindContent med kategori |
+| Filtrera på aktualitet | Konsument | Nationell sökparameter`content-last-updated=gt…` | Användarkontext | FindContent med tidsfilter |
+| Registrera eller uppdatera post | Registrerande part | Villkorad`PUT DocumentReference?identifier=<part>|<id>`, eller`transaction`-Bundle för flera | Systemkontext | Update |
+| Avregistrera post | Registrerande part | Villkorad`PUT`med`status`=`superseded`eller`entered-in-error`och`deregistrationReason` | Systemkontext | Update med deleteFlag |
+| Prenumerera på ändringar | Konsument | R5`Subscription`på`SubscriptionTopic``indexpost-andrad`; se[Prenumeration](subscriptions.md) | Systemkontext | ProcessNotification |
+| Inkrementell avstämning | Konsument | `GET DocumentReference?_lastUpdated=gt…&status=current,superseded,entered-in-error` | Systemkontext | Saknas |
+| Massuttag | Systemkonsument | Bulk Data`$export`med`_type=DocumentReference`och`_since` | Systemkontext | Saknas |
 
 -------
 
@@ -51,7 +51,7 @@ Svaret visas i exemplet [Sökresultat för en patient](Bundle-SokresultatForPati
 
 ### Läs- och skriv-API
 
-Läs-, prenumerations- och export-API:et är detsamma för alla [försörjningssätt](population.md). Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten kan skriva via samma API eller, om den är en del av FHIR-EI, direkt i indexet; reglerna för indexposten och livscykeln är desamma.
+Läs-, prenumerations- och export-API:et är detsamma för alla [försörjningssätt](population.md). Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten skriver också via skriv-API:et, aldrig direkt i indexkärnan, så att reglerna för indexposten och livscykeln gäller på samma sätt; se [Roller och ansvar](roles-and-responsibilities.md).
 
 När FHIR-EI vet att ett svar kan vara ofullständigt, till exempel när en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen, innehåller sökresultatet en `OperationOutcome` i `Bundle.issues`; se [Förväntade svar](expected-responses.md).
 

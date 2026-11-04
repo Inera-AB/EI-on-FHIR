@@ -188,12 +188,13 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <p><!-- white space is critical inside of capture --></p>
 <div class="markdown-toc">
 <ul id="markdown-toc">
+  <li><a href="#komponenter" id="markdown-toc-komponenter">Komponenter</a></li>
   <li><a href="#förväntningar" id="markdown-toc-förväntningar">Förväntningar</a></li>
   <li><a href="#ansvar-under-övergången" id="markdown-toc-ansvar-under-övergången">Ansvar under övergången</a></li>
 </ul>
 
 </div>
-<p>Åtta roller deltar i <a href="use-cases.html">användningsfallen</a>, plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar.</p>
+<p>Åtta roller deltar i <a href="use-cases.html">användningsfallen</a>, plus de tjänster för spärr, loggning och säkerhet som FHIR-EI anropar. FHIR-EI självt består av två komponenter; se <a href="#komponenter">Komponenter</a> nedan.</p>
 
 <table class="grid">
   <thead>
@@ -205,7 +206,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <tbody>
     <tr>
       <td>FHIR-EI</td>
-      <td>Lagrar indexposter. Är sin egen åtkomstkontrollpunkt: kontrollerar behörighet och spärrar, filtrerar och loggar alla anrop. Auktoriserar producenternas skrivningar mot den autentiserade producentidentiteten. Skickar notiser till prenumeranter och håller händelselogg och gravstenar under sina lagringstider</td>
+      <td>Lagrar indexposter. Är sin egen åtkomstkontrollpunkt vid läsning i användarkontext: kontrollerar spärr, samtycke och syfte, filtrerar och loggar. Prövar systemets behörighet och loggar vid anrop i systemkontext. Auktoriserar de registrerande parternas skrivningar mot den autentiserade identiteten. Skickar notiser till prenumeranter och håller händelselogg och gravstenar under sina lagringstider</td>
     </tr>
     <tr>
       <td>Producent</td>
@@ -225,11 +226,11 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Konsument</td>
-      <td>Söker i eller prenumererar på indexet för en patient, inom sitt uppdrag och syfte. Stämmer av efter avbrott. Hämtar informationen från producenternas endpoints</td>
+      <td>Söker i indexet i användarkontext, för en användare och inom dennes uppdrag och syfte. Kan också prenumerera och stämma av efter avbrott, i systemkontext. Hämtar informationen från producenternas endpoints</td>
     </tr>
     <tr>
       <td>Systemkonsument</td>
-      <td>Gör massuttag för grundladdning och återsynk, till exempel en framtida synk till eHM:s patientindex</td>
+      <td>Läser i systemkontext: gör massuttag för grundladdning och återsynk, till exempel en framtida synk till eHM:s patientindex, eller håller en lokal kopia av innehåll aktuell. Prövar och loggar per användare när informationen visas</td>
     </tr>
     <tr>
       <td>Tjänsteägare</td>
@@ -239,6 +240,44 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </table>
 
 <p>Tjänstekatalogen är auktoritativ för producenternas endpoints, och för vilka vårdgivare som listar dem.</p>
+
+<h3 id="komponenter">Komponenter</h3>
+
+<p>FHIR-EI delas efter <a href="security.html">åtkomstlägena</a>, så att varje del kan förstås, testas och förvaltas för sig:</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Komponent</th>
+      <th>Ansvar</th>
+      <th>Åtkomstläge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Indexkärna</td>
+      <td>Lagrar indexposterna. Skriv-API med livscykel och skrivbehörighet, händelselogg, prenumerationer, inkrementell avstämning och massuttag</td>
+      <td>Systemkontext</td>
+    </tr>
+    <tr>
+      <td>Åtkomstlager</td>
+      <td>Sökning och läsning i användarkontext: spärr, samtycke, syfte, fullmakt, säkerhetsetiketter och loggning. Anropar lokaliseringstjänsten före sökningen i kärnan, för tjänster med Inera-försörjd cache</td>
+      <td>Användarkontext</td>
+    </tr>
+    <tr>
+      <td>Försörjningskomponenter</td>
+      <td>Indexeringsagent, lokaliseringstjänst och övergångsadapter: registrerande parter som skriver via kärnans skriv-API</td>
+      <td>Systemkontext mot kärnan</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Kärnan har ingen logik för spärr, samtycke eller syfte. Den motsvarar i stort NHS Englands National Record Locator, med prenumerationer tillagda. I NRL ansvarar konsumenten för att användaren har rätt att ta del av informationen; FHIR-EI lägger den prövningen i åtkomstlagret.</li>
+  <li>Åtkomstlagrets prövning är densamma som EHDS-bryggan och framtida åtkomst till innehåll behöver. Den bör därför bygga på en gemensam beslutstjänst och inte vara specifik för indexet; se <a href="open-issues.html">Öppna frågor</a>.</li>
+  <li>Försörjningskomponenterna skriver bara via skriv-API:et, aldrig direkt i kärnan. Kärnan förblir neutral till försörjningen, och en komponent kan läggas till eller avvecklas per tjänst, som övergångsadaptern när övergången är klar.</li>
+  <li>Lokaliseringstjänsten är den enda försörjningskomponenten i läsflödet. Åtkomstlagret anropar den med användarens kontext före sökningen i kärnan, och källor som inte svarar inom tidsgränsen redovisas som ett ofullständigt svar.</li>
+</ul>
 
 <h3 id="förväntningar">Förväntningar</h3>
 
@@ -280,7 +319,11 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Konsument</td>
-      <td>SHALL skicka åtkomstkontext i varje anrop; se <a href="security.html">Spärr, loggning och behörighet</a></td>
+      <td>SHALL söka och läsa i användarkontext, med åtkomstkontext i varje anrop, när svaret ska visas för en användare; se <a href="security.html">Spärr, loggning och behörighet</a></td>
+    </tr>
+    <tr>
+      <td>Systemkonsument</td>
+      <td>SHALL pröva och logga per användare när information som den tagit emot i systemkontext visas för en användare</td>
     </tr>
     <tr>
       <td>Konsument</td>
@@ -297,6 +340,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <tr>
       <td>Lokaliseringstjänst</td>
       <td>SHALL bekräfta en inaktuell cachepost mot källan innan den lämnas ut, och SHALL redovisa källor som inte svarat som ett ofullständigt svar</td>
+    </tr>
+    <tr>
+      <td>Lokaliseringstjänst</td>
+      <td>SHALL ställa den riktade frågan med användarens kontext när en sökning utlöser den, och SHALL skriva indexposter via skriv-API:et</td>
     </tr>
     <tr>
       <td>Tjänsteägare</td>
@@ -349,7 +396,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 14:46:00 +0000">
+  <span title="2026-11-04 18:52:00 +0000">
     2026-11-04
   </span>
 

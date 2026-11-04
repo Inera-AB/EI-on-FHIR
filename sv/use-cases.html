@@ -192,6 +192,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><a href="#fylla-indexet" id="markdown-toc-fylla-indexet">Fylla indexet</a></li>
   <li><a href="#avregistrera-indexposter" id="markdown-toc-avregistrera-indexposter">Avregistrera indexposter</a></li>
   <li><a href="#prenumerera-på-ändringar" id="markdown-toc-prenumerera-på-ändringar">Prenumerera på ändringar</a></li>
+  <li><a href="#hålla-en-lokal-kopia-aktuell" id="markdown-toc-hålla-en-lokal-kopia-aktuell">Hålla en lokal kopia aktuell</a></li>
   <li><a href="#stäm-av-efter-avbrott" id="markdown-toc-stäm-av-efter-avbrott">Stäm av efter avbrott</a></li>
   <li><a href="#massuttag" id="markdown-toc-massuttag">Massuttag</a></li>
   <li><a href="#övergång-från-dagens-engagemangsindex" id="markdown-toc-övergång-från-dagens-engagemangsindex">Övergång från dagens engagemangsindex</a></li>
@@ -202,7 +203,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="sök-var-information-finns-om-en-patient">Sök var information finns om en patient</h3>
 
-<p>En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. FHIR-EI kontrollerar behörighet och spärrar, filtrerar bort poster som konsumenten inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.</p>
+<p>En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. Sökningen sker i användarkontext. FHIR-EI kontrollerar användarens behörighet och spärrar, filtrerar bort poster som användaren inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.</p>
 
 <h3 id="fylla-indexet">Fylla indexet</h3>
 
@@ -214,7 +215,11 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="prenumerera-på-ändringar">Prenumerera på ändringar</h3>
 
-<p>En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration, filtrerad på patient, tjänst eller vårdgivare. Vid varje ändring som konsumenten har rätt att se får den en notis med postens id. Motsvarar ProcessNotification.</p>
+<p>En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration i systemkontext, filtrerad på patient, tjänst eller vårdgivare. Vid varje ändring inom konsumentens behörighet får den en notis med postens id. Motsvarar ProcessNotification.</p>
+
+<h3 id="hålla-en-lokal-kopia-aktuell">Hålla en lokal kopia aktuell</h3>
+
+<p>En systemkonsument håller en lokal kopia av innehåll inom en tjänst, till exempel läkemedelsordinationer eller uppmärksamhetsinformation, och behöver veta när den ska hämta på nytt. Den prenumererar i systemkontext och hämtar från källan när en notis kommer. Kopian ligger utanför FHIR-EI, och systemkonsumenten prövar och loggar per användare när innehållet visas. Tjänsten behöver producentregistrering eller spegling; se <a href="security.html">Spärr, loggning och behörighet</a>.</p>
 
 <h3 id="stäm-av-efter-avbrott">Stäm av efter avbrott</h3>
 
@@ -260,7 +265,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 14:46:00 +0000">
+  <span title="2026-11-04 18:52:00 +0000">
     2026-11-04
   </span>
 

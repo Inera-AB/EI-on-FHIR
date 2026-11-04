@@ -41,9 +41,9 @@
   "implementationGuide" : ["https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex"],
   "rest" : [{
     "mode" : "server",
-    "documentation" : "Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning. Se sidan Spärr, loggning och behörighet.",
+    "documentation" : "Alla anrop autentiseras och loggas. Sökning och läsning för visning sker i användarkontext, där FHIR-EI prövar spärr, samtycke och syfte. Registrering, prenumeration, inkrementell avstämning och export sker i systemkontext, där FHIR-EI prövar systemets behörighet och det mottagande systemet prövar per användare. Se sidan Spärr, loggning och behörighet.",
     "security" : {
-      "description" : "Se sidan Spärr, loggning och behörighet."
+      "description" : "Två åtkomstlägen: användarkontext med token som bär användarens kontextanspråk, och systemkontext enligt SMART Backend Services eller med klientcertifikat. Se sidan Spärr, loggning och behörighet."
     },
     "resource" : [{
       "type" : "DocumentReference",
@@ -201,7 +201,7 @@
     {
       "type" : "Subscription",
       "profile" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription",
-      "documentation" : "Topic-baserade prenumerationer på topic indexpost-andrad. Notiser filtreras på samma sätt som sökningar.",
+      "documentation" : "Topic-baserade prenumerationer på topic indexpost-andrad, i systemkontext. Notiser filtreras på prenumerantens behörighet och bär bara postens id.",
       "interaction" : [{
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation",

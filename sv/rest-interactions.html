@@ -196,7 +196,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </ul>
 
 </div>
-<p>Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får var sin FHIR R5-motsvarighet. API:et skiljer på tre användningsfall: sökning vid behov, löpande uppdatering via prenumeration och massuttag för avstämning. Alla läs-, skriv-, prenumerations- och exportanrop går genom samma centrala kontroll av behörighet, spärr och loggning; se <a href="security.html">Spärr, loggning och behörighet</a>. De formella kraven finns i <a href="CapabilityStatement-IneraIndexServer.html">CapabilityStatement för FHIR-EI</a>.</p>
+<p>Dagens tre tjänstekontrakt (FindContent, Update och ProcessNotification) får var sin FHIR R5-motsvarighet. API:et skiljer på tre användningsfall: sökning vid behov, löpande uppdatering via prenumeration och massuttag för avstämning. Alla anrop autentiseras och loggas. Vad FHIR-EI prövar beror på anropets åtkomstläge, användarkontext eller systemkontext; se <a href="security.html">Spärr, loggning och behörighet</a>. De formella kraven finns i <a href="CapabilityStatement-IneraIndexServer.html">CapabilityStatement för FHIR-EI</a>.</p>
 
 <table class="grid">
   <thead>
@@ -204,6 +204,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <th>Operation</th>
       <th>Aktör</th>
       <th>FHIR-interaktion</th>
+      <th>Åtkomstläge</th>
       <th>Motsvarighet idag</th>
     </tr>
   </thead>
@@ -212,48 +213,56 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>Sök indexposter för en patient</td>
       <td>Konsument</td>
       <td><code class="language-plaintext highlighter-rouge">GET DocumentReference?patient:identifier=…&amp;type=…</code> (standard: <code class="language-plaintext highlighter-rouge">status=current</code>)</td>
+      <td>Användarkontext</td>
       <td>FindContent</td>
     </tr>
     <tr>
       <td>Filtrera på informationsmängd</td>
       <td>Konsument</td>
       <td>Standardparametrarna <code class="language-plaintext highlighter-rouge">format-code</code> / <code class="language-plaintext highlighter-rouge">format-canonical</code> (på <code class="language-plaintext highlighter-rouge">content.profile</code>)</td>
+      <td>Användarkontext</td>
       <td>FindContent med kategori</td>
     </tr>
     <tr>
       <td>Filtrera på aktualitet</td>
       <td>Konsument</td>
       <td>Nationell sökparameter <code class="language-plaintext highlighter-rouge">content-last-updated=gt…</code></td>
+      <td>Användarkontext</td>
       <td>FindContent med tidsfilter</td>
     </tr>
     <tr>
       <td>Registrera eller uppdatera post</td>
       <td>Registrerande part</td>
       <td>Villkorad <code class="language-plaintext highlighter-rouge">PUT DocumentReference?identifier=&lt;part&gt;|&lt;id&gt;</code>, eller <code class="language-plaintext highlighter-rouge">transaction</code>-Bundle för flera</td>
+      <td>Systemkontext</td>
       <td>Update</td>
     </tr>
     <tr>
       <td>Avregistrera post</td>
       <td>Registrerande part</td>
       <td>Villkorad <code class="language-plaintext highlighter-rouge">PUT</code> med <code class="language-plaintext highlighter-rouge">status</code> = <code class="language-plaintext highlighter-rouge">superseded</code> eller <code class="language-plaintext highlighter-rouge">entered-in-error</code> och <code class="language-plaintext highlighter-rouge">deregistrationReason</code></td>
+      <td>Systemkontext</td>
       <td>Update med deleteFlag</td>
     </tr>
     <tr>
       <td>Prenumerera på ändringar</td>
       <td>Konsument</td>
       <td>R5 <code class="language-plaintext highlighter-rouge">Subscription</code> på <code class="language-plaintext highlighter-rouge">SubscriptionTopic</code> <code class="language-plaintext highlighter-rouge">indexpost-andrad</code>; se <a href="subscriptions.html">Prenumeration</a></td>
+      <td>Systemkontext</td>
       <td>ProcessNotification</td>
     </tr>
     <tr>
       <td>Inkrementell avstämning</td>
       <td>Konsument</td>
       <td><code class="language-plaintext highlighter-rouge">GET DocumentReference?_lastUpdated=gt…&amp;status=current,superseded,entered-in-error</code></td>
+      <td>Systemkontext</td>
       <td>Saknas</td>
     </tr>
     <tr>
       <td>Massuttag</td>
       <td>Systemkonsument</td>
       <td>Bulk Data <code class="language-plaintext highlighter-rouge">$export</code> med <code class="language-plaintext highlighter-rouge">_type=DocumentReference</code> och <code class="language-plaintext highlighter-rouge">_since</code></td>
+      <td>Systemkontext</td>
       <td>Saknas</td>
     </tr>
   </tbody>
@@ -353,7 +362,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="läs--och-skriv-api">Läs- och skriv-API</h3>
 
-<p>Läs-, prenumerations- och export-API:et är detsamma för alla <a href="population.html">försörjningssätt</a>. Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten kan skriva via samma API eller, om den är en del av FHIR-EI, direkt i indexet; reglerna för indexposten och livscykeln är desamma.</p>
+<p>Läs-, prenumerations- och export-API:et är detsamma för alla <a href="population.html">försörjningssätt</a>. Skriv-API:et används vid producentregistrering, av indexeringsagenten och av övergångsadaptern. Lokaliseringstjänsten skriver också via skriv-API:et, aldrig direkt i indexkärnan, så att reglerna för indexposten och livscykeln gäller på samma sätt; se <a href="roles-and-responsibilities.html">Roller och ansvar</a>.</p>
 
 <p>När FHIR-EI vet att ett svar kan vara ofullständigt, till exempel när en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen, innehåller sökresultatet en <code class="language-plaintext highlighter-rouge">OperationOutcome</code> i <code class="language-plaintext highlighter-rouge">Bundle.issues</code>; se <a href="expected-responses.html">Förväntade svar</a>.</p>
 
@@ -466,7 +475,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 14:46:00 +0000">
+  <span title="2026-11-04 18:52:00 +0000">
     2026-11-04
   </span>
 

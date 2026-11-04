@@ -24,6 +24,11 @@ FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangs
 | Indexeringsagent | Komponent som prenumererar på tjänsternas topics hos producenternas FHIR-servrar och registrerar indexposter på producenternas vägnar |
 | Lokaliseringstjänst | Ineras komponent som fyller indexet som en cache, utifrån eHM:s patientindex och riktade frågor till källorna |
 | Konsument | Tjänst som söker i eller prenumererar på indexet, till exempel NPÖ och 1177 |
+| Systemkonsument | Konsument som läser i systemkontext: prenumererar, stämmer av, gör massuttag eller håller en lokal kopia av innehåll aktuell |
+| Användarkontext | Åtkomstläge där anropet görs för en namngiven användare och bär användarens anspråk. FHIR-EI prövar spärr, samtycke och syfte och loggar per användare. Se[Spärr, loggning och behörighet](security.md) |
+| Systemkontext | Åtkomstläge utan användare. FHIR-EI prövar systemets behörighet, och det mottagande systemet prövar per användare när informationen visas |
+| Indexkärna | Den del av FHIR-EI som lagrar indexposterna och sköter skrivning, livscykel, händelselogg, prenumeration, avstämning och massuttag. Se[Roller och ansvar](roles-and-responsibilities.md) |
+| Åtkomstlager | Den del av FHIR-EI som tar emot sökning och läsning i användarkontext och prövar spärr, samtycke, syfte, fullmakt och säkerhetsetiketter |
 | Tunt index | eHM:s patientindex kopplat till NDI |
 
 -------
@@ -37,6 +42,7 @@ FHIR-EI är ett rikt index av pekare. Det ska klara minst det dagens engagemangs
 1. **Indexet är självt skyddsvärd information.**Att en patient har en post hos en viss vårdenhet är en uppgift om patienten. Komponenten tillämpar därför spärr, loggning och filtrering.
 1. **Profilering enligt Ineras tre-lagersmodell, ovanpå svenska basprofiler.**I denna version bygger profilen direkt på FHIR:s basresurser; se[Öppna frågor](open-issues.md).
 1. **Neutral försörjning.**Konsumentkontraktet är detsamma oavsett hur en tjänsts indexposter fylls. Försörjningen är ett val per tjänst; se[Försörjning av indexet](population.md).
+1. **Två åtkomstlägen.**Varje operation sker i användarkontext eller i systemkontext. Prövning per användare kräver en användare: i användarkontext görs den i FHIR-EI, i systemkontext av det mottagande systemet när informationen visas. Se[Spärr, loggning och behörighet](security.md).
 
 -------
 

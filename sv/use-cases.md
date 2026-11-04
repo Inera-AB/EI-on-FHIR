@@ -6,7 +6,7 @@ API:et skiljer på tre sätt att läsa indexet: sökning vid behov, löpande upp
 
 ### Sök var information finns om en patient
 
-En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. FHIR-EI kontrollerar behörighet och spärrar, filtrerar bort poster som konsumenten inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.
+En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. Sökningen sker i användarkontext. FHIR-EI kontrollerar användarens behörighet och spärrar, filtrerar bort poster som användaren inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.
 
 ### Fylla indexet
 
@@ -18,7 +18,11 @@ En källa håller inte längre informationen: den var felregistrerad, engagemang
 
 ### Prenumerera på ändringar
 
-En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration, filtrerad på patient, tjänst eller vårdgivare. Vid varje ändring som konsumenten har rätt att se får den en notis med postens id. Motsvarar ProcessNotification.
+En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration i systemkontext, filtrerad på patient, tjänst eller vårdgivare. Vid varje ändring inom konsumentens behörighet får den en notis med postens id. Motsvarar ProcessNotification.
+
+### Hålla en lokal kopia aktuell
+
+En systemkonsument håller en lokal kopia av innehåll inom en tjänst, till exempel läkemedelsordinationer eller uppmärksamhetsinformation, och behöver veta när den ska hämta på nytt. Den prenumererar i systemkontext och hämtar från källan när en notis kommer. Kopian ligger utanför FHIR-EI, och systemkonsumenten prövar och loggar per användare när innehållet visas. Tjänsten behöver producentregistrering eller spegling; se [Spärr, loggning och behörighet](security.md).
 
 ### Stäm av efter avbrott
 

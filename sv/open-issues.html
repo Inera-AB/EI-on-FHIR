@@ -225,10 +225,14 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><strong>Första tjänst.</strong> Vilken tjänst går först genom övergången?</li>
   <li><strong>Försörjningssätt per tjänst.</strong> Vem beslutar, och var anges det, så att lokaliseringstjänsten och adaptern vet vilka endpoints de ska fylla?</li>
   <li><strong>Riktad fråga.</strong> Egen operation (till exempel <code class="language-plaintext highlighter-rouge">$inventory</code>) eller <code class="language-plaintext highlighter-rouge">batch</code> med <code class="language-plaintext highlighter-rouge">_summary=count</code>? Definieras den i denna IG eller i tjänsternas IG:er? Och svarar den med vårdenhet?</li>
-  <li><strong>Lokaliseringstjänstens behörighet.</strong> Under vilket ändamål och med vilken identitet frågar den källorna, och hur loggas frågan hos källan och i FHIR-EI?</li>
-  <li><strong>Lokaliseringstjänstens placering.</strong> Del av FHIR-EI eller en separat komponent som skriver via API:et?</li>
+  <li><strong>Lokaliseringstjänstens behörighet.</strong> När en sökning utlöser den riktade frågan ställs den med användarens kontext. Under vilket ändamål och med vilken identitet ställs den vid färskhållning, och hur loggas den hos källan och i FHIR-EI?</li>
   <li><strong>Tidsgränser.</strong> Hur länge är en cachepost färsk när källan saknar prenumeration, och hur länge väntar FHIR-EI på en källa innan svaret redovisas som ofullständigt?</li>
   <li><strong>Post utan vårdenhet.</strong> Räcker fail-closed vid inre spärr, eller behöver den riktade frågan alltid ange vårdenhet?</li>
+  <li><strong>Rättslig grund för systemkontext.</strong> Med vilken grund får en systemkonsument ta emot indexposter och notiser om patienter utan att en användare har frågat, och hur regleras dess ansvar för prövning och loggning per användare?</li>
+  <li><strong>Lokala kopior av innehåll.</strong> Vilka tjänster behöver ett synkat läsmönster, till exempel läkemedelsordinationer och uppmärksamhetsinformation? Vem är personuppgiftsansvarig och åtkomstkontrollpunkt för en sådan kopia?</li>
+  <li><strong>Gemensam beslutstjänst.</strong> Ska åtkomstlagret använda samma beslutstjänst för spärr, samtycke och syfte som EHDS-bryggan och framtida åtkomst till innehåll?</li>
+  <li><strong>Användarens kontext.</strong> Hur får konsumenten en token med användarens anspråk till FHIR-EI, och hur skickar lokaliseringstjänsten den vidare till källorna, till exempel med token exchange?</li>
+  <li><strong>Spärr i systemkontext.</strong> Ska ett system som agerar för en bestämd vårdgivare få notiser filtrerade på yttre spärr redan i FHIR-EI, och hur anges vårdgivaren?</li>
 </ul>
 
 
@@ -259,7 +263,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 14:46:00 +0000">
+  <span title="2026-11-04 18:52:00 +0000">
     2026-11-04
   </span>
 

@@ -259,6 +259,26 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>Tjänst som söker i eller prenumererar på indexet, till exempel NPÖ och 1177</td>
     </tr>
     <tr>
+      <td>Systemkonsument</td>
+      <td>Konsument som läser i systemkontext: prenumererar, stämmer av, gör massuttag eller håller en lokal kopia av innehåll aktuell</td>
+    </tr>
+    <tr>
+      <td>Användarkontext</td>
+      <td>Åtkomstläge där anropet görs för en namngiven användare och bär användarens anspråk. FHIR-EI prövar spärr, samtycke och syfte och loggar per användare. Se <a href="security.html">Spärr, loggning och behörighet</a></td>
+    </tr>
+    <tr>
+      <td>Systemkontext</td>
+      <td>Åtkomstläge utan användare. FHIR-EI prövar systemets behörighet, och det mottagande systemet prövar per användare när informationen visas</td>
+    </tr>
+    <tr>
+      <td>Indexkärna</td>
+      <td>Den del av FHIR-EI som lagrar indexposterna och sköter skrivning, livscykel, händelselogg, prenumeration, avstämning och massuttag. Se <a href="roles-and-responsibilities.html">Roller och ansvar</a></td>
+    </tr>
+    <tr>
+      <td>Åtkomstlager</td>
+      <td>Den del av FHIR-EI som tar emot sökning och läsning i användarkontext och prövar spärr, samtycke, syfte, fullmakt och säkerhetsetiketter</td>
+    </tr>
+    <tr>
       <td>Tunt index</td>
       <td>eHM:s patientindex kopplat till NDI</td>
     </tr>
@@ -277,6 +297,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li><strong>Indexet är självt skyddsvärd information.</strong> Att en patient har en post hos en viss vårdenhet är en uppgift om patienten. Komponenten tillämpar därför spärr, loggning och filtrering.</li>
   <li><strong>Profilering enligt Ineras tre-lagersmodell, ovanpå svenska basprofiler.</strong> I denna version bygger profilen direkt på FHIR:s basresurser; se <a href="open-issues.html">Öppna frågor</a>.</li>
   <li><strong>Neutral försörjning.</strong> Konsumentkontraktet är detsamma oavsett hur en tjänsts indexposter fylls. Försörjningen är ett val per tjänst; se <a href="population.html">Försörjning av indexet</a>.</li>
+  <li><strong>Två åtkomstlägen.</strong> Varje operation sker i användarkontext eller i systemkontext. Prövning per användare kräver en användare: i användarkontext görs den i FHIR-EI, i systemkontext av det mottagande systemet när informationen visas. Se <a href="security.html">Spärr, loggning och behörighet</a>.</li>
 </ol>
 
 <hr />
@@ -342,7 +363,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 14:46:00 +0000">
+  <span title="2026-11-04 18:52:00 +0000">
     2026-11-04
   </span>
 

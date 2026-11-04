@@ -44,6 +44,6 @@ Specen lämnade några detaljer öppna eller formulerade dem på ett sätt som i
 | Tjänstens kodning | Minst en av`type.coding[serviceDomain]`och`type.coding[implementationGuide]` | En kodning per generation, och tjänsten är obligatorisk |
 | Innehållets senaste ändring | Minst sekundprecision krävs | Ordningen per post avgörs av tidpunkten |
 | Äldre uppdatering | Ignoreras med`200 OK`och oförändrad version | Specen säger att den ignoreras; ett felsvar skulle få en producent med minst-en-leverans att försöka igen |
-| Notisinnehåll | `id-only`är fast, inte bara standard | Säkerhetsavsnittet förutsätter`id-only`för att notiser inte ska läcka spärrad information |
+| Notisinnehåll | `id-only`är fast, inte bara standard | Säkerhetsavsnittet förutsätter`id-only`, så att en notis i systemkontext inte för med sig mer om patienten än nödvändigt |
 | Orsak vid adapteravregistrering | Koden`transition-adapter` | Specen anger att adaptern sätter en egen kod |
 
