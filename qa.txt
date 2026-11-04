@@ -3,7 +3,7 @@ IneraEngagementIndex : Validation Results
 
 err = 0, warn = 47, info = 124, broken links = 0
 IG Publisher Version: 3.0.2
-Generated Wed Nov 04 18:53:26 UTC 2026. FHIR version 5.0.0 for inera.ei.engagementindex#0.1.0 (canonical = https://fhir.inera.se/ig/engagementindex)
+Generated Wed Nov 04 19:15:11 UTC 2026. FHIR version 5.0.0 for inera.ei.engagementindex#0.1.0 (canonical = https://fhir.inera.se/ig/engagementindex)
  Build Errors : 0 / 0 / 0
  /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-RegistreringTransaction : 0 / 6 / 10
  /home/runner/work/EI-on-FHIR/EI-on-FHIR/fsh-generated/resources/Bundle-SokresultatForPatient : 0 / 8 / 14
