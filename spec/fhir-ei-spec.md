@@ -2,11 +2,11 @@
 
 2026-10-26 · Oskar Thunman
 
-> Arbetsunderlaget som implementationsguiden i detta repo bygger på. Specen beskriver designen och dess skäl; IG:n under `input/` är den formella realiseringen. Där IG:n gör val som specen lämnar öppna, eller uttrycker något annorlunda för att det ska fungera i FHIR, står det på IG-sidan *Mappning till profiler* (`input/pagecontent/mappings.md`). Ändringar i designen görs här först och förs sedan in i IG:n.
+> Arbetsunderlaget som implementationsguiden i detta repo bygger på. Specen beskriver designval och identifierade behov; IG:n under `input/` är den formella realiseringen. IG_n gör några specifika val kring öppna frågor och designval, för att få det att fungera i FHIR. Dessa går att spåra på IG-sidan *Mappning till profiler* (`input/pagecontent/mappings.md`). Designen är tänkt att styras från denna spec och sedan föras in i IG:n.
 
 ## Syfte och avgränsning
 
-Specen beskriver en ny EI-komponent för FHIR (arbetsnamn FHIR-EI). Komponenten svarar på tre frågor: i vilka system finns information om en patient, vilka informationsmängder finns där, och när uppdaterades de senast. Den ersätter engagemangsindex när NPÖ och 1177 FHIR-ifieras, och följer samma mönster som NHS Englands National Record Locator.
+Specen beskriver en ny EI-liknande komponent inom den nya samverkansinfrastrukturen som ett rikt patientiondex i FHIR (arbetsnamn FHIR-EI). Komponenten svarar på tre frågor: i vilka system finns information om en patient, vilka informationsmängder finns där, och när uppdaterades de senast. Den ersätter engagemangsindex när NPÖ och 1177 FHIR-ifieras, och följer samma mönster som NHS Englands National Record Locator.
 
 Specen omfattar:
 
@@ -22,7 +22,7 @@ Specen är neutral till hur indexet fylls. Konsumenterna läser samma API oavset
 
 Utanför specen ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll. Den ska ändå kunna förse sådana lösningar med indexposter och notiser, i systemkontext; se avsnittet om komponenter och åtkomstlägen.
 
-Första konsumenter är NPÖ och 1177.
+Tänkta konsumenter i den beaktade kontexten är NPÖ och 1177, medan t ex Formulärtjänsten över FHIR löst notifieringsmekanismen i den egna tjänsten via prenumeration.
 
 ## Begrepp och arkitekturprinciper
 
