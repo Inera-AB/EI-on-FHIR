@@ -38,6 +38,8 @@ pages:
     title: Användningsfall
   roles-and-responsibilities.md:
     title: Roller och ansvar
+  legal-basis.md:
+    title: Rättslig grund och ändamål
   information-model.md:
     title: Indexposten
   population.md:

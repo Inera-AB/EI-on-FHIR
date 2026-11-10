@@ -92,7 +92,7 @@ En registrerande parts identitet är dess Endpoint i tjänstekatalogen. FHIR-EI 
 | Registrerande part | `registeringProducer` är en absolut referens till den endpoint klienten är bunden till |
 | Namnrymd | `identifier.system` är samma URL som `registeringProducer`. Profilens invariant `inera-ei-producer-namespace` kontrollerar det, och inget register över namnrymder behövs |
 | Endpoint | För en producent eller indexeringsagent är `sourceEndpoint` samma endpoint som `registeringProducer` |
-| Vårdgivare | Vårdgivaren i `custodian`, eller en underliggande enhet via `partOf`, listar `sourceEndpoint` i `Organization.endpoint` i tjänstekatalogen |
+| Vårdgivare | `custodian` är en vårdgivare i tjänstekatalogen, inte ett källsystem eller en vårdenhet. Vårdgivaren, eller en underliggande enhet via `partOf`, listar `sourceEndpoint` i `Organization.endpoint` i tjänstekatalogen |
 {:.grid}
 
 Övergångsadaptern och lokaliseringstjänsten har ombudsroll. De är registrerade i tjänstekatalogen med egna endpoints och får registrera poster vars `sourceEndpoint` är en annan endpoint, men bara inom sitt underlag: adaptern för kombinationer av logisk adress och tjänstedomän i sitt adressregister, lokaliseringstjänsten för vårdgivare som eHM:s patientindex anger för patienten. Se [Försörjning av indexet](population.html).

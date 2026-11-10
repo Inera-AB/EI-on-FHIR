@@ -16,6 +16,7 @@ IG:n omfattar:
 - [API för sökning, registrering](rest-interactions.html) och [prenumeration](subscriptions.html)
 - [händelsemodell och leveransgarantier](event-model.html), inklusive övergången från dagens engagemangsindex
 - [spärr, loggning och filtrering](security.html) av svar
+- [rättslig grund och ändamål](legal-basis.html): dagens juridiska tolkning av engagemangsindex och det FHIR-EI går utöver
 - [samexistens med eHM:s patientindex](ehm-coexistence.html): borttag, grundladdning och återsynk
 
 IG:n är neutral till hur indexet fylls. Konsumenterna läser samma API oavsett om en tjänsts indexposter registreras av producenterna, fylls av Inera utifrån eHM:s patientindex och riktade frågor till källorna, eller speglas från dagens engagemangsindex. Försörjningen väljs per tjänst.
