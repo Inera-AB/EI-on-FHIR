@@ -30,7 +30,9 @@ Följande frågor är inte avgjorda. Svaren kan ändra profilen eller API:et.
 - **Lokaliseringstjänstens behörighet.** När en sökning utlöser den riktade frågan ställs den med användarens kontext. Under vilket ändamål och med vilken identitet ställs den vid färskhållning, och hur loggas den hos källan och i FHIR-EI?
 - **Tidsgränser.** Hur länge är en cachepost färsk när källan saknar prenumeration, och hur länge väntar FHIR-EI på en källa innan svaret redovisas som ofullständigt?
 - **Post utan vårdenhet.** Räcker fail-closed vid inre spärr, eller behöver den riktade frågan alltid ange vårdenhet?
-- **Rättslig grund för systemkontext.** Med vilken grund får en systemkonsument ta emot indexposter och notiser om patienter utan att en användare har frågat, och hur regleras dess ansvar för prövning och loggning per användare?
+- **Rättslig grund för systemkontext.** Med vilken grund får en systemkonsument ta emot indexposter och notiser om patienter utan att en användare har frågat, och hur regleras dess ansvar för prövning och loggning per användare? Utgångsläget är dagens regel att notiser kastas; se [Rättslig grund och ändamål](legal-basis.html).
+- **Ansvarsfördelning.** Ska FHIR-EI behålla dagens tolkning, där indexet är vårdgivarnas behandling med Inera som personuppgiftsbiträde, eller få en ny ansvarsfördelning med ett uttalat ändamål? Vem beslutar, och med vilket underlag?
+- **Vårdgivare i speglade poster.** Hur stor andel av dagens poster har källsystemets HSA-id i dataController, och hur många källsystem betjänar flera vårdgivare?
 - **Lokala kopior av innehåll.** Vilka tjänster behöver ett synkat läsmönster, till exempel läkemedelsordinationer och uppmärksamhetsinformation? Vem är personuppgiftsansvarig och åtkomstkontrollpunkt för en sådan kopia?
 - **Gemensam beslutstjänst.** Ska åtkomstlagret använda samma beslutstjänst för spärr, samtycke och syfte som EHDS-bryggan och framtida åtkomst till innehåll?
 - **Användarens kontext.** Hur får konsumenten en token med användarens anspråk till FHIR-EI, och hur skickar lokaliseringstjänsten den vidare till källorna, till exempel med token exchange?

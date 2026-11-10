@@ -128,9 +128,20 @@ Engagemangsposter för samma patient, logiska adress och tjänstedomän slås ih
 | `content.profile[category]` | En Coding per kategori bland de ingående engagemangsposterna |
 | Avregistrering | deleteFlag på den sista ingående engagemangsposten ger status `superseded`, `registrationStatus` `withdrawn` och `deregistrationReason` `transition-adapter`, eftersom dagens kontrakt inte bär någon orsak |
 | `registeringProducer` | Adapterns egen endpoint i tjänstekatalogen |
+| `custodian` | Vårdgivaren, bestämd enligt nästa avsnitt |
 {:.grid}
 
 Se exemplet [Indexpost speglad av övergångsadaptern](DocumentReference-IndexpostFranAdapter.html).
+
+#### Vårdgivare i speglade poster
+
+dataController ska ange personuppgiftsansvarig organisation, men sedan 2015 godtas källsystemets HSA-id i fältet. Adaptern mappar därför inte dataController rakt till `custodian`. Spärrkontrollen, kontrollen mot tjänstekatalogen och härledningen av eHM:s patientindex förutsätter alla att `custodian` är en vårdgivare. Adaptern bestämmer vårdgivaren i tur och ordning:
+
+1. dataController, om det är en vårdgivare i tjänstekatalogen.
+2. Den logiska adressens organisation i tjänstekatalogen, eller den vårdgivare den hör till via `partOf`.
+3. Adapterns vårdgivarregister, för källsystem som bara betjänar en vårdgivare.
+
+Går vårdgivaren inte att bestämma registrerar adaptern inte posten. Den läggs i kön för manuell hantering, och andelen sådana poster ingår i avstämningen före läge 2; se [Händelsemodell och övergång](event-model.html). Bakgrunden står under [Rättslig grund och ändamål](legal-basis.html).
 
 #### Adressregister i adaptern
 

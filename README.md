@@ -37,6 +37,7 @@ The specification and FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based 
 - **One index for NPÖ and 1177.** Access is assessed per purpose of use, and producers can label entries with security labels such as `NOPAT`.
 - **Native R5 subscriptions** on the topic `indexpost-andrad`, with `id-only` notifications, `$status` and `$events`; reconciliation with `_lastUpdated`; bulk export with `$export`.
 - **Two access modes.** Searches and reads for display run in user context, where FHIR-EI is its own access control point for blocking (spärr), consent, purpose of use and logging. Registration, subscriptions, reconciliation and export run in system context, where FHIR-EI checks the system's authorisation and the receiving system checks per user when the information is shown.
+- **Legal basis.** Today's engagement index rests on a 2013 interpretation: each care provider is controller for its own entries, Inera is processor, and entries may only be used to find logical addresses. The IG lists where FHIR-EI goes beyond that and needs a new assessment, and requires each service to describe its purpose for using the index.
 - **Split by access mode.** An index core (storage, write API, lifecycle, events, subscriptions, export) with no blocking or consent logic, an access layer for user-context reads, and population components (indexing agent, locator, transition adapter) that write only through the write API.
 
 ### Related repositories

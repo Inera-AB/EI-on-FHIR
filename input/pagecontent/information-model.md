@@ -59,6 +59,12 @@ Tillämpningen bestämmer vad som räknas som en ändring, och den regeln ska va
 
 `contentLastUpdated` är tidpunkten för den senaste händelse som uppfyller tjänstens topic. Samma topics driver indexeringsagenten och lokaliseringstjänstens prenumerationer; se [Försörjning av indexet](population.html).
 
+#### Ändamål per tjänst
+
+Tjänstens IG beskriver också hur tjänsten använder indexet: vilka konsumenter som läser och i vilket åtkomstläge, för vilket ändamål, och vad en systemkonsument sparar. Se [Rättslig grund och ändamål](legal-basis.html).
+
+#### Tillämpningsprofilen och FHIR-version
+
 Tillämpningsprofilen har indexprofilen som förälder och är därför en R5-profil. En tjänst vars IG är R4 publicerar sin tillämpning i ett separat R5-paket och anger sina topics med canonical, som i Subscriptions Backport.
 
 ### Tidpunkter

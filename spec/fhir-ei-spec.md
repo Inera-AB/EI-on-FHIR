@@ -2,11 +2,11 @@
 
 2026-10-26 · Oskar Thunman
 
-> Arbetsunderlaget som implementationsguiden i detta repo bygger på. Specen beskriver designval och identifierade behov; IG:n under `input/` är den formella realiseringen. IG_n gör några specifika val kring öppna frågor och designval, för att få det att fungera i FHIR. Dessa går att spåra på IG-sidan *Mappning till profiler* (`input/pagecontent/mappings.md`). Designen är tänkt att styras från denna spec och sedan föras in i IG:n.
+> Arbetsunderlaget som implementationsguiden i detta repo bygger på. Specen beskriver designval och identifierade behov; IG:n under `input/` är den formella realiseringen. IG:n gör några specifika val kring öppna frågor och designval, för att få det att fungera i FHIR. Dessa går att spåra på IG-sidan *Mappning till profiler* (`input/pagecontent/mappings.md`). Designen är tänkt att styras från denna spec och sedan föras in i IG:n.
 
 ## Syfte och avgränsning
 
-Specen beskriver en ny EI-liknande komponent inom den nya samverkansinfrastrukturen som ett rikt patientiondex i FHIR (arbetsnamn FHIR-EI). Komponenten svarar på tre frågor: i vilka system finns information om en patient, vilka informationsmängder finns där, och när uppdaterades de senast. Den ersätter engagemangsindex när NPÖ och 1177 FHIR-ifieras, och följer samma mönster som NHS Englands National Record Locator.
+Specen beskriver en ny EI-liknande komponent inom den nya samverkansinfrastrukturen som ett rikt patientindex i FHIR (arbetsnamn FHIR-EI). Komponenten svarar på tre frågor: i vilka system finns information om en patient, vilka informationsmängder finns där, och när uppdaterades de senast. Den ersätter engagemangsindex när NPÖ och 1177 FHIR-ifieras, och följer samma mönster som NHS Englands National Record Locator.
 
 Specen omfattar:
 
@@ -22,7 +22,7 @@ Specen är neutral till hur indexet fylls. Konsumenterna läser samma API oavset
 
 Utanför specen ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll. Den ska ändå kunna förse sådana lösningar med indexposter och notiser, i systemkontext; se avsnittet om komponenter och åtkomstlägen.
 
-Tänkta konsumenter i den beaktade kontexten är NPÖ och 1177, medan t ex Formulärtjänsten över FHIR löst notifieringsmekanismen i den egna tjänsten via prenumeration.
+Tänkta konsumenter i den betraktade kontexten är NPÖ och 1177, medan t ex Formulärtjänsten över FHIR löst notifieringsmekanismen i den egna tjänsten via prenumeration.
 
 ## Begrepp och arkitekturprinciper
 
@@ -93,6 +93,8 @@ Uppdateringsregler. Tillämpningen bestämmer vad som räknas som en ändring, o
 - extensionen `obligation` på de element i tillämpningsprofilen som den registrerande parten ska fylla i
 
 `contentLastUpdated` är tidpunkten för den senaste händelse som uppfyller tjänstens topic, oavsett försörjningssätt. Samma topics driver indexeringsagenten och lokaliseringstjänstens prenumerationer, se avsnittet om försörjning.
+
+Ändamål. Tjänstens IG beskriver också hur tjänsten använder indexet: vilka konsumenter som läser och i vilket åtkomstläge, för vilket ändamål, och vad en systemkonsument sparar. Se avsnittet om rättslig grund och ändamål.
 
 Tillämpningsprofilen har indexprofilen som förälder och är därför en R5-profil. En tjänst vars IG är R4 publicerar sin tillämpning i ett separat R5-paket och anger sina topics med canonical, som i Subscriptions Backport.
 
@@ -278,6 +280,14 @@ Ansvar. Adaptern speglar utan egen affärslogik. Ansvaret för att indexposterna
 
 Mappning av Update. Engagemangsposter för samma patient, logiska adress och tjänstedomän slås ihop till en indexpost, med dagens kategorier som informationsmängder. Varje post blir en villkorad `PUT` i en `transaction`, med fältmappningen i avsnittet om informationsmodell. `contentLastUpdated` sätts till den senaste mostRecentContent bland de ingående engagemangsposterna. deleteFlag på den sista ingående engagemangsposten mappas till avregistrering med status `superseded`. Dagens kontrakt bär ingen orsak, så adaptern sätter `deregistrationReason` till en kod för avregistrering via övergångsadapter.
 
+Vårdgivare. dataController ska ange personuppgiftsansvarig organisation, men sedan 2015 godtas källsystemets HSA-id i fältet. Adaptern mappar därför inte dataController rakt till `custodian`. Spärrkontrollen, kontrollen mot tjänstekatalogen och härledningen av eHM:s patientindex förutsätter alla att `custodian` är en vårdgivare. Adaptern bestämmer vårdgivaren i tur och ordning:
+
+1. dataController, om det är en vårdgivare i tjänstekatalogen.
+2. Den logiska adressens organisation i tjänstekatalogen, eller den vårdgivare den hör till via `partOf`.
+3. Adapterns vårdgivarregister, för källsystem som bara betjänar en vårdgivare.
+
+Går vårdgivaren inte att bestämma registrerar adaptern inte posten. Den läggs i kön för manuell hantering, och andelen sådana poster ingår i avstämningen före läge 2.
+
 Adaptern sätter `logicalAddress` och `sourceSystem` från engagemangsposterna, och `registeringProducer` till sin egen endpoint. Postens `identifier.system` blir därmed adapterns endpoint-URL, och värdet bildas deterministiskt ur patient, logisk adress och tjänstedomän.
 
 Adressregister. Tjänstekatalogen har ingen endpoint per logisk adress, och den har inte TAK:s uppgift om vilken logisk adress och vilket tjänstekontrakt som routas till vilken producent. Adaptern håller därför ett eget adressregister, byggt genom att samköra TAK med tjänstekatalogen. Nyckeln är logisk adress och tjänstedomän, och värdet är den endpoint i tjänstekatalogen som posten ska peka på. Samma tänk finns i EHDS-bryggan, som håller ett eget register från vårdgivare till endpoint. Två varianter är möjliga för värdet:
@@ -333,7 +343,7 @@ Identitet och skrivbehörighet. En registrerande parts identitet är dess Endpoi
 | Registrerande part | `registeringProducer` är en absolut referens till den endpoint klienten är bunden till |
 | Namnrymd | `identifier.system` är samma URL som `registeringProducer`. Kontrollen är en strängjämförelse och kräver inget register över namnrymder |
 | Endpoint | För en producent eller indexeringsagent är `sourceEndpoint` samma endpoint som `registeringProducer` |
-| Vårdgivare | Vårdgivaren i `custodian`, eller en underliggande enhet via `partOf`, listar `sourceEndpoint` i `Organization.endpoint` i tjänstekatalogen |
+| Vårdgivare | `custodian` är en vårdgivare i tjänstekatalogen, inte ett källsystem eller en vårdenhet. Vårdgivaren, eller en underliggande enhet via `partOf`, listar `sourceEndpoint` i `Organization.endpoint` i tjänstekatalogen |
 
 Övergångsadaptern och lokaliseringstjänsten har ombudsroll. De är registrerade i tjänstekatalogen med egna endpoints och får registrera poster vars `sourceEndpoint` är en annan endpoint, men bara inom sitt underlag: adaptern för kombinationer av logisk adress och tjänstedomän i sitt adressregister, lokaliseringstjänsten för vårdgivare som eHM:s patientindex anger för patienten. `meta.source` används aldrig ensamt för behörighetskontroll.
 
@@ -369,9 +379,9 @@ Två lagringstider ska fastställas. Båda härleds från samma fråga: hur lån
 
 | Läge | Vem läser | Hur FHIR-EI fylls | Villkor för att gå vidare | Väg tillbaka |
 |---|---|---|---|---|
-| 0. Bara engagemangsindex | Dagens konsumenter, via engagemangsindex | – | Tjänstens tillämpning är publicerad, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade | – |
+| 0. Bara engagemangsindex | Dagens konsumenter, via engagemangsindex | – | Tjänstens tillämpning och ändamålsbeskrivning är publicerade, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade, och användningen är avstämd med säkerhetsrådet | – |
 | 1. Parallell försörjning | Engagemangsindex; FHIR-EI läses parallellt för jämförelse | Med tjänstens valda försörjningssätt: spegling, Inera-försörjd cache eller producentregistrering | Avstämningen visar samma svar under en överenskommen period | Stäng av försörjningen för tjänsten |
-| 2. Konsumenten byter | Tjänstedomänens aggregerande tjänst läser FHIR-EI | Som i läge 1 | Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften | Peka konsumenten mot engagemangsindex igen |
+| 2. Konsumenten byter | Tjänstedomänens aggregerande tjänst läser FHIR-EI | Som i läge 1 | Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften; den ändrade användningen godkänd av säkerhetsrådet | Peka konsumenten mot engagemangsindex igen |
 | 3. Källorna går över | Konsumenter som kan FHIR hämtar direkt från källorna | Källor går från spegling till producentregistrering eller Inera-försörjd cache | Ingen källa speglas längre från engagemangsindex för tjänstedomänen | – |
 | 4. Avveckling | FHIR-EI | Producentregistrering eller Inera-försörjd cache | – | – |
 
@@ -386,6 +396,57 @@ Första tjänst. Den första tjänsten bör ha en publicerad eller nära förest
 ![läge 3 för en tjänst · producentregistrering och spegling](../input/images/overgang-blandad-drift.svg)
 
 Bilden visar läge 3 för en tjänst som kombinerar spegling och producentregistrering: RIV-TA-källor når FHIR-EI via dagens index och adaptern, FHIR-källor skriver direkt. Synken till eHM är streckad eftersom den inte ingår i första iterationen.
+
+## Rättslig grund och ändamål
+
+Dagens engagemangsindex vilar på en juridisk tolkning som Arkitekturledningens säkerhetsgrupp (AL-S) tog fram 2013 och stämde av 2014. Den står i kapitel 4 i tjänstedomänens TKB, Informationssäkerhet och juridik. FHIR-EI går på flera punkter utöver den, och de punkterna behöver en ny bedömning innan de tas i drift.
+
+### Dagens tolkning
+
+| Område | Tolkning |
+|---|---|
+| Personuppgiftsansvar | Lagring i engagemangsindex är en vårdgivares behandling av personuppgifter enligt patientdatalagen 1:1. Varje vårdgivare är personuppgiftsansvarig för sina egna uppgifter. Inera är personuppgiftsbiträde och får bara behandla indexet enligt vårdgivarnas instruktioner |
+| Skyddsvärde | Uppgifterna är patientuppgifter, och indexet är ett personregister. De är inte klinisk information men kan röja vårdbehov, till exempel att en patient har en bokad tid hos en psykologmottagning |
+| Åtkomst | Uppgifterna är inte åtkomliga för någon vårdgivare. Indexet är en teknisk del som anslutna tjänster använder för att söka snabbare, och lagstödet för att visa informationen finns i tjänsten |
+| Ändamål | Uppgifterna får bara användas för att få fram den logiska adressen för anrop av en tjänst inom postens tjänstedomän. De får inte sökas ut eller bearbetas för något annat ändamål, och inte lagras för senare bearbetning eller adressering. FindContent är begränsat till aggregerande tjänster |
+| Notiser | En mottagare av ProcessNotification ska kasta posterna när anropen är gjorda. Bara det nationella engagemangsindexet får lagra dem, inte ett regionalt index. Skälet är att prenumerationsmaskerna är grövre än vad personuppgiftsbiträdesavtal och tjänsteavtal reglerar, till exempel per vårdgivare |
+| Personuppgiftsansvarig i posten | Varje post anger personuppgiftsansvarig organisation i dataController. Ett källsystem som betjänar flera vårdgivare registrerar poster som om varje vårdgivare hade ett eget källsystem. Sedan migreringen från NPÖ:s index 2015 godtas ändå källsystemets HSA-id i fältet, med spårbarhet till vårdgivaren via manuella rutiner |
+| Ändrad användning | Varje ändring av hur indexet används stäms av med säkerhetsansvarig och jurist och därefter med säkerhetsrådet (motsvarande AL-S). Varje tjänsts TKB ska beskriva hur tjänsten använder indexet, så att kravet på öppenhet i GDPR uppfylls |
+
+### Det FHIR-EI går utöver
+
+| I FHIR-EI | Dagens tolkning | Vad som behöver bedömas |
+|---|---|---|
+| Åtkomstlagret lämnar ut poster till användare efter prövning av spärr, samtycke och syfte | Indexet är inte åtkomligt för någon vårdgivare | Om utlämnande till en användare ryms i ändamålet när prövningen görs i FHIR-EI |
+| Konsumenter som NPÖ och 1177 läser direkt, inte via en aggregerande tjänst | FindContent är begränsat till aggregerande tjänster | Vilka konsumenter som får läsa, per tjänst |
+| Prenumeration, avstämning och deduplicering mot senast sedda version | Notiser kastas när anropen är gjorda | Vad en systemkonsument får spara, och hur länge |
+| Massuttag och lokala kopior av innehåll | Ingen lagring för senare bearbetning | Ändamål och rättslig grund per systemkonsument |
+| Härledning av eHM:s patientindex | Bara adressuppslag | Stöd i lagstiftningen om eHM:s patientindex |
+| Inera-försörjd cache, där lokaliseringstjänsten frågar källorna | Inera behandlar bara enligt vårdgivarnas instruktioner | Om Inera kan få en instruktion som täcker frågorna, eller behöver en annan roll |
+| Parallell försörjning i övergångens läge 1 | Ett nationellt index | Om en andra kopia av indexet under övergången ryms i nuvarande instruktioner |
+
+### Vägar framåt
+
+Två vägar är möjliga:
+
+1. **Behålla dagens tolkning.** FHIR-EI används då som dagens engagemangsindex: bara aggregerande tjänster läser, åtkomstlagret lämnar inte ut poster till användare, och systemkonsumenter kastar posterna efter anropen. Massuttag, lokala kopior, härledning av eHM:s patientindex och Inera-försörjd cache faller bort eller kräver var för sig ett nytt beslut.
+2. **En ny ansvarsfördelning med ett uttalat ändamål för FHIR-EI.** Alternativ att utreda är att Inera blir personuppgiftsansvarig för indexet, ett gemensamt personuppgiftsansvar, eller stöd i lagstiftningen om eHM:s patientindex (promemorian S2026/01360). Prövningen per användare och syfte i åtkomstlagret är det som kan göra den bredare användningen försvarbar.
+
+Designen beskriver väg 2 men gör den inte till en förutsättning. Varje användning som går utöver dagens tolkning stäms av med säkerhetsrådet innan den tas i drift, och övergångens lägen har det som villkor; se avsnittet om händelsemodell och övergång.
+
+### Ändamål per tjänst
+
+Tjänstens IG beskriver hur tjänsten använder indexet. Det motsvarar kravet att varje TKB beskriver användningen av engagemangsindex. Beskrivningen anger:
+
+- vilka konsumenter som läser, och i vilket åtkomstläge
+- för vilket ändamål, till exempel att hitta källor att anropa för visning i NPÖ
+- vad en systemkonsument sparar, och hur länge
+
+Ändamålsbeskrivningen är ett villkor för läge 1 i övergången.
+
+### Vad en systemkonsument får spara
+
+Utgångsläget är dagens regel: en systemkonsument använder posterna för att anropa källorna och sparar dem inte därefter. Det som leveransgarantin kräver får sparas för deduplicering och avstämning: postens id och version och notisens händelsenummer. Allt utöver det, som posternas innehåll, massuttag eller lokala kopior av journalinnehåll, kräver att tjänstens ändamålsbeskrivning medger det och att systemkonsumenten har egen rättslig grund.
 
 ## Komponenter och åtkomstlägen
 
@@ -463,7 +524,7 @@ Ett index, prövning per syfte. NPÖ och 1177 använder samma indexposter. Det s
 
 Säkerhetsetiketter. En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Producenten kan därför märka en post med säkerhetsetiketter i `meta.security`, till exempel `NOPAT` ur HL7:s kodsystem ActCode (inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande). FHIR-EI tillämpar etiketterna per syfte. Vid Inera-försörjd cache måste den riktade frågan kunna returnera etiketterna; dagens engagemangsindex har ingen motsvarighet, så speglade poster saknar dem. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177.
 
-Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma.
+Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma. Se avsnittet om rättslig grund och ändamål.
 
 Prenumerationer sker i systemkontext, eftersom de lever längre än en användares session. FHIR-EI filtrerar notiserna på systemets behörighet, och på yttre spärr när systemet agerar för en bestämd vårdgivare. Notisen bär bara postens id (`id-only`), så att den inte för med sig mer om patienten än nödvändigt. Det mottagande systemet läser posten i systemkontext för egen bearbetning, eller via åtkomstlagret i användarkontext när den ska visas, och ansvarar för prövningen per användare.
 
@@ -522,7 +583,9 @@ Nästa steg är att torrsimma båda riktningarna mot eHM:s API-specifikationer f
 - [x] Lokaliseringstjänstens placering: del av FHIR-EI eller en separat komponent som skriver via API:et? Svar: en försörjningskomponent som skriver via skriv-API:et och som åtkomstlagret anropar i läsflödet; se avsnittet om komponenter och åtkomstlägen.
 - [ ] Tidsgränser: hur länge är en cachepost färsk när källan saknar prenumeration, och hur länge väntar FHIR-EI på en källa innan svaret redovisas som ofullständigt?
 - [ ] Post utan vårdenhet: räcker fail-closed vid inre spärr, eller behöver den riktade frågan alltid ange vårdenhet?
-- [ ] Rättslig grund för systemkontext: med vilken grund får en systemkonsument ta emot indexposter och notiser om patienter utan att en användare har frågat, och hur regleras dess ansvar för prövning och loggning per användare?
+- [ ] Rättslig grund för systemkontext: med vilken grund får en systemkonsument ta emot indexposter och notiser om patienter utan att en användare har frågat, och hur regleras dess ansvar för prövning och loggning per användare? Utgångsläget är dagens regel att notiser kastas; se avsnittet om rättslig grund och ändamål.
+- [ ] Ansvarsfördelning: ska FHIR-EI behålla dagens tolkning, där indexet är vårdgivarnas behandling med Inera som personuppgiftsbiträde, eller få en ny ansvarsfördelning med ett uttalat ändamål? Vem beslutar, och med vilket underlag?
+- [ ] Vårdgivare i speglade poster: hur stor andel av dagens poster har källsystemets HSA-id i dataController, och hur många källsystem betjänar flera vårdgivare?
 - [ ] Lokala kopior av innehåll: vilka tjänster behöver ett synkat läsmönster, till exempel läkemedelsordinationer och uppmärksamhetsinformation? Vem är personuppgiftsansvarig och åtkomstkontrollpunkt för en sådan kopia?
 - [ ] Gemensam beslutstjänst: ska åtkomstlagret använda samma beslutstjänst för spärr, samtycke och syfte som EHDS-bryggan och framtida åtkomst till innehåll?
 - [ ] Användarens kontext: hur får konsumenten en token med användarens anspråk till FHIR-EI, och hur skickar lokaliseringstjänsten den vidare till källorna, till exempel med token exchange?

@@ -94,6 +94,7 @@ tjänstens IG, och bestämmer där om informationsmängder och tidpunkt för sen
 
 * custodian 1..1 MS
 * custodian ^short = "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer"
+* custodian ^comment = "Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål."
 * custodian.identifier 1..1 MS
 * custodian.identifier.system 1..1 MS
 * custodian.identifier.value 1..1 MS
