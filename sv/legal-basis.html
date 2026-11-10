@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>Rättslig grund och ändamål - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<link href="inera.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="inera-thumbnail.png"/>
+<link rel="shortcut icon" href="inera-thumbnail.png"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"6"}
+    h3,h4,h5,h6{--heading-prefix:"6"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <div id="inera-nav">
+  <a id="inera-logo" data-no-external="true" href="https://www.inera.se">
+    <img height="50" alt="Inera" src="inera-logo-header.svg"/>
+  </a>
+</div>
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul class="nav navbar-nav">
+  <li><a href="index.html">Hem</a></li>
+  <li><a href="introduction.html">Inledning</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="information-basis.html">Informationsunderlag</a></li>
+      <li><a href="use-cases.html">Användningsfall</a></li>
+      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
+      <li><a href="information-model.html">Indexposten</a></li>
+      <li><a href="population.html">Försörjning av indexet</a></li>
+      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
+      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
+      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
+      <li><a href="mappings.html">Mappning till profiler</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
+      <li><a href="subscriptions.html">Prenumeration</a></li>
+      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="error-handling.html">Felhantering</a></li>
+      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
+      <li><a href="testing.html">Testning och validering</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
+      <li><a href="downloads.html">Nedladdningar</a></li>
+      <li><a href="version-history.html">Versionshistorik</a></li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artefakter</a></li>
+  <li><a href="https://fhir.inera.se/" target="_blank" rel="noopener">FHIR på Inera <span aria-hidden="true">&#8599;</span></a></li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Rättslig grund och ändamål</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <h2>Rättslig grund och ändamål</h2>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p><!-- white space is critical inside of capture --></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#dagens-tolkning" id="markdown-toc-dagens-tolkning">Dagens tolkning</a></li>
+  <li><a href="#det-fhir-ei-går-utöver" id="markdown-toc-det-fhir-ei-går-utöver">Det FHIR-EI går utöver</a></li>
+  <li><a href="#vägar-framåt" id="markdown-toc-vägar-framåt">Vägar framåt</a></li>
+  <li><a href="#ändamål-per-tjänst" id="markdown-toc-ändamål-per-tjänst">Ändamål per tjänst</a></li>
+  <li><a href="#vad-en-systemkonsument-får-spara" id="markdown-toc-vad-en-systemkonsument-får-spara">Vad en systemkonsument får spara</a></li>
+</ul>
+
+</div>
+<p>Dagens engagemangsindex vilar på en juridisk tolkning som Arkitekturledningens säkerhetsgrupp (AL-S) tog fram 2013 och stämde av 2014. Den står i kapitel 4 i tjänstedomänens TKB, Informationssäkerhet och juridik. FHIR-EI går på flera punkter utöver den, främst genom <a href="security.html">åtkomstlägena</a> och <a href="population.html">försörjningssätten</a>, och de punkterna behöver en ny bedömning innan de tas i drift.</p>
+
+<h3 id="dagens-tolkning">Dagens tolkning</h3>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Område</th>
+      <th>Tolkning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Personuppgiftsansvar</td>
+      <td>Lagring i engagemangsindex är en vårdgivares behandling av personuppgifter enligt patientdatalagen 1:1. Varje vårdgivare är personuppgiftsansvarig för sina egna uppgifter. Inera är personuppgiftsbiträde och får bara behandla indexet enligt vårdgivarnas instruktioner</td>
+    </tr>
+    <tr>
+      <td>Skyddsvärde</td>
+      <td>Uppgifterna är patientuppgifter, och indexet är ett personregister. De är inte klinisk information men kan röja vårdbehov, till exempel att en patient har en bokad tid hos en psykologmottagning</td>
+    </tr>
+    <tr>
+      <td>Åtkomst</td>
+      <td>Uppgifterna är inte åtkomliga för någon vårdgivare. Indexet är en teknisk del som anslutna tjänster använder för att söka snabbare, och lagstödet för att visa informationen finns i tjänsten</td>
+    </tr>
+    <tr>
+      <td>Ändamål</td>
+      <td>Uppgifterna får bara användas för att få fram den logiska adressen för anrop av en tjänst inom postens tjänstedomän. De får inte sökas ut eller bearbetas för något annat ändamål, och inte lagras för senare bearbetning eller adressering. FindContent är begränsat till aggregerande tjänster</td>
+    </tr>
+    <tr>
+      <td>Notiser</td>
+      <td>En mottagare av ProcessNotification ska kasta posterna när anropen är gjorda. Bara det nationella engagemangsindexet får lagra dem, inte ett regionalt index. Skälet är att prenumerationsmaskerna är grövre än vad personuppgiftsbiträdesavtal och tjänsteavtal reglerar, till exempel per vårdgivare</td>
+    </tr>
+    <tr>
+      <td>Personuppgiftsansvarig i posten</td>
+      <td>Varje post anger personuppgiftsansvarig organisation i dataController. Ett källsystem som betjänar flera vårdgivare registrerar poster som om varje vårdgivare hade ett eget källsystem. Sedan migreringen från NPÖ:s index 2015 godtas ändå källsystemets HSA-id i fältet, med spårbarhet till vårdgivaren via manuella rutiner</td>
+    </tr>
+    <tr>
+      <td>Ändrad användning</td>
+      <td>Varje ändring av hur indexet används stäms av med säkerhetsansvarig och jurist och därefter med säkerhetsrådet (motsvarande AL-S). Varje tjänsts TKB ska beskriva hur tjänsten använder indexet, så att kravet på öppenhet i GDPR uppfylls</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="det-fhir-ei-går-utöver">Det FHIR-EI går utöver</h3>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>I FHIR-EI</th>
+      <th>Dagens tolkning</th>
+      <th>Vad som behöver bedömas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Åtkomstlagret lämnar ut poster till användare efter prövning av spärr, samtycke och syfte</td>
+      <td>Indexet är inte åtkomligt för någon vårdgivare</td>
+      <td>Om utlämnande till en användare ryms i ändamålet när prövningen görs i FHIR-EI</td>
+    </tr>
+    <tr>
+      <td>Konsumenter som NPÖ och 1177 läser direkt, inte via en aggregerande tjänst</td>
+      <td>FindContent är begränsat till aggregerande tjänster</td>
+      <td>Vilka konsumenter som får läsa, per tjänst</td>
+    </tr>
+    <tr>
+      <td>Prenumeration, avstämning och deduplicering mot senast sedda version</td>
+      <td>Notiser kastas när anropen är gjorda</td>
+      <td>Vad en systemkonsument får spara, och hur länge</td>
+    </tr>
+    <tr>
+      <td>Massuttag och lokala kopior av innehåll</td>
+      <td>Ingen lagring för senare bearbetning</td>
+      <td>Ändamål och rättslig grund per systemkonsument</td>
+    </tr>
+    <tr>
+      <td>Härledning av eHM:s patientindex</td>
+      <td>Bara adressuppslag</td>
+      <td>Stöd i lagstiftningen om eHM:s patientindex</td>
+    </tr>
+    <tr>
+      <td>Inera-försörjd cache, där lokaliseringstjänsten frågar källorna</td>
+      <td>Inera behandlar bara enligt vårdgivarnas instruktioner</td>
+      <td>Om Inera kan få en instruktion som täcker frågorna, eller behöver en annan roll</td>
+    </tr>
+    <tr>
+      <td>Parallell försörjning i övergångens läge 1</td>
+      <td>Ett nationellt index</td>
+      <td>Om en andra kopia av indexet under övergången ryms i nuvarande instruktioner</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="vägar-framåt">Vägar framåt</h3>
+
+<p>Två vägar är möjliga:</p>
+
+<ol>
+  <li><strong>Behålla dagens tolkning.</strong> FHIR-EI används då som dagens engagemangsindex: bara aggregerande tjänster läser, åtkomstlagret lämnar inte ut poster till användare, och systemkonsumenter kastar posterna efter anropen. Massuttag, lokala kopior, härledning av eHM:s patientindex och Inera-försörjd cache faller bort eller kräver var för sig ett nytt beslut.</li>
+  <li><strong>En ny ansvarsfördelning med ett uttalat ändamål för FHIR-EI.</strong> Alternativ att utreda är att Inera blir personuppgiftsansvarig för indexet, ett gemensamt personuppgiftsansvar, eller stöd i lagstiftningen om eHM:s patientindex (promemorian S2026/01360). Prövningen per användare och syfte i åtkomstlagret är det som kan göra den bredare användningen försvarbar.</li>
+</ol>
+
+<p>Designen beskriver väg 2 men gör den inte till en förutsättning. Varje användning som går utöver dagens tolkning stäms av med säkerhetsrådet innan den tas i drift, och övergångens lägen har det som villkor; se <a href="event-model.html">Händelsemodell och övergång</a>.</p>
+
+<h3 id="ändamål-per-tjänst">Ändamål per tjänst</h3>
+
+<p>Tjänstens IG beskriver hur tjänsten använder indexet. Det motsvarar kravet att varje TKB beskriver användningen av engagemangsindex. Beskrivningen anger:</p>
+
+<ul>
+  <li>vilka konsumenter som läser, och i vilket åtkomstläge</li>
+  <li>för vilket ändamål, till exempel att hitta källor att anropa för visning i NPÖ</li>
+  <li>vad en systemkonsument sparar, och hur länge</li>
+</ul>
+
+<p>Ändamålsbeskrivningen är ett villkor för läge 1 i övergången.</p>
+
+<h3 id="vad-en-systemkonsument-får-spara">Vad en systemkonsument får spara</h3>
+
+<p>Utgångsläget är dagens regel: en systemkonsument använder posterna för att anropa källorna och sparar dem inte därefter. Det som leveransgarantin kräver får sparas för deduplicering och avstämning: postens id och version och notisens händelsenummer. Allt utöver det, som posternas innehåll, massuttag eller lokala kopior av journalinnehåll, kräver att tjänstens ändamålsbeskrivning medger det och att systemkonsumenten har egen rättslig grund.</p>
+
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
+          Genererad 
+  <span title="2026-11-10 12:09:00 +0000">
+    2026-11-10
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Länkar: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Innehållsförteckning</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-rapport</a>
+                 
+                
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

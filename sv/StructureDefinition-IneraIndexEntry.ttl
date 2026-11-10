@@ -4557,7 +4557,7 @@
        fhir:path [ fhir:v "DocumentReference.custodian" ] ;
        fhir:short [ fhir:v "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer" ] ;
        fhir:definition [ fhir:v "Identifies the organization or group who is responsible for ongoing maintenance of and access to the document." ] ;
-       fhir:comment [ fhir:v "Identifies the logical organization (software system, vendor, or department) to go to find the current version, where to report issues, etc. This is different from the physical location (URL, disk drive, or server) of the document, which is the technical location of the document, which host may be delegated to the management of some other organization." ] ;
+       fhir:comment [ fhir:v "Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål." ] ;
        fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
        fhir:max [ fhir:v "1" ] ;
        fhir:base [
@@ -7634,6 +7634,7 @@
        fhir:id [ fhir:v "DocumentReference.custodian" ] ;
        fhir:path [ fhir:v "DocumentReference.custodian" ] ;
        fhir:short [ fhir:v "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer" ] ;
+       fhir:comment [ fhir:v "Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål." ] ;
        fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
        fhir:mustSupport [ fhir:v true ]
      ] [

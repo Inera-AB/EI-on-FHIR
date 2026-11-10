@@ -102,6 +102,7 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
       <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
@@ -234,7 +235,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     </tr>
     <tr>
       <td>Tjänsteägare</td>
-      <td>Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics och den registrerande partens skyldigheter i tjänstens IG. Beslutar tillsammans med Inera om tjänstens försörjningssätt</td>
+      <td>Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics, den registrerande partens skyldigheter och tjänstens ändamål med indexet i tjänstens IG. Beslutar tillsammans med Inera om tjänstens försörjningssätt</td>
     </tr>
   </tbody>
 </table>
@@ -326,6 +327,14 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>SHALL pröva och logga per användare när information som den tagit emot i systemkontext visas för en användare</td>
     </tr>
     <tr>
+      <td>Systemkonsument</td>
+      <td>SHALL NOT spara mer än postens id och version och notisens händelsenummer, om inte tjänstens ändamålsbeskrivning medger det</td>
+    </tr>
+    <tr>
+      <td>Övergångsadapter</td>
+      <td>SHALL NOT registrera en post vars vårdgivare inte kan bestämmas; se <a href="population.html">Försörjning av indexet</a></td>
+    </tr>
+    <tr>
       <td>Konsument</td>
       <td>SHALL deduplicera notiser och ignorera en notis om en äldre version än den den redan har; se <a href="event-model.html">Händelsemodell och övergång</a></td>
     </tr>
@@ -348,6 +357,10 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <tr>
       <td>Tjänsteägare</td>
       <td>SHALL publicera tillämpningen som en profil med <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a> som förälder</td>
+    </tr>
+    <tr>
+      <td>Tjänsteägare</td>
+      <td>SHALL beskriva i tjänstens IG hur tjänsten använder indexet: konsumenter, åtkomstläge, ändamål och vad som sparas; se <a href="legal-basis.html">Rättslig grund och ändamål</a></td>
     </tr>
     <tr>
       <td>Tjänsteägare</td>
@@ -396,8 +409,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 19:14:00 +0000">
-    2026-11-04
+  <span title="2026-11-10 12:09:00 +0000">
+    2026-11-10
   </span>
 
           <br/>

@@ -205,8 +205,8 @@
     "sources" : ["2.16.840.1.113883.4.642.3.45"],
     "uses" : {
     },
-    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
+    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
     "StructureDefinition-LogicalAddress.html" : "Logisk adress"
   },
@@ -222,8 +222,8 @@
     "sources" : ["2.16.840.1.113883.4.642.3.57"],
     "uses" : {
     },
-    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-CareUnit.html" : "Vårdenhet",
+    "StructureDefinition-SourceSystem.html" : "Källsystem",
     "StructureDefinition-IneraIndexEntry.html" : "Indexpost (FHIR-EI)",
     "StructureDefinition-LogicalAddress.html" : "Logisk adress"
   },

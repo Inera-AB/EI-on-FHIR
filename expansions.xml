@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Bundle xmlns="http://hl7.org/fhir">
-  <id value="cd696647-64a0-448b-b96a-3fb54b21ab01"/>
+  <id value="e7b9b6e6-4162-4ca7-9b0b-5561cddcf9a8"/>
   <meta>
-    <lastUpdated value="2026-11-04T19:14:12.948+00:00"/>
+    <lastUpdated value="2026-11-10T12:09:41.422+00:00"/>
   </meta>
   <type value="collection"/>
   <entry>
@@ -168,8 +168,8 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:a1f24503-bb93-4f2b-8068-50e594a3b63d"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:b70c365c-bc51-411c-9f06-d41222e4ed54"/>
+          <timestamp value="2026-11-10T12:10:14+00:00"/>
           <total value="5"/>
           <offset value="0"/>
           <parameter>
@@ -378,8 +378,8 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:4a51d0ac-6e83-4108-8bb4-c36f9089ae9d"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:23197352-20df-439c-8133-3ca7dfd1bb83"/>
+          <timestamp value="2026-11-10T12:10:14+00:00"/>
           <total value="5"/>
           <offset value="0"/>
           <parameter>
@@ -510,8 +510,8 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:13a8ac7e-d22a-486f-b68a-66e6d0b54a19"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:5083e69a-35f3-4e51-9526-ba47d2263bec"/>
+          <timestamp value="2026-11-10T12:10:14+00:00"/>
           <total value="1"/>
           <offset value="0"/>
           <parameter>
@@ -630,8 +630,8 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:4e0f587d-567c-4240-8252-c4110dad9a6b"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:7ba4803c-a925-4854-bfa0-789483d1d396"/>
+          <timestamp value="2026-11-10T12:10:15+00:00"/>
           <total value="1"/>
           <offset value="0"/>
           <parameter>
@@ -786,8 +786,8 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:3ebc110b-e7fd-4bda-a743-f0a4ad4da571"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:d57607a8-68cf-44c3-a602-2a59b3bf470d"/>
+          <timestamp value="2026-11-10T12:10:15+00:00"/>
           <total value="3"/>
           <offset value="0"/>
           <parameter>
@@ -946,8 +946,8 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:f1901cb7-e92c-4b13-8eff-b936c2bf8efb"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:be5ab644-cea7-42d7-8022-cc420ee45aeb"/>
+          <timestamp value="2026-11-10T12:10:15+00:00"/>
           <total value="3"/>
           <offset value="0"/>
           <parameter>
@@ -1106,8 +1106,8 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:67dab15a-947b-4e6a-aa14-1cf77387f922"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:08cc8e03-f183-4049-89b2-b075754507f9"/>
+          <timestamp value="2026-11-10T12:10:15+00:00"/>
           <total value="3"/>
           <offset value="0"/>
           <parameter>
@@ -1266,8 +1266,8 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:1ea2947f-0e99-4a63-9e75-73892c3b1c49"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:9fbe23c9-c55d-4a93-bdf1-4927c6c55818"/>
+          <timestamp value="2026-11-10T12:10:15+00:00"/>
           <total value="3"/>
           <offset value="0"/>
           <parameter>
@@ -1390,8 +1390,8 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:29c8b3e8-8a99-44f4-ae69-92026dd52685"/>
-          <timestamp value="2026-11-04T19:14:52+00:00"/>
+          <identifier value="urn:uuid:85824bb9-1d6b-4236-bf70-c9d1750c12cf"/>
+          <timestamp value="2026-11-10T12:10:15+00:00"/>
           <total value="1"/>
           <offset value="0"/>
           <parameter>
@@ -1510,8 +1510,8 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:a3e4fd29-c6fe-4227-a7a3-7cb466b02097"/>
-          <timestamp value="2026-11-04T19:14:53+00:00"/>
+          <identifier value="urn:uuid:79e0470d-52ab-4800-a71b-da3e84cb995b"/>
+          <timestamp value="2026-11-10T12:10:15+00:00"/>
           <total value="1"/>
           <offset value="0"/>
           <parameter>

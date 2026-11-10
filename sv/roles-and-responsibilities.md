@@ -13,7 +13,7 @@
 | Lokaliseringstjänst | Fyller indexet som en cache utifrån eHM:s patientindex och riktade frågor till källorna, och håller det färskt med prenumerationer eller tidsgräns. Har ombudsroll inom de vårdgivare eHM:s patientindex anger |
 | Konsument | Söker i indexet i användarkontext, för en användare och inom dennes uppdrag och syfte. Kan också prenumerera och stämma av efter avbrott, i systemkontext. Hämtar informationen från producenternas endpoints |
 | Systemkonsument | Läser i systemkontext: gör massuttag för grundladdning och återsynk, till exempel en framtida synk till eHM:s patientindex, eller håller en lokal kopia av innehåll aktuell. Prövar och loggar per användare när informationen visas |
-| Tjänsteägare | Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics och den registrerande partens skyldigheter i tjänstens IG. Beslutar tillsammans med Inera om tjänstens försörjningssätt |
+| Tjänsteägare | Publicerar tjänstens tillämpning av indexprofilen, tjänstens topics, den registrerande partens skyldigheter och tjänstens ändamål med indexet i tjänstens IG. Beslutar tillsammans med Inera om tjänstens försörjningssätt |
 
 Tjänstekatalogen är auktoritativ för producenternas endpoints, och för vilka vårdgivare som listar dem.
 
@@ -45,12 +45,15 @@ FHIR-EI delas efter [åtkomstlägena](security.md), så att varje del kan först
 | Registrerande part | SHALL försöka igen tills FHIR-EI kvitterat, och lägga ej levererbara händelser i en kö för manuell hantering |
 | Konsument | SHALL söka och läsa i användarkontext, med åtkomstkontext i varje anrop, när svaret ska visas för en användare; se[Spärr, loggning och behörighet](security.md) |
 | Systemkonsument | SHALL pröva och logga per användare när information som den tagit emot i systemkontext visas för en användare |
+| Systemkonsument | SHALL NOT spara mer än postens id och version och notisens händelsenummer, om inte tjänstens ändamålsbeskrivning medger det |
+| Övergångsadapter | SHALL NOT registrera en post vars vårdgivare inte kan bestämmas; se[Försörjning av indexet](population.md) |
 | Konsument | SHALL deduplicera notiser och ignorera en notis om en äldre version än den den redan har; se[Händelsemodell och övergång](event-model.md) |
 | Konsument | SHALL ignorera kodningar i`type`och`content.profile`som den inte förstår |
 | Konsument | SHALL kunna visa att uppgifter kan saknas när sökresultatet innehåller en`OperationOutcome`; se[Förväntade svar](expected-responses.md) |
 | Lokaliseringstjänst | SHALL bekräfta en inaktuell cachepost mot källan innan den lämnas ut, och SHALL redovisa källor som inte svarat som ett ofullständigt svar |
 | Lokaliseringstjänst | SHALL ställa den riktade frågan med användarens kontext när en sökning utlöser den, och SHALL skriva indexposter via skriv-API:et |
 | Tjänsteägare | SHALL publicera tillämpningen som en profil med[Indexpost](StructureDefinition-IneraIndexEntry.md)som förälder |
+| Tjänsteägare | SHALL beskriva i tjänstens IG hur tjänsten använder indexet: konsumenter, åtkomstläge, ändamål och vad som sparas; se[Rättslig grund och ändamål](legal-basis.md) |
 | Tjänsteägare | SHALL publicera en`SubscriptionTopic`per informationsmängd som anger vad som räknas som en ändring, och SHOULD ange producentens skyldigheter med extensionen`obligation`; se[Indexposten](information-model.md) |
 | Producent | SHALL NOT sluta uppdatera dagens engagemangsindex för en tjänst förrän tjänstens konsumenter läser FHIR-EI; se[Händelsemodell och övergång](event-model.md) |
 | Registrerande part | MAY märka en post med säkerhetsetiketter i`meta.security`, till exempel`NOPAT`; se[Spärr, loggning och behörighet](security.md) |

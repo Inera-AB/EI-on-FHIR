@@ -14,7 +14,7 @@
   "name" : "IneraEngagementIndex",
   "title" : "FHIR-baserat engagemangsindex (FHIR-EI)",
   "status" : "draft",
-  "date" : "2026-11-04T19:14:12+00:00",
+  "date" : "2026-11-10T12:09:41+00:00",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -625,6 +625,12 @@
         "sourceUrl" : "roles-and-responsibilities.html",
         "name" : "roles-and-responsibilities.html",
         "title" : "Roller och ansvar",
+        "generation" : "markdown"
+      },
+      {
+        "sourceUrl" : "legal-basis.html",
+        "name" : "legal-basis.html",
+        "title" : "Rättslig grund och ändamål",
         "generation" : "markdown"
       },
       {

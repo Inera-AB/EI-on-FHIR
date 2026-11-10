@@ -4166,7 +4166,7 @@
       "path" : "DocumentReference.custodian",
       "short" : "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer",
       "definition" : "Identifies the organization or group who is responsible for ongoing maintenance of and access to the document.",
-      "comment" : "Identifies the logical organization (software system, vendor, or department) to go to find the current version, where to report issues, etc. This is different from the physical location (URL, disk drive, or server) of the document, which is the technical location of the document, which host may be delegated to the management of some other organization.",
+      "comment" : "Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål.",
       "min" : 1,
       "max" : "1",
       "base" : {
@@ -7053,6 +7053,7 @@
       "id" : "DocumentReference.custodian",
       "path" : "DocumentReference.custodian",
       "short" : "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer",
+      "comment" : "Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål.",
       "min" : 1,
       "mustSupport" : true
     },

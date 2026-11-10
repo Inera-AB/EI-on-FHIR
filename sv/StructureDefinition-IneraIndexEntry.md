@@ -487,6 +487,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-IneraIndexEntry
       "id" : "DocumentReference.custodian",
       "path" : "DocumentReference.custodian",
       "short" : "Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer",
+      "comment" : "Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål.",
       "min" : 1,
       "mustSupport" : true
     },

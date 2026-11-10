@@ -15,6 +15,7 @@
 * [Informationsunderlag](sv/information-basis.md)
 * [REST-interaktioner och sökparametrar](sv/rest-interactions.md)
 * [Versionshistorik](sv/version-history.md)
+* [Rättslig grund och ändamål](sv/legal-basis.md)
 * [Samexistens med eHM:s patientindex](sv/ehm-coexistence.md)
 * [Inledning](sv/introduction.md)
 * [Kodverk för tjänster och informationsmängder](sv/information-sets.md)

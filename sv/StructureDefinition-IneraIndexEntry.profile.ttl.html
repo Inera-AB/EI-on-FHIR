@@ -55,8 +55,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"23.5"}
-    h3,h4,h5,h6{--heading-prefix:"23.5"}</style>
+    <style type="text/css">h2{--heading-prefix:"24.5"}
+    h3,h4,h5,h6{--heading-prefix:"24.5"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -108,6 +108,7 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
       <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
@@ -4840,7 +4841,7 @@ TTL-profil
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.path">fhir:path</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;DocumentReference.custodian&quot; ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.short">fhir:short</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer&quot; ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.definition">fhir:definition</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">fhir:v</a> &quot;Identifies the organization or group who is responsible for ongoing maintenance of and access to the document.&quot; ] ;
-       <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.comment">fhir:comment</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">fhir:v</a> &quot;Identifies the logical organization (software system, vendor, or department) to go to find the current version, where to report issues, etc. This is different from the physical location (URL, disk drive, or server) of the document, which is the technical location of the document, which host may be delegated to the management of some other organization.&quot; ] ;
+       <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.comment">fhir:comment</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">fhir:v</a> &quot;Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål.&quot; ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.min">fhir:min</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#unsignedInt">fhir:v</a> &quot;1&quot;^^xsd:nonNegativeInteger ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.max">fhir:max</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;1&quot; ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.base">fhir:base</a> [
@@ -7917,6 +7918,7 @@ TTL-profil
        <a href="http://hl7.org/fhir/R5/types.html#Element#XElementDefinition.id">fhir:id</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#id">fhir:v</a> &quot;DocumentReference.custodian&quot; ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.path">fhir:path</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;DocumentReference.custodian&quot; ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.short">fhir:short</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#string">fhir:v</a> &quot;Vårdgivare (personuppgiftsansvarig), som logisk referens med HSA-id eller organisationsnummer&quot; ] ;
+       <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.comment">fhir:comment</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#markdown">fhir:v</a> &quot;Ska vara en vårdgivare, inte ett källsystem eller en vårdenhet. FHIR-EI kontrollerar det mot tjänstekatalogen. Se sidan Rättslig grund och ändamål.&quot; ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.min">fhir:min</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#unsignedInt">fhir:v</a> &quot;1&quot;^^xsd:nonNegativeInteger ] ;
        <a href="http://hl7.org/fhir/R5/elementdefinition.html#ElementDefinition#XElementDefinition.mustSupport">fhir:mustSupport</a> [ <a href="http://hl7.org/fhir/R5/datatypes.html#boolean">fhir:v</a> true ]
      ] [
@@ -8058,8 +8060,8 @@ TTL-profil
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 19:14:00 +0000">
-    2026-11-04
+  <span title="2026-11-10 12:09:00 +0000">
+    2026-11-10
   </span>
 
           <br/>

@@ -44,13 +44,13 @@ Värdena är en [öppen fråga](open-issues.md).
 
 Övergången görs per tjänst. Dagens konsumenter läser engagemangsindex per tjänstedomän: de aggregerande tjänsterna på tjänsteplattformen frågar FindContent per tjänstedomän för att hitta vilka logiska adresser de ska anropa, och NPÖ och 1177 Journalen går via dem. Det ska bekräftas; se [Öppna frågor](open-issues.md). Varje tjänst kan därför gå över i egen takt, utan att andra tjänster påverkas och utan att NPÖ och 1177 behöver ändras först.
 
-Lägena beskriver konsumenternas byte. Hur FHIR-EI fylls för tjänsten väljs för sig; se [Försörjning av indexet](population.md).
+Lägena beskriver konsumenternas byte. Hur FHIR-EI fylls för tjänsten väljs för sig; se [Försörjning av indexet](population.md). Varje läge som ändrar hur indexet används stäms av med säkerhetsrådet; se [Rättslig grund och ändamål](legal-basis.md).
 
 | | | | | |
 | :--- | :--- | :--- | :--- | :--- |
-| 0. Bara engagemangsindex | Dagens konsumenter, via engagemangsindex | – | Tjänstens tillämpning är publicerad, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade | – |
+| 0. Bara engagemangsindex | Dagens konsumenter, via engagemangsindex | – | Tjänstens tillämpning och ändamålsbeskrivning är publicerade, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade, och användningen är avstämd med säkerhetsrådet | – |
 | 1. Parallell försörjning | Engagemangsindex; FHIR-EI läses parallellt för jämförelse | Med tjänstens valda försörjningssätt: spegling, Inera-försörjd cache eller producentregistrering | Avstämningen visar samma svar under en överenskommen period | Stäng av försörjningen för tjänsten |
-| 2. Konsumenten byter | Tjänstedomänens aggregerande tjänst läser FHIR-EI | Som i läge 1 | Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften | Peka konsumenten mot engagemangsindex igen |
+| 2. Konsumenten byter | Tjänstedomänens aggregerande tjänst läser FHIR-EI | Som i läge 1 | Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften; den ändrade användningen godkänd av säkerhetsrådet | Peka konsumenten mot engagemangsindex igen |
 | 3. Källorna går över | Konsumenter som kan FHIR hämtar direkt från källorna | Källor går från spegling till producentregistrering eller Inera-försörjd cache | Ingen källa speglas längre från engagemangsindex för tjänstedomänen | – |
 | 4. Avveckling | FHIR-EI | Producentregistrering eller Inera-försörjd cache | – | – |
 

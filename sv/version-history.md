@@ -34,5 +34,7 @@ Den här sidan beskriver vad som har ändrats i varje version. Listan över alla
 * Två åtkomstlägen: sökning och läsning för visning sker i användarkontext med prövning i FHIR-EI, medan registrering, prenumeration, avstämning och massuttag sker i systemkontext, där det mottagande systemet prövar per användare
 * Läsmönster per tjänst: vid behov eller synkat mot en lokal kopia, och hur läsmönstret begränsar försörjningen
 * FHIR-EI delas i indexkärna och åtkomstlager, med försörjningskomponenterna som registrerande parter som skriver via skriv-API:et
+* Ny sida Rättslig grund och ändamål: dagens juridiska tolkning av engagemangsindex, det FHIR-EI går utöver, vägar framåt, ändamål per tjänst och vad en systemkonsument får spara
+* Övergångsadaptern bestämmer vårdgivaren i speglade poster i stället för att mappa dataController rakt av, och FHIR-EI kontrollerar att `custodian` är en vårdgivare
 * Sidor om indexposten, händelsemodell och övergång, samexistens med eHM:s patientindex, prenumeration, spärr och loggning samt öppna frågor
 

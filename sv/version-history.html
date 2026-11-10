@@ -49,8 +49,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"22"}
-    h3,h4,h5,h6{--heading-prefix:"22"}</style>
+    <style type="text/css">h2{--heading-prefix:"23"}
+    h3,h4,h5,h6{--heading-prefix:"23"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -102,6 +102,7 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
       <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
@@ -222,6 +223,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <li>Två åtkomstlägen: sökning och läsning för visning sker i användarkontext med prövning i FHIR-EI, medan registrering, prenumeration, avstämning och massuttag sker i systemkontext, där det mottagande systemet prövar per användare</li>
   <li>Läsmönster per tjänst: vid behov eller synkat mot en lokal kopia, och hur läsmönstret begränsar försörjningen</li>
   <li>FHIR-EI delas i indexkärna och åtkomstlager, med försörjningskomponenterna som registrerande parter som skriver via skriv-API:et</li>
+  <li>Ny sida Rättslig grund och ändamål: dagens juridiska tolkning av engagemangsindex, det FHIR-EI går utöver, vägar framåt, ändamål per tjänst och vad en systemkonsument får spara</li>
+  <li>Övergångsadaptern bestämmer vårdgivaren i speglade poster i stället för att mappa dataController rakt av, och FHIR-EI kontrollerar att <code class="language-plaintext highlighter-rouge">custodian</code> är en vårdgivare</li>
   <li>Sidor om indexposten, händelsemodell och övergång, samexistens med eHM:s patientindex, prenumeration, spärr och loggning samt öppna frågor</li>
 </ul>
 
@@ -253,8 +256,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 19:14:00 +0000">
-    2026-11-04
+  <span title="2026-11-10 12:09:00 +0000">
+    2026-11-10
   </span>
 
           <br/>

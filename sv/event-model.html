@@ -49,8 +49,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"9"}
-    h3,h4,h5,h6{--heading-prefix:"9"}</style>
+    <style type="text/css">h2{--heading-prefix:"10"}
+    h3,h4,h5,h6{--heading-prefix:"10"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -102,6 +102,7 @@
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
       <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
+      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
       <li><a href="information-model.html">Indexposten</a></li>
       <li><a href="population.html">Försörjning av indexet</a></li>
       <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
@@ -302,7 +303,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p>Övergången görs per tjänst. Dagens konsumenter läser engagemangsindex per tjänstedomän: de aggregerande tjänsterna på tjänsteplattformen frågar FindContent per tjänstedomän för att hitta vilka logiska adresser de ska anropa, och NPÖ och 1177 Journalen går via dem. Det ska bekräftas; se <a href="open-issues.html">Öppna frågor</a>. Varje tjänst kan därför gå över i egen takt, utan att andra tjänster påverkas och utan att NPÖ och 1177 behöver ändras först.</p>
 
-<p>Lägena beskriver konsumenternas byte. Hur FHIR-EI fylls för tjänsten väljs för sig; se <a href="population.html">Försörjning av indexet</a>.</p>
+<p>Lägena beskriver konsumenternas byte. Hur FHIR-EI fylls för tjänsten väljs för sig; se <a href="population.html">Försörjning av indexet</a>. Varje läge som ändrar hur indexet används stäms av med säkerhetsrådet; se <a href="legal-basis.html">Rättslig grund och ändamål</a>.</p>
 
 <table class="grid">
   <thead>
@@ -319,7 +320,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>0. Bara engagemangsindex</td>
       <td>Dagens konsumenter, via engagemangsindex</td>
       <td>–</td>
-      <td>Tjänstens tillämpning är publicerad, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade</td>
+      <td>Tjänstens tillämpning och ändamålsbeskrivning är publicerade, tjänstedomänens uppdelning i tjänster och tjänstens försörjningssätt är beslutade, och användningen är avstämd med säkerhetsrådet</td>
       <td>–</td>
     </tr>
     <tr>
@@ -333,7 +334,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
       <td>2. Konsumenten byter</td>
       <td>Tjänstedomänens aggregerande tjänst läser FHIR-EI</td>
       <td>Som i läge 1</td>
-      <td>Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften</td>
+      <td>Samma svar i drift; spärr, samtycke och loggning godkända för tjänstens syften; den ändrade användningen godkänd av säkerhetsrådet</td>
       <td>Peka konsumenten mot engagemangsindex igen</td>
     </tr>
     <tr>
@@ -417,8 +418,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-04 19:14:00 +0000">
-    2026-11-04
+  <span title="2026-11-10 12:09:00 +0000">
+    2026-11-10
   </span>
 
           <br/>

@@ -17,7 +17,7 @@ Denna sida visar hur den logiska modellen för indexposten motsvaras av element 
 | Endpoint | Extension[sourceEndpoint](StructureDefinition-SourceEndpoint.md)→ Endpoint i tjänstekatalogen, en per post;`content.attachment.url`= endpointens adress | logicalAddress, via adapterns adressregister |
 | Logisk adress | Extension[logicalAddress](StructureDefinition-LogicalAddress.md)(HSA-id), när endpointen adresseras med logisk adress | logicalAddress |
 | Källsystem | Extension[sourceSystem](StructureDefinition-SourceSystem.md), när den registrerande parten inte är källan: källsystemet vid spegling, journalsystemet vid Inera-försörjd cache | sourceSystem |
-| Vårdgivare | `custodian`, som logisk referens med HSA-id eller organisationsnummer | dataController |
+| Vårdgivare | `custodian`, som logisk referens med HSA-id eller organisationsnummer | dataController, som kan vara källsystemets HSA-id; se[Försörjning av indexet](population.md) |
 | Vårdenhet | Extension[careUnit](StructureDefinition-CareUnit.md)(HSA-id, 0..*), när den är känd | careUnitId |
 | Registrerande part | Extension[registeringProducer](StructureDefinition-RegisteringProducer.md): absolut referens till den registrerande partens Endpoint i tjänstekatalogen; kontrolleras av FHIR-EI mot autentiserad klient | owner |
 | Innehållets senaste ändring | Extension[contentLastUpdated](StructureDefinition-ContentLastUpdated.md)(dateTime) | mostRecentContent |
@@ -46,4 +46,5 @@ Specen lämnade några detaljer öppna eller formulerade dem på ett sätt som i
 | Äldre uppdatering | Ignoreras med`200 OK`och oförändrad version | Specen säger att den ignoreras; ett felsvar skulle få en producent med minst-en-leverans att försöka igen |
 | Notisinnehåll | `id-only`är fast, inte bara standard | Säkerhetsavsnittet förutsätter`id-only`, så att en notis i systemkontext inte för med sig mer om patienten än nödvändigt |
 | Orsak vid adapteravregistrering | Koden`transition-adapter` | Specen anger att adaptern sätter en egen kod |
+| Vårdgivare i speglade poster | Adaptern bestämmer vårdgivaren i stället för att mappa dataController rakt av | dataController kan vara källsystemets HSA-id sedan 2015, och`custodian`ska vara en vårdgivare |
 

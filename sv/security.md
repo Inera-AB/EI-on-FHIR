@@ -65,7 +65,7 @@ NPÖ och 1177 använder samma indexposter. Det som skiljer är prövningen vid v
 | Samtycke och nödåtkomst | Krävs | Ersätts av inloggning och identitet |
 | Särskilda begränsningar | – | Till exempel vårdgivarens fördröjda visning och sekretess mot vårdnadshavare för unga |
 
-Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma. Se [Öppna frågor](open-issues.md).
+Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma. Se [Rättslig grund och ändamål](legal-basis.md) och [Öppna frågor](open-issues.md).
 
 ### Säkerhetsetiketter
 

@@ -12,7 +12,7 @@
   <name value="IneraEngagementIndex"/>
   <title value="FHIR-baserat engagemangsindex (FHIR-EI)"/>
   <status value="draft"/>
-  <date value="2026-11-04T19:14:12+00:00"/>
+  <date value="2026-11-10T12:09:41+00:00"/>
   <publisher value="Inera AB"/>
   <contact>
     <name value="Inera AB"/>
@@ -453,6 +453,12 @@
         <sourceUrl value="roles-and-responsibilities.html"/>
         <name value="roles-and-responsibilities.html"/>
         <title value="Roller och ansvar"/>
+        <generation value="markdown"/>
+      </page>
+      <page>
+        <sourceUrl value="legal-basis.html"/>
+        <name value="legal-basis.html"/>
+        <title value="Rättslig grund och ändamål"/>
         <generation value="markdown"/>
       </page>
       <page>

@@ -19,7 +19,7 @@
   fhir:name [ fhir:v "IneraEngagementIndex"] ; # 
   fhir:title [ fhir:v "FHIR-baserat engagemangsindex (FHIR-EI)"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
-  fhir:date [ fhir:v "2026-11-04T19:14:12+00:00"^^xsd:dateTime] ; # 
+  fhir:date [ fhir:v "2026-11-10T12:09:41+00:00"^^xsd:dateTime] ; # 
   fhir:publisher [ fhir:v "Inera AB"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "Inera AB" ] ;
@@ -644,6 +644,14 @@
          ] ;
          fhir:name [ fhir:v "roles-and-responsibilities.html"^^xsd:anyURI ] ;
          fhir:title [ fhir:v "Roller och ansvar" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] [
+         fhir:source [
+           a fhir:url ;
+           fhir:v "legal-basis.html"^^xsd:anyURI
+         ] ;
+         fhir:name [ fhir:v "legal-basis.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Rättslig grund och ändamål" ] ;
          fhir:generation [ fhir:v "markdown" ]
        ] [
          fhir:source [
