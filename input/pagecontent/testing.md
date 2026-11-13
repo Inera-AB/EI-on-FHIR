@@ -1,27 +1,21 @@
-Implementatörer kan validera indexposter och prenumerationer mot profilerna med [HL7 FHIR Validator](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator) och IG-paketet (se [Nedladdningar](downloads.html)):
+Implementatörer, till exempel FHIR-producenter som vill kontrollera sina registreringar, kan validera engagemangsposter mot profilen med [HL7 FHIR Validator](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator) och IG-paketet (se [Nedladdningar](downloads.html)):
 
 ```
-java -jar validator_cli.jar indexpost.json -version 5.0.0 -ig inera.ei.engagementindex#current \
-  -profile https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry
+java -jar validator_cli.jar engagemangspost.json -version 5.0.0 -ig inera.ei.engagementindex#current \
+  -profile https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement
 ```
-
-En tjänsts tillämpning valideras på samma sätt, med tjänstens IG och tillämpningens profil.
 
 Exemplen i IG:n visar giltiga instanser:
 
 | Exempel | Profil |
 |---|---|
-| [Registrerad indexpost från en FHIR-producent](DocumentReference-IndexpostFhirProducent.html) | Indexpost |
-| [Indexpost som inte visas för patient eller närstående](DocumentReference-IndexpostEjForPatient.html) | Indexpost |
-| [Indexpost speglad av övergångsadaptern](DocumentReference-IndexpostFranAdapter.html) | Indexpost |
-| [Indexpost fylld av lokaliseringstjänsten](DocumentReference-IndexpostFranLokaliseringstjanst.html) | Indexpost |
-| [Indragen indexpost](DocumentReference-IndexpostIndragen.html) | Indexpost |
-| [Prenumeration på en patients indexposter](Subscription-PrenumerationForPatient.html) | Prenumeration på indexposter |
-| [Registrering och avregistrering i en transaction](Bundle-RegistreringTransaction.html) | Bundle |
+| [Aktuell engagemangspost](DocumentReference-EngagemangspostAktuell.html) | Engagemangspost |
+| [Engagemangspost från en FHIR-producent](DocumentReference-EngagemangspostFhir.html) | Engagemangspost |
+| [Engagemangspost med källsystemet som personuppgiftsansvarig](DocumentReference-EngagemangspostKallsystemSomPuA.html) | Engagemangspost |
+| [Borttagen engagemangspost](DocumentReference-EngagemangspostBorttagen.html) | Engagemangspost |
 | [Sökresultat för en patient](Bundle-SokresultatForPatient.html) | Bundle |
-| [Ofullständigt sökresultat](Bundle-SokresultatOfullstandigt.html) | Bundle |
 {:.grid}
 
-Exemplen använder testpersonnumret 191212121212, påhittade HSA-id:n och påhittade adresser i tjänstekatalogen. Någon testmiljö för FHIR-EI finns inte än.
+Exemplen använder testpersonnumret 191212121212 och påhittade HSA-id:n. Någon testmiljö för EI-on-FHIR finns inte än.
 
 Kodsystemen för tjänstedomäner och kategorier är utdrag. Validatorn varnar därför för koder som inte finns i utdraget; det är väntat.

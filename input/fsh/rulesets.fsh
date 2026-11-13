@@ -6,7 +6,7 @@ RuleSet: IneraMetadata(id)
 * ^experimental = false
 * ^identifier.value = "{id}"
 // Update on every material change to the artifact.
-* ^date = "2026-10-26"
+* ^date = "2026-11-13"
 * ^publisher = "Inera AB"
 * ^contact.name = "Inera AB"
 * ^contact.telecom.system = #url
@@ -14,11 +14,11 @@ RuleSet: IneraMetadata(id)
 * ^jurisdiction = urn:iso:std:iso:3166#SE "Sweden"
 
 // The same metadata for definitional instances (SearchParameter, CapabilityStatement),
-// which have no identifier element in R4.
+// to which this IG gives no identifier.
 RuleSet: IneraInstanceMetadata
 * status = #draft
 * experimental = false
-* date = "2026-10-26"
+* date = "2026-11-13"
 * publisher = "Inera AB"
 * contact.name = "Inera AB"
 * contact.telecom.system = #url

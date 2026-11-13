@@ -1,69 +1,66 @@
-# FHIR-baserat engagemangsindex (FHIR-EI)
+# EI-on-FHIR: FHIR API for the engagement index
 
 [![Build and publish IG](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml)
 [![Validate FSH](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml)
 [![FHIR R5](https://img.shields.io/badge/FHIR-R5-blue)](https://hl7.org/fhir/R5/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-The specification and FHIR Implementation Guide for FHIR-EI, Inera's FHIR-based engagement index. FHIR-EI answers three questions about a patient: which systems hold information about them, which information sets are there, and when they were last updated. It replaces today's engagement index (RIV-TA `itintegration:engagementindex`) when NPÖ and 1177 move to FHIR, following the same pattern as NHS England's National Record Locator and IHE MHD. Both the specification and the IG are written in Swedish.
+**EI-on-FHIR covers what EHDS-bryggan, the sync to eHM's patient index and FHIR producers such as Fasta kontakter need.** It defines a FHIR R5 API on top of today's national engagement index (EI), modelled on NHS England's National Record Locator, with its own register for sources that implement a service's FHIR IG instead of the RIV-TA contract. The earlier, broader vision for a FHIR-based index (FHIR R5, several population methods, per-user access control and legal analysis) is kept on the branch [`arkiv/fhir-ei-vision`](https://github.com/Inera-AB/EI-on-FHIR/tree/arkiv/fhir-ei-vision) and is not part of this IG. The architecture document and the IG are written in Swedish.
 
 | | |
 |---|---|
 | Package id | `inera.ei.engagementindex` |
 | Canonical | `https://fhir.inera.se/ig/engagementindex` |
 | FHIR version | 5.0.0 |
-| Branch builds | `https://inera-ab.github.io/EI-on-FHIR/` |
 | Status | Draft, version 0.1.0 (unpublished) |
+
+### Use cases
+
+1. **Support services find where information is.** Inera's internal support services in the new interoperability infrastructure, such as EHDS-bryggan, search a patient's engagement entries before calling a source system. This corresponds to FindContent.
+2. **Sync to eHM's patient index.** A sync service reads all entries and all changes through the API and populates eHM's patient index on behalf of care providers, from the data already in EI.
+3. **FHIR producers register engagements.** A source that implements a service's FHIR IG instead of the RIV-TA contract, for example Fasta kontakter, registers its entries in EI-on-FHIR's own register, so that they appear alongside the entries from EI.
 
 ### What is in this repository
 
 | Part | Where | What it is |
 |---|---|---|
-| Specification | [`spec/fhir-ei-spec.md`](spec/fhir-ei-spec.md) | The design and its rationale: information model, code systems, API, event model and transition, access control, coexistence with eHM's patient index, open questions. Design changes are made here first |
-| Implementation Guide | `input/`, `sushi-config.yaml` | The formal realisation in FSH and narrative pages, built with SUSHI and IG Publisher. Where the IG makes a choice the specification leaves open, the IG page *Mappning till profiler* says so |
+| Architecture document (SAD) | [`sad/ei-on-fhir-sad.md`](sad/ei-on-fhir-sad.md) | Scope, requirements, context, building blocks, runtime flows, decisions with alternatives, risks |
+| Implementation Guide | `input/`, `sushi-config.yaml` | The formal specification in FSH and narrative pages, built with SUSHI and IG Publisher |
 | Publishing instructions | [`docs/`](docs/) | Swedish instructions for versioning and releases, from the Inera IG template |
 
 ### Design in brief
 
-- **One index entry per patient × endpoint × service**, as a profiled R5 `DocumentReference` (`IneraIndexEntry`). A service is an IG (today a RIV-TA service domain); information sets are profiles within it (today categories). Each service publishes an application profile of the common entry in its own IG.
-- **Pointers, not content.** The entry says where and when, never what; elements that would carry clinical content are prohibited.
-- **Lifecycle by deregistration, not deletion.** The base `status` plus the extensions `registrationStatus` and `deregistrationReason`. Deregistered entries remain as tombstones for a retention period, so consumers that missed notifications can reconcile.
-- **Registering parties are identified by their endpoint in [tjänstekatalogen](https://github.com/Inera-AB/tjanstekatalog).** The same URL is the party's namespace in `identifier.system`, checked by an invariant. A producer may only register for care providers that list its endpoint there; the transition adapter and the locator act as agents within their own source of truth.
-- **Logical address is carried separately.** In tjänstekatalogen a logical address is an organisation's HSA-id, not an endpoint, so RIV-TA sources carry `logicalAddress` next to the endpoint.
-- **Neutral population.** The consumer contract is the same whichever way a service's entries are populated, and the choice is made per service: producer registration (directly or through an indexing agent that subscribes to the service topics), an Inera-populated cache (a locator that reads eHM's patient index and asks the sources with a targeted query, kept fresh by subscriptions or a time limit), or mirroring of today's engagement index for RIV-TA sources, such as those behind [EHDS-bryggan](https://github.com/Inera-AB/ehds-brygga). The method is recorded in `meta.tag`, and known gaps are reported as an incomplete search result.
-- **Transition per service, consumers first.** Each service moves through five stages on its own: parallel population, consumer switch, sources moving off mirroring, decommissioning. A source stops updating today's index for a service only once that service's consumers read FHIR-EI, so nothing is written back to today's index.
-- **Update rules per service.** Each service's IG publishes a `SubscriptionTopic` per information set, defining what counts as a change, and `obligation` on its application profile.
-- **Coexistence with eHM's patient index in both directions.** The thin index (care provider by organisation number and record system) can be the source of truth for where, with FHIR-EI as an Inera cache, or be derived from FHIR-EI. Care provider may therefore be given by organisation number, and care unit is optional.
-- **One index for NPÖ and 1177.** Access is assessed per purpose of use, and producers can label entries with security labels such as `NOPAT`.
-- **Native R5 subscriptions** on the topic `indexpost-andrad`, with `id-only` notifications, `$status` and `$events`; reconciliation with `_lastUpdated`; bulk export with `$export`.
-- **Two access modes.** Searches and reads for display run in user context, where FHIR-EI is its own access control point for blocking (spärr), consent, purpose of use and logging. Registration, subscriptions, reconciliation and export run in system context, where FHIR-EI checks the system's authorisation and the receiving system checks per user when the information is shown.
-- **Legal basis.** Today's engagement index rests on a 2013 interpretation: each care provider is controller for its own entries, Inera is processor, and entries may only be used to find logical addresses. The IG lists where FHIR-EI goes beyond that and needs a new assessment, and requires each service to describe its purpose for using the index.
-- **Split by access mode.** An index core (storage, write API, lifecycle, events, subscriptions, export) with no blocking or consent logic, an access layer for user-context reads, and population components (indexing agent, locator, transition adapter) that write only through the write API.
+- **A read interface in the national EI, not a new service with its own copy.** The API reads EI's database or a read replica, so there is no copy of EI to keep in sync.
+- **Its own register for FHIR producers**, written with conditional update and delete as in NRL's producer API. Searches and exports return entries from EI and the register together.
+- **Each entry says how to fetch the information:** `content.profile` (as a Coding) is `riv-ta` (logical address via the service platform) or `fhir` (endpoint URL). A source with both interfaces has two entries, matched on patient, service domain and logical address; a FHIR-capable consumer picks the FHIR one.
+- **One `DocumentReference` per EI entry**, profiled as `IneraEngagement`, with no merging. Fields without a DocumentReference element are extensions: logical address, source system, owner and most recent content.
+- **Search like NRL:** `subject:identifier` and `type`, plus `logical-address` to narrow to one care provider. A search without a patient is allowed only for the sync client.
+- **Sync with standard FHIR:** Bulk Data `$export` for the initial load and reconciliation, `_lastUpdated` for incremental changes. Deleted entries appear with status `superseded` for a retention period.
+- **System clients only**, with SMART Backend Services and three client roles: support service, sync service and producer. The API does not check blocking (spärr), as today's EI does not; the support service checks it when it releases clinical information.
 
 ### Related repositories
 
 | Repository | Relation |
 |---|---|
-| [Inera-AB/tjanstekatalog](https://github.com/Inera-AB/tjanstekatalog) | Holds the endpoints that index entries point to and that identify producers. Its organisations' HSA-ids are the logical addresses |
-| [Inera-AB/ehds-brygga](https://github.com/Inera-AB/ehds-brygga) | Uses the engagement index before calling producers, and is one of the address register's possible targets for RIV-TA sources |
+| [Inera-AB/ehds-brygga](https://github.com/Inera-AB/ehds-brygga) | Checks the engagement index before calling a care provider's system; the first consumer of use case 1 |
+| [Inera-AB/tjanstekatalog](https://github.com/Inera-AB/tjanstekatalog) | Its organisations' HSA-ids are the logical addresses; the sync service looks up care providers there |
 
 ### IG artifacts
 
 | Artifact | FSH file |
 |---|---|
-| Index entry profile on R5 `DocumentReference` (`IneraIndexEntry`) | `input/fsh/profiles/IneraIndexEntry.fsh` |
-| Extensions: source endpoint, care unit, registering producer, logical address, source system, content last updated, registration status, deregistration reason | `input/fsh/extensions/Extensions.fsh` |
+| Engagement entry profile on R5 `DocumentReference` (`IneraEngagement`) | `input/fsh/profiles/IneraEngagement.fsh` |
+| Extensions: logical address, source system, most recent content, owner | `input/fsh/extensions/Extensions.fsh` |
 | Code systems and value sets | `input/fsh/terminology/Terminology.fsh` |
-| SubscriptionTopic `indexpost-andrad` and a Subscription profile (`IneraIndexSubscription`) | `input/fsh/subscriptions/Subscriptions.fsh` |
-| National search parameters | `input/fsh/searchparameters/SearchParameters.fsh` |
-| Server CapabilityStatement | `input/fsh/capabilitystatements/IneraIndexServer.fsh` |
+| Search parameters `logical-address` and `source-system` | `input/fsh/searchparameters/SearchParameters.fsh` |
+| Server CapabilityStatement | `input/fsh/capabilitystatements/IneraEngagementIndexServer.fsh` |
 | Examples | `input/fsh/examples/Examples.fsh` |
 
 Bulk Data `$export` is required in narrative only: Bulk Data Access is published for R4, so its OperationDefinition cannot be referenced from an R5 IG.
 
-An R5 IG validates against the R5 terminology server, so `publish.yml`, `release.yml` and `pr-qa.yml` pass `tx-server: https://tx.fhir.org/r5` to the shared workflows. Their default is the R4 server for builds and releases, and no server for PR QA; without the R5 server, the QA build reports false errors on `SearchParameter.base` and `SearchParameter.target`.
+An R5 IG validates against the R5 terminology server, so `publish.yml`, `release.yml` and `pr-qa.yml` pass `tx-server: https://tx.fhir.org/r5` to the shared workflows.
 
-Open questions are listed at the end of the specification and on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
+Open questions are listed in the SAD and on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
 
 The repository was created from [IneraFHIRTemplate](https://github.com/Inera-AB/IneraFHIRTemplate) 2.3.0. The sections below describe how the template's structure, publishing and CI work.
 
@@ -73,9 +70,9 @@ The repository was created from [IneraFHIRTemplate](https://github.com/Inera-AB/
 
 Three deliberate choices shape how this template's narrative pages are organised:
 
-- **Menu structure inspired by European specifications.** The top menu (Home / Inledning / Funktionellt / Implementering / Om / Artefakter — Home / Introduction / Functional / Implementation / About / Artifacts) mirrors the pattern used by specifications such as FHIR ePS, rather than the ad-hoc Background/Artifacts grouping used in earlier versions of this template. Funktionellt and Implementering are expandable dropdowns grouping several narrower topic pages; this gives implementers a familiar entry point across Inera and other European FHIR IGs, and separates background material (Inledning), business requirements (Funktionellt), and what implementers actually build against (Implementering) into distinct top-level sections.
+- **Menu structure inspired by European specifications.** The top menu (Home / Funktionellt / Implementering / Om / Artefakter — Home / Functional / Implementation / About / Artifacts) mirrors the pattern used by specifications such as FHIR ePS, rather than the ad-hoc Background/Artifacts grouping used in earlier versions of this template. Funktionellt and Implementering are expandable dropdowns grouping several narrower topic pages; this gives implementers a familiar entry point across Inera and other European FHIR IGs, and separates business requirements (Funktionellt), and what implementers actually build against (Implementering) into distinct top-level sections.
 - **Artifacts is a single, auto-generated page, not hand-maintained catalog pages.** Profiles, terminology (code systems/value sets) and examples are not given their own narrative pages — IG Publisher already lists them automatically on the generated `artifacts.html` page, so the "Artefakter" menu entry links straight there. Maintaining separate `profiles.md`/`terminology.md`/`examples.md` pages would just duplicate that listing and require manual upkeep as profiles change.
-- **The information model is published externally, separate from the IG.** Concept models, information models and detailed business workflows are not restated in this template — they live in an authoritative, independently published information specification that the IG references (see `information-basis.md`'s "Informationsunderlag" page, under Funktionellt, and `mappings.md`). This avoids duplicate documentation that can drift out of sync between the information specification and the IG over time. For FHIR-EI there is no separate information specification; the design lives in [`spec/fhir-ei-spec.md`](spec/fhir-ei-spec.md) in this repository, and the IG's *Informationsunderlag* page points to today's engagement index contracts.
+- **The information model is published externally, separate from the IG.** Concept models, information models and detailed business workflows are not restated in this template — they live in an authoritative, independently published information specification that the IG references (see `information-basis.md`'s "Informationsunderlag" page, under Funktionellt, and `mappings.md`). This avoids duplicate documentation that can drift out of sync between the information specification and the IG over time. For EI-on-FHIR the information basis is today's engagement index and its contracts, which the IG's *Informationsunderlag* page points to.
 
 ---
 
@@ -124,7 +121,7 @@ The Swedish instructions in [`docs/`](docs/) describe the process in full:
 
 ## Before the first release
 
-The IG identity, `ig.ini`, `publication-request.json` (`"first": true`), `release.yml` and the package link are already set for FHIR-EI. The remaining one-time steps are repository settings: GitHub Pages on `gh-pages`, Actions write access, the `FHIR_PORTAL_TOKEN` secret and a `develop` branch. See [Förbereda en IG för publicering](docs/forbereda-och-releasa-ig.md#förberedelser-inför-första-publiceringen).
+The IG identity, `ig.ini`, `publication-request.json` (`"first": true`), `release.yml` and the package link are already set for this IG. The remaining one-time steps are repository settings: GitHub Pages on `gh-pages`, Actions write access, the `FHIR_PORTAL_TOKEN` secret and a `develop` branch. See [Förbereda en IG för publicering](docs/forbereda-och-releasa-ig.md#förberedelser-inför-första-publiceringen).
 
 ---
 
@@ -336,7 +333,7 @@ Recommended VS Code extensions:
   release.yml              Releases with -go-publish to the web root
   cleanup.yml              Remove build dir for deleted branches
 docs/                      Swedish instructions for versioning and publishing
-spec/                      The FHIR-EI specification (design and rationale)
+sad/                       The architecture document (SAD)
 publication-request.json   What the next release is (desc, mode, status, sequence)
 sushi-config.yaml          IG metadata, dependencies, pages and menu
 ig.ini                     IG Publisher configuration
@@ -348,7 +345,6 @@ input/
     extensions/            Extension definitions
     terminology/           Code systems and value sets
     searchparameters/      SearchParameter definitions
-    subscriptions/         SubscriptionTopic and Subscription profile
     capabilitystatements/  CapabilityStatement definitions
     examples/              Example instances (.fsh)
   pagecontent/             Narrative IG pages (.md); no leading "# Title", the template renders the page title

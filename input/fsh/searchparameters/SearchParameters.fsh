@@ -1,33 +1,29 @@
-Instance: DocumentReference-content-last-updated
-InstanceOf: SearchParameter
-Usage: #definition
-Title: "Sök på innehållets senaste ändring"
-* insert IneraInstanceMetadata
-* url = "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-content-last-updated"
-* name = "ContentLastUpdated"
-* description = "Filtrerar indexposter på när det kliniska innehållet i källsystemet senast ändrades (extension contentLastUpdated). Ersätter tidsfiltret i FindContent."
-* code = #content-last-updated
-* base = #DocumentReference
-* type = #date
-* expression = "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated').value"
-* processingMode = #normal
-* comparator[0] = #eq
-* comparator[+] = #gt
-* comparator[+] = #ge
-* comparator[+] = #lt
-* comparator[+] = #le
+// Search parameters on the extensions that DocumentReference has no element for.
 
-Instance: DocumentReference-source-endpoint
+Instance: DocumentReference-logical-address
 InstanceOf: SearchParameter
 Usage: #definition
-Title: "Sök på producentens endpoint"
+Title: "Sökparameter logical-address"
 * insert IneraInstanceMetadata
-* url = "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint"
-* name = "SourceEndpoint"
-* description = "Producentens endpoint i tjänstekatalogen (extension sourceEndpoint)."
-* code = #source-endpoint
+* url = "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-logical-address"
+* name = "LogicalAddress"
+* description = "Söker engagemangsposter på logisk adress (extension logicalAddress), till exempel en vårdgivares HSA-id."
+* code = #logical-address
 * base = #DocumentReference
-* type = #reference
-* target = #Endpoint
-* expression = "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint').value"
+* type = #token
+* expression = "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress').value.ofType(Identifier)"
+* processingMode = #normal
+
+Instance: DocumentReference-source-system
+InstanceOf: SearchParameter
+Usage: #definition
+Title: "Sökparameter source-system"
+* insert IneraInstanceMetadata
+* url = "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-system"
+* name = "SourceSystem"
+* description = "Söker engagemangsposter på källsystem (extension sourceSystem)."
+* code = #source-system
+* base = #DocumentReference
+* type = #token
+* expression = "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceSystem').value.ofType(Identifier)"
 * processingMode = #normal

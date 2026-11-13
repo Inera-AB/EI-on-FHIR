@@ -1,8 +1,8 @@
 id: inera.ei.engagementindex
 canonical: https://fhir.inera.se/ig/engagementindex
 name: IneraEngagementIndex
-title: "FHIR-baserat engagemangsindex (FHIR-EI)"
-description: "Indexprofil, API och händelsemodell för FHIR-EI, ett index över var det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades."
+title: "EI-on-FHIR: FHIR-API för engagemangsindex"
+description: "Ett FHIR R5-API ovanpå dagens engagemangsindex, för Ineras interna stödtjänster och för synk till eHM:s patientindex, med ett eget register för källor som implementerar en tjänsts FHIR-IG."
 status: draft
 version: 0.1.0
 fhirVersion: 5.0.0
@@ -17,11 +17,6 @@ publisher:
 jurisdiction: urn:iso:std:iso:3166#SE "Sweden"
 
 
-# Inline instances (the resources inside the transaction example) get no id, since a
-# conditional PUT resolves the target from its identifier.
-instanceOptions:
-  setId: standalone-only
-
 parameters:
   show-inherited-invariants: false
   usage-stats-opt-out: true
@@ -30,40 +25,22 @@ parameters:
 pages:
   index.md:
     title: Hem
-  introduction.md:
-    title: Inledning
   information-basis.md:
     title: Informationsunderlag
   use-cases.md:
     title: Användningsfall
-  roles-and-responsibilities.md:
-    title: Roller och ansvar
-  legal-basis.md:
-    title: Rättslig grund och ändamål
-  information-model.md:
-    title: Indexposten
-  population.md:
-    title: Försörjning av indexet
-  information-sets.md:
-    title: Kodverk för tjänster och informationsmängder
-  event-model.md:
-    title: Händelsemodell och övergång
-  ehm-coexistence.md:
-    title: Samexistens med eHM:s patientindex
-  mappings.md:
-    title: Mappning till profiler
-  rest-interactions.md:
-    title: REST-interaktioner och sökparametrar
-  subscriptions.md:
-    title: Prenumeration
-  expected-responses.md:
-    title: Förväntade svar
+  engagement.md:
+    title: Engagemangsposten
+  ehm-sync.md:
+    title: Synk till eHM:s patientindex
+  api.md:
+    title: API
   capabilitystatement.md:
     title: CapabilityStatement
+  security.md:
+    title: Säkerhet och loggning
   error-handling.md:
     title: Felhantering
-  security.md:
-    title: Spärr, loggning och behörighet
   testing.md:
     title: Testning och validering
   about.md:
