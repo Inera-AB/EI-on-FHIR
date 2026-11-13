@@ -1,37 +1,38 @@
-API:et skiljer på tre sätt att läsa indexet: sökning vid behov, löpande uppdatering via prenumeration och avstämning eller massuttag för korrekthet. Till det kommer producenternas registrering och övergången från dagens engagemangsindex.
+IG:n har två användningsfall. Båda läser befintlig information i EI; ingen av dem ändrar vad som registreras eller hur.
 
-### Sök var information finns om en patient
+### 1. Stödtjänster hittar var information finns
 
-En konsument, till exempel NPÖ, ska visa en översikt över en patients information. Konsumenten söker patientens indexposter, eventuellt begränsat till vissa tjänster, informationsmängder eller poster vars innehåll ändrats efter en viss tidpunkt. Sökningen sker i användarkontext. FHIR-EI kontrollerar användarens behörighet och spärrar, filtrerar bort poster som användaren inte har rätt att se, loggar åtkomsten och returnerar de registrerade posterna. Konsumenten hämtar sedan informationen direkt från producenternas endpoints. Motsvarar FindContent.
+En av Ineras interna stödtjänster i samverkansinfrastrukturen behöver veta var det finns information om en patient. Ett exempel är EHDS-bryggan, som kontrollerar att en vårdgivares system har information om patienten innan den gör ett RIV-TA-anrop. Det sparar anrop till källsystem som inte har något.
 
-### Fylla indexet
+1. Stödtjänsten söker patientens engagemangsposter, avgränsat till en tjänstedomän och vid behov en logisk adress:
+   ```
+   GET [base]/DocumentReference?subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212
+       &type=https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|riv:clinicalprocess:healthcond:description
+       &logical-address=urn:oid:1.2.752.29.4.19|SE0000000000-VG01
+   ```
+2. API:et kontrollerar att klienten är en behörig stödtjänst, läser posterna i EI, mappar dem till [Engagemangspost](StructureDefinition-IneraEngagement.html) och loggar anropet.
+3. Svaret är en `searchset`-Bundle med postens status `current`. En tom Bundle betyder att EI saknar poster för urvalet.
+4. Stödtjänsten anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen, med postens logiska adress.
 
-En källa har fått ny eller ändrad information om en patient inom en tjänst, och indexet ska spegla det. Hur det sker beror på tjänstens [försörjningssätt](population.html): producenten registrerar själv eller via en indexeringsagent, Ineras lokaliseringstjänst frågar källan när posten behövs och håller den färsk med prenumeration, eller övergångsadaptern speglar dagens engagemangsindex för källor som fortfarande använder RIV-TA. Oavsett sätt är uppdateringen idempotent och en äldre ändring skriver aldrig över en nyare. Motsvarar Update.
+Användningsfallet motsvarar FindContent. Informationen används på samma sätt som i dag: för att hitta vart ett anrop ska gå.
 
-### Avregistrera indexposter
+### 2. Synk till eHM:s patientindex
 
-En källa håller inte längre informationen: den var felregistrerad, engagemanget är avslutat eller informationen har gallrats. Den registrerande parten avregistrerar posten och anger orsaken. Posten ligger kvar som gravsten under en lagringstid, så att avregistreringen syns för prenumeranter och vid avstämning. Motsvarar Update med deleteFlag.
+En synktjänst fyller eHM:s patientindex för vårdgivarnas räkning, utifrån befintlig data i EI. Vårdgivarna behöver då inte rapportera samma vårdrelationer en gång till.
 
-### Prenumerera på ändringar
+1. **Grundladdning.** Synktjänsten gör ett massuttag av alla engagemangsposter med Bulk Data `$export`.
+2. **Löpande synk.** Med jämna mellanrum söker synktjänsten poster som ändrats sedan förra körningen, med `_lastUpdated`. Borttagna poster kommer med status `superseded`.
+3. **Aggregering.** Synktjänsten slår ihop posterna per patient, vårdgivare och journalsystem och lägger till eller tar bort motsvarande uppgifter i eHM:s patientindex.
+4. **Avstämning.** Med längre intervall jämför synktjänsten ett fullständigt uttag med patientindexet och rättar avvikelser.
 
-En konsument vill veta när en patients indexposter ändras, utan att söka om. Konsumenten registrerar en prenumeration i systemkontext, filtrerad på patient, tjänst eller vårdgivare. Vid varje ändring inom konsumentens behörighet får den en notis med postens id. Motsvarar ProcessNotification.
+Hur synken använder API:et beskrivs under [Synk till eHM:s patientindex](ehm-sync.html).
 
-### Hålla en lokal kopia aktuell
+### Aktörer
 
-En systemkonsument håller en lokal kopia av innehåll inom en tjänst, till exempel läkemedelsordinationer eller uppmärksamhetsinformation, och behöver veta när den ska hämta på nytt. Den prenumererar i systemkontext och hämtar från källan när en notis kommer. Kopian ligger utanför FHIR-EI, och systemkonsumenten prövar och loggar per användare när innehållet visas. Tjänsten behöver producentregistrering eller spegling; se [Spärr, loggning och behörighet](security.html).
-
-### Stäm av efter avbrott
-
-En konsument har missat notiser. Vid kortare avbrott hämtar den missade händelser ur händelseloggen. Vid längre avbrott söker den poster som ändrats sedan en viss tidpunkt, inklusive avregistrerade. Saknar motsvarighet idag.
-
-### Massuttag
-
-En systemkonsument, till exempel en framtida synk till eHM:s patientindex, behöver hela indexet eller allt som ändrats sedan en viss tidpunkt. Systemkonsumenten gör ett massuttag. Används för grundladdning, för ny konsument och efter avbrott längre än gravstenarnas lagringstid. Saknar motsvarighet idag.
-
-### Övergång från dagens engagemangsindex
-
-Källsystem ska kunna gå över till FHIR i egen takt. Övergången görs per tjänst: en adapter speglar tjänstens poster från dagens engagemangsindex till FHIR-EI, tjänstens konsumenter byter till FHIR-EI, och först därefter registrerar producenterna direkt. Se [Händelsemodell och övergång](event-model.html).
-
----
-
-Rollerna i användningsfallen beskrivs under [Roller och ansvar](roles-and-responsibilities.html).
+| Aktör | Ansvar |
+|---|---|
+| EI-on-FHIR | Exponerar EI:s poster som FHIR, skrivskyddat. Kontrollerar klientens behörighet och loggar varje anrop |
+| Engagemangsindex | Källan för posterna. Tar emot registreringar från källsystemen som i dag |
+| Stödtjänst | Söker poster för en patient, inom sitt ändamål. Ansvarar för spärr och loggning när den hämtar och lämnar ut journalinformation |
+| Synktjänst | Läser alla poster och ändringar och fyller eHM:s patientindex för vårdgivarnas räkning |
+{:.grid}

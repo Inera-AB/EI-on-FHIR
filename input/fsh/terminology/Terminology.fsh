@@ -1,26 +1,27 @@
-// Services and information sets as coded today: service domains and their categories.
-// The code systems are fragments: they hold the examples in this IG, while the full lists are
-// maintained in Inera's register of service domains.
+// Service domains and categories as coded in today's engagement index. The code systems are
+// fragments: they hold the examples in this IG, while the full lists are maintained in Inera's
+// register of service domains.
 CodeSystem: IneraServiceDomainCodeSystem
 Id: IneraServiceDomainCodeSystem
 Title: "Kodsystem för tjänstedomäner"
-Description: "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner."
+Description: "Tjänstedomäner, som de anges i serviceDomain i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner."
 * insert IneraMetadata(IneraServiceDomainCodeSystem)
 * ^caseSensitive = true
 * ^content = #fragment
 * #riv:clinicalprocess:healthcond:description "riv:clinicalprocess:healthcond:description" "Tjänstedomänen riv:clinicalprocess:healthcond:description."
+* #riv:clinicalprocess:activityprescription:actoutcome "riv:clinicalprocess:activityprescription:actoutcome" "Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome."
 
 ValueSet: IneraServiceDomainValueSet
 Id: IneraServiceDomainValueSet
 Title: "Tjänstedomäner"
-Description: "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner."
+Description: "Alla tjänstedomäner i kodsystemet för tjänstedomäner."
 * insert IneraMetadata(IneraServiceDomainValueSet)
 * include codes from system IneraServiceDomainCodeSystem
 
 CodeSystem: IneraEngagementCategoryCodeSystem
 Id: IneraEngagementCategoryCodeSystem
 Title: "Kodsystem för kategorier inom tjänstedomän"
-Description: "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."
+Description: "Kategorier inom en tjänstedomän, som de anges i categorization i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."
 * insert IneraMetadata(IneraEngagementCategoryCodeSystem)
 * ^caseSensitive = true
 * ^content = #fragment
@@ -29,62 +30,14 @@ Description: "Kategorier inom en tjänstedomän, som anger informationsmängd i 
 ValueSet: IneraEngagementCategoryValueSet
 Id: IneraEngagementCategoryValueSet
 Title: "Kategorier inom tjänstedomän"
-Description: "Alla kategorier i kodverket för kategorier inom tjänstedomän."
+Description: "Alla kategorier i kodsystemet för kategorier inom tjänstedomän."
 * insert IneraMetadata(IneraEngagementCategoryValueSet)
 * include codes from system IneraEngagementCategoryCodeSystem
 
-CodeSystem: IneraIndexRegistrationStatusCodeSystem
-Id: IneraIndexRegistrationStatusCodeSystem
-Title: "Kodsystem för registreringsstatus"
-Description: "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status."
-* insert IneraMetadata(IneraIndexRegistrationStatusCodeSystem)
-* ^caseSensitive = true
-* ^content = #complete
-* #active "Registrerad" "Informationen finns tillgänglig hos producenten. Basstatus current."
-* #withdrawn "Indragen" "Posten har avsiktligt och varaktigt dragits tillbaka. Basstatus superseded."
-* #entered-in-error "Felregistrerad" "Posten skulle aldrig ha funnits. Basstatus entered-in-error."
-
-ValueSet: IneraIndexRegistrationStatusValueSet
-Id: IneraIndexRegistrationStatusValueSet
-Title: "Registreringsstatus för indexposter"
-Description: "Alla livscykeltillstånd för en indexpost."
-* insert IneraMetadata(IneraIndexRegistrationStatusValueSet)
-* include codes from system IneraIndexRegistrationStatusCodeSystem
-
-CodeSystem: IneraDeregistrationReasonCodeSystem
-Id: IneraDeregistrationReasonCodeSystem
-Title: "Kodsystem för orsaker till avregistrering"
-Description: "Varför en indexpost avregistreras. Orsaken avgör hur mottagare, till exempel ett tunt index, ska hantera avregistreringen."
-* insert IneraMetadata(IneraDeregistrationReasonCodeSystem)
-* ^caseSensitive = true
-* ^content = #complete
-* #entered-in-error "Felregistrering" "Posten skulle aldrig ha registrerats. Används med registreringsstatus entered-in-error."
-* #ended "Avslutat engagemang" "Producenten håller inte längre information om patienten inom tjänsten. Används med registreringsstatus withdrawn."
-* #purged "Gallring" "Informationen har gallrats hos producenten. Används med registreringsstatus withdrawn."
-* #not-at-source "Finns inte längre hos källan" "Källan uppger, på en riktad fråga från lokaliseringstjänsten, att den inte längre har information om patienten inom tjänsten. Används med registreringsstatus withdrawn."
-* #transition-adapter "Avregistrering via övergångsadapter" "Posten avregistrerades i dagens engagemangsindex, vars kontrakt inte bär någon orsak. Används med registreringsstatus withdrawn."
-
-ValueSet: IneraDeregistrationReasonValueSet
-Id: IneraDeregistrationReasonValueSet
-Title: "Orsaker till avregistrering"
-Description: "Alla orsaker till avregistrering av en indexpost."
-* insert IneraMetadata(IneraDeregistrationReasonValueSet)
-* include codes from system IneraDeregistrationReasonCodeSystem
-
-CodeSystem: IneraIndexPopulationMethodCodeSystem
-Id: IneraIndexPopulationMethodCodeSystem
-Title: "Kodsystem för försörjningssätt"
-Description: "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt."
-* insert IneraMetadata(IneraIndexPopulationMethodCodeSystem)
-* ^caseSensitive = true
-* ^content = #complete
-* #producer "Producentregistrering" "Producenten har registrerat posten, direkt eller via en indexeringsagent."
-* #cache "Inera-försörjd cache" "Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan."
-* #mirror "Spegling av dagens engagemangsindex" "Övergångsadaptern har speglat posten från dagens engagemangsindex."
-
-ValueSet: IneraIndexPopulationMethodValueSet
-Id: IneraIndexPopulationMethodValueSet
-Title: "Försörjningssätt"
-Description: "Alla försörjningssätt för indexposter."
-* insert IneraMetadata(IneraIndexPopulationMethodValueSet)
-* include codes from system IneraIndexPopulationMethodCodeSystem
+ValueSet: IneraEngagementStatusValueSet
+Id: IneraEngagementStatusValueSet
+Title: "Status för engagemangsposter"
+Description: "current för en post som finns i EI, superseded för en post som har tagits bort ur EI och visas under borttagsloggens lagringstid."
+* insert IneraMetadata(IneraEngagementStatusValueSet)
+* $docref-status#current
+* $docref-status#superseded

@@ -6,7 +6,7 @@ RuleSet: IneraMetadata(id)
 * ^experimental = false
 * ^identifier.value = "{id}"
 // Update on every material change to the artifact.
-* ^date = "2026-10-26"
+* ^date = "2026-11-13"
 * ^publisher = "Inera AB"
 * ^contact.name = "Inera AB"
 * ^contact.telecom.system = #url
@@ -18,7 +18,7 @@ RuleSet: IneraMetadata(id)
 RuleSet: IneraInstanceMetadata
 * status = #draft
 * experimental = false
-* date = "2026-10-26"
+* date = "2026-11-13"
 * publisher = "Inera AB"
 * contact.name = "Inera AB"
 * contact.telecom.system = #url

@@ -2,13 +2,13 @@
   "mode" : "milestone",
   "status" : "release",
   "sequence" : "Releases",
-  "desc" : "Första publicerade versionen: indexpost, API, händelsemodell och övergång från dagens engagemangsindex.",
+  "desc" : "Första publicerade versionen: skrivskyddat FHIR R4-API ovanpå engagemangsindex, för interna stödtjänster och synk till eHM:s patientindex.",
   "first" : true,
-  "title" : "FHIR-baserat engagemangsindex (FHIR-EI)",
+  "title" : "EI-on-FHIR: FHIR-API för engagemangsindex",
   "category" : "National Base",
-  "introduction" : "Index över i vilka källsystem det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades.",
+  "introduction" : "Skrivskyddat FHIR-API som exponerar engagemangsindex: i vilka källsystem det finns information om en patient, inom vilka tjänstedomäner.",
   "ci-build" : "https://inera-ab.github.io/EI-on-FHIR",
-  "registry-description" : "FHIR-baserat engagemangsindex för svensk hälso- och sjukvård.",
+  "registry-description" : "FHIR-API för Ineras engagemangsindex.",
   "registry-country" : "se",
   "registry-authority" : "Inera"
 }
