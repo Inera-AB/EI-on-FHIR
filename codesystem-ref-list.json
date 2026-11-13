@@ -1,14 +1,15 @@
 {
   "codeSystems" : [{
-    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem",
-    "version" : "0.1.0",
+    "url" : "http://hl7.org/fhir/document-reference-status",
+    "version" : "5.0.0",
     "status" : "draft",
-    "name" : "IneraDeregistrationReasonCodeSystem",
-    "title" : "Kodsystem för orsaker till avregistrering",
-    "description" : "Varför en indexpost avregistreras. Orsaken avgör hur mottagare, till exempel ett tunt index, ska hantera avregistreringen.",
+    "name" : "DocumentReferenceStatus",
+    "title" : "DocumentReferenceStatus",
+    "description" : "The status of the document reference.",
+    "oids" : ["2.16.840.1.113883.4.642.4.8"],
     "uses" : {
     },
-    "ValueSet-IneraDeregistrationReasonValueSet.html" : "Orsaker till avregistrering"
+    "ValueSet-IneraEngagementStatusValueSet.html" : "Status för engagemangsposter"
   },
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem",
@@ -16,32 +17,21 @@
     "status" : "draft",
     "name" : "IneraEngagementCategoryCodeSystem",
     "title" : "Kodsystem för kategorier inom tjänstedomän",
-    "description" : "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
+    "description" : "Kategorier inom en tjänstedomän, som de anges i categorization i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
     "uses" : {
     },
     "ValueSet-IneraEngagementCategoryValueSet.html" : "Kategorier inom tjänstedomän"
   },
   {
-    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem",
     "version" : "0.1.0",
     "status" : "draft",
-    "name" : "IneraIndexPopulationMethodCodeSystem",
-    "title" : "Kodsystem för försörjningssätt",
-    "description" : "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt.",
+    "name" : "IneraRetrievalProtocolCodeSystem",
+    "title" : "Kodsystem för hämtningsprotokoll",
+    "description" : "Hur en konsument hämtar den information som en engagemangspost pekar ut.",
     "uses" : {
     },
-    "ValueSet-IneraIndexPopulationMethodValueSet.html" : "Försörjningssätt"
-  },
-  {
-    "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",
-    "version" : "0.1.0",
-    "status" : "draft",
-    "name" : "IneraIndexRegistrationStatusCodeSystem",
-    "title" : "Kodsystem för registreringsstatus",
-    "description" : "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status.",
-    "uses" : {
-    },
-    "ValueSet-IneraIndexRegistrationStatusValueSet.html" : "Registreringsstatus för indexposter"
+    "ValueSet-IneraRetrievalProtocolValueSet.html" : "Hämtningsprotokoll"
   },
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem",
@@ -49,7 +39,7 @@
     "status" : "draft",
     "name" : "IneraServiceDomainCodeSystem",
     "title" : "Kodsystem för tjänstedomäner",
-    "description" : "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
+    "description" : "Tjänstedomäner, som de anges i serviceDomain i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
     "uses" : {
     },
     "ValueSet-IneraServiceDomainValueSet.html" : "Tjänstedomäner"

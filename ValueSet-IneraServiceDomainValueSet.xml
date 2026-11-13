@@ -14,7 +14,7 @@
   <title value="Tjänstedomäner"/>
   <status value="draft"/>
   <experimental value="false"/>
-  <date value="2026-10-26"/>
+  <date value="2026-11-13"/>
   <publisher value="Inera AB"/>
   <contact>
     <name value="Inera AB"/>
@@ -23,7 +23,7 @@
       <value value="https://www.inera.se"/>
     </telecom>
   </contact>
-  <description value="Alla tjänstedomäner i Ineras kodverk för tjänstedomäner."/>
+  <description value="Alla tjänstedomäner i kodsystemet för tjänstedomäner."/>
   <jurisdiction>
     <coding>
       <system value="urn:iso:std:iso:3166"/>

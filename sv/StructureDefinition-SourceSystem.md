@@ -1,4 +1,4 @@
-# Källsystem - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# Källsystem - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## Extension: Källsystem 
 
@@ -8,8 +8,9 @@
 
 **Användningar:**
 
-* Använd denna Extension: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
-* Exempel för denna Extension: [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md), [Bundle/SokresultatOfullstandigt](Bundle-SokresultatOfullstandigt.md), [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md) and [DocumentReference/IndexpostFranLokaliseringstjanst](DocumentReference-IndexpostFranLokaliseringstjanst.md)
+* Använd denna Extension: [Engagemangspost](StructureDefinition-IneraEngagement.md)
+* Exempel för denna Extension: [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md), [DocumentReference/EngagemangspostAktuell](DocumentReference-EngagemangspostAktuell.md), [DocumentReference/EngagemangspostBorttagen](DocumentReference-EngagemangspostBorttagen.md), [DocumentReference/EngagemangspostFhir](DocumentReference-EngagemangspostFhir.md) and [DocumentReference/EngagemangspostKallsystemSomPuA](DocumentReference-EngagemangspostKallsystemSomPuA.md)
+* Sökparametrar som använder denna Extension: [Sökparameter source-system](SearchParameter-DocumentReference-source-system.md)
 
 Du kan också kontrollera [användningar i FHIR IG-statistiken](https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/SourceSystem)
 
@@ -67,7 +68,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-SourceSystem.cs
   "title" : "Källsystem",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -76,7 +77,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-SourceSystem.cs
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Källsystemet eller journalsystemet som håller informationen, när den registrerande parten inte är källan själv: källsystemet enligt dagens engagemangsindex vid spegling, eller journalsystemet enligt eHM:s patientindex vid Inera-försörjd cache. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex.",
+  "description" : "Det system som har informationen och har registrerat posten (sourceSystem i EI). Ett HSA-id.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -104,7 +105,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-SourceSystem.cs
       "id" : "Extension",
       "path" : "Extension",
       "short" : "Källsystem",
-      "definition" : "Källsystemet eller journalsystemet som håller informationen, när den registrerande parten inte är källan själv: källsystemet enligt dagens engagemangsindex vid spegling, eller journalsystemet enligt eHM:s patientindex vid Inera-försörjd cache. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex."
+      "definition" : "Det system som har informationen och har registrerat posten (sourceSystem i EI). Ett HSA-id."
     },
     {
       "id" : "Extension.extension",
@@ -127,8 +128,8 @@ Andra representationer av profilen: [CSV](../StructureDefinition-SourceSystem.cs
     {
       "id" : "Extension.value[x].system",
       "path" : "Extension.value[x].system",
-      "short" : "Identifierarsystem, t.ex. HSA-id för källsystemet",
-      "min" : 1
+      "min" : 1,
+      "patternUri" : "urn:oid:1.2.752.29.4.19"
     },
     {
       "id" : "Extension.value[x].value",

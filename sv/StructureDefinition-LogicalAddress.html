@@ -7,7 +7,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Logisk adress - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+    <title>Logisk adress - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -50,8 +50,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"24.9"}
-    h3,h4,h5,h6{--heading-prefix:"24.9"}</style>
+    <style type="text/css">h2{--heading-prefix:"15.6"}
+    h3,h4,h5,h6{--heading-prefix:"15.6"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -63,7 +63,7 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -96,31 +96,22 @@
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
-  <li><a href="introduction.html">Inledning</a></li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
-      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
-      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
-      <li><a href="information-model.html">Indexposten</a></li>
-      <li><a href="population.html">Försörjning av indexet</a></li>
-      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
-      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
-      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
-      <li><a href="mappings.html">Mappning till profiler</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
     </ul>
   </li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
-      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
-      <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="api.html">API</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -165,7 +156,7 @@
 
 <!-- layouts\layout-ext -->
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   
 
 
@@ -264,7 +255,7 @@
           
 
             per 
-2026-10-26
+2026-11-13
 
           
         
@@ -286,7 +277,7 @@
 
   </table>
 
-<div data-fhir="generated"><p>Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.</p>
+<div data-fhir="generated"><p>Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.</p>
 </div>
 
 
@@ -310,8 +301,9 @@ Element-ID:     <code>
   <p><b>Usage info</b></p>
   <p><b>Användningar:</b></p>
 <ul>
- <li>Använd denna Extension: <a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></li>
- <li>Exempel för denna Extension: <a href="Bundle-SokresultatForPatient.html">Bundle/SokresultatForPatient</a> and <a href="DocumentReference-IndexpostFranAdapter.html">DocumentReference/IndexpostFranAdapter</a></li>
+ <li>Använd denna Extension: <a href="StructureDefinition-IneraEngagement.html">Engagemangspost</a></li>
+ <li>Exempel för denna Extension: <a href="Bundle-SokresultatForPatient.html">Bundle/SokresultatForPatient</a>, <a href="DocumentReference-EngagemangspostAktuell.html">DocumentReference/EngagemangspostAktuell</a>, <a href="DocumentReference-EngagemangspostBorttagen.html">DocumentReference/EngagemangspostBorttagen</a>, <a href="DocumentReference-EngagemangspostFhir.html">DocumentReference/EngagemangspostFhir</a> and <a href="DocumentReference-EngagemangspostKallsystemSomPuA.html">DocumentReference/EngagemangspostKallsystemSomPuA</a></li>
+ <li>Sökparametrar som använder denna Extension: <a href="SearchParameter-DocumentReference-logical-address.html">Sökparameter logical-address</a></li>
 </ul>
 <p>Du kan också kontrollera <a href="https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/LogicalAddress">användningar i FHIR IG-statistiken</a></p>
 
@@ -361,7 +353,7 @@ Element-ID:     <code>
     </p>
         <div id="tbl-diff-inner">
           <table border="0" fhir="generated-heirarchy" cellpadding="0" cellspacing="0" id="LogicalAddressD" class="xhtTableBorder0" data-fhir="generated-heirarchy"><tr fhir="generated-heirarchy" class="xhtRowBorder1" data-fhir="generated-heirarchy"><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Elementets logiska namn" data-no-external="true">Namn</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Information om användningen av elementet" data-no-external="true">Flaggor</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Lägsta och högsta antal gånger elementet kan förekomma i instansen" data-no-external="true">Kard.</a></th><th scope="col" style="; width: 100px" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Referens till elementets typ" data-no-external="true">Typ</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Ytterligare information om elementet" data-no-external="true">Beskrivning &amp; begränsningar</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: normal">Filter: <input size="10" name="filter" style="border: 1px #F0F0F0 solid; background-color: rgb(254, 254, 231);" onInput="filterTree(document.getElementById('LogicalAddressD'), event.target.value)" type="text" aria-label="Filter"/> <button onClick="showPanel(this, document.getElementById('LogicalAddressD'), document.getElementById('ppLogicalAddressD'))" aria-controls="ppLogicalAddressD" style="background: none; border: 0; padding: 0; margin: 0; cursor: pointer" type="button" title="Filters" aria-label="Filters"><img src="tree-filter.png" alt=""/></button><div style="display: none; position: fixed; opacity : 1.0; background-color: rgb(254, 254, 231); border: 1px solid #ccc; padding: 10px; boxShadow: 0 2px 5px rgba(0,0,0,0.2); zIndex: 1000; borderRadius: 4px" id="ppLogicalAddressD"><label>Begränsningar <input onClick="filterDesc(document.getElementById('LogicalAddressD'), 'constraint',event.target.checked, document.getElementById('ppLogicalAddressD'))" size="1" name="constraint" checked="true" id="cbLogicalAddressD-constraint" type="checkbox" aria-label="constraint"/></label><br/><label>Bindningar <input onClick="filterDesc(document.getElementById('LogicalAddressD'), 'binding',event.target.checked, document.getElementById('ppLogicalAddressD'))" size="1" name="binding" checked="true" id="cbLogicalAddressD-binding" type="checkbox" aria-label="binding"/></label><br/><label>Skyldigheter <input onClick="filterDesc(document.getElementById('LogicalAddressD'), 'obligation',event.target.checked, document.getElementById('ppLogicalAddressD'))" size="1" name="obligation" checked="true" id="cbLogicalAddressD-obligation" type="checkbox" aria-label="obligation"/></label><br/></div></span><span style="float: right"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Legend for this format" data-no-external="true"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" onLoad="fhirTableInit(this)" style="background-color: inherit"/></a></span></th></tr>
-<tr fhir="generated-heirarchy" id="a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="" style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex." data-no-external="true">Extension</a><a name="Extension"> </a></td>
+<tr fhir="generated-heirarchy" id="a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="" style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda." data-no-external="true">Extension</a><a name="Extension"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">0</span><span class="xhtPieceDeEmphasized">..</span><span class="xhtPieceDeEmphasized">*</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/extensibility.html#Extension">Extension</a></td>
@@ -391,7 +383,7 @@ Element-ID:     <code>
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string" class="xhtPieceDeEmphasized">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">The value that is unique</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // b68f5df7-74d9-4d95-ae97-db91bc90ed2f
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 079c3162-19b4-461e-a9f2-ab5e69032011
 document.getElementById('cbLogicalAddressD-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressD'), 'constraint', document.getElementById('cbLogicalAddressD-constraint').checked, document.getElementById('ppLogicalAddressD'));
 document.getElementById('cbLogicalAddressD-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -418,7 +410,7 @@ filterDesc(document.getElementById('LogicalAddressD'), 'obligation', document.ge
       <div id="tbl-snap">
         <div id="tbl-snap-inner">
           <table border="0" fhir="generated-heirarchy" cellpadding="0" cellspacing="0" id="LogicalAddressS" class="xhtTableBorder0" data-fhir="generated-heirarchy"><tr fhir="generated-heirarchy" class="xhtRowBorder1" data-fhir="generated-heirarchy"><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Elementets logiska namn" data-no-external="true">Namn</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Information om användningen av elementet" data-no-external="true">Flaggor</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Lägsta och högsta antal gånger elementet kan förekomma i instansen" data-no-external="true">Kard.</a></th><th scope="col" style="; width: 100px" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Referens till elementets typ" data-no-external="true">Typ</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Ytterligare information om elementet" data-no-external="true">Beskrivning &amp; begränsningar</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: normal">Filter: <input size="10" name="filter" style="border: 1px #F0F0F0 solid; background-color: rgb(254, 254, 231);" onInput="filterTree(document.getElementById('LogicalAddressS'), event.target.value)" type="text" aria-label="Filter"/> <button onClick="showPanel(this, document.getElementById('LogicalAddressS'), document.getElementById('ppLogicalAddressS'))" aria-controls="ppLogicalAddressS" style="background: none; border: 0; padding: 0; margin: 0; cursor: pointer" type="button" title="Filters" aria-label="Filters"><img src="tree-filter.png" alt=""/></button><div style="display: none; position: fixed; opacity : 1.0; background-color: rgb(254, 254, 231); border: 1px solid #ccc; padding: 10px; boxShadow: 0 2px 5px rgba(0,0,0,0.2); zIndex: 1000; borderRadius: 4px" id="ppLogicalAddressS"><label>Begränsningar <input onClick="filterDesc(document.getElementById('LogicalAddressS'), 'constraint',event.target.checked, document.getElementById('ppLogicalAddressS'))" size="1" name="constraint" checked="true" id="cbLogicalAddressS-constraint" type="checkbox" aria-label="constraint"/></label><br/><label>Bindningar <input onClick="filterDesc(document.getElementById('LogicalAddressS'), 'binding',event.target.checked, document.getElementById('ppLogicalAddressS'))" size="1" name="binding" checked="true" id="cbLogicalAddressS-binding" type="checkbox" aria-label="binding"/></label><br/><label>Skyldigheter <input onClick="filterDesc(document.getElementById('LogicalAddressS'), 'obligation',event.target.checked, document.getElementById('ppLogicalAddressS'))" size="1" name="obligation" checked="true" id="cbLogicalAddressS-obligation" type="checkbox" aria-label="obligation"/></label><br/></div></span><span style="float: right"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Legend for this format" data-no-external="true"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" onLoad="fhirTableInit(this)" style="background-color: inherit"/></a></span></th></tr>
-<tr fhir="generated-heirarchy" id="s-a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_resource.png" alt="" style="background-color: white; background-color: inherit" title="Resurs" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex." data-no-external="true">Extension</a><a name="s-Extension"> </a></td>
+<tr fhir="generated-heirarchy" id="s-a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_resource.png" alt="" style="background-color: white; background-color: inherit" title="Resurs" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda." data-no-external="true">Extension</a><a name="s-Extension"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">0..*</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/extensibility.html#Extension">Extension</a></td>
@@ -483,7 +475,7 @@ filterDesc(document.getElementById('LogicalAddressD'), 'obligation', document.ge
 <td style="" class="hierarchy xhtCellBorder0">0..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/references.html">Reference</a>(<a href="http://hl7.org/fhir/R5/organization.html">Organization</a>)</td>
 <td style="" class="hierarchy xhtCellBorder0">Organization that issued id (may be just text)</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // b68f5df7-74d9-4d95-ae97-db91bc90ed2f
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 079c3162-19b4-461e-a9f2-ab5e69032011
 document.getElementById('cbLogicalAddressS-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressS'), 'constraint', document.getElementById('cbLogicalAddressS-constraint').checked, document.getElementById('ppLogicalAddressS'));
 document.getElementById('cbLogicalAddressS-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -640,7 +632,7 @@ filterDesc(document.getElementById('LogicalAddressS'), 'obligation', document.ge
 <p><b>
 Sammanfattning
 </b></p>
-<p>Enkel extension med typen Identifier: Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.</p></div>
+<p>Enkel extension med typen Identifier: Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.</p></div>
         </div>
       </div>
     </div>
@@ -655,7 +647,7 @@ Sammanfattning
     </p>
         <div id="all-tbl-diff-inner">
           <table border="0" fhir="generated-heirarchy" cellpadding="0" cellspacing="0" id="LogicalAddressDA" class="xhtTableBorder0" data-fhir="generated-heirarchy"><tr fhir="generated-heirarchy" class="xhtRowBorder1" data-fhir="generated-heirarchy"><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Elementets logiska namn" data-no-external="true">Namn</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Information om användningen av elementet" data-no-external="true">Flaggor</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Lägsta och högsta antal gånger elementet kan förekomma i instansen" data-no-external="true">Kard.</a></th><th scope="col" style="; width: 100px" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Referens till elementets typ" data-no-external="true">Typ</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Ytterligare information om elementet" data-no-external="true">Beskrivning &amp; begränsningar</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: normal">Filter: <input size="10" name="filter" style="border: 1px #F0F0F0 solid; background-color: rgb(254, 254, 231);" onInput="filterTree(document.getElementById('LogicalAddressDA'), event.target.value)" type="text" aria-label="Filter"/> <button onClick="showPanel(this, document.getElementById('LogicalAddressDA'), document.getElementById('ppLogicalAddressDA'))" aria-controls="ppLogicalAddressDA" style="background: none; border: 0; padding: 0; margin: 0; cursor: pointer" type="button" title="Filters" aria-label="Filters"><img src="tree-filter.png" alt=""/></button><div style="display: none; position: fixed; opacity : 1.0; background-color: rgb(254, 254, 231); border: 1px solid #ccc; padding: 10px; boxShadow: 0 2px 5px rgba(0,0,0,0.2); zIndex: 1000; borderRadius: 4px" id="ppLogicalAddressDA"><label>Begränsningar <input onClick="filterDesc(document.getElementById('LogicalAddressDA'), 'constraint',event.target.checked, document.getElementById('ppLogicalAddressDA'))" size="1" name="constraint" checked="true" id="cbLogicalAddressDA-constraint" type="checkbox" aria-label="constraint"/></label><br/><label>Bindningar <input onClick="filterDesc(document.getElementById('LogicalAddressDA'), 'binding',event.target.checked, document.getElementById('ppLogicalAddressDA'))" size="1" name="binding" checked="true" id="cbLogicalAddressDA-binding" type="checkbox" aria-label="binding"/></label><br/><label>Skyldigheter <input onClick="filterDesc(document.getElementById('LogicalAddressDA'), 'obligation',event.target.checked, document.getElementById('ppLogicalAddressDA'))" size="1" name="obligation" checked="true" id="cbLogicalAddressDA-obligation" type="checkbox" aria-label="obligation"/></label><br/></div></span><span style="float: right"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Legend for this format" data-no-external="true"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" onLoad="fhirTableInit(this)" style="background-color: inherit"/></a></span></th></tr>
-<tr fhir="generated-heirarchy" id="a-a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="" style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex." data-no-external="true">Extension</a><a name="a-Extension"> </a></td>
+<tr fhir="generated-heirarchy" id="a-a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="" style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda." data-no-external="true">Extension</a><a name="a-Extension"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">0</span><span class="xhtPieceDeEmphasized">..</span><span class="xhtPieceDeEmphasized">*</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/extensibility.html#Extension">Extension</a></td>
@@ -685,7 +677,7 @@ Sammanfattning
 <td style="" class="hierarchy xhtCellBorder0">1..<span class="xhtPieceDeEmphasized">1</span></td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/datatypes.html#string" class="xhtPieceDeEmphasized">string</a></td>
 <td style="" class="hierarchy xhtCellBorder0"><span class="xhtPieceDeEmphasized">The value that is unique</span></td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // b68f5df7-74d9-4d95-ae97-db91bc90ed2f
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 079c3162-19b4-461e-a9f2-ab5e69032011
 document.getElementById('cbLogicalAddressDA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressDA'), 'constraint', document.getElementById('cbLogicalAddressDA-constraint').checked, document.getElementById('ppLogicalAddressDA'));
 document.getElementById('cbLogicalAddressDA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -708,7 +700,7 @@ filterDesc(document.getElementById('LogicalAddressDA'), 'obligation', document.g
         </p>
         <div id="all-tbl-snap-inner">
           <table border="0" fhir="generated-heirarchy" cellpadding="0" cellspacing="0" id="LogicalAddressSA" class="xhtTableBorder0" data-fhir="generated-heirarchy"><tr fhir="generated-heirarchy" class="xhtRowBorder1" data-fhir="generated-heirarchy"><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Elementets logiska namn" data-no-external="true">Namn</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Information om användningen av elementet" data-no-external="true">Flaggor</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Lägsta och högsta antal gånger elementet kan förekomma i instansen" data-no-external="true">Kard.</a></th><th scope="col" style="; width: 100px" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Referens till elementets typ" data-no-external="true">Typ</a></th><th scope="col" style="" class="hierarchy xhtCellBorder0"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Ytterligare information om elementet" data-no-external="true">Beskrivning &amp; begränsningar</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: normal">Filter: <input size="10" name="filter" style="border: 1px #F0F0F0 solid; background-color: rgb(254, 254, 231);" onInput="filterTree(document.getElementById('LogicalAddressSA'), event.target.value)" type="text" aria-label="Filter"/> <button onClick="showPanel(this, document.getElementById('LogicalAddressSA'), document.getElementById('ppLogicalAddressSA'))" aria-controls="ppLogicalAddressSA" style="background: none; border: 0; padding: 0; margin: 0; cursor: pointer" type="button" title="Filters" aria-label="Filters"><img src="tree-filter.png" alt=""/></button><div style="display: none; position: fixed; opacity : 1.0; background-color: rgb(254, 254, 231); border: 1px solid #ccc; padding: 10px; boxShadow: 0 2px 5px rgba(0,0,0,0.2); zIndex: 1000; borderRadius: 4px" id="ppLogicalAddressSA"><label>Begränsningar <input onClick="filterDesc(document.getElementById('LogicalAddressSA'), 'constraint',event.target.checked, document.getElementById('ppLogicalAddressSA'))" size="1" name="constraint" checked="true" id="cbLogicalAddressSA-constraint" type="checkbox" aria-label="constraint"/></label><br/><label>Bindningar <input onClick="filterDesc(document.getElementById('LogicalAddressSA'), 'binding',event.target.checked, document.getElementById('ppLogicalAddressSA'))" size="1" name="binding" checked="true" id="cbLogicalAddressSA-binding" type="checkbox" aria-label="binding"/></label><br/><label>Skyldigheter <input onClick="filterDesc(document.getElementById('LogicalAddressSA'), 'obligation',event.target.checked, document.getElementById('ppLogicalAddressSA'))" size="1" name="obligation" checked="true" id="cbLogicalAddressSA-obligation" type="checkbox" aria-label="obligation"/></label><br/></div></span><span style="float: right"><a no-external="true" href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Legend for this format" data-no-external="true"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" onLoad="fhirTableInit(this)" style="background-color: inherit"/></a></span></th></tr>
-<tr fhir="generated-heirarchy" id="sa-a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_resource.png" alt="" style="background-color: white; background-color: inherit" title="Resurs" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex." data-no-external="true">Extension</a><a name="sa-Extension"> </a></td>
+<tr fhir="generated-heirarchy" id="sa-a" class="xhtRowBorder0 xhtRowEven" data-fhir="generated-heirarchy"><td role="rowheader" style="background-image: url(tbl_bck1.png)" class="hierarchy xhtCellBorder0 xhtCellNoWrap"><img src="tbl_spacer.png" alt="" style="background-color: inherit" class="hierarchy"/><img src="icon_resource.png" alt="" style="background-color: white; background-color: inherit" title="Resurs" class="hierarchy"/> <a no-external="true" href="StructureDefinition-LogicalAddress-definitions.html#Extension" title="Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda." data-no-external="true">Extension</a><a name="sa-Extension"> </a></td>
 <td style="" class="hierarchy xhtCellBorder0"></td>
 <td style="" class="hierarchy xhtCellBorder0">0..*</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/extensibility.html#Extension">Extension</a></td>
@@ -773,7 +765,7 @@ filterDesc(document.getElementById('LogicalAddressDA'), 'obligation', document.g
 <td style="" class="hierarchy xhtCellBorder0">0..1</td>
 <td style="" class="hierarchy xhtCellBorder0"><a href="http://hl7.org/fhir/R5/references.html">Reference</a>(<a href="http://hl7.org/fhir/R5/organization.html">Organization</a>)</td>
 <td style="" class="hierarchy xhtCellBorder0">Organization that issued id (may be just text)</td></tr>
-<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // b68f5df7-74d9-4d95-ae97-db91bc90ed2f
+<tr fhir="generated-heirarchy" data-fhir="generated-heirarchy"><td colspan="5" class="hierarchy"><br/><a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views" title="Förklaring för detta format"><img src="https://hl7.org/fhir/R5/help16.png" alt="doco" style="background-color: inherit"/> Dokumentation för detta format</a></td></tr><script type="text/javascript">  // 079c3162-19b4-461e-a9f2-ab5e69032011
 document.getElementById('cbLogicalAddressSA-constraint').checked = 'false' != localStorage.getItem('ht-table-states-constraint');
 filterDesc(document.getElementById('LogicalAddressSA'), 'constraint', document.getElementById('cbLogicalAddressSA-constraint').checked, document.getElementById('ppLogicalAddressSA'));
 document.getElementById('cbLogicalAddressSA-binding').checked = 'false' != localStorage.getItem('ht-table-states-binding');
@@ -924,7 +916,7 @@ filterDesc(document.getElementById('LogicalAddressSA'), 'obligation', document.g
 <p><b>
 Sammanfattning
 </b></p>
-<p>Enkel extension med typen Identifier: Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.</p></div>
+<p>Enkel extension med typen Identifier: Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.</p></div>
         </div>
       </div>
     </div>
@@ -966,8 +958,8 @@ Sammanfattning
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-10 12:09:00 +0000">
-    2026-11-10
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
   </span>
 
           <br/>

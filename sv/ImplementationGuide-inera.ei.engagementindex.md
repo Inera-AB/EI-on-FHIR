@@ -1,4 +1,4 @@
-# Resource FHIR-baserat engagemangsindex (FHIR-EI)
+# Resource EI-on-FHIR: FHIR-API för engagemangsindex
 
 
 
@@ -12,9 +12,9 @@
   "url" : "https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex",
   "version" : "0.1.0",
   "name" : "IneraEngagementIndex",
-  "title" : "FHIR-baserat engagemangsindex (FHIR-EI)",
+  "title" : "EI-on-FHIR: FHIR-API för engagemangsindex",
   "status" : "draft",
-  "date" : "2026-11-10T12:09:41+00:00",
+  "date" : "2026-11-13T09:35:31+00:00",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -23,7 +23,7 @@
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Indexprofil, API och händelsemodell för FHIR-EI, ett index över var det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades.",
+  "description" : "Ett FHIR R5-API ovanpå dagens engagemangsindex, för Ineras interna stödtjänster och för synk till eHM:s patientindex, med ett eget register för källor som implementerar en tjänsts FHIR-IG.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -61,33 +61,51 @@
     "resource" : [{
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "CapabilityStatement"
+        "valueString" : "DocumentReference"
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "CapabilityStatement-IneraIndexServer.html"
+        "valueUri" : "DocumentReference-EngagemangspostAktuell.html"
       }],
       "reference" : {
-        "reference" : "CapabilityStatement/IneraIndexServer"
+        "reference" : "DocumentReference/EngagemangspostAktuell"
       },
-      "name" : "FHIR-EI server",
-      "description" : "Krav på FHIR-EI som server: sökning, registrering och avregistrering, prenumeration, inkrementell avstämning och massuttag av indexposter.",
-      "isExample" : false
+      "name" : "Aktuell engagemangspost",
+      "description" : "En engagemangspost i tjänstedomänen riv:clinicalprocess:healthcond:description, där vårdgivarens HSA-id är både logisk adress och personuppgiftsansvarig.",
+      "isExample" : true,
+      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement"]
     },
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "ValueSet"
+        "valueString" : "DocumentReference"
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "ValueSet-IneraIndexPopulationMethodValueSet.html"
+        "valueUri" : "DocumentReference-EngagemangspostBorttagen.html"
       }],
       "reference" : {
-        "reference" : "ValueSet/IneraIndexPopulationMethodValueSet"
+        "reference" : "DocumentReference/EngagemangspostBorttagen"
       },
-      "name" : "Försörjningssätt",
-      "description" : "Alla försörjningssätt för indexposter.",
+      "name" : "Borttagen engagemangspost",
+      "description" : "En post som har tagits bort ur EI. Den visas med status superseded under borttagsloggens lagringstid, så att synken till eHM:s patientindex ser borttaget.",
+      "isExample" : true,
+      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement"]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "CapabilityStatement"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "CapabilityStatement-IneraEngagementIndexServer.html"
+      }],
+      "reference" : {
+        "reference" : "CapabilityStatement/IneraEngagementIndexServer"
+      },
+      "name" : "EI-on-FHIR server",
+      "description" : "Krav på EI-on-FHIR som server: läsning och sökning av engagemangsposter från EI och från EI-on-FHIR:s register, registrering i registret för FHIR-producenter. Massuttag med Bulk Data $export krävs i text på IG-sidan API, eftersom Bulk Data Access bara finns för R4.",
       "isExample" : false
     },
     {
@@ -97,13 +115,13 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-IneraIndexEntry.html"
+        "valueUri" : "StructureDefinition-IneraEngagement.html"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/IneraIndexEntry"
+        "reference" : "StructureDefinition/IneraEngagement"
       },
-      "name" : "Indexpost (FHIR-EI)",
-      "description" : "Gemensam indexpost. Anger att en producent via en endpoint har information om en patient inom en tjänst.\nDet finns en post per patient × endpoint × tjänst. Posten kan bära flera informationsmängder, och tidpunkten\nför senaste ändring av innehållet gäller hela posten.\n\nPosten betyder samma sak oavsett hur den har kommit till: registrerad av producenten, fylld av Ineras\nlokaliseringstjänst eller speglad från dagens engagemangsindex. Försörjningssättet framgår av `meta.tag`.\n\nPosten är en pekare, inte innehåll. Varje tjänst publicerar sin tillämpning som en profil av denna profil, i\ntjänstens IG, och bestämmer där om informationsmängder och tidpunkt för senaste ändring är obligatoriska.",
+      "name" : "Engagemangspost",
+      "description" : "En engagemangspost, exponerad som DocumentReference. Posten pekar ut att ett källsystem har information om en patient inom en tjänstedomän, och hur den hämtas: med RIV-TA via tjänsteplattformen och en logisk adress, eller med FHIR från en endpoint. Den bär inget journalinnehåll. Posten kommer antingen från engagemangsindex (EI) eller från EI-on-FHIR:s eget register för FHIR-producenter. En resurs motsvarar en post, utan sammanslagning.",
       "isExample" : false
     },
     {
@@ -113,15 +131,15 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "DocumentReference-IndexpostFranLokaliseringstjanst.html"
+        "valueUri" : "DocumentReference-EngagemangspostFhir.html"
       }],
       "reference" : {
-        "reference" : "DocumentReference/IndexpostFranLokaliseringstjanst"
+        "reference" : "DocumentReference/EngagemangspostFhir"
       },
-      "name" : "Indexpost fylld av lokaliseringstjänsten",
-      "description" : "Lokaliseringstjänsten har slagit upp patientens vårdgivare i eHM:s patientindex och ställt en riktad fråga till journalsystem C. Vårdgivaren anges med organisationsnummer, och vårdenhet saknas eftersom patientindexet inte anger den.",
+      "name" : "Engagemangspost från en FHIR-producent",
+      "description" : "En post i EI-on-FHIR:s register. Källsystemet SE0000000000-SYS1 svarar både på tjänstekontraktet och på tjänstens FHIR-IG, och har därför också en RIV-TA-post i EI (Aktuell engagemangspost). Posterna har samma patient, tjänstedomän och logiska adress, så en konsument kan välja väg.",
       "isExample" : true,
-      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
+      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement"]
     },
     {
       "extension" : [{
@@ -130,80 +148,30 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "DocumentReference-IndexpostEjForPatient.html"
+        "valueUri" : "DocumentReference-EngagemangspostKallsystemSomPuA.html"
       }],
       "reference" : {
-        "reference" : "DocumentReference/IndexpostEjForPatient"
+        "reference" : "DocumentReference/EngagemangspostKallsystemSomPuA"
       },
-      "name" : "Indexpost som inte visas för patient eller närstående",
-      "description" : "Producenten har märkt posten med säkerhetsetiketten NOPAT. FHIR-EI lämnar inte ut den vid patientens direktåtkomst eller till ombud och vårdnadshavare, men vid sammanhållen journalföring prövas den som vanligt.",
+      "name" : "Engagemangspost med källsystemet som personuppgiftsansvarig",
+      "description" : "En engagemangspost där dataController är källsystemets HSA-id, som EI har godtagit sedan migreringen från NPÖ:s index. Vårdgivaren går inte att läsa ut ur custodian.",
       "isExample" : true,
-      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
+      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement"]
     },
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "DocumentReference"
+        "valueString" : "ValueSet"
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "DocumentReference-IndexpostFranAdapter.html"
+        "valueUri" : "ValueSet-IneraRetrievalProtocolValueSet.html"
       }],
       "reference" : {
-        "reference" : "DocumentReference/IndexpostFranAdapter"
+        "reference" : "ValueSet/IneraRetrievalProtocolValueSet"
       },
-      "name" : "Indexpost speglad av övergångsadaptern",
-      "description" : "Adaptern har slagit ihop dagens engagemangsposter för samma patient, logiska adress och tjänstedomän till en indexpost, med dagens kategori som informationsmängd. Endpointen är tjänsteplattformens endpoint för tjänstekontraktet, enligt adapterns adressregister, och den logiska adressen anges separat. Registrerande producent är adaptern, och källsystemet behålls.",
-      "isExample" : true,
-      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "SubscriptionTopic"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "SubscriptionTopic-indexpost-andrad.html"
-      }],
-      "reference" : {
-        "reference" : "SubscriptionTopic/indexpost-andrad"
-      },
-      "name" : "Indexpost ändrad",
-      "description" : "Triggar när en indexpost skapas, uppdateras eller avregistreras. Avregistrering är en uppdatering till status superseded eller entered-in-error, inte en radering.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "DocumentReference"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "DocumentReference-IndexpostIndragen.html"
-      }],
-      "reference" : {
-        "reference" : "DocumentReference/IndexpostIndragen"
-      },
-      "name" : "Indragen indexpost",
-      "description" : "Producenten har dragit tillbaka posten eftersom engagemanget är avslutat. Posten ligger kvar som gravsten under gravstenarnas lagringstid och syns vid avstämning och export, men inte i en standardsökning.",
-      "isExample" : true,
-      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:extension"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-ContentLastUpdated.html"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/ContentLastUpdated"
-      },
-      "name" : "Innehållets senaste ändring",
-      "description" : "När det kliniska innehållet i källsystemet senast ändrades, enligt producenten. Gäller hela posten. Hålls isär från meta.lastUpdated, som anger när indexposten ändrades i FHIR-EI. Motsvarar mostRecentContent i dagens engagemangsindex.",
+      "name" : "Hämtningsprotokoll",
+      "description" : "Alla hämtningsprotokoll för engagemangsposter.",
       "isExample" : false
     },
     {
@@ -219,7 +187,7 @@
         "reference" : "ValueSet/IneraEngagementCategoryValueSet"
       },
       "name" : "Kategorier inom tjänstedomän",
-      "description" : "Alla kategorier i kodverket för kategorier inom tjänstedomän.",
+      "description" : "Alla kategorier i kodsystemet för kategorier inom tjänstedomän.",
       "isExample" : false
     },
     {
@@ -229,13 +197,13 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "CodeSystem-IneraIndexPopulationMethodCodeSystem.html"
+        "valueUri" : "CodeSystem-IneraRetrievalProtocolCodeSystem.html"
       }],
       "reference" : {
-        "reference" : "CodeSystem/IneraIndexPopulationMethodCodeSystem"
+        "reference" : "CodeSystem/IneraRetrievalProtocolCodeSystem"
       },
-      "name" : "Kodsystem för försörjningssätt",
-      "description" : "Hur en indexpost har kommit till. Försörjningen väljs per tjänst; konsumenterna läser posterna på samma sätt oavsett försörjningssätt.",
+      "name" : "Kodsystem för hämtningsprotokoll",
+      "description" : "Hur en konsument hämtar den information som en engagemangspost pekar ut.",
       "isExample" : false
     },
     {
@@ -251,39 +219,7 @@
         "reference" : "CodeSystem/IneraEngagementCategoryCodeSystem"
       },
       "name" : "Kodsystem för kategorier inom tjänstedomän",
-      "description" : "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "CodeSystem"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "CodeSystem-IneraDeregistrationReasonCodeSystem.html"
-      }],
-      "reference" : {
-        "reference" : "CodeSystem/IneraDeregistrationReasonCodeSystem"
-      },
-      "name" : "Kodsystem för orsaker till avregistrering",
-      "description" : "Varför en indexpost avregistreras. Orsaken avgör hur mottagare, till exempel ett tunt index, ska hantera avregistreringen.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "CodeSystem"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "CodeSystem-IneraIndexRegistrationStatusCodeSystem.html"
-      }],
-      "reference" : {
-        "reference" : "CodeSystem/IneraIndexRegistrationStatusCodeSystem"
-      },
-      "name" : "Kodsystem för registreringsstatus",
-      "description" : "En indexposts livscykeltillstånd. Varje kod motsvarar ett värde i DocumentReference.status.",
+      "description" : "Kategorier inom en tjänstedomän, som de anges i categorization i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
       "isExample" : false
     },
     {
@@ -299,7 +235,7 @@
         "reference" : "CodeSystem/IneraServiceDomainCodeSystem"
       },
       "name" : "Kodsystem för tjänstedomäner",
-      "description" : "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
+      "description" : "Tjänstedomäner, som de anges i serviceDomain i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
       "isExample" : false
     },
     {
@@ -315,7 +251,7 @@
         "reference" : "StructureDefinition/SourceSystem"
       },
       "name" : "Källsystem",
-      "description" : "Källsystemet eller journalsystemet som håller informationen, när den registrerande parten inte är källan själv: källsystemet enligt dagens engagemangsindex vid spegling, eller journalsystemet enligt eHM:s patientindex vid Inera-försörjd cache. En post kan ha flera källsystem när adaptern slår ihop engagemangsposter. Motsvarar sourceSystem i dagens engagemangsindex.",
+      "description" : "Det system som har informationen och har registrerat posten (sourceSystem i EI). Ett HSA-id.",
       "isExample" : false
     },
     {
@@ -331,24 +267,8 @@
         "reference" : "StructureDefinition/LogicalAddress"
       },
       "name" : "Logisk adress",
-      "description" : "Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.",
+      "description" : "Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.",
       "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "Bundle"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "Bundle-SokresultatOfullstandigt.html"
-      }],
-      "reference" : {
-        "reference" : "Bundle/SokresultatOfullstandigt"
-      },
-      "name" : "Ofullständigt sökresultat",
-      "description" : "Svar på en sökning där en källa inte svarade på lokaliseringstjänstens riktade fråga inom tidsgränsen. Bundlen innehåller de poster som gick att bekräfta, och en OperationOutcome i Bundle.issues anger vilken källa som saknas, så att konsumenten kan visa att uppgifter kan saknas.",
-      "isExample" : true
     },
     {
       "extension" : [{
@@ -357,13 +277,13 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-DeregistrationReason.html"
+        "valueUri" : "StructureDefinition-MostRecentContent.html"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/DeregistrationReason"
+        "reference" : "StructureDefinition/MostRecentContent"
       },
-      "name" : "Orsak till avregistrering",
-      "description" : "Varför posten avregistrerades: felregistrering, avslutat engagemang, gallring eller avregistrering via övergångsadaptern. Finns om och endast om posten inte är registrerad.",
+      "name" : "Senaste innehåll",
+      "description" : "När informationen hos källsystemet senast ändrades, enligt källsystemet (mostRecentContent i EI). Skiljer sig från meta.lastUpdated, som anger när posten senast ändrades i EI.",
       "isExample" : false
     },
     {
@@ -373,143 +293,13 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "ValueSet-IneraDeregistrationReasonValueSet.html"
+        "valueUri" : "ValueSet-IneraEngagementStatusValueSet.html"
       }],
       "reference" : {
-        "reference" : "ValueSet/IneraDeregistrationReasonValueSet"
+        "reference" : "ValueSet/IneraEngagementStatusValueSet"
       },
-      "name" : "Orsaker till avregistrering",
-      "description" : "Alla orsaker till avregistrering av en indexpost.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "Subscription"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "Subscription-PrenumerationForPatient.html"
-      }],
-      "reference" : {
-        "reference" : "Subscription/PrenumerationForPatient"
-      },
-      "name" : "Prenumeration på en patients indexposter",
-      "description" : "En konsument prenumererar på ändrade indexposter för en patient inom en tjänst.",
-      "isExample" : true,
-      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription"]
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-IneraIndexSubscription.html"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/IneraIndexSubscription"
-      },
-      "name" : "Prenumeration på indexposter (FHIR-EI)",
-      "description" : "En konsuments prenumeration på ändrade indexposter, på topic `indexpost-andrad`. Prenumerationen kan\nfiltreras på patient, tjänst och vårdgivare. Notiser bär bara id för ändrade poster, så att de inte bär\nmer patientinformation än nödvändigt.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:extension"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-SourceEndpoint.html"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/SourceEndpoint"
-      },
-      "name" : "Producentens endpoint",
-      "description" : "Producentens åtkomstpunkt, som Endpoint-resurs i tjänstekatalogen. Katalogen är auktoritativ för endpointens egenskaper. Exakt en per indexpost. Motsvarar logicalAddress i dagens engagemangsindex.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "DocumentReference"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "DocumentReference-IndexpostFhirProducent.html"
-      }],
-      "reference" : {
-        "reference" : "DocumentReference/IndexpostFhirProducent"
-      },
-      "name" : "Registrerad indexpost från en FHIR-producent",
-      "description" : "Journalsystem A har vård- och omsorgsdokumentation om patienten. Tjänsten anges med både tjänstedomän och IG-canonical, och informationsmängden med både kategori och profil-canonical.",
-      "isExample" : true,
-      "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry"]
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:extension"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-RegisteringProducer.html"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/RegisteringProducer"
-      },
-      "name" : "Registrerande producent",
-      "description" : "Den registrerande partens identitet: den Endpoint i tjänstekatalogen som den autentiserade klienten är bunden till, som absolut referens. Parten är producenten, en indexeringsagent med producentens identitet, Ineras lokaliseringstjänst eller övergångsadaptern. För en producent är det samma endpoint som i sourceEndpoint. Referensen är också partens namnrymd i identifier.system. FHIR-EI kontrollerar värdet mot den autentiserade klienten. Får inte ändras på en befintlig post. Motsvarar owner i dagens engagemangsindex.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "Bundle"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "Bundle-RegistreringTransaction.html"
-      }],
-      "reference" : {
-        "reference" : "Bundle/RegistreringTransaction"
-      },
-      "name" : "Registrering och avregistrering i en transaction",
-      "description" : "En producent registrerar en post och avregistrerar en felregistrerad post i samma transaction. Bundlen registreras helt eller inte alls.",
-      "isExample" : true
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:extension"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-RegistrationStatus.html"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/RegistrationStatus"
-      },
-      "name" : "Registreringsstatus",
-      "description" : "Postens exakta livscykeltillstånd: registrerad, indragen eller felregistrerad. Bär den semantik som DocumentReference.status inte kan uttrycka, eftersom basbindningen inte kan utökas.",
-      "isExample" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "ValueSet"
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "ValueSet-IneraIndexRegistrationStatusValueSet.html"
-      }],
-      "reference" : {
-        "reference" : "ValueSet/IneraIndexRegistrationStatusValueSet"
-      },
-      "name" : "Registreringsstatus för indexposter",
-      "description" : "Alla livscykeltillstånd för en indexpost.",
+      "name" : "Status för engagemangsposter",
+      "description" : "current för en registrerad post, superseded för en post som har tagits bort och visas under borttagsloggens lagringstid.",
       "isExample" : false
     },
     {
@@ -519,13 +309,13 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "SearchParameter-DocumentReference-content-last-updated.html"
+        "valueUri" : "SearchParameter-DocumentReference-logical-address.html"
       }],
       "reference" : {
-        "reference" : "SearchParameter/DocumentReference-content-last-updated"
+        "reference" : "SearchParameter/DocumentReference-logical-address"
       },
-      "name" : "Sök på innehållets senaste ändring",
-      "description" : "Filtrerar indexposter på när det kliniska innehållet i källsystemet senast ändrades (extension contentLastUpdated). Ersätter tidsfiltret i FindContent.",
+      "name" : "Sökparameter logical-address",
+      "description" : "Söker engagemangsposter på logisk adress (extension logicalAddress), till exempel en vårdgivares HSA-id.",
       "isExample" : false
     },
     {
@@ -535,13 +325,13 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "SearchParameter-DocumentReference-source-endpoint.html"
+        "valueUri" : "SearchParameter-DocumentReference-source-system.html"
       }],
       "reference" : {
-        "reference" : "SearchParameter/DocumentReference-source-endpoint"
+        "reference" : "SearchParameter/DocumentReference-source-system"
       },
-      "name" : "Sök på producentens endpoint",
-      "description" : "Producentens endpoint i tjänstekatalogen (extension sourceEndpoint).",
+      "name" : "Sökparameter source-system",
+      "description" : "Söker engagemangsposter på källsystem (extension sourceSystem).",
       "isExample" : false
     },
     {
@@ -557,7 +347,7 @@
         "reference" : "Bundle/SokresultatForPatient"
       },
       "name" : "Sökresultat för en patient",
-      "description" : "Svar på en konsuments sökning efter en patients indexposter. Utan status-parameter returneras bara registrerade poster, så den indragna posten finns inte med.",
+      "description" : "Svar på GET [base]/DocumentReference?subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212. Resultatet innehåller poster från både EI och EI-on-FHIR:s register. Den borttagna posten kommer inte med, eftersom sökningen inte anger status.",
       "isExample" : true
     },
     {
@@ -573,7 +363,7 @@
         "reference" : "ValueSet/IneraServiceDomainValueSet"
       },
       "name" : "Tjänstedomäner",
-      "description" : "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner.",
+      "description" : "Alla tjänstedomäner i kodsystemet för tjänstedomäner.",
       "isExample" : false
     },
     {
@@ -583,13 +373,13 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
-        "valueUri" : "StructureDefinition-CareUnit.html"
+        "valueUri" : "StructureDefinition-Owner.html"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/CareUnit"
+        "reference" : "StructureDefinition/Owner"
       },
-      "name" : "Vårdenhet",
-      "description" : "Vårdenheten där informationen finns, som HSA-id, när den är känd. Kan saknas när indexet fylls utifrån eHM:s patientindex, som bara anger vårdgivare. Motsvarar careUnitId i dagens engagemangsindex.",
+      "name" : "Ägare",
+      "description" : "Var posten förvaltas (owner i EI): det nationella EI för poster från EI, eller EI-on-FHIR för poster i dess register. Ett HSA-id.",
       "isExample" : false
     }],
     "page" : {
@@ -601,12 +391,6 @@
         "sourceUrl" : "index.html",
         "name" : "index.html",
         "title" : "Hem",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "introduction.html",
-        "name" : "introduction.html",
-        "title" : "Inledning",
         "generation" : "markdown"
       },
       {
@@ -622,69 +406,21 @@
         "generation" : "markdown"
       },
       {
-        "sourceUrl" : "roles-and-responsibilities.html",
-        "name" : "roles-and-responsibilities.html",
-        "title" : "Roller och ansvar",
+        "sourceUrl" : "engagement.html",
+        "name" : "engagement.html",
+        "title" : "Engagemangsposten",
         "generation" : "markdown"
       },
       {
-        "sourceUrl" : "legal-basis.html",
-        "name" : "legal-basis.html",
-        "title" : "Rättslig grund och ändamål",
+        "sourceUrl" : "ehm-sync.html",
+        "name" : "ehm-sync.html",
+        "title" : "Synk till eHM:s patientindex",
         "generation" : "markdown"
       },
       {
-        "sourceUrl" : "information-model.html",
-        "name" : "information-model.html",
-        "title" : "Indexposten",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "population.html",
-        "name" : "population.html",
-        "title" : "Försörjning av indexet",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "information-sets.html",
-        "name" : "information-sets.html",
-        "title" : "Kodverk för tjänster och informationsmängder",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "event-model.html",
-        "name" : "event-model.html",
-        "title" : "Händelsemodell och övergång",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "ehm-coexistence.html",
-        "name" : "ehm-coexistence.html",
-        "title" : "Samexistens med eHM:s patientindex",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "mappings.html",
-        "name" : "mappings.html",
-        "title" : "Mappning till profiler",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "rest-interactions.html",
-        "name" : "rest-interactions.html",
-        "title" : "REST-interaktioner och sökparametrar",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "subscriptions.html",
-        "name" : "subscriptions.html",
-        "title" : "Prenumeration",
-        "generation" : "markdown"
-      },
-      {
-        "sourceUrl" : "expected-responses.html",
-        "name" : "expected-responses.html",
-        "title" : "Förväntade svar",
+        "sourceUrl" : "api.html",
+        "name" : "api.html",
+        "title" : "API",
         "generation" : "markdown"
       },
       {
@@ -694,15 +430,15 @@
         "generation" : "markdown"
       },
       {
-        "sourceUrl" : "error-handling.html",
-        "name" : "error-handling.html",
-        "title" : "Felhantering",
+        "sourceUrl" : "security.html",
+        "name" : "security.html",
+        "title" : "Säkerhet och loggning",
         "generation" : "markdown"
       },
       {
-        "sourceUrl" : "security.html",
-        "name" : "security.html",
-        "title" : "Spärr, loggning och behörighet",
+        "sourceUrl" : "error-handling.html",
+        "name" : "error-handling.html",
+        "title" : "Felhantering",
         "generation" : "markdown"
       },
       {

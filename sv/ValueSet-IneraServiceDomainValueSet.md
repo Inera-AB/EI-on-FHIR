@@ -1,10 +1,10 @@
-# Tjänstedomäner - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# Tjänstedomäner - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## ValueSet: Tjänstedomäner 
 
  **References** 
 
-* [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
+* [Engagemangspost](StructureDefinition-IneraEngagement.md)
 
 ### Logisk definition (CLD)
 
@@ -33,7 +33,7 @@
   "title" : "Tjänstedomäner",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -42,7 +42,7 @@
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner.",
+  "description" : "Alla tjänstedomäner i kodsystemet för tjänstedomäner.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",

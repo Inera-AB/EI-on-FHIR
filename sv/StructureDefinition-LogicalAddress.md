@@ -1,4 +1,4 @@
-# Logisk adress - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# Logisk adress - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## Extension: Logisk adress 
 
@@ -8,8 +8,9 @@
 
 **Användningar:**
 
-* Använd denna Extension: [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
-* Exempel för denna Extension: [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md) and [DocumentReference/IndexpostFranAdapter](DocumentReference-IndexpostFranAdapter.md)
+* Använd denna Extension: [Engagemangspost](StructureDefinition-IneraEngagement.md)
+* Exempel för denna Extension: [Bundle/SokresultatForPatient](Bundle-SokresultatForPatient.md), [DocumentReference/EngagemangspostAktuell](DocumentReference-EngagemangspostAktuell.md), [DocumentReference/EngagemangspostBorttagen](DocumentReference-EngagemangspostBorttagen.md), [DocumentReference/EngagemangspostFhir](DocumentReference-EngagemangspostFhir.md) and [DocumentReference/EngagemangspostKallsystemSomPuA](DocumentReference-EngagemangspostKallsystemSomPuA.md)
+* Sökparametrar som använder denna Extension: [Sökparameter logical-address](SearchParameter-DocumentReference-logical-address.md)
 
 Du kan också kontrollera [användningar i FHIR IG-statistiken](https://packages2.fhir.org/xig/inera.ei.engagementindex|current/StructureDefinition/LogicalAddress)
 
@@ -67,7 +68,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-LogicalAddress.
   "title" : "Logisk adress",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -76,7 +77,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-LogicalAddress.
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.",
+  "description" : "Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -104,7 +105,7 @@ Andra representationer av profilen: [CSV](../StructureDefinition-LogicalAddress.
       "id" : "Extension",
       "path" : "Extension",
       "short" : "Logisk adress",
-      "definition" : "Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex."
+      "definition" : "Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda."
     },
     {
       "id" : "Extension.extension",

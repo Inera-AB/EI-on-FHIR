@@ -7,7 +7,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Tjänstedomäner - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+    <title>Tjänstedomäner - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -50,8 +50,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"24.19"}
-    h3,h4,h5,h6{--heading-prefix:"24.19"}</style>
+    <style type="text/css">h2{--heading-prefix:"15.12"}
+    h3,h4,h5,h6{--heading-prefix:"15.12"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -63,7 +63,7 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -96,31 +96,22 @@
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
-  <li><a href="introduction.html">Inledning</a></li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
-      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
-      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
-      <li><a href="information-model.html">Indexposten</a></li>
-      <li><a href="population.html">Försörjning av indexet</a></li>
-      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
-      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
-      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
-      <li><a href="mappings.html">Mappning till profiler</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
     </ul>
   </li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
-      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
-      <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="api.html">API</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -165,7 +156,7 @@
 
 <!-- layouts\layout-valueset -->
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   
 
 
@@ -244,7 +235,7 @@
           
 
             per 
-2026-10-26
+2026-11-13
 
           
         
@@ -267,7 +258,7 @@
   </table>
 
 <div data-fhir="generated">
-<p>Alla tjänstedomäner i Ineras kodverk för tjänstedomäner.</p>
+<p>Alla tjänstedomäner i kodsystemet för tjänstedomäner.</p>
 
 </div>
 
@@ -277,7 +268,7 @@
   </p>
   
 <ul>
- <li><a href="StructureDefinition-IneraIndexEntry.html">Indexpost (FHIR-EI)</a></li>
+ <li><a href="StructureDefinition-IneraEngagement.html">Engagemangspost</a></li>
 </ul>
 
 
@@ -297,7 +288,7 @@
   <a name="expansion"> </a>
   <h3 id="expansion">Expansion</h3>
 
-  <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated"><p class="res-header-id"/><p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på <a href="CodeSystem-IneraServiceDomainCodeSystem.html">codesystem Kodsystem för tjänstedomäner v0.1.0 (CodeSystem)</a><span class="copy-text-inline"><button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button></span></p><p>Denna värdemängd innehåller 1 begrepp</p><table class="codes" data-fhir="generated"><tr><td><b>System</b></td><td style="white-space:nowrap"><b>Kod</b></td><td><b>Visning (sv)</b></td><td><b>Definition</b></td><td><b>JSON</b></td><td><b>XML</b></td></tr><tr><td><a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem-riv:clinicalprocess:healthcond:description"> </a><code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code></td><td style="white-space:nowrap">  <a href="CodeSystem-IneraServiceDomainCodeSystem.html#IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description">riv:clinicalprocess:healthcond:description</a></td><td/><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td><td><span class="copy-text-inline"><button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;riv:clinicalprocess:healthcond:description&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button></span></td><td><span class="copy-text-inline"><button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;riv:clinicalprocess:healthcond:description&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button></span></td></tr></table></div>
+  <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated"><p class="res-header-id"/><p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på <a href="CodeSystem-IneraServiceDomainCodeSystem.html">codesystem Kodsystem för tjänstedomäner v0.1.0 (CodeSystem)</a><span class="copy-text-inline"><button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button></span></p><p>Denna värdemängd innehåller 2 begrepp</p><table class="codes" data-fhir="generated"><tr><td><b>System</b></td><td style="white-space:nowrap"><b>Kod</b></td><td><b>Visning (sv)</b></td><td><b>Definition</b></td><td><b>JSON</b></td><td><b>XML</b></td></tr><tr><td><a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem-riv:clinicalprocess:healthcond:description"> </a><code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code></td><td style="white-space:nowrap">  <a href="CodeSystem-IneraServiceDomainCodeSystem.html#IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description">riv:clinicalprocess:healthcond:description</a></td><td/><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td><td><span class="copy-text-inline"><button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;riv:clinicalprocess:healthcond:description&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button></span></td><td><span class="copy-text-inline"><button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;riv:clinicalprocess:healthcond:description&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button></span></td></tr><tr><td><a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem-riv:clinicalprocess:activityprescription:actoutcome"> </a><code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code></td><td style="white-space:nowrap">  <a href="CodeSystem-IneraServiceDomainCodeSystem.html#IneraServiceDomainCodeSystem-riv.58clinicalprocess.58activityprescription.58actoutcome">riv:clinicalprocess:activityprescription:actoutcome</a></td><td/><td>Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome.</td><td><span class="copy-text-inline"><button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;riv:clinicalprocess:activityprescription:actoutcome&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button></span></td><td><span class="copy-text-inline"><button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;riv:clinicalprocess:activityprescription:actoutcome&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button></span></td></tr></table></div>
 
   <hr/>
   <p>
@@ -338,8 +329,8 @@
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-10 12:09:00 +0000">
-    2026-11-10
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
   </span>
 
           <br/>

@@ -15,7 +15,7 @@
   <title value="Kodsystem för kategorier inom tjänstedomän"/>
   <status value="draft"/>
   <experimental value="false"/>
-  <date value="2026-10-26"/>
+  <date value="2026-11-13"/>
   <publisher value="Inera AB"/>
   <contact>
     <name value="Inera AB"/>
@@ -24,7 +24,7 @@
       <value value="https://www.inera.se"/>
     </telecom>
   </contact>
-  <description value="Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."/>
+  <description value="Kategorier inom en tjänstedomän, som de anges i categorization i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."/>
   <jurisdiction>
     <coding>
       <system value="urn:iso:std:iso:3166"/>

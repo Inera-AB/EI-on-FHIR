@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>Synk till eHM:s patientindex - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<link href="inera.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="inera-thumbnail.png"/>
+<link rel="shortcut icon" href="inera-thumbnail.png"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"5"}
+    h3,h4,h5,h6{--heading-prefix:"5"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <div id="inera-nav">
+  <a id="inera-logo" data-no-external="true" href="https://www.inera.se">
+    <img height="50" alt="Inera" src="inera-logo-header.svg"/>
+  </a>
+</div>
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul class="nav navbar-nav">
+  <li><a href="index.html">Hem</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="information-basis.html">Informationsunderlag</a></li>
+      <li><a href="use-cases.html">Användningsfall</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="api.html">API</a></li>
+      <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
+      <li><a href="error-handling.html">Felhantering</a></li>
+      <li><a href="testing.html">Testning och validering</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
+      <li><a href="downloads.html">Nedladdningar</a></li>
+      <li><a href="version-history.html">Versionshistorik</a></li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artefakter</a></li>
+  <li><a href="https://fhir.inera.se/" target="_blank" rel="noopener">FHIR på Inera <span aria-hidden="true">&#8599;</span></a></li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Synk till eHM:s patientindex</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <h2>Synk till eHM:s patientindex</h2>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p><!-- white space is critical inside of capture --></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#vad-patientindexet-innehåller" id="markdown-toc-vad-patientindexet-innehåller">Vad patientindexet innehåller</a></li>
+  <li><a href="#vårdgivaren" id="markdown-toc-vårdgivaren">Vårdgivaren</a></li>
+  <li><a href="#flöde" id="markdown-toc-flöde">Flöde</a></li>
+  <li><a href="#aggregering-och-borttag" id="markdown-toc-aggregering-och-borttag">Aggregering och borttag</a></li>
+</ul>
+
+</div>
+<p>En synktjänst kan använda API:et för att fylla eHM:s patientindex för vårdgivarnas räkning, utifrån befintlig data i EI och EI-on-FHIR:s register. Sidan beskriver hur synktjänsten använder API:et. eHM:s API för patientindexet är inte specificerat än och beskrivs inte här.</p>
+
+<p>Synken förutsätter att vårdgivarna har gett Inera i uppdrag att rapportera till patientindexet för deras räkning; se <a href="open-issues.html">Öppna frågor</a>.</p>
+
+<h3 id="vad-patientindexet-innehåller">Vad patientindexet innehåller</h3>
+
+<p>Enligt promemorian S2026/01360 innehåller patientindexet patientens identitet, vårdgivarens organisationsnummer, vilket journalsystem som har uppgifter om patienten och vårdgivarens elektroniska kontaktuppgifter. Det anger inte vårdenhet, tjänst eller informationsmängd. Flera engagemangsposter motsvarar därför en uppgift i patientindexet.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Uppgift i patientindexet</th>
+      <th>Källa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Patientens identitet</td>
+      <td><code class="language-plaintext highlighter-rouge">subject.identifier</code></td>
+    </tr>
+    <tr>
+      <td>Vårdgivarens organisationsnummer</td>
+      <td>Vårdgivaren bestäms enligt nedan, och dess organisationsnummer hämtas i HSA eller tjänstekatalogen</td>
+    </tr>
+    <tr>
+      <td>Journalsystem</td>
+      <td>Extension <code class="language-plaintext highlighter-rouge">sourceSystem</code> (HSA-id). Hur eHM vill identifiera journalsystem är inte bestämt</td>
+    </tr>
+    <tr>
+      <td>Elektroniska kontaktuppgifter</td>
+      <td>Tjänstekatalogen, inte EI</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="vårdgivaren">Vårdgivaren</h3>
+
+<p>I poster från registret är <code class="language-plaintext highlighter-rouge">custodian</code> alltid vårdgivaren. I poster från EI är <code class="language-plaintext highlighter-rouge">custodian</code> ofta vårdgivarens HSA-id, men kan vara källsystemets; se <a href="engagement.html">Engagemangsposten</a>. För dem bestämmer synktjänsten vårdgivaren i tur och ordning:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">custodian</code>, om det är en vårdgivare i HSA.</li>
+  <li>Organisationen för postens logiska adress, eller den vårdgivare den hör till.</li>
+  <li>Ett register över källsystem som bara betjänar en vårdgivare.</li>
+</ol>
+
+<p>Går vårdgivaren inte att bestämma rapporterar synktjänsten inte posten. Den läggs i en kö för manuell hantering, och synktjänsten följer upp hur stor andelen sådana poster är.</p>
+
+<h3 id="flöde">Flöde</h3>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Steg</th>
+      <th>Anrop</th>
+      <th>Regel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Grundladdning</td>
+      <td><code class="language-plaintext highlighter-rouge">$export?_type=DocumentReference</code></td>
+      <td>Alla poster med status <code class="language-plaintext highlighter-rouge">current</code></td>
+    </tr>
+    <tr>
+      <td>Löpande synk</td>
+      <td><code class="language-plaintext highlighter-rouge">DocumentReference?_lastUpdated=gt[senast]&amp;status=current,superseded&amp;_sort=_lastUpdated</code></td>
+      <td>Gränsen sätts till det senaste <code class="language-plaintext highlighter-rouge">meta.lastUpdated</code> som synktjänsten har behandlat, minus en säkerhetsmarginal. Samma post kan då komma flera gånger, så behandlingen ska vara idempotent</td>
+    </tr>
+    <tr>
+      <td>Återsynk efter avbrott</td>
+      <td><code class="language-plaintext highlighter-rouge">$export?_type=DocumentReference&amp;_since=[senast]</code></td>
+      <td>När avbrottet är kortare än borttagsloggens lagringstid</td>
+    </tr>
+    <tr>
+      <td>Avstämning</td>
+      <td><code class="language-plaintext highlighter-rouge">$export?_type=DocumentReference</code></td>
+      <td>Ett fullständigt uttag jämförs med patientindexet med jämna mellanrum, och efter avbrott som är längre än lagringstiden</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="aggregering-och-borttag">Aggregering och borttag</h3>
+
+<p>Synktjänsten slår ihop poster per patient, vårdgivare och journalsystem:</p>
+
+<ul>
+  <li>Den första posten med status <code class="language-plaintext highlighter-rouge">current</code> för en kombination ger en ny uppgift i patientindexet.</li>
+  <li>När den sista posten för en kombination får status <code class="language-plaintext highlighter-rouge">superseded</code> tas uppgiften bort ur patientindexet.</li>
+  <li>Övriga ändringar påverkar inte patientindexet.</li>
+  <li>En källa som har både en RIV-TA-post och en FHIR-post för samma patient ger samma kombination, och därmed en uppgift i patientindexet.</li>
+</ul>
+
+<p>Synktjänsten behöver därför hålla reda på vilka poster som ingår i varje kombination. Den sparar bara det som krävs för det: postens id, kombinationen och status.</p>
+
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
+          Genererad 
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Länkar: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Innehållsförteckning</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-rapport</a>
+                 
+                
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

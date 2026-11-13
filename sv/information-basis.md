@@ -1,15 +1,13 @@
-# Informationsunderlag - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# Informationsunderlag - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## Informationsunderlag
 
-FHIR-EI realiserar samma information som dagens engagemangsindex, i en FHIR-form som kan växa från tjänstedomäner och kategorier till IG:er och profiler. Informationsunderlaget är därför dagens engagemangsindex och dess tjänstekontrakt.
+EI-on-FHIR exponerar samma information som dagens engagemangsindex, utan att lägga till eller ta bort något. Informationsunderlaget är därför EI och dess tjänstekontrakt.
 
 | | |
 | :--- | :--- |
 | **Informationsunderlag** | Tjänstedomänen`riv:itintegration:engagementindex`med tjänstekontrakten FindContent, Update och ProcessNotification |
-| **Version** | Den version av tjänstedomänen som dagens engagemangsindex implementerar |
+| **Version** | Den version av tjänstedomänen som det nationella engagemangsindexet implementerar |
 
-Det finns ingen fristående informationsspecifikation för FHIR-EI. Designen och dess skäl beskrivs i [specen](https://github.com/Inera-AB/EI-on-FHIR/blob/main/spec/fhir-ei-spec.md) i IG:ns repo, och denna IG realiserar den. Begrepp och principer beskrivs under [Inledning](introduction.md), den logiska modellen för indexposten under [Indexposten](information-model.md), och hur den motsvaras av FHIR-element och fält i dagens engagemangsindex under [Mappning till profiler](mappings.md).
-
-Användningsfall samt roller och ansvar beskrivs under [Användningsfall](use-cases.md) och [Roller och ansvar](roles-and-responsibilities.md).
+Hur fälten i en engagemangspost motsvaras av FHIR-element beskrivs under [Engagemangsposten](engagement.md).
 

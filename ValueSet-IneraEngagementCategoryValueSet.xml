@@ -14,7 +14,7 @@
   <title value="Kategorier inom tjänstedomän"/>
   <status value="draft"/>
   <experimental value="false"/>
-  <date value="2026-10-26"/>
+  <date value="2026-11-13"/>
   <publisher value="Inera AB"/>
   <contact>
     <name value="Inera AB"/>
@@ -23,7 +23,7 @@
       <value value="https://www.inera.se"/>
     </telecom>
   </contact>
-  <description value="Alla kategorier i kodverket för kategorier inom tjänstedomän."/>
+  <description value="Alla kategorier i kodsystemet för kategorier inom tjänstedomän."/>
   <jurisdiction>
     <coding>
       <system value="urn:iso:std:iso:3166"/>

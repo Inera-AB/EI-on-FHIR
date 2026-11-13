@@ -1,4 +1,4 @@
-# Sammanfattning av artefakter - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# Sammanfattning av artefakter - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## Sammanfattning av artefakter
 

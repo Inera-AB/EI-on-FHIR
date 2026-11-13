@@ -4,7 +4,7 @@
   "language" : "sv",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraServiceDomainCodeSystem</b></p><a name=\"IneraServiceDomainCodeSystem\"> </a><a name=\"hcIneraServiceDomainCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande kod:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">riv:clinicalprocess:healthcond:description<a name=\"IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description\"> </a></td><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr></table></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraServiceDomainCodeSystem</b></p><a name=\"IneraServiceDomainCodeSystem\"> </a><a name=\"hcIneraServiceDomainCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">riv:clinicalprocess:healthcond:description<a name=\"IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description\"> </a></td><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr><tr><td style=\"white-space:nowrap\">riv:clinicalprocess:activityprescription:actoutcome<a name=\"IneraServiceDomainCodeSystem-riv.58clinicalprocess.58activityprescription.58actoutcome\"> </a></td><td>Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome.</td></tr></table></div>"
   },
   "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem",
   "identifier" : [{
@@ -15,7 +15,7 @@
   "title" : "Kodsystem för tjänstedomäner",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -24,7 +24,7 @@
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
+  "description" : "Tjänstedomäner, som de anges i serviceDomain i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -38,5 +38,10 @@
     "code" : "riv:clinicalprocess:healthcond:description",
     "display" : "riv:clinicalprocess:healthcond:description",
     "definition" : "Tjänstedomänen riv:clinicalprocess:healthcond:description."
+  },
+  {
+    "code" : "riv:clinicalprocess:activityprescription:actoutcome",
+    "display" : "riv:clinicalprocess:activityprescription:actoutcome",
+    "definition" : "Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome."
   }]
 }

@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Spärr, loggning och behörighet - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+    <title>Säkerhet och loggning - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -49,8 +49,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"18"}
-    h3,h4,h5,h6{--heading-prefix:"18"}</style>
+    <style type="text/css">h2{--heading-prefix:"8"}
+    h3,h4,h5,h6{--heading-prefix:"8"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -62,7 +62,7 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -95,31 +95,22 @@
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
-  <li><a href="introduction.html">Inledning</a></li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
-      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
-      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
-      <li><a href="information-model.html">Indexposten</a></li>
-      <li><a href="population.html">Försörjning av indexet</a></li>
-      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
-      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
-      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
-      <li><a href="mappings.html">Mappning till profiler</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
     </ul>
   </li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
-      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
-      <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="api.html">API</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -150,7 +141,7 @@
     <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
       <div class="container">  <!-- container -->
         <ul class="breadcrumb">
-          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Spärr, loggning och behörighet</b></li>
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Säkerhet och loggning</b></li>
 
         </ul>
       </div>  <!-- /container -->
@@ -170,8 +161,8 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
-  <h2>Spärr, loggning och behörighet</h2>
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <h2>Säkerhet och loggning</h2>
   
 
 
@@ -189,239 +180,64 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <p><!-- white space is critical inside of capture --></p>
 <div class="markdown-toc">
 <ul id="markdown-toc">
-  <li><a href="#åtkomstlägen" id="markdown-toc-åtkomstlägen">Åtkomstlägen</a></li>
-  <li><a href="#läsmönster-per-tjänst" id="markdown-toc-läsmönster-per-tjänst">Läsmönster per tjänst</a></li>
-  <li><a href="#prövning-i-användarkontext" id="markdown-toc-prövning-i-användarkontext">Prövning i användarkontext</a></li>
-  <li><a href="#alla-operationer" id="markdown-toc-alla-operationer">Alla operationer</a></li>
-  <li><a href="#ett-index-prövning-per-syfte" id="markdown-toc-ett-index-prövning-per-syfte">Ett index, prövning per syfte</a></li>
-  <li><a href="#säkerhetsetiketter" id="markdown-toc-säkerhetsetiketter">Säkerhetsetiketter</a></li>
-  <li><a href="#prenumerationer" id="markdown-toc-prenumerationer">Prenumerationer</a></li>
-  <li><a href="#producenter" id="markdown-toc-producenter">Producenter</a></li>
-  <li><a href="#granularitet" id="markdown-toc-granularitet">Granularitet</a></li>
-  <li><a href="#vårdgivare-och-vårdenhet-i-spärrkontrollen" id="markdown-toc-vårdgivare-och-vårdenhet-i-spärrkontrollen">Vårdgivare och vårdenhet i spärrkontrollen</a></li>
-  <li><a href="#allmänna-krav" id="markdown-toc-allmänna-krav">Allmänna krav</a></li>
+  <li><a href="#autentisering" id="markdown-toc-autentisering">Autentisering</a></li>
+  <li><a href="#behörigheter" id="markdown-toc-behörigheter">Behörigheter</a></li>
+  <li><a href="#spärr-och-ändamål" id="markdown-toc-spärr-och-ändamål">Spärr och ändamål</a></li>
+  <li><a href="#loggning" id="markdown-toc-loggning">Loggning</a></li>
+  <li><a href="#transport" id="markdown-toc-transport">Transport</a></li>
 </ul>
 
 </div>
-<p>FHIR-EI används på två sätt som kräver olika säkerhetsmodell. När en användare öppnar en patient finns någon vars behörighet kan prövas. När ett system registrerar, prenumererar, stämmer av eller håller en lokal kopia aktuell finns ingen användare, och prövningen per användare kan inte göras i det ögonblicket. FHIR-EI skiljer därför på två åtkomstlägen och är uppdelat efter dem; se <a href="roles-and-responsibilities.html">Roller och ansvar</a>.</p>
+<p>API:et är bara till för Ineras interna stödtjänster, synktjänsten och källor som registrerar som FHIR-producenter. Alla klienter är system. Ingen klient anropar för en enskild användares räkning, och API:et lämnar inte ut poster till användare.</p>
 
-<p>Vid läsning i användarkontext är FHIR-EI sin egen åtkomstkontrollpunkt. Åtkomstlagret anropar spärrtjänsten, loggar i loggtjänsten och filtrerar svaren innan de lämnas ut, på samma sätt som EHDS-bryggan. Användaren får alltså bara se poster den har rätt att se. Det är en första hypotes som behöver bekräftas.</p>
+<h3 id="autentisering">Autentisering</h3>
 
-<p>Skälet är att indexet självt är skyddsvärd information: att en patient har en post hos en viss vårdenhet är en uppgift om patienten.</p>
+<p>Klienter autentiserar sig enligt <a href="https://hl7.org/fhir/smart-app-launch/backend-services.html">SMART Backend Services</a>: de får en åtkomsttoken med systembehörigheter från Ineras auktoriseringstjänst, med en signerad JWT som klientidentitet. API:et tar bara emot klienter som är registrerade hos auktoriseringstjänsten.</p>
 
-<h3 id="åtkomstlägen">Åtkomstlägen</h3>
-
-<table class="grid">
-  <thead>
-    <tr>
-      <th> </th>
-      <th>Användarkontext</th>
-      <th>Systemkontext</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>När</td>
-      <td>Anropet görs för en namngiven användare: vårdpersonal, invånare eller ombud</td>
-      <td>Ingen användare: ett system anropar för egen räkning</td>
-    </tr>
-    <tr>
-      <td>Autentisering</td>
-      <td>Token med användarens kontextanspråk från säkerhetstjänsten, till exempel genom token exchange från konsumentens session</td>
-      <td>Klientcertifikat eller signerad token enligt SMART Backend Services</td>
-    </tr>
-    <tr>
-      <td>Vad FHIR-EI prövar</td>
-      <td>Spärr, samtycke, nödåtkomst, syfte, fullmakt och säkerhetsetiketter</td>
-      <td>Systemets behörighet: vilka tjänster och vilket syfte, och för registrerande parter vilket underlag</td>
-    </tr>
-    <tr>
-      <td>Loggning i FHIR-EI</td>
-      <td>Per användare: varje sökning och varje utlämnad post</td>
-      <td>Per anrop och uttag, med systemets identitet</td>
-    </tr>
-    <tr>
-      <td>Prövning per användare</td>
-      <td>I FHIR-EI, innan svaret lämnas ut</td>
-      <td>I det mottagande systemet, när informationen visas för en användare</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="behörigheter">Behörigheter</h3>
 
 <table class="grid">
   <thead>
     <tr>
-      <th>Operation</th>
-      <th>Åtkomstläge</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sökning och läsning för visning, till exempel i NPÖ och 1177</td>
-      <td>Användarkontext</td>
-    </tr>
-    <tr>
-      <td>Registrering och avregistrering</td>
-      <td>Systemkontext</td>
-    </tr>
-    <tr>
-      <td>Prenumeration</td>
-      <td>Systemkontext</td>
-    </tr>
-    <tr>
-      <td>Inkrementell avstämning och massuttag</td>
-      <td>Systemkontext</td>
-    </tr>
-    <tr>
-      <td>Lokaliseringstjänstens riktade fråga, när en sökning träffar en saknad eller inaktuell cachepost</td>
-      <td>Användarkontext, som skickas vidare till källan</td>
-    </tr>
-    <tr>
-      <td>Lokaliseringstjänstens färskhållning</td>
-      <td>Systemkontext</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Ett system som tar emot indexposter i systemkontext är en betrodd mellanhand. Dess behörighet begränsas per tjänst och syfte och regleras i avtal, och det ansvarar för prövning och loggning per användare när informationen visas. Ett mellanläge är ett system som agerar för en bestämd vårdgivare. FHIR-EI kan då pröva yttre spärr mot den vårdgivaren redan i systemkontext, men inte samtycke eller nödåtkomst, som kräver en användare.</p>
-
-<h3 id="läsmönster-per-tjänst">Läsmönster per tjänst</h3>
-
-<p>Hur en tjänsts konsumenter läser avgör i vilket åtkomstläge läsningen sker, och det begränsar vilka <a href="population.html">försörjningssätt</a> som passar:</p>
-
-<table class="grid">
-  <thead>
-    <tr>
-      <th>Läsmönster</th>
+      <th>Klientroll</th>
       <th>Exempel</th>
-      <th>Åtkomstläge</th>
-      <th>Försörjning</th>
+      <th>Tillåtet</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Vid behov: konsumenten söker när en användare öppnar patienten, och kan förhämta innehåll (pre-warm)</td>
-      <td>Översikten i NPÖ, journalen i 1177</td>
-      <td>Användarkontext</td>
-      <td>Alla tre. Vid Inera-försörjd cache är det användarens sökning som utlöser den riktade frågan</td>
+      <td>Stödtjänst</td>
+      <td>EHDS-bryggan</td>
+      <td>Läsning, och sökning som anger <code class="language-plaintext highlighter-rouge">subject:identifier</code></td>
     </tr>
     <tr>
-      <td>Synkat: en systemkonsument håller en lokal kopia av innehåll och uppdaterar den löpande</td>
-      <td>Läkemedelsordinationer och uppmärksamhetsinformation</td>
-      <td>Systemkontext</td>
-      <td>Producentregistrering eller spegling. Inera-försörjd cache passar dåligt, eftersom posterna bara fylls när någon söker</td>
+      <td>Synktjänst</td>
+      <td>Synk till eHM:s patientindex</td>
+      <td>Som stödtjänst, och dessutom sökning utan patient och massuttag med <code class="language-plaintext highlighter-rouge">$export</code></td>
+    </tr>
+    <tr>
+      <td>Producent</td>
+      <td>Källsystem som implementerar en tjänsts FHIR-IG, till exempel Fasta kontakter</td>
+      <td>Registrering, uppdatering och borttag av egna poster i registret, för det källsystem klienten är registrerad för. Ingen sökning eller läsning av andras poster</td>
     </tr>
   </tbody>
 </table>
 
-<p>Förhämtning i användarkontext loggas hos källan som användarens åtkomst, även för informationsmängder som användaren sedan inte öppnar. En lokal kopia av innehåll är central lagring. Den ligger utanför IG:n och kräver egen rättslig grund, och dess ägare blir åtkomstkontrollpunkt för innehållet. FHIR-EI:s del är att förse den med indexposter och notiser i systemkontext.</p>
+<p>Läsbehörigheten uttrycks med systembehörigheten <code class="language-plaintext highlighter-rouge">system/DocumentReference.rs</code> och skrivbehörigheten med <code class="language-plaintext highlighter-rouge">system/DocumentReference.cud</code>, tillsammans med klientens källsystem. Hur behörigheten för synk och kopplingen mellan klient och källsystem uttrycks är <a href="open-issues.html">öppna frågor</a>.</p>
 
-<h3 id="prövning-i-användarkontext">Prövning i användarkontext</h3>
+<h3 id="spärr-och-ändamål">Spärr och ändamål</h3>
 
-<table class="grid">
-  <thead>
-    <tr>
-      <th>Funktion</th>
-      <th>Vad FHIR-EI gör</th>
-      <th>Beroende</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Åtkomstkontext</td>
-      <td>Kräver i varje anrop i användarkontext vem som frågar (HSA-id eller invånare), för vilken vårdgivare och vårdenhet, i vilket uppdrag, med vilket syfte (<code class="language-plaintext highlighter-rouge">purposeOfUse</code>), samt samtycke eller nödåtkomst där det krävs</td>
-      <td>Säkerhetstjänst, token med kontextanspråk</td>
-    </tr>
-    <tr>
-      <td>Spärrkontroll</td>
-      <td>Frågar spärrtjänsten med åtkomstkontexten och tar bort poster som omfattas av spärr</td>
-      <td>Spärrtjänsten, på sikt en FHIR-baserad spärrtjänst</td>
-    </tr>
-    <tr>
-      <td>Filtrering</td>
-      <td>Tar bort poster utanför frågande aktörs behörighet. Om konsumenten får veta att poster filtrerats (till exempel "information finns men kräver samtycke") beror på lagstiftningen för syftet. Det styrs av <code class="language-plaintext highlighter-rouge">purposeOfUse</code> i frågan och av spärrtjänstens svar, som FHIR-EI för vidare i sitt svar</td>
-      <td>Spärrtjänsten, policy per konsument (NPÖ, 1177)</td>
-    </tr>
-    <tr>
-      <td>Ombud</td>
-      <td>För 1177: tillämpar fullmakt när någon söker för en annan person</td>
-      <td>Fullmaktsarkitekturen</td>
-    </tr>
-    <tr>
-      <td>Loggning</td>
-      <td>Loggar både varje sökning och varje utlämnad post som åtkomst till patientuppgift</td>
-      <td>Loggtjänsten</td>
-    </tr>
-  </tbody>
-</table>
+<p>API:et prövar inte spärr eller samtycke. Det gör inte heller dagens engagemangsindex. Den stödtjänst som hämtar journalinformation med hjälp av en post ansvarar för spärrprövning och loggning när den lämnar ut informationen. EHDS-bryggan gör det redan, efter att svaret från källsystemet har mappats.</p>
 
-<h3 id="alla-operationer">Alla operationer</h3>
+<p>Informationen i EI får användas för att hitta vart ett anrop ska gå, och användningsfall 1 håller sig till det ändamålet. Användningsfall 2 använder informationen för ett nytt ändamål och förutsätter vårdgivarnas uppdrag; se <a href="open-issues.html">Öppna frågor</a>. Registret är samma slags behandling som EI: vårdgivarnas uppgifter, med Inera som personuppgiftsbiträde.</p>
 
-<p>Kontrollen gäller alla operationer, men vad som prövas beror på åtkomstläget. I användarkontext filtrerar FHIR-EI svaret innan det lämnas ut, aldrig bara i den komponent som presenterar svaret. I systemkontext prövar FHIR-EI systemets behörighet, och det mottagande systemet ansvarar för prövningen per användare när informationen visas. Massuttag kräver egen behörighet för systemkonsumenten och loggas per uttag.</p>
+<h3 id="loggning">Loggning</h3>
 
-<h3 id="ett-index-prövning-per-syfte">Ett index, prövning per syfte</h3>
+<p>API:et loggar varje anrop, också registreringar och borttag, med klientens identitet, tidpunkt, interaktion och sökparametrar, inklusive patientens identitet när den anges, och antalet returnerade poster. Ett massuttag loggas per uttag. Loggarna följs upp av EI:s förvaltning.</p>
 
-<p>NPÖ och 1177 använder samma indexposter. Det som skiljer är prövningen vid varje läsning, som FHIR-EI väljer utifrån åtkomstkontexten och <code class="language-plaintext highlighter-rouge">purposeOfUse</code>.</p>
+<h3 id="transport">Transport</h3>
 
-<table class="grid">
-  <thead>
-    <tr>
-      <th>Prövning</th>
-      <th>NPÖ (sammanhållen journalföring)</th>
-      <th>1177 (patientens direktåtkomst)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Vem frågar</td>
-      <td>Vårdpersonal med uppdrag</td>
-      <td>Patienten, eller ombud med fullmakt</td>
-    </tr>
-    <tr>
-      <td>Spärr</td>
-      <td>Gäller</td>
-      <td>Gäller inte mot patienten själv</td>
-    </tr>
-    <tr>
-      <td>Samtycke och nödåtkomst</td>
-      <td>Krävs</td>
-      <td>Ersätts av inloggning och identitet</td>
-    </tr>
-    <tr>
-      <td>Särskilda begränsningar</td>
-      <td>–</td>
-      <td>Till exempel vårdgivarens fördröjda visning och sekretess mot vårdnadshavare för unga</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Att indexet får användas för både sammanhållen journalföring och patientens direktåtkomst är en juridisk fråga: vårdgivarens ändamål som personuppgiftsansvarig, och att Ineras personuppgiftsbiträdesavtal täcker båda tjänsterna. Det är prövningen per syfte som gör delningen försvarbar, inte att informationen är densamma. Se <a href="legal-basis.html">Rättslig grund och ändamål</a> och <a href="open-issues.html">Öppna frågor</a>.</p>
-
-<h3 id="säkerhetsetiketter">Säkerhetsetiketter</h3>
-
-<p>En post kan i sig avslöja uppgifter, till exempel för en vårdnadshavare att en ungdom har besökt en viss mottagning. Den registrerande parten kan därför märka en post med säkerhetsetiketter i <code class="language-plaintext highlighter-rouge">meta.security</code>, till exempel <code class="language-plaintext highlighter-rouge">NOPAT</code> ur HL7:s kodsystem <code class="language-plaintext highlighter-rouge">v3-ActCode</code>: inte till patient, närstående eller vårdnadshavare utan behandlarens medgivande. FHIR-EI tillämpar etiketterna per syfte. Vid Inera-försörjd cache måste den riktade frågan kunna returnera etiketterna; dagens engagemangsindex har ingen motsvarighet, så speglade poster saknar dem. Vilka etiketter som används, och hur de tillämpas, beslutas tillsammans med reglerna för 1177. Se exemplet <a href="DocumentReference-IndexpostEjForPatient.html">Indexpost som inte visas för patient eller närstående</a>.</p>
-
-<h3 id="prenumerationer">Prenumerationer</h3>
-
-<p>Prenumerationer sker i systemkontext, eftersom de lever längre än en användares session. FHIR-EI filtrerar notiserna på systemets behörighet, och på yttre spärr när systemet agerar för en bestämd vårdgivare. Notisen bär bara postens id (<code class="language-plaintext highlighter-rouge">id-only</code>), så att den inte för med sig mer om patienten än nödvändigt. Det mottagande systemet läser posten i systemkontext för egen bearbetning, eller via åtkomstlagret i användarkontext när den ska visas, och ansvarar för prövningen per användare. Se <a href="subscriptions.html">Prenumeration</a>.</p>
-
-<h3 id="producenter">Producenter</h3>
-
-<p>Skrivningar från registrerande parter filtreras inte men auktoriseras. Partens identitet är dess endpoint i tjänstekatalogen. En producent får bara registrera för vårdgivare som listar endpointen där; övergångsadaptern och lokaliseringstjänsten bara inom sitt underlag. Se <a href="rest-interactions.html">REST-interaktioner och sökparametrar</a>. <code class="language-plaintext highlighter-rouge">meta.source</code> används aldrig ensamt för behörighetskontroll.</p>
-
-<h3 id="granularitet">Granularitet</h3>
-
-<p>Spärrar gäller idag på vårdgivar- och vårdenhetsnivå. Med indexposter per tjänst går det längre fram att spärra eller filtrera per tjänst utan ändrad modell.</p>
-
-<h3 id="vårdgivare-och-vårdenhet-i-spärrkontrollen">Vårdgivare och vårdenhet i spärrkontrollen</h3>
-
-<p>Yttre spärr prövas mot vårdgivaren. När posten anger vårdgivaren med organisationsnummer slår FHIR-EI upp vårdgivarens HSA-id i tjänstekatalogen, som har båda på den juridiska personen.</p>
-
-<p>Inre spärr prövas mot vårdenheten i <code class="language-plaintext highlighter-rouge">careUnit</code>. En post utan <code class="language-plaintext highlighter-rouge">careUnit</code>, vilket kan förekomma vid <a href="population.html">Inera-försörjd cache</a>, lämnas inte ut om patienten har en inre spärr hos vårdgivaren (fail-closed). Det kan dölja information som patienten inte har spärrat, så regeln är en <a href="open-issues.html">öppen fråga</a>.</p>
-
-<h3 id="allmänna-krav">Allmänna krav</h3>
-
-<p>Ineras generella säkerhetskrav för FHIR-gränssnitt på <a href="https://fhir.inera.se/">FHIR på Inera</a> gäller. Exakt tokenformat och vilka anspråk åtkomstkontexten bär specificeras inte i denna version.</p>
+<p>API:et nås bara med TLS. Ineras generella säkerhetskrav för FHIR-gränssnitt på <a href="https://fhir.inera.se/">FHIR på Inera</a> gäller.</p>
 
 
 
@@ -451,8 +267,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-10 12:09:00 +0000">
-    2026-11-10
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
   </span>
 
           <br/>

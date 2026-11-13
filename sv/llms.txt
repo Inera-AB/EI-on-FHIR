@@ -1,91 +1,66 @@
-# inera.ei.engagementindex#0.1.0: FHIR-baserat engagemangsindex (FHIR-EI)(sv)
+# inera.ei.engagementindex#0.1.0: EI-on-FHIR: FHIR-API för engagemangsindex(sv)
 
 ## Pages
 
 * [Hem](index.md)
-* [Nedladdningar](downloads.md)
-* [Prenumeration](subscriptions.md)
 * [Testning och validering](testing.md)
-* [Förväntade svar](expected-responses.md)
-* [CapabilityStatement](capabilitystatement.md)
+* [Om](about.md)
 * [Felhantering](error-handling.md)
 * [Sammanfattning av artefakter](artifacts.md)
-* [Indexposten](information-model.md)
 * [Användningsfall](use-cases.md)
-* [Informationsunderlag](information-basis.md)
-* [REST-interaktioner och sökparametrar](rest-interactions.md)
+* [API](api.md)
+* [Synk till eHM:s patientindex](ehm-sync.md)
+* [Säkerhet och loggning](security.md)
 * [Versionshistorik](version-history.md)
-* [Rättslig grund och ändamål](legal-basis.md)
-* [Samexistens med eHM:s patientindex](ehm-coexistence.md)
-* [Inledning](introduction.md)
-* [Kodverk för tjänster och informationsmängder](information-sets.md)
-* [Om](about.md)
-* [Mappning till profiler](mappings.md)
-* [Försörjning av indexet](population.md)
+* [Engagemangsposten](engagement.md)
 * [Öppna frågor](open-issues.md)
-* [Händelsemodell och övergång](event-model.md)
-* [Roller och ansvar](roles-and-responsibilities.md)
-* [Spärr, loggning och behörighet](security.md)
+* [Informationsunderlag](information-basis.md)
+* [CapabilityStatement](capabilitystatement.md)
+* [Nedladdningar](downloads.md)
 
 ## Resources
 
 ### CodeSystems
 
-* [Kodsystem för orsaker till avregistrering](CodeSystem-IneraDeregistrationReasonCodeSystem.md)
 * [Kodsystem för kategorier inom tjänstedomän](CodeSystem-IneraEngagementCategoryCodeSystem.md)
-* [Kodsystem för försörjningssätt](CodeSystem-IneraIndexPopulationMethodCodeSystem.md)
-* [Kodsystem för registreringsstatus](CodeSystem-IneraIndexRegistrationStatusCodeSystem.md)
+* [Kodsystem för hämtningsprotokoll](CodeSystem-IneraRetrievalProtocolCodeSystem.md)
 * [Kodsystem för tjänstedomäner](CodeSystem-IneraServiceDomainCodeSystem.md)
 
 ### ValueSets
 
-* [Orsaker till avregistrering](ValueSet-IneraDeregistrationReasonValueSet.md)
 * [Kategorier inom tjänstedomän](ValueSet-IneraEngagementCategoryValueSet.md)
-* [Försörjningssätt](ValueSet-IneraIndexPopulationMethodValueSet.md)
-* [Registreringsstatus för indexposter](ValueSet-IneraIndexRegistrationStatusValueSet.md)
+* [Status för engagemangsposter](ValueSet-IneraEngagementStatusValueSet.md)
+* [Hämtningsprotokoll](ValueSet-IneraRetrievalProtocolValueSet.md)
 * [Tjänstedomäner](ValueSet-IneraServiceDomainValueSet.md)
 
 ### Resource Profiles
 
-* [Indexpost (FHIR-EI)](StructureDefinition-IneraIndexEntry.md)
-* [Prenumeration på indexposter (FHIR-EI)](StructureDefinition-IneraIndexSubscription.md)
+* [Engagemangspost](StructureDefinition-IneraEngagement.md)
 
 ### Extensions
 
-* [Vårdenhet](StructureDefinition-CareUnit.md)
-* [Innehållets senaste ändring](StructureDefinition-ContentLastUpdated.md)
-* [Orsak till avregistrering](StructureDefinition-DeregistrationReason.md)
 * [Logisk adress](StructureDefinition-LogicalAddress.md)
-* [Registrerande producent](StructureDefinition-RegisteringProducer.md)
-* [Registreringsstatus](StructureDefinition-RegistrationStatus.md)
-* [Producentens endpoint](StructureDefinition-SourceEndpoint.md)
+* [Senaste innehåll](StructureDefinition-MostRecentContent.md)
+* [Ägare](StructureDefinition-Owner.md)
 * [Källsystem](StructureDefinition-SourceSystem.md)
 
 ### CapabilityStatements
 
-* [FHIR-EI server](CapabilityStatement-IneraIndexServer.md)
+* [EI-on-FHIR server](CapabilityStatement-IneraEngagementIndexServer.md)
 
 ### ImplementationGuides
 
-* [FHIR-baserat engagemangsindex (FHIR-EI)](ImplementationGuide-inera.ei.engagementindex.md)
+* [EI-on-FHIR: FHIR-API för engagemangsindex](ImplementationGuide-inera.ei.engagementindex.md)
 
 ### SearchParameters
 
-* [Sök på innehållets senaste ändring](SearchParameter-DocumentReference-content-last-updated.md)
-* [Sök på producentens endpoint](SearchParameter-DocumentReference-source-endpoint.md)
-
-### SubscriptionTopics
-
-* [Indexpost ändrad](SubscriptionTopic-indexpost-andrad.md)
+* [Sökparameter logical-address](SearchParameter-DocumentReference-logical-address.md)
+* [Sökparameter source-system](SearchParameter-DocumentReference-source-system.md)
 
 ### Examples
 
-* [RegistreringTransaction (Bundle)](Bundle-RegistreringTransaction.md)
 * [SokresultatForPatient (Bundle)](Bundle-SokresultatForPatient.md)
-* [SokresultatOfullstandigt (Bundle)](Bundle-SokresultatOfullstandigt.md)
-* [IndexpostEjForPatient (DocumentReference)](DocumentReference-IndexpostEjForPatient.md)
-* [IndexpostFhirProducent (DocumentReference)](DocumentReference-IndexpostFhirProducent.md)
-* [IndexpostFranAdapter (DocumentReference)](DocumentReference-IndexpostFranAdapter.md)
-* [IndexpostFranLokaliseringstjanst (DocumentReference)](DocumentReference-IndexpostFranLokaliseringstjanst.md)
-* [IndexpostIndragen (DocumentReference)](DocumentReference-IndexpostIndragen.md)
-* [PrenumerationForPatient (Subscription)](Subscription-PrenumerationForPatient.md)
+* [EngagemangspostAktuell (DocumentReference)](DocumentReference-EngagemangspostAktuell.md)
+* [EngagemangspostBorttagen (DocumentReference)](DocumentReference-EngagemangspostBorttagen.md)
+* [EngagemangspostFhir (DocumentReference)](DocumentReference-EngagemangspostFhir.md)
+* [EngagemangspostKallsystemSomPuA (DocumentReference)](DocumentReference-EngagemangspostKallsystemSomPuA.md)

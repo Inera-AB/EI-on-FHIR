@@ -5,35 +5,6 @@
   "jurisdiction": "SE",
   "extensions": [
     {
-      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
-      "title": "Vårdenhet",
-      "types": [
-        "Identifier",
-        "id",
-        "Extension",
-        "code",
-        "CodeableConcept",
-        "uri",
-        "string",
-        "Period",
-        "Reference"
-      ]
-    },
-    {
-      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated",
-      "title": "Innehållets senaste ändring",
-      "types": [
-        "dateTime"
-      ]
-    },
-    {
-      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason",
-      "title": "Orsak till avregistrering",
-      "types": [
-        "CodeableConcept"
-      ]
-    },
-    {
       "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress",
       "title": "Logisk adress",
       "types": [
@@ -49,29 +20,24 @@
       ]
     },
     {
-      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer",
-      "title": "Registrerande producent",
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/MostRecentContent",
+      "title": "Senaste innehåll",
       "types": [
-        "Reference",
+        "dateTime"
+      ]
+    },
+    {
+      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/Owner",
+      "title": "Ägare",
+      "types": [
+        "Identifier",
         "id",
         "Extension",
-        "string",
+        "code",
+        "CodeableConcept",
         "uri",
-        "Identifier",
-        "string"
-      ]
-    },
-    {
-      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
-      "title": "Registreringsstatus",
-      "types": [
-        "code"
-      ]
-    },
-    {
-      "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
-      "title": "Producentens endpoint",
-      "types": [
+        "string",
+        "Period",
         "Reference"
       ]
     },
@@ -94,22 +60,14 @@
   "profiles": {
     "DocumentReference": [
       {
-        "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry",
-        "title": "Indexpost (FHIR-EI)"
-      }
-    ],
-    "Subscription": [
-      {
-        "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription",
-        "title": "Prenumeration på indexposter (FHIR-EI)"
+        "url": "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement",
+        "title": "Engagemangspost"
       }
     ]
   },
   "usage": {
     "http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation": [
-      "CapabilityStatement.rest.interaction",
       "CapabilityStatement.rest.resource.interaction",
-      "CapabilityStatement.rest.resource.operation",
       "CapabilityStatement.rest.resource.searchParam"
     ],
     "http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice": [
@@ -142,31 +100,15 @@
     "http://hl7.org/fhir/tools/StructureDefinition/snapshot-base-version": [
       "StructureDefinition.snapshot"
     ],
-    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit": [
-      "Bundle.entry.resource",
-      "DocumentReference"
-    ],
-    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated": [
-      "Bundle.entry.resource",
-      "DocumentReference"
-    ],
-    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason": [
-      "Bundle.entry.resource",
-      "DocumentReference"
-    ],
     "https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress": [
       "Bundle.entry.resource",
       "DocumentReference"
     ],
-    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer": [
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/MostRecentContent": [
       "Bundle.entry.resource",
       "DocumentReference"
     ],
-    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus": [
-      "Bundle.entry.resource",
-      "DocumentReference"
-    ],
-    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint": [
+    "https://fhir.inera.se/ig/engagementindex/StructureDefinition/Owner": [
       "Bundle.entry.resource",
       "DocumentReference"
     ],

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="IneraEngagementStatusValueSet"/>
+  <language value="sv"/>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: ValueSet IneraEngagementStatusValueSet</b></p><a name="IneraEngagementStatusValueSet"> </a><a name="hcIneraEngagementStatusValueSet"> </a><ul><li>Include dessa koder enligt definitionen i <a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html"><code>http://hl7.org/fhir/document-reference-status</code></a><span title="Versionen är inte uttryckligen angiven, vilket innebär att den är fast till 5.0.0, versionen som hittas via paketreferenserna"> version &#x1F4E6;5.0.0</span><table class="none"><tr><td style="white-space:nowrap"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td><a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-current">current</a></td><td style="color: #cccccc">Current</td><td>This is the current reference for this document.</td></tr><tr><td><a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-superseded">superseded</a></td><td style="color: #cccccc">Superseded</td><td>This reference has been superseded by another reference.</td></tr></table></li></ul></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet"/>
+  <identifier>
+    <value value="IneraEngagementStatusValueSet"/>
+  </identifier>
+  <version value="0.1.0"/>
+  <name value="IneraEngagementStatusValueSet"/>
+  <title value="Status för engagemangsposter"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-11-13"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="current för en registrerad post, superseded för en post som har tagits bort och visas under borttagsloggens lagringstid."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <compose>
+    <include>
+      <system value="http://hl7.org/fhir/document-reference-status"/>
+      <concept>
+        <code value="current"/>
+      </concept>
+      <concept>
+        <code value="superseded"/>
+      </concept>
+    </include>
+  </compose>
+</ValueSet>

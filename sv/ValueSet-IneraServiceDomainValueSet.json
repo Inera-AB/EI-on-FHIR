@@ -15,7 +15,7 @@
   "title" : "Tjänstedomäner",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -24,7 +24,7 @@
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner.",
+  "description" : "Alla tjänstedomäner i kodsystemet för tjänstedomäner.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",

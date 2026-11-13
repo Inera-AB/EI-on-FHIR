@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Öppna frågor - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+    <title>Öppna frågor - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -49,8 +49,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"21"}
-    h3,h4,h5,h6{--heading-prefix:"21"}</style>
+    <style type="text/css">h2{--heading-prefix:"12"}
+    h3,h4,h5,h6{--heading-prefix:"12"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -62,7 +62,7 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -95,31 +95,22 @@
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
-  <li><a href="introduction.html">Inledning</a></li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
-      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
-      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
-      <li><a href="information-model.html">Indexposten</a></li>
-      <li><a href="population.html">Försörjning av indexet</a></li>
-      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
-      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
-      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
-      <li><a href="mappings.html">Mappning till profiler</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
     </ul>
   </li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
-      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
-      <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="api.html">API</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -170,7 +161,7 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   <h2>Öppna frågor</h2>
   
 
@@ -189,53 +180,54 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <p><!-- white space is critical inside of capture --></p>
 <div class="markdown-toc">
 <ul id="markdown-toc">
-  <li><a href="#från-specen" id="markdown-toc-från-specen">Från specen</a></li>
-  <li><a href="#uppkomna-när-ign-skrevs" id="markdown-toc-uppkomna-när-ign-skrevs">Uppkomna när IG:n skrevs</a></li>
+  <li><a href="#engagemangsindex" id="markdown-toc-engagemangsindex">Engagemangsindex</a></li>
+  <li><a href="#register-för-fhir-producenter" id="markdown-toc-register-för-fhir-producenter">Register för FHIR-producenter</a></li>
+  <li><a href="#synk-till-ehms-patientindex" id="markdown-toc-synk-till-ehms-patientindex">Synk till eHM:s patientindex</a></li>
+  <li><a href="#säkerhet" id="markdown-toc-säkerhet">Säkerhet</a></li>
+  <li><a href="#ign" id="markdown-toc-ign">IG:n</a></li>
 </ul>
 
 </div>
-<p>Följande frågor är inte avgjorda. Svaren kan ändra profilen eller API:et.</p>
+<p>Följande frågor är inte avgjorda. Svaren kan ändra profilen, API:et eller arkitekturen.</p>
 
-<h3 id="från-specen">Från specen</h3>
+<h3 id="engagemangsindex">Engagemangsindex</h3>
 
 <ul>
-  <li><strong>Federation.</strong> Dagens engagemangsindex kan vara hierarkiskt, där regionala index vidarebefordrar till det nationella via ProcessNotification. Ska FHIR-EI stödja en sådan topologi, eller bara ett nationellt index?</li>
-  <li><strong>Latens.</strong> Vilket krav gäller från ändring i källsystemet till synlig indexpost? Vad klarar dagens engagemangsindex i praktiken?</li>
-  <li><strong>Lagringstider.</strong> Hur långt avbrott ska en konsument klara utan full omladdning? Svaret sätter både händelseloggens och gravstenarnas lagringstid.</li>
-  <li><strong>eHM:s tunna index.</strong> Torrsimma båda riktningarna, och borttag, grundladdning och återsynk, mot eHM:s API-specifikationer när de finns. Granulariteten är besvarad: vårdgivare (organisationsnummer) och journalsystem, inte vårdenhet; se <a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a>.</li>
-  <li><strong>R5-beroende.</strong> Tidplanen för svenska basprofiler i R5, och om konsumenter och producenter är redo för R5. Denna version bygger direkt på FHIR:s basresurser.</li>
+  <li><strong>Åtkomst till EI:s data.</strong> SAD:en föreslår att API:et läser EI:s databas, eller en läsreplika, som ett nytt gränssnitt i det nationella EI. Kan EI:s förvaltning ta det åtagandet, och vilken last tål databasen?</li>
+  <li><strong>Borttagslogg.</strong> Behåller EI borttagna poster i dag? Om inte behövs en borttagslogg i EI. Hur länge ska den sparas? Lagringstiden avgör hur långt avbrott synken klarar utan fullständig avstämning.</li>
+  <li><strong>Fältlistan.</strong> Mappningen ska stämmas av mot tjänstekontraktsbeskrivningen för <code class="language-plaintext highlighter-rouge">riv:itintegration:engagementindex</code>, så att alla fält i en engagemangspost kommer med.</li>
+  <li><strong>Tidszon.</strong> Bekräfta att EI:s tidsstämplar är svensk tid.</li>
+  <li><strong>Stabilt id.</strong> Vilken nyckel i EI identifierar en post, så att resursens id kan härledas ur den och inte ändras?</li>
 </ul>
 
-<h3 id="uppkomna-när-ign-skrevs">Uppkomna när IG:n skrevs</h3>
+<h3 id="register-för-fhir-producenter">Register för FHIR-producenter</h3>
 
 <ul>
-  <li><strong>Bulk Data i R5.</strong> Bulk Data Access finns bara publicerad för R4, så <code class="language-plaintext highlighter-rouge">$export</code> kan inte refereras formellt från denna R5-IG. Kravet står i text. Följs upp när Bulk Data publiceras för R5.</li>
-  <li><strong>Kodverk.</strong> Var förvaltas tjänstedomäner och kategorier som FHIR-kodsystem, och med vilken canonical? Denna IG har utdrag under sin egen canonical.</li>
-  <li><strong>Kontrollsummor.</strong> Hur exponeras antal och kontrollsummor per vårdgivare och dag för återsynk?</li>
-  <li><strong>Koppling mellan klient och endpoint.</strong> Den registrerande partens identitet är dess endpoint i tjänstekatalogen. Hur binds ett klientcertifikat eller en token till en endpoint? Tjänstekatalogens Endpoint har i dag ingen identifierare för det producerande systemet, så kopplingen kräver antingen en sådan i tjänstekatalogen eller ett register i FHIR-EI.</li>
-  <li><strong>Adressregistrets innehåll.</strong> Vilken variant ska adaptern peka på för RIV-TA-källor: tjänsteplattformens endpoint per tjänstekontrakt, eller EHDS-bryggans FHIR-yta per vårdgivare? Bryggan använder vårdgivarens HSA-id som logisk adress; dagens engagemangsposter kan ha vårdenhetens eller källsystemets.</li>
-  <li><strong>Överlämning från adaptern.</strong> När ett källsystem går över till FHIR blir det en avregistrering och en ny registrering per post. Räcker det, eller behövs en operation som flyttar ägarskapet?</li>
-  <li><strong>Behörighet per vårdgivare.</strong> Regeln att en producent bara får registrera för vårdgivare som listar dess endpoint i tjänstekatalogen förutsätter att vårdgivarna håller sina listningar aktuella. Hur säkerställs det?</li>
-  <li><strong>Aggregerande tjänster.</strong> Stämmer det att de är dagens huvudsakliga konsumenter av engagemangsindex, per tjänstedomän? <a href="event-model.html">Övergången per tjänst</a> bygger på det.</li>
-  <li><strong>Spärr och samtycke i dagens kedja.</strong> Var filtreras de i dag, i den aggregerande tjänsten eller hos konsumenten? Om FHIR-EI också filtrerar kan läge 2 ge dubbel filtrering eller ändrat beteende.</li>
-  <li><strong>Juridik.</strong> Täcker vårdgivarnas ändamål och Ineras personuppgiftsbiträdesavtal att samma index används för sammanhållen journalföring och för patientens direktåtkomst?</li>
-  <li><strong>Säkerhetsetiketter.</strong> Vilka etiketter används, och hur tillämpas de per syfte?</li>
-  <li><strong>Vårdgivarens prövning vid sökning.</strong> Ska FHIR-EI, som det nederländska lokaliseringsindexet, fråga vårdgivaren om åtkomst vid varje sökning i stället för att filtrera centralt? Ansvaret för samtycke och spärr blir då tydligt, men det kostar svarstid och kräver en beslutstjänst hos varje vårdgivare.</li>
-  <li><strong>Avregistrering via indexeringsagenten.</strong> Hur vet agenten att informationen inte längre finns hos producenten?</li>
-  <li><strong>R4-tjänster.</strong> Publiceras deras tillämpning i ett separat R5-paket, eller går tjänsterna över till R5?</li>
-  <li><strong>Första tjänst.</strong> Vilken tjänst går först genom övergången?</li>
-  <li><strong>Försörjningssätt per tjänst.</strong> Vem beslutar, och var anges det, så att lokaliseringstjänsten och adaptern vet vilka endpoints de ska fylla?</li>
-  <li><strong>Riktad fråga.</strong> Egen operation (till exempel <code class="language-plaintext highlighter-rouge">$inventory</code>) eller <code class="language-plaintext highlighter-rouge">batch</code> med <code class="language-plaintext highlighter-rouge">_summary=count</code>? Definieras den i denna IG eller i tjänsternas IG:er? Och svarar den med vårdenhet?</li>
-  <li><strong>Lokaliseringstjänstens behörighet.</strong> När en sökning utlöser den riktade frågan ställs den med användarens kontext. Under vilket ändamål och med vilken identitet ställs den vid färskhållning, och hur loggas den hos källan och i FHIR-EI?</li>
-  <li><strong>Tidsgränser.</strong> Hur länge är en cachepost färsk när källan saknar prenumeration, och hur länge väntar FHIR-EI på en källa innan svaret redovisas som ofullständigt?</li>
-  <li><strong>Post utan vårdenhet.</strong> Räcker fail-closed vid inre spärr, eller behöver den riktade frågan alltid ange vårdenhet?</li>
-  <li><strong>Rättslig grund för systemkontext.</strong> Med vilken grund får en systemkonsument ta emot indexposter och notiser om patienter utan att en användare har frågat, och hur regleras dess ansvar för prövning och loggning per användare? Utgångsläget är dagens regel att notiser kastas; se <a href="legal-basis.html">Rättslig grund och ändamål</a>.</li>
-  <li><strong>Ansvarsfördelning.</strong> Ska FHIR-EI behålla dagens tolkning, där indexet är vårdgivarnas behandling med Inera som personuppgiftsbiträde, eller få en ny ansvarsfördelning med ett uttalat ändamål? Vem beslutar, och med vilket underlag?</li>
-  <li><strong>Vårdgivare i speglade poster.</strong> Hur stor andel av dagens poster har källsystemets HSA-id i dataController, och hur många källsystem betjänar flera vårdgivare?</li>
-  <li><strong>Lokala kopior av innehåll.</strong> Vilka tjänster behöver ett synkat läsmönster, till exempel läkemedelsordinationer och uppmärksamhetsinformation? Vem är personuppgiftsansvarig och åtkomstkontrollpunkt för en sådan kopia?</li>
-  <li><strong>Gemensam beslutstjänst.</strong> Ska åtkomstlagret använda samma beslutstjänst för spärr, samtycke och syfte som EHDS-bryggan och framtida åtkomst till innehåll?</li>
-  <li><strong>Användarens kontext.</strong> Hur får konsumenten en token med användarens anspråk till FHIR-EI, och hur skickar lokaliseringstjänsten den vidare till källorna, till exempel med token exchange?</li>
-  <li><strong>Spärr i systemkontext.</strong> Ska ett system som agerar för en bestämd vårdgivare få notiser filtrerade på yttre spärr redan i FHIR-EI, och hur anges vårdgivaren?</li>
+  <li><strong>Fasta kontakter.</strong> Vilken tjänstedomän (<code class="language-plaintext highlighter-rouge">type</code>) har Fasta kontakter, och ska FHIR-poster också kunna ange tjänstens IG?</li>
+  <li><strong>Koppling mellan klient och källsystem.</strong> Hur binds en producents klient till dess källsystem (HSA-id)?</li>
+  <li><strong>FHIR-endpoints i tjänstekatalogen.</strong> Hur registrerar en vårdgivare sin FHIR-endpoint för en tjänst i tjänstekatalogen, så att API:et kan kontrollera den?</li>
+  <li><strong>Avstämning för producenter.</strong> Behöver producenterna kunna söka sina egna poster för att stämma av mot sitt källsystem?</li>
+</ul>
+
+<h3 id="synk-till-ehms-patientindex">Synk till eHM:s patientindex</h3>
+
+<ul>
+  <li><strong>Uppdrag.</strong> Hur ger vårdgivarna Inera i uppdrag att rapportera till patientindexet för deras räkning, och räcker det för att använda EI:s information för det ändamålet?</li>
+  <li><strong>eHM:s API.</strong> Hur rapporteras och tas uppgifter bort i patientindexet, och hur identifieras ett journalsystem?</li>
+  <li><strong>Vårdgivaren.</strong> Hur stor andel av posterna har källsystemets HSA-id i dataController, och hur många källsystem betjänar flera vårdgivare?</li>
+</ul>
+
+<h3 id="säkerhet">Säkerhet</h3>
+
+<ul>
+  <li><strong>Behörighet för synk.</strong> Hur uttrycks behörigheten för sökning utan patient och massuttag i token: som en egen scope eller som en klientroll i auktoriseringstjänsten?</li>
+  <li><strong>Auktoriseringstjänst.</strong> Vilken av Ineras auktoriseringstjänster utfärdar token till stödtjänsterna i samverkansinfrastrukturen?</li>
+</ul>
+
+<h3 id="ign">IG:n</h3>
+
+<ul>
+  <li><strong>Paket-id och canonical.</strong> IG:n har tagit över paket-id och canonical från den arkiverade FHIR-EI-specen (branchen <code class="language-plaintext highlighter-rouge">arkiv/fhir-ei-vision</code>), som aldrig publicerades. Ska en framtida bredare IG få egna?</li>
 </ul>
 
 
@@ -266,8 +258,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-10 12:09:00 +0000">
-    2026-11-10
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
   </span>
 
           <br/>

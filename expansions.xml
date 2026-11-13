@@ -1,432 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Bundle xmlns="http://hl7.org/fhir">
-  <id value="e7b9b6e6-4162-4ca7-9b0b-5561cddcf9a8"/>
+  <id value="ee669e8d-0f35-44aa-86c6-32fad01a688d"/>
   <meta>
-    <lastUpdated value="2026-11-10T12:09:41.422+00:00"/>
+    <lastUpdated value="2026-11-13T09:35:31.964+00:00"/>
   </meta>
   <type value="collection"/>
   <entry>
-    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet"/>
-    <resource>
-      <ValueSet>
-        <text>
-          <status value="generated"/>
-          <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated">
-            <p class="res-header-id"/>
-            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på 
-              <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html">codesystem Kodsystem för orsaker till avregistrering v0.1.0 (CodeSystem)</a>
-              <span class="copy-text-inline">
-                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
-              </span>
-            </p>
-            <p>Denna värdemängd innehåller 5 begrepp</p>
-            <table class="codes" data-fhir="generated">
-              <tr>
-                <td>
-                  <b>System</b>
-                </td>
-                <td style="white-space:nowrap">
-                  <b>Kod</b>
-                </td>
-                <td>
-                  <b>Visning (sv)</b>
-                </td>
-                <td>
-                  <b>Definition</b>
-                </td>
-                <td>
-                  <b>JSON</b>
-                </td>
-                <td>
-                  <b>XML</b>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-entered-in-error"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-entered-in-error">entered-in-error</a>
-                </td>
-                <td/>
-                <td>Posten skulle aldrig ha registrerats. Används med registreringsstatus entered-in-error.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;entered-in-error&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;entered-in-error&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-ended"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-ended">ended</a>
-                </td>
-                <td/>
-                <td>Producenten håller inte längre information om patienten inom tjänsten. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;ended&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;ended&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-purged"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-purged">purged</a>
-                </td>
-                <td/>
-                <td>Informationen har gallrats hos producenten. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;purged&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;purged&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-not-at-source"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-not-at-source">not-at-source</a>
-                </td>
-                <td/>
-                <td>Källan uppger, på en riktad fråga från lokaliseringstjänsten, att den inte längre har information om patienten inom tjänsten. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;not-at-source&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;not-at-source&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-transition-adapter"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-transition-adapter">transition-adapter</a>
-                </td>
-                <td/>
-                <td>Posten avregistrerades i dagens engagemangsindex, vars kontrakt inte bär någon orsak. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;transition-adapter&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;transition-adapter&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </text>
-        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet"/>
-        <identifier>
-          <value value="IneraDeregistrationReasonValueSet"/>
-        </identifier>
-        <version value="0.1.0"/>
-        <name value="IneraDeregistrationReasonValueSet"/>
-        <title value="Orsaker till avregistrering"/>
-        <status value="draft"/>
-        <experimental value="false"/>
-        <date value="2026-10-26"/>
-        <jurisdiction>
-          <coding>
-            <system value="urn:iso:std:iso:3166"/>
-            <code value="SE"/>
-            <display value="Sweden"/>
-          </coding>
-        </jurisdiction>
-        <expansion>
-          <identifier value="urn:uuid:b70c365c-bc51-411c-9f06-d41222e4ed54"/>
-          <timestamp value="2026-11-10T12:10:14+00:00"/>
-          <total value="5"/>
-          <offset value="0"/>
-          <parameter>
-            <name value="displayLanguage"/>
-            <valueCode value="sv"/>
-          </parameter>
-          <parameter>
-            <name value="count"/>
-            <valueInteger value="1000"/>
-          </parameter>
-          <parameter>
-            <name value="offset"/>
-            <valueInteger value="0"/>
-          </parameter>
-          <parameter>
-            <name value="excludeNested"/>
-            <valueBoolean value="false"/>
-          </parameter>
-          <parameter>
-            <name value="used-codesystem"/>
-            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem|0.1.0"/>
-          </parameter>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="entered-in-error"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="ended"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="purged"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="not-at-source"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="transition-adapter"/>
-          </contains>
-        </expansion>
-      </ValueSet>
-    </resource>
-  </entry>
-  <entry>
-    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet"/>
-    <resource>
-      <ValueSet>
-        <text>
-          <status value="generated"/>
-          <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated">
-            <p class="res-header-id"/>
-            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på 
-              <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html">codesystem Kodsystem för orsaker till avregistrering v0.1.0 (CodeSystem)</a>
-              <span class="copy-text-inline">
-                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
-              </span>
-            </p>
-            <p>Denna värdemängd innehåller 5 begrepp</p>
-            <table class="codes" data-fhir="generated">
-              <tr>
-                <td>
-                  <b>System</b>
-                </td>
-                <td style="white-space:nowrap">
-                  <b>Kod</b>
-                </td>
-                <td>
-                  <b>Visning (sv)</b>
-                </td>
-                <td>
-                  <b>Definition</b>
-                </td>
-                <td>
-                  <b>JSON</b>
-                </td>
-                <td>
-                  <b>XML</b>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-entered-in-error"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-entered-in-error">entered-in-error</a>
-                </td>
-                <td/>
-                <td>Posten skulle aldrig ha registrerats. Används med registreringsstatus entered-in-error.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;entered-in-error&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;entered-in-error&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-ended"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-ended">ended</a>
-                </td>
-                <td/>
-                <td>Producenten håller inte längre information om patienten inom tjänsten. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;ended&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;ended&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-purged"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-purged">purged</a>
-                </td>
-                <td/>
-                <td>Informationen har gallrats hos producenten. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;purged&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;purged&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-not-at-source"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-not-at-source">not-at-source</a>
-                </td>
-                <td/>
-                <td>Källan uppger, på en riktad fråga från lokaliseringstjänsten, att den inte längre har information om patienten inom tjänsten. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;not-at-source&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;not-at-source&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem-transition-adapter"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraDeregistrationReasonCodeSystem.html#IneraDeregistrationReasonCodeSystem-transition-adapter">transition-adapter</a>
-                </td>
-                <td/>
-                <td>Posten avregistrerades i dagens engagemangsindex, vars kontrakt inte bär någon orsak. Används med registreringsstatus withdrawn.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;transition-adapter&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;transition-adapter&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </text>
-        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet"/>
-        <identifier>
-          <value value="IneraDeregistrationReasonValueSet"/>
-        </identifier>
-        <version value="0.1.0"/>
-        <name value="IneraDeregistrationReasonValueSet"/>
-        <title value="Orsaker till avregistrering"/>
-        <status value="draft"/>
-        <experimental value="false"/>
-        <date value="2026-10-26"/>
-        <jurisdiction>
-          <coding>
-            <system value="urn:iso:std:iso:3166"/>
-            <code value="SE"/>
-            <display value="Sweden"/>
-          </coding>
-        </jurisdiction>
-        <expansion>
-          <identifier value="urn:uuid:23197352-20df-439c-8133-3ca7dfd1bb83"/>
-          <timestamp value="2026-11-10T12:10:14+00:00"/>
-          <total value="5"/>
-          <offset value="0"/>
-          <parameter>
-            <name value="displayLanguage"/>
-            <valueCode value="sv"/>
-          </parameter>
-          <parameter>
-            <name value="count"/>
-            <valueInteger value="1000"/>
-          </parameter>
-          <parameter>
-            <name value="offset"/>
-            <valueInteger value="0"/>
-          </parameter>
-          <parameter>
-            <name value="excludeNested"/>
-            <valueBoolean value="false"/>
-          </parameter>
-          <parameter>
-            <name value="used-codesystem"/>
-            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem|0.1.0"/>
-          </parameter>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="entered-in-error"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="ended"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="purged"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="not-at-source"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"/>
-            <code value="transition-adapter"/>
-          </contains>
-        </expansion>
-      </ValueSet>
-    </resource>
-  </entry>
-  <entry>
     <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementCategoryValueSet"/>
     <resource>
       <ValueSet>
@@ -495,7 +75,7 @@
         <title value="Kategorier inom tjänstedomän"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -510,8 +90,8 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:5083e69a-35f3-4e51-9526-ba47d2263bec"/>
-          <timestamp value="2026-11-10T12:10:14+00:00"/>
+          <identifier value="urn:uuid:60bf5166-e6ca-4bfa-8fdf-1bff591eb899"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
           <total value="1"/>
           <offset value="0"/>
           <parameter>
@@ -615,7 +195,7 @@
         <title value="Kategorier inom tjänstedomän"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -630,8 +210,8 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:7ba4803c-a925-4854-bfa0-789483d1d396"/>
-          <timestamp value="2026-11-10T12:10:15+00:00"/>
+          <identifier value="urn:uuid:cde62686-f4d1-40c7-be59-b07af6d2cef8"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
           <total value="1"/>
           <offset value="0"/>
           <parameter>
@@ -667,7 +247,7 @@
     </resource>
   </entry>
   <entry>
-    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet"/>
+    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet"/>
     <resource>
       <ValueSet>
         <text>
@@ -675,12 +255,12 @@
           <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated">
             <p class="res-header-id"/>
             <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på 
-              <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html">codesystem Kodsystem för försörjningssätt v0.1.0 (CodeSystem)</a>
+              <a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html">codesystem DocumentReferenceStatus v5.0.0 (CodeSystem)</a>
               <span class="copy-text-inline">
-                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
+                <button data-clipboard-text="http://hl7.org/fhir/document-reference-status|5.0.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
               </span>
             </p>
-            <p>Denna värdemängd innehåller 3 begrepp</p>
+            <p>Denna värdemängd innehåller 2 begrepp</p>
             <table class="codes" data-fhir="generated">
               <tr>
                 <td>
@@ -704,80 +284,59 @@
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem-producer"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code>
+                  <a name="x-http://hl7.org/fhir/document-reference-status-current"> </a>
+                  <code>http://hl7.org/fhir/document-reference-status</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html#IneraIndexPopulationMethodCodeSystem-producer">producer</a>
+                  <a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-current">current</a>
                 </td>
                 <td/>
-                <td>Producenten har registrerat posten, direkt eller via en indexeringsagent.</td>
+                <td>This is the current reference for this document.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;producer&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;http://hl7.org/fhir/document-reference-status&quot;, &quot;version&quot;: &quot;5.0.0&quot;, &quot;code&quot;: &quot;current&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;producer&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;http://hl7.org/fhir/document-reference-status&quot;/&gt;&lt;version value=&quot;5.0.0&quot;/&gt;&lt;code value=&quot;current&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem-cache"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code>
+                  <a name="x-http://hl7.org/fhir/document-reference-status-superseded"> </a>
+                  <code>http://hl7.org/fhir/document-reference-status</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html#IneraIndexPopulationMethodCodeSystem-cache">cache</a>
+                  <a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-superseded">superseded</a>
                 </td>
                 <td/>
-                <td>Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan.</td>
+                <td>This reference has been superseded by another reference.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;cache&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;http://hl7.org/fhir/document-reference-status&quot;, &quot;version&quot;: &quot;5.0.0&quot;, &quot;code&quot;: &quot;superseded&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;cache&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem-mirror"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html#IneraIndexPopulationMethodCodeSystem-mirror">mirror</a>
-                </td>
-                <td/>
-                <td>Övergångsadaptern har speglat posten från dagens engagemangsindex.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;mirror&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;mirror&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;http://hl7.org/fhir/document-reference-status&quot;/&gt;&lt;version value=&quot;5.0.0&quot;/&gt;&lt;code value=&quot;superseded&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
             </table>
           </div>
         </text>
-        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet"/>
+        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet"/>
         <identifier>
-          <value value="IneraIndexPopulationMethodValueSet"/>
+          <value value="IneraEngagementStatusValueSet"/>
         </identifier>
         <version value="0.1.0"/>
-        <name value="IneraIndexPopulationMethodValueSet"/>
-        <title value="Försörjningssätt"/>
+        <name value="IneraEngagementStatusValueSet"/>
+        <title value="Status för engagemangsposter"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -786,9 +345,9 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:d57607a8-68cf-44c3-a602-2a59b3bf470d"/>
-          <timestamp value="2026-11-10T12:10:15+00:00"/>
-          <total value="3"/>
+          <identifier value="urn:uuid:d6569984-a51c-4553-ac0c-6a806ab75fb5"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
+          <total value="2"/>
           <offset value="0"/>
           <parameter>
             <name value="displayLanguage"/>
@@ -808,26 +367,22 @@
           </parameter>
           <parameter>
             <name value="used-codesystem"/>
-            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem|0.1.0"/>
+            <valueUri value="http://hl7.org/fhir/document-reference-status|5.0.0"/>
           </parameter>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"/>
-            <code value="producer"/>
+            <system value="http://hl7.org/fhir/document-reference-status"/>
+            <code value="current"/>
           </contains>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"/>
-            <code value="cache"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"/>
-            <code value="mirror"/>
+            <system value="http://hl7.org/fhir/document-reference-status"/>
+            <code value="superseded"/>
           </contains>
         </expansion>
       </ValueSet>
     </resource>
   </entry>
   <entry>
-    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet"/>
+    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet"/>
     <resource>
       <ValueSet>
         <text>
@@ -835,12 +390,12 @@
           <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated">
             <p class="res-header-id"/>
             <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på 
-              <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html">codesystem Kodsystem för försörjningssätt v0.1.0 (CodeSystem)</a>
+              <a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html">codesystem DocumentReferenceStatus v5.0.0 (CodeSystem)</a>
               <span class="copy-text-inline">
-                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
+                <button data-clipboard-text="http://hl7.org/fhir/document-reference-status|5.0.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
               </span>
             </p>
-            <p>Denna värdemängd innehåller 3 begrepp</p>
+            <p>Denna värdemängd innehåller 2 begrepp</p>
             <table class="codes" data-fhir="generated">
               <tr>
                 <td>
@@ -864,80 +419,59 @@
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem-producer"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code>
+                  <a name="x-http://hl7.org/fhir/document-reference-status-current"> </a>
+                  <code>http://hl7.org/fhir/document-reference-status</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html#IneraIndexPopulationMethodCodeSystem-producer">producer</a>
+                  <a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-current">current</a>
                 </td>
                 <td/>
-                <td>Producenten har registrerat posten, direkt eller via en indexeringsagent.</td>
+                <td>This is the current reference for this document.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;producer&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;http://hl7.org/fhir/document-reference-status&quot;, &quot;version&quot;: &quot;5.0.0&quot;, &quot;code&quot;: &quot;current&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;producer&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;http://hl7.org/fhir/document-reference-status&quot;/&gt;&lt;version value=&quot;5.0.0&quot;/&gt;&lt;code value=&quot;current&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem-cache"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code>
+                  <a name="x-http://hl7.org/fhir/document-reference-status-superseded"> </a>
+                  <code>http://hl7.org/fhir/document-reference-status</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html#IneraIndexPopulationMethodCodeSystem-cache">cache</a>
+                  <a href="http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-superseded">superseded</a>
                 </td>
                 <td/>
-                <td>Ineras lokaliseringstjänst har fyllt posten utifrån eHM:s patientindex och en riktad fråga till källan.</td>
+                <td>This reference has been superseded by another reference.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;cache&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;http://hl7.org/fhir/document-reference-status&quot;, &quot;version&quot;: &quot;5.0.0&quot;, &quot;code&quot;: &quot;superseded&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;cache&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem-mirror"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexPopulationMethodCodeSystem.html#IneraIndexPopulationMethodCodeSystem-mirror">mirror</a>
-                </td>
-                <td/>
-                <td>Övergångsadaptern har speglat posten från dagens engagemangsindex.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;mirror&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;mirror&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;http://hl7.org/fhir/document-reference-status&quot;/&gt;&lt;version value=&quot;5.0.0&quot;/&gt;&lt;code value=&quot;superseded&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
             </table>
           </div>
         </text>
-        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet"/>
+        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet"/>
         <identifier>
-          <value value="IneraIndexPopulationMethodValueSet"/>
+          <value value="IneraEngagementStatusValueSet"/>
         </identifier>
         <version value="0.1.0"/>
-        <name value="IneraIndexPopulationMethodValueSet"/>
-        <title value="Försörjningssätt"/>
+        <name value="IneraEngagementStatusValueSet"/>
+        <title value="Status för engagemangsposter"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -946,9 +480,9 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:be5ab644-cea7-42d7-8022-cc420ee45aeb"/>
-          <timestamp value="2026-11-10T12:10:15+00:00"/>
-          <total value="3"/>
+          <identifier value="urn:uuid:10f633b5-ae12-4ca6-99c2-d070629b8238"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
+          <total value="2"/>
           <offset value="0"/>
           <parameter>
             <name value="displayLanguage"/>
@@ -968,26 +502,22 @@
           </parameter>
           <parameter>
             <name value="used-codesystem"/>
-            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem|0.1.0"/>
+            <valueUri value="http://hl7.org/fhir/document-reference-status|5.0.0"/>
           </parameter>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"/>
-            <code value="producer"/>
+            <system value="http://hl7.org/fhir/document-reference-status"/>
+            <code value="current"/>
           </contains>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"/>
-            <code value="cache"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"/>
-            <code value="mirror"/>
+            <system value="http://hl7.org/fhir/document-reference-status"/>
+            <code value="superseded"/>
           </contains>
         </expansion>
       </ValueSet>
     </resource>
   </entry>
   <entry>
-    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet"/>
+    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraRetrievalProtocolValueSet"/>
     <resource>
       <ValueSet>
         <text>
@@ -995,12 +525,12 @@
           <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated">
             <p class="res-header-id"/>
             <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på 
-              <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html">codesystem Kodsystem för registreringsstatus v0.1.0 (CodeSystem)</a>
+              <a href="CodeSystem-IneraRetrievalProtocolCodeSystem.html">codesystem Kodsystem för hämtningsprotokoll v0.1.0 (CodeSystem)</a>
               <span class="copy-text-inline">
-                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
+                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
               </span>
             </p>
-            <p>Denna värdemängd innehåller 3 begrepp</p>
+            <p>Denna värdemängd innehåller 2 begrepp</p>
             <table class="codes" data-fhir="generated">
               <tr>
                 <td>
@@ -1024,80 +554,59 @@
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem-active"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code>
+                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem-riv-ta"> </a>
+                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html#IneraIndexRegistrationStatusCodeSystem-active">active</a>
+                  <a href="CodeSystem-IneraRetrievalProtocolCodeSystem.html#IneraRetrievalProtocolCodeSystem-riv-ta">riv-ta</a>
                 </td>
                 <td/>
-                <td>Informationen finns tillgänglig hos producenten. Basstatus current.</td>
+                <td>Ett tjänstekontrakt i postens tjänstedomän, via tjänsteplattformen och postens logiska adress.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;active&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;riv-ta&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;active&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;riv-ta&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem-withdrawn"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code>
+                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem-fhir"> </a>
+                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html#IneraIndexRegistrationStatusCodeSystem-withdrawn">withdrawn</a>
+                  <a href="CodeSystem-IneraRetrievalProtocolCodeSystem.html#IneraRetrievalProtocolCodeSystem-fhir">fhir</a>
                 </td>
                 <td/>
-                <td>Posten har avsiktligt och varaktigt dragits tillbaka. Basstatus superseded.</td>
+                <td>FHIR-API:t på den endpoint som anges i postens attachment.url, i den FHIR-version som tjänstens IG anger.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;withdrawn&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;fhir&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;withdrawn&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem-entered-in-error"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html#IneraIndexRegistrationStatusCodeSystem-entered-in-error">entered-in-error</a>
-                </td>
-                <td/>
-                <td>Posten skulle aldrig ha funnits. Basstatus entered-in-error.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;entered-in-error&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;entered-in-error&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;fhir&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
             </table>
           </div>
         </text>
-        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet"/>
+        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraRetrievalProtocolValueSet"/>
         <identifier>
-          <value value="IneraIndexRegistrationStatusValueSet"/>
+          <value value="IneraRetrievalProtocolValueSet"/>
         </identifier>
         <version value="0.1.0"/>
-        <name value="IneraIndexRegistrationStatusValueSet"/>
-        <title value="Registreringsstatus för indexposter"/>
+        <name value="IneraRetrievalProtocolValueSet"/>
+        <title value="Hämtningsprotokoll"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -1106,9 +615,9 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:08cc8e03-f183-4049-89b2-b075754507f9"/>
-          <timestamp value="2026-11-10T12:10:15+00:00"/>
-          <total value="3"/>
+          <identifier value="urn:uuid:1e461d26-1952-4c9d-9041-1b180436cf90"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
+          <total value="2"/>
           <offset value="0"/>
           <parameter>
             <name value="displayLanguage"/>
@@ -1128,26 +637,22 @@
           </parameter>
           <parameter>
             <name value="used-codesystem"/>
-            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem|0.1.0"/>
+            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem|0.1.0"/>
           </parameter>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"/>
-            <code value="active"/>
+            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem"/>
+            <code value="riv-ta"/>
           </contains>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"/>
-            <code value="withdrawn"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"/>
-            <code value="entered-in-error"/>
+            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem"/>
+            <code value="fhir"/>
           </contains>
         </expansion>
       </ValueSet>
     </resource>
   </entry>
   <entry>
-    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet"/>
+    <fullUrl value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraRetrievalProtocolValueSet"/>
     <resource>
       <ValueSet>
         <text>
@@ -1155,12 +660,12 @@
           <div xmlns="http://www.w3.org/1999/xhtml" data-fhir="generated">
             <p class="res-header-id"/>
             <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion utförd internt baserad på 
-              <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html">codesystem Kodsystem för registreringsstatus v0.1.0 (CodeSystem)</a>
+              <a href="CodeSystem-IneraRetrievalProtocolCodeSystem.html">codesystem Kodsystem för hämtningsprotokoll v0.1.0 (CodeSystem)</a>
               <span class="copy-text-inline">
-                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
+                <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
               </span>
             </p>
-            <p>Denna värdemängd innehåller 3 begrepp</p>
+            <p>Denna värdemängd innehåller 2 begrepp</p>
             <table class="codes" data-fhir="generated">
               <tr>
                 <td>
@@ -1184,80 +689,59 @@
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem-active"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code>
+                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem-riv-ta"> </a>
+                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html#IneraIndexRegistrationStatusCodeSystem-active">active</a>
+                  <a href="CodeSystem-IneraRetrievalProtocolCodeSystem.html#IneraRetrievalProtocolCodeSystem-riv-ta">riv-ta</a>
                 </td>
                 <td/>
-                <td>Informationen finns tillgänglig hos producenten. Basstatus current.</td>
+                <td>Ett tjänstekontrakt i postens tjänstedomän, via tjänsteplattformen och postens logiska adress.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;active&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;riv-ta&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;active&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;riv-ta&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem-withdrawn"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code>
+                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem-fhir"> </a>
+                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem</code>
                 </td>
                 <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html#IneraIndexRegistrationStatusCodeSystem-withdrawn">withdrawn</a>
+                  <a href="CodeSystem-IneraRetrievalProtocolCodeSystem.html#IneraRetrievalProtocolCodeSystem-fhir">fhir</a>
                 </td>
                 <td/>
-                <td>Posten har avsiktligt och varaktigt dragits tillbaka. Basstatus superseded.</td>
+                <td>FHIR-API:t på den endpoint som anges i postens attachment.url, i den FHIR-version som tjänstens IG anger.</td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;withdrawn&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;fhir&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
                 <td>
                   <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;withdrawn&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem-entered-in-error"> </a>
-                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem</code>
-                </td>
-                <td style="white-space:nowrap">  
-                  <a href="CodeSystem-IneraIndexRegistrationStatusCodeSystem.html#IneraIndexRegistrationStatusCodeSystem-entered-in-error">entered-in-error</a>
-                </td>
-                <td/>
-                <td>Posten skulle aldrig ha funnits. Basstatus entered-in-error.</td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;entered-in-error&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
-                  </span>
-                </td>
-                <td>
-                  <span class="copy-text-inline">
-                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;entered-in-error&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;fhir&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
                   </span>
                 </td>
               </tr>
             </table>
           </div>
         </text>
-        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet"/>
+        <url value="https://fhir.inera.se/ig/engagementindex/ValueSet/IneraRetrievalProtocolValueSet"/>
         <identifier>
-          <value value="IneraIndexRegistrationStatusValueSet"/>
+          <value value="IneraRetrievalProtocolValueSet"/>
         </identifier>
         <version value="0.1.0"/>
-        <name value="IneraIndexRegistrationStatusValueSet"/>
-        <title value="Registreringsstatus för indexposter"/>
+        <name value="IneraRetrievalProtocolValueSet"/>
+        <title value="Hämtningsprotokoll"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -1266,9 +750,9 @@
           </coding>
         </jurisdiction>
         <expansion>
-          <identifier value="urn:uuid:9fbe23c9-c55d-4a93-bdf1-4927c6c55818"/>
-          <timestamp value="2026-11-10T12:10:15+00:00"/>
-          <total value="3"/>
+          <identifier value="urn:uuid:d241fcfd-f09b-4018-aa94-31baf5628b01"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
+          <total value="2"/>
           <offset value="0"/>
           <parameter>
             <name value="displayLanguage"/>
@@ -1288,19 +772,15 @@
           </parameter>
           <parameter>
             <name value="used-codesystem"/>
-            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem|0.1.0"/>
+            <valueUri value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem|0.1.0"/>
           </parameter>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"/>
-            <code value="active"/>
+            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem"/>
+            <code value="riv-ta"/>
           </contains>
           <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"/>
-            <code value="withdrawn"/>
-          </contains>
-          <contains>
-            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"/>
-            <code value="entered-in-error"/>
+            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem"/>
+            <code value="fhir"/>
           </contains>
         </expansion>
       </ValueSet>
@@ -1320,7 +800,7 @@
                 <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
               </span>
             </p>
-            <p>Denna värdemängd innehåller 1 begrepp</p>
+            <p>Denna värdemängd innehåller 2 begrepp</p>
             <table class="codes" data-fhir="generated">
               <tr>
                 <td>
@@ -1363,6 +843,27 @@
                   </span>
                 </td>
               </tr>
+              <tr>
+                <td>
+                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem-riv:clinicalprocess:activityprescription:actoutcome"> </a>
+                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code>
+                </td>
+                <td style="white-space:nowrap">  
+                  <a href="CodeSystem-IneraServiceDomainCodeSystem.html#IneraServiceDomainCodeSystem-riv.58clinicalprocess.58activityprescription.58actoutcome">riv:clinicalprocess:activityprescription:actoutcome</a>
+                </td>
+                <td/>
+                <td>Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome.</td>
+                <td>
+                  <span class="copy-text-inline">
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;riv:clinicalprocess:activityprescription:actoutcome&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                  </span>
+                </td>
+                <td>
+                  <span class="copy-text-inline">
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;riv:clinicalprocess:activityprescription:actoutcome&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                  </span>
+                </td>
+              </tr>
             </table>
           </div>
         </text>
@@ -1375,7 +876,7 @@
         <title value="Tjänstedomäner"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -1390,9 +891,9 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:85824bb9-1d6b-4236-bf70-c9d1750c12cf"/>
-          <timestamp value="2026-11-10T12:10:15+00:00"/>
-          <total value="1"/>
+          <identifier value="urn:uuid:64e213a3-dd1a-446e-9d52-1d75b0b33e86"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
+          <total value="2"/>
           <offset value="0"/>
           <parameter>
             <name value="displayLanguage"/>
@@ -1422,6 +923,10 @@
             <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
             <code value="riv:clinicalprocess:healthcond:description"/>
           </contains>
+          <contains>
+            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
+            <code value="riv:clinicalprocess:activityprescription:actoutcome"/>
+          </contains>
         </expansion>
       </ValueSet>
     </resource>
@@ -1440,7 +945,7 @@
                 <button data-clipboard-text="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem|0.1.0" title="Klicka för att kopiera URL" class="btn-copy" aria-label="copy"> </button>
               </span>
             </p>
-            <p>Denna värdemängd innehåller 1 begrepp</p>
+            <p>Denna värdemängd innehåller 2 begrepp</p>
             <table class="codes" data-fhir="generated">
               <tr>
                 <td>
@@ -1483,6 +988,27 @@
                   </span>
                 </td>
               </tr>
+              <tr>
+                <td>
+                  <a name="x-https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem-riv:clinicalprocess:activityprescription:actoutcome"> </a>
+                  <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code>
+                </td>
+                <td style="white-space:nowrap">  
+                  <a href="CodeSystem-IneraServiceDomainCodeSystem.html#IneraServiceDomainCodeSystem-riv.58clinicalprocess.58activityprescription.58actoutcome">riv:clinicalprocess:activityprescription:actoutcome</a>
+                </td>
+                <td/>
+                <td>Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome.</td>
+                <td>
+                  <span class="copy-text-inline">
+                    <button data-clipboard-text="{&quot;system&quot;: &quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;, &quot;version&quot;: &quot;0.1.0&quot;, &quot;code&quot;: &quot;riv:clinicalprocess:activityprescription:actoutcome&quot;}" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                  </span>
+                </td>
+                <td>
+                  <span class="copy-text-inline">
+                    <button data-clipboard-text="&lt;coding&gt;&lt;system value=&quot;https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem&quot;/&gt;&lt;version value=&quot;0.1.0&quot;/&gt;&lt;code value=&quot;riv:clinicalprocess:activityprescription:actoutcome&quot;/&gt;&lt;/coding&gt;" title="Klicka för att kopiera som Coding" class="btn-copy" aria-label="copy"> </button>
+                  </span>
+                </td>
+              </tr>
             </table>
           </div>
         </text>
@@ -1495,7 +1021,7 @@
         <title value="Tjänstedomäner"/>
         <status value="draft"/>
         <experimental value="false"/>
-        <date value="2026-10-26"/>
+        <date value="2026-11-13"/>
         <jurisdiction>
           <coding>
             <system value="urn:iso:std:iso:3166"/>
@@ -1510,9 +1036,9 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason">
             <valueString value="This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
           </extension>
-          <identifier value="urn:uuid:79e0470d-52ab-4800-a71b-da3e84cb995b"/>
-          <timestamp value="2026-11-10T12:10:15+00:00"/>
-          <total value="1"/>
+          <identifier value="urn:uuid:2eebc05a-1b19-452f-af24-520983a31879"/>
+          <timestamp value="2026-11-13T09:36:11+00:00"/>
+          <total value="2"/>
           <offset value="0"/>
           <parameter>
             <name value="displayLanguage"/>
@@ -1541,6 +1067,10 @@
           <contains>
             <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
             <code value="riv:clinicalprocess:healthcond:description"/>
+          </contains>
+          <contains>
+            <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
+            <code value="riv:clinicalprocess:activityprescription:actoutcome"/>
           </contains>
         </expansion>
       </ValueSet>

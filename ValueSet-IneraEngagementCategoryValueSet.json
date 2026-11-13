@@ -14,7 +14,7 @@
   "title" : "Kategorier inom tjänstedomän",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -23,7 +23,7 @@
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Alla kategorier i kodverket för kategorier inom tjänstedomän.",
+  "description" : "Alla kategorier i kodsystemet för kategorier inom tjänstedomän.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",

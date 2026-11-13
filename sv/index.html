@@ -6,7 +6,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Hem - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+    <title>Hem - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -62,7 +62,7 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -95,31 +95,22 @@
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
-  <li><a href="introduction.html">Inledning</a></li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
-      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
-      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
-      <li><a href="information-model.html">Indexposten</a></li>
-      <li><a href="population.html">Försörjning av indexet</a></li>
-      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
-      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
-      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
-      <li><a href="mappings.html">Mappning till profiler</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
     </ul>
   </li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
-      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
-      <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="api.html">API</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -170,7 +161,7 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   <h2>Hem</h2>
   
 
@@ -208,7 +199,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           
 
             per 
-2026-11-10
+2026-11-13
 
           
         
@@ -238,19 +229,19 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
     <p><!-- white space is critical inside of capture --></p>
 <div class="markdown-toc">
 <ul id="markdown-toc">
-  <li><a href="#fhir-baserat-engagemangsindex-fhir-ei" id="markdown-toc-fhir-baserat-engagemangsindex-fhir-ei">FHIR-baserat engagemangsindex (FHIR-EI)</a></li>
+  <li><a href="#ei-on-fhir" id="markdown-toc-ei-on-fhir">EI-on-FHIR</a></li>
   <li><a href="#omfattning" id="markdown-toc-omfattning">Omfattning</a></li>
-  <li><a href="#syfte" id="markdown-toc-syfte">Syfte</a></li>
+  <li><a href="#utanför-omfattningen" id="markdown-toc-utanför-omfattningen">Utanför omfattningen</a></li>
+  <li><a href="#arkitektur" id="markdown-toc-arkitektur">Arkitektur</a></li>
   <li><a href="#målgrupp" id="markdown-toc-målgrupp">Målgrupp</a></li>
-  <li><a href="#terminologi" id="markdown-toc-terminologi">Terminologi</a></li>
-  <li><a href="#beroenden" id="markdown-toc-beroenden">Beroenden</a></li>
-  <li><a href="#dokumentation" id="markdown-toc-dokumentation">Dokumentation</a></li>
 </ul>
 
 </div>
-<h3 id="fhir-baserat-engagemangsindex-fhir-ei">FHIR-baserat engagemangsindex (FHIR-EI)</h3>
+<h3 id="ei-on-fhir">EI-on-FHIR</h3>
 
-<p>FHIR-EI är en ny komponent som pekar ut var det finns information om en patient. Den svarar på tre frågor: i vilka system finns information om patienten, vilka informationsmängder finns där, och när uppdaterades de senast. Komponenten ersätter engagemangsindex när NPÖ och 1177 FHIR-ifieras, och följer samma mönster som NHS Englands <a href="https://digital.nhs.uk/services/national-record-locator">National Record Locator</a> och IHE MHD.</p>
+<p>EI-on-FHIR är ett FHIR R5-API ovanpå dagens engagemangsindex (EI). API:et gör befintlig EI-information tillgänglig för Ineras interna stödtjänster i den nya samverkansinfrastrukturen, till exempel EHDS-bryggan. Det kan också vara källa för en synktjänst som fyller eHM:s patientindex för vårdgivarnas räkning. En källa som implementerar en tjänsts FHIR-IG i stället för tjänstekontraktet registrerar sina engagemang i EI-on-FHIR:s eget register, så att de syns på samma sätt.</p>
+
+<p>Förebilden är NHS Englands <a href="https://digital.nhs.uk/services/national-record-locator">National Record Locator</a> (NRL): en post i indexet är en pekare som exponeras som <code class="language-plaintext highlighter-rouge">DocumentReference</code>, och den söks på patientens identitet och informationens typ.</p>
 
 <blockquote>
   <p><strong>Status:</strong> utkast. Specifikationen är under arbete och kan ändras utan föregående meddelande. Se <a href="open-issues.html">Öppna frågor</a>.</p>
@@ -260,65 +251,46 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <h3 id="omfattning">Omfattning</h3>
 
-<p>IG:n omfattar:</p>
+<p>IG:n omfattar tre <a href="use-cases.html">användningsfall</a>:</p>
+
+<ol>
+  <li><strong>Stödtjänster hittar var information finns.</strong> En intern stödtjänst söker en patients engagemangsposter, till exempel för att se om en vårdgivares system har information innan den anropar det. Det motsvarar FindContent.</li>
+  <li><strong>Synk till eHM:s patientindex.</strong> En synktjänst läser alla poster och alla ändringar och fyller eHM:s patientindex utifrån befintlig data i EI.</li>
+  <li><strong>FHIR-producenter registrerar engagemang.</strong> En källa som implementerar en tjänsts FHIR-IG, till exempel Fasta kontakter, registrerar sina engagemang i EI-on-FHIR:s register i stället för med Update i EI.</li>
+</ol>
+
+<p>För det definierar IG:n:</p>
 
 <ul>
-  <li>informationsmodell för indexposten (<a href="information-model.html">Indexposten</a>, profil <a href="StructureDefinition-IneraIndexEntry.html">Indexpost</a>)</li>
-  <li><a href="population.html">försörjning av indexet</a>: producentregistrering, Inera-försörjd cache eller spegling av dagens engagemangsindex</li>
-  <li><a href="information-sets.html">kodverk för tjänster och informationsmängder</a></li>
-  <li><a href="rest-interactions.html">API för sökning, registrering</a> och <a href="subscriptions.html">prenumeration</a></li>
-  <li><a href="event-model.html">händelsemodell och leveransgarantier</a>, inklusive övergången från dagens engagemangsindex</li>
-  <li><a href="security.html">spärr, loggning och filtrering</a> av svar</li>
-  <li><a href="legal-basis.html">rättslig grund och ändamål</a>: dagens juridiska tolkning av engagemangsindex och det FHIR-EI går utöver</li>
-  <li><a href="ehm-coexistence.html">samexistens med eHM:s patientindex</a>: borttag, grundladdning och återsynk</li>
+  <li>profilen <a href="StructureDefinition-IneraEngagement.html">Engagemangspost</a> och hur den motsvarar fälten i EI (<a href="engagement.html">Engagemangsposten</a>)</li>
+  <li><a href="api.html">API:et</a>: läsning, sökning, registrering för FHIR-producenter och massuttag med Bulk Data</li>
+  <li>hur API:et används för <a href="ehm-sync.html">synk till eHM:s patientindex</a></li>
+  <li><a href="security.html">säkerhet och loggning</a></li>
 </ul>
 
-<p>IG:n är neutral till hur indexet fylls. Konsumenterna läser samma API oavsett om en tjänsts indexposter registreras av producenterna, fylls av Inera utifrån eHM:s patientindex och riktade frågor till källorna, eller speglas från dagens engagemangsindex. Försörjningen väljs per tjänst.</p>
+<h3 id="utanför-omfattningen">Utanför omfattningen</h3>
 
-<p>Utanför IG:n ligger allt som rör hämtning av journalinformation: realtidshämtning, pre-warm, cachning och central lagring. Komponenten pekar ut var information finns. Den lagrar eller förmedlar inte journalinnehåll. Den ska ändå kunna förse sådana lösningar med indexposter och notiser, i systemkontext; se <a href="security.html">Spärr, loggning och behörighet</a>.</p>
+<ul>
+  <li>Ändringar i EI. Källor som implementerar tjänstekontrakten registrerar som i dag med Update, och EI behåller sina RIV-TA-kontrakt.</li>
+  <li>Prenumerationer och notiser.</li>
+  <li>Åtkomst för vårdpersonal och invånare, till exempel via NPÖ eller 1177, och andra framtida användningar av indexet.</li>
+  <li>eHM:s eget API för patientindexet. Synktjänsten beskrivs bara som konsument av detta API.</li>
+</ul>
 
-<p>Första konsumenter är NPÖ och 1177.</p>
+<h3 id="arkitektur">Arkitektur</h3>
 
-<hr />
-
-<h3 id="syfte">Syfte</h3>
-
-<p>Dagens engagemangsindex bygger på RIV-TA-tjänstekontrakten FindContent, Update och ProcessNotification. När NPÖ och 1177 går över till FHIR behöver de ett index med FHIR-gränssnitt. FHIR-EI ska klara minst det dagens engagemangsindex klarar, i aktualitet, leveransgarantier, borttag och återhämtning, och vara byggt så att ett tunt index hos eHM kan härledas ur det senare.</p>
+<p>Arkitekturen, med alternativ och beslut, beskrivs i <a href="https://github.com/Inera-AB/EI-on-FHIR/blob/main/sad/ei-on-fhir-sad.md">SAD för EI-on-FHIR</a> i IG:ns repo.</p>
 
 <hr />
 
 <h3 id="målgrupp">Målgrupp</h3>
 
 <ul>
-  <li>Leverantörer av källsystem som registrerar indexposter (producenter)</li>
-  <li>Tjänster som söker i eller prenumererar på indexet, till att börja med NPÖ och 1177 (konsumenter)</li>
-  <li>Tjänsteägare som publicerar en tillämpning av indexprofilen i sin tjänsts IG</li>
-  <li>Arkitekter och förvaltare av engagemangsindex och FHIR-EI</li>
+  <li>Utvecklare av Ineras interna stödtjänster, till exempel EHDS-bryggan</li>
+  <li>Utvecklare av synktjänsten mot eHM:s patientindex</li>
+  <li>Leverantörer av källsystem som implementerar en tjänsts FHIR-IG</li>
+  <li>Förvaltare av engagemangsindex</li>
 </ul>
-
-<p>Nya läsare börjar med <a href="introduction.html">Inledning</a>. Implementatörer går till <a href="rest-interactions.html">REST-interaktioner och sökparametrar</a>.</p>
-
-<hr />
-
-<h3 id="terminologi">Terminologi</h3>
-
-<p>Kodverken för tjänstedomäner och kategorier i denna IG är utdrag. Den fullständiga förteckningen förvaltas av Inera. På <a href="https://www.inera.se/tjanster/alla-tjanster-a-o/terminologitjanst-for-nationell-e-halsa/">Inera Terminologitjänst</a> finns de kodsystem och värdemängder som Inera förvaltar.</p>
-
-<hr />
-
-<h3 id="beroenden">Beroenden</h3>
-
-<p>IG:n bygger på FHIR R5 (5.0.0). Prenumeration använder R5:s inbyggda topic-baserade prenumerationer. Massuttag använder <a href="https://hl7.org/fhir/uv/bulkdata/">Bulk Data Access</a> (<code class="language-plaintext highlighter-rouge">$export</code>), som bara finns publicerad för R4 och därför refereras i text, inte som paketberoende.</p>
-
-<p>Profilerna bygger direkt på FHIR:s basresurser. Specen anger att de ska bygga på svenska basprofiler; några sådana finns inte för R5 än. Se <a href="open-issues.html">Öppna frågor</a>.</p>
-
-<hr />
-
-<h3 id="dokumentation">Dokumentation</h3>
-
-<p>Mer information om FHIR på Inera finns på <a href="https://fhir.inera.se/">fhir.inera.se</a>. FHIR på Inera är en del av RIVTA, referensarkitekturen för svensk hälso- och sjukvård.</p>
-
-<p>Information om hur denna IG förvaltas finns under <a href="about.html">Om</a>.</p>
 
 
 
@@ -348,8 +320,8 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-10 12:09:00 +0000">
-    2026-11-10
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
   </span>
 
           <br/>

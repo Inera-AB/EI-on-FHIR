@@ -1,4 +1,4 @@
-# CapabilityStatement - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# CapabilityStatement - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## CapabilityStatement
 
@@ -6,11 +6,7 @@ IG:n definierar ett CapabilityStatement med `kind = requirements`:
 
 | | | |
 | :--- | :--- | :--- |
-| [FHIR-EI server](CapabilityStatement-IneraIndexServer.md) | Server | Sökning, villkorad registrering och avregistrering,`transaction`, historik, topic-baserad prenumeration med`$status`och`$events`, och SubscriptionTopic |
+| [EI-on-FHIR server](CapabilityStatement-IneraEngagementIndexServer.md) | Server | Läsning och sökning av engagemangsposter, registrering och borttag för FHIR-producenter, och massuttag med Bulk Data`$export` |
 
-Kraven anges per interaktion och sökparameter med extension `capabilitystatement-expectation` (SHALL, SHOULD). CapabilityStatementet annonserar de nationella sökparametrarna och, via SubscriptionTopic-resursen, vilka prenumerationsfilter som stöds.
-
-Massuttag med Bulk Data `$export` står inte i CapabilityStatementet. Bulk Data Access finns bara publicerad för R4, så dess OperationDefinition kan inte refereras från en R5-IG. Kravet står i text under [REST-interaktioner och sökparametrar](rest-interactions.md): FHIR-EI SHALL stödja `$export` på systemnivå med `_type=DocumentReference` och `_since`, och ett `_since`-uttag SHALL innehålla avregistrerade poster inom gravstenarnas lagringstid.
-
-Producenter och konsumenter har inga egna CapabilityStatements. Deras förväntningar beskrivs under [Roller och ansvar](roles-and-responsibilities.md).
+Kraven anges per interaktion och sökparameter med extension `capabilitystatement-expectation` (SHALL, SHOULD). Massuttag med Bulk Data `$export` står inte i CapabilityStatementet, eftersom Bulk Data Access bara finns publicerad för R4. Kravet står i text under [API](api.md). Klienterna har inga egna CapabilityStatements; deras behörigheter beskrivs under [Säkerhet och loggning](security.md).
 

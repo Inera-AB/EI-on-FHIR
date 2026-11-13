@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DocumentReference xmlns="http://hl7.org/fhir">
+  <id value="EngagemangspostAktuell"/>
+  <meta>
+    <lastUpdated value="2026-11-02T14:32:10+01:00"/>
+    <profile value="https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement"/>
+  </meta>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: DocumentReference EngagemangspostAktuell</b></p><a name="EngagemangspostAktuell"> </a><a name="hcEngagemangspostAktuell"> </a><div style="display: inline-block; background-color: #fbffeb; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Senast uppdaterad: 2026-11-02 14:32:10+0100</p><p style="margin-bottom: 0px">Profil: <a href="StructureDefinition-IneraEngagement.html">Engagemangspost</a></p></div><p><b>Källsystem</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-SYS1</p><p><b>Ägare</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-EI00</p><p><b>Logisk adress</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><p><b>Senaste innehåll</b>: 2026-11-02 14:30:00+0100</p><p><b>identifier</b>: 7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33</p><p><b>status</b>: Current</p><p><b>type</b>: <span title="Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:healthcond:description}">riv:clinicalprocess:healthcond:description</span></p><p><b>category</b>: <span title="Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem voo}">voo</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>date</b>: 2025-03-11 09:15:00+0100</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VG01</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ContentType</b></td></tr><tr><td style="display: none">*</td><td>application/xml</td></tr></table><h3>Profiles</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Value[x]</b></td></tr><tr><td style="display: none">*</td><td><a href="CodeSystem-IneraRetrievalProtocolCodeSystem.html#IneraRetrievalProtocolCodeSystem-riv-ta">Kodsystem för hämtningsprotokoll: riv-ta</a> (RIV-TA)</td></tr></table></blockquote></div>
+  </text>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceSystem">
+    <valueIdentifier>
+      <system value="urn:oid:1.2.752.29.4.19"/>
+      <value value="SE0000000000-SYS1"/>
+    </valueIdentifier>
+  </extension>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/Owner">
+    <valueIdentifier>
+      <system value="urn:oid:1.2.752.29.4.19"/>
+      <value value="SE0000000000-EI00"/>
+    </valueIdentifier>
+  </extension>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress">
+    <valueIdentifier>
+      <system value="urn:oid:1.2.752.29.4.19"/>
+      <value value="SE0000000000-VG01"/>
+    </valueIdentifier>
+  </extension>
+  <extension url="https://fhir.inera.se/ig/engagementindex/StructureDefinition/MostRecentContent">
+    <valueDateTime value="2026-11-02T14:30:00+01:00"/>
+  </extension>
+  <identifier>
+    <value value="7f3c2a10-5b1e-4c8e-9f7a-2d6b8e4a1c33"/>
+  </identifier>
+  <status value="current"/>
+  <type>
+    <coding>
+      <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"/>
+      <code value="riv:clinicalprocess:healthcond:description"/>
+    </coding>
+  </type>
+  <category>
+    <coding>
+      <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"/>
+      <code value="voo"/>
+    </coding>
+  </category>
+  <subject>
+    <identifier>
+      <system value="http://electronichealth.se/identifier/personnummer"/>
+      <value value="191212121212"/>
+    </identifier>
+  </subject>
+  <date value="2025-03-11T09:15:00+01:00"/>
+  <custodian>
+    <identifier>
+      <system value="urn:oid:1.2.752.29.4.19"/>
+      <value value="SE0000000000-VG01"/>
+    </identifier>
+  </custodian>
+  <content>
+    <attachment>
+      <contentType value="application/xml"/>
+    </attachment>
+    <profile>
+      <valueCoding>
+        <system value="https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem"/>
+        <code value="riv-ta"/>
+      </valueCoding>
+    </profile>
+  </content>
+</DocumentReference>

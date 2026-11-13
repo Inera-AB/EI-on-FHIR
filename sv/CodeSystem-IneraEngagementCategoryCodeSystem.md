@@ -1,4 +1,4 @@
-# Kodsystem för kategorier inom tjänstedomän - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# Kodsystem för kategorier inom tjänstedomän - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## CodeSystem: Kodsystem för kategorier inom tjänstedomän 
 
@@ -27,7 +27,7 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
   "title" : "Kodsystem för kategorier inom tjänstedomän",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -36,7 +36,7 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
+  "description" : "Kategorier inom en tjänstedomän, som de anges i categorization i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",

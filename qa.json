@@ -1,20 +1,20 @@
 {
   "url" : "https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex",
   "name" : "IneraEngagementIndex",
-  "title" : "FHIR-baserat engagemangsindex (FHIR-EI)",
-  "description" : "Indexprofil, API och händelsemodell för FHIR-EI, ett index över var det finns information om en patient, vilka informationsmängder som finns där och när de senast uppdaterades.",
+  "title" : "EI-on-FHIR: FHIR-API för engagemangsindex",
+  "description" : "Ett FHIR R5-API ovanpå dagens engagemangsindex, för Ineras interna stödtjänster och för synk till eHM:s patientindex, med ett eget register för källor som implementerar en tjänsts FHIR-IG.",
   "status" : "draft",
   "package-id" : "inera.ei.engagementindex",
   "ig-ver" : "0.1.0",
-  "date" : "Tue, 10 Nov, 2026 12:09:41 +0000",
-  "dateISO8601" : "2026-11-10T12:09:41+00:00",
+  "date" : "Fri, 13 Nov, 2026 09:35:31 +0000",
+  "dateISO8601" : "2026-11-13T09:35:31+00:00",
   "errs" : 0,
-  "warnings" : 47,
-  "hints" : 124,
+  "warnings" : 44,
+  "hints" : 69,
   "broken-links" : 0,
   "suppressed-hints" : 1,
   "suppressed-warnings" : 2,
   "version" : "5.0.0",
   "tool" : "6.0.0-snapshot1 (3)",
-  "maxMemory" : 757541096
+  "maxMemory" : 921624456
 }

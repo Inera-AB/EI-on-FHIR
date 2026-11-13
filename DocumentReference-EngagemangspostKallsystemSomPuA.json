@@ -1,0 +1,67 @@
+{
+  "resourceType" : "DocumentReference",
+  "id" : "EngagemangspostKallsystemSomPuA",
+  "meta" : {
+    "lastUpdated" : "2026-10-28T08:01:44+01:00",
+    "profile" : ["https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement"]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: DocumentReference EngagemangspostKallsystemSomPuA</b></p><a name=\"EngagemangspostKallsystemSomPuA\"> </a><a name=\"hcEngagemangspostKallsystemSomPuA\"> </a><div style=\"display: inline-block; background-color: #fbffeb; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Senast uppdaterad: 2026-10-28 08:01:44+0100</p><p style=\"margin-bottom: 0px\">Profil: <a href=\"StructureDefinition-IneraEngagement.html\">Engagemangspost</a></p></div><p><b>Källsystem</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-SYS2</p><p><b>Ägare</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-EI00</p><p><b>Logisk adress</b>: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-VE02</p><p><b>identifier</b>: BOI-2024-000118</p><p><b>status</b>: Current</p><p><b>type</b>: <span title=\"Koder:{https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem riv:clinicalprocess:activityprescription:actoutcome}\">riv:clinicalprocess:activityprescription:actoutcome</span></p><p><b>subject</b>: Identifier: <code>http://electronichealth.se/identifier/personnummer</code>/191212121212</p><p><b>date</b>: 2024-06-03 10:20:00+0200</p><p><b>custodian</b>: Identifier: <code>urn:oid:1.2.752.29.4.19</code>/SE0000000000-SYS2</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ContentType</b></td></tr><tr><td style=\"display: none\">*</td><td>application/xml</td></tr></table><h3>Profiles</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Value[x]</b></td></tr><tr><td style=\"display: none\">*</td><td><a href=\"CodeSystem-IneraRetrievalProtocolCodeSystem.html#IneraRetrievalProtocolCodeSystem-riv-ta\">Kodsystem för hämtningsprotokoll: riv-ta</a> (RIV-TA)</td></tr></table></blockquote></div>"
+  },
+  "extension" : [{
+    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceSystem",
+    "valueIdentifier" : {
+      "system" : "urn:oid:1.2.752.29.4.19",
+      "value" : "SE0000000000-SYS2"
+    }
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/Owner",
+    "valueIdentifier" : {
+      "system" : "urn:oid:1.2.752.29.4.19",
+      "value" : "SE0000000000-EI00"
+    }
+  },
+  {
+    "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress",
+    "valueIdentifier" : {
+      "system" : "urn:oid:1.2.752.29.4.19",
+      "value" : "SE0000000000-VE02"
+    }
+  }],
+  "identifier" : [{
+    "value" : "BOI-2024-000118"
+  }],
+  "status" : "current",
+  "type" : {
+    "coding" : [{
+      "system" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem",
+      "code" : "riv:clinicalprocess:activityprescription:actoutcome"
+    }]
+  },
+  "subject" : {
+    "identifier" : {
+      "system" : "http://electronichealth.se/identifier/personnummer",
+      "value" : "191212121212"
+    }
+  },
+  "date" : "2024-06-03T10:20:00+02:00",
+  "custodian" : {
+    "identifier" : {
+      "system" : "urn:oid:1.2.752.29.4.19",
+      "value" : "SE0000000000-SYS2"
+    }
+  },
+  "content" : [{
+    "attachment" : {
+      "contentType" : "application/xml"
+    },
+    "profile" : [{
+      "valueCoding" : {
+        "system" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem",
+        "code" : "riv-ta"
+      }
+    }]
+  }]
+}

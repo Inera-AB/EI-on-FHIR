@@ -12,7 +12,7 @@
   fhir:language [ fhir:v "sv"] ; # 
   fhir:text [
      fhir:status [ fhir:v "generated" ] ;
-     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraServiceDomainCodeSystem</b></p><a name=\"IneraServiceDomainCodeSystem\"> </a><a name=\"hcIneraServiceDomainCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande kod:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">riv:clinicalprocess:healthcond:description<a name=\"IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description\"> </a></td><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr></table></div>"^^rdf:XMLLiteral ]
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: CodeSystem IneraServiceDomainCodeSystem</b></p><a name=\"IneraServiceDomainCodeSystem\"> </a><a name=\"hcIneraServiceDomainCodeSystem\"> </a><p>Detta case-sensitive kodsystem <code>https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem</code> tillhandahåller <b>ett fragment</b> som inkluderar följande koder:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">riv:clinicalprocess:healthcond:description<a name=\"IneraServiceDomainCodeSystem-riv.58clinicalprocess.58healthcond.58description\"> </a></td><td>Tjänstedomänen riv:clinicalprocess:healthcond:description.</td></tr><tr><td style=\"white-space:nowrap\">riv:clinicalprocess:activityprescription:actoutcome<a name=\"IneraServiceDomainCodeSystem-riv.58clinicalprocess.58activityprescription.58actoutcome\"> </a></td><td>Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome.</td></tr></table></div>"^^rdf:XMLLiteral ]
   ] ; # 
   fhir:url [ fhir:v "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"^^xsd:anyURI] ; # 
   fhir:identifier ( [
@@ -23,7 +23,7 @@
   fhir:title [ fhir:v "Kodsystem för tjänstedomäner"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
   fhir:experimental [ fhir:v false] ; # 
-  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:date [ fhir:v "2026-11-13"^^xsd:date] ; # 
   fhir:publisher [ fhir:v "Inera AB"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "Inera AB" ] ;
@@ -32,7 +32,7 @@
        fhir:value [ fhir:v "https://www.inera.se" ]
      ] )
   ] ) ; # 
-  fhir:description [ fhir:v "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner."] ; # 
+  fhir:description [ fhir:v "Tjänstedomäner, som de anges i serviceDomain i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner."] ; # 
   fhir:jurisdiction ( [
      fhir:coding ( [
        fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;
@@ -46,6 +46,10 @@
      fhir:code [ fhir:v "riv:clinicalprocess:healthcond:description" ] ;
      fhir:display [ fhir:v "riv:clinicalprocess:healthcond:description" ] ;
      fhir:definition [ fhir:v "Tjänstedomänen riv:clinicalprocess:healthcond:description." ]
+  ] [
+     fhir:code [ fhir:v "riv:clinicalprocess:activityprescription:actoutcome" ] ;
+     fhir:display [ fhir:v "riv:clinicalprocess:activityprescription:actoutcome" ] ;
+     fhir:definition [ fhir:v "Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome." ]
   ] ) . # 
 
 # -------------------------------------------------------------------------------------

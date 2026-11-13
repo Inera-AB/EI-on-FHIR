@@ -1,0 +1,36 @@
+{
+  "resourceType" : "SearchParameter",
+  "id" : "DocumentReference-logical-address",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: SearchParameter DocumentReference-logical-address</b></p><a name=\"DocumentReference-logical-address\"> </a><a name=\"hcDocumentReference-logical-address\"> </a><h2>LogicalAddress</h2><p>Parameter <code>logical-address</code>:<code>token</code></p><div><p>Söker engagemangsposter på logisk adress (extension logicalAddress), till exempel en vårdgivares HSA-id.</p>\n</div><table class=\"grid\"><tr><td>Resurs</td><td><a href=\"http://hl7.org/fhir/R5/documentreference.html\">DocumentReference</a></td></tr><tr><td>Uttryck</td><td><code>DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress').value.ofType(Identifier)</code></td></tr><tr><td>Bearbetningsläge</td><td>Normal</td></tr><tr><td>Multipler</td><td><ul><li>multipleAnd: Det är upp till servern om parametern får upprepas för att ange flera värden som alla måste vara sanna</li><li>multipleOr: Det är upp till servern om parametern kan ha flera värden (separerade med kommatecken) där minst ett måste vara sant</li></ul></td></tr></table></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-logical-address",
+  "version" : "0.1.0",
+  "name" : "LogicalAddress",
+  "title" : "Sökparameter logical-address",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-11-13",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "Söker engagemangsposter på logisk adress (extension logicalAddress), till exempel en vårdgivares HSA-id.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "code" : "logical-address",
+  "base" : ["DocumentReference"],
+  "type" : "token",
+  "expression" : "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress').value.ofType(Identifier)",
+  "processingMode" : "normal"
+}

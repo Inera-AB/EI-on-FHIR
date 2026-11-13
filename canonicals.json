@@ -1,16 +1,9 @@
 [{
-  "id" : "IneraIndexServer",
+  "id" : "IneraEngagementIndexServer",
   "type" : "CapabilityStatement",
-  "url" : "https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraIndexServer",
+  "url" : "https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraEngagementIndexServer",
   "version" : "0.1.0",
-  "name" : "IneraIndexServer"
-},
-{
-  "id" : "IneraDeregistrationReasonCodeSystem",
-  "type" : "CodeSystem",
-  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem",
-  "version" : "0.1.0",
-  "name" : "IneraDeregistrationReasonCodeSystem"
+  "name" : "IneraEngagementIndexServer"
 },
 {
   "id" : "IneraEngagementCategoryCodeSystem",
@@ -20,18 +13,11 @@
   "name" : "IneraEngagementCategoryCodeSystem"
 },
 {
-  "id" : "IneraIndexPopulationMethodCodeSystem",
+  "id" : "IneraRetrievalProtocolCodeSystem",
   "type" : "CodeSystem",
-  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem",
+  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem",
   "version" : "0.1.0",
-  "name" : "IneraIndexPopulationMethodCodeSystem"
-},
-{
-  "id" : "IneraIndexRegistrationStatusCodeSystem",
-  "type" : "CodeSystem",
-  "url" : "https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem",
-  "version" : "0.1.0",
-  "name" : "IneraIndexRegistrationStatusCodeSystem"
+  "name" : "IneraRetrievalProtocolCodeSystem"
 },
 {
   "id" : "IneraServiceDomainCodeSystem",
@@ -48,53 +34,25 @@
   "name" : "IneraEngagementIndex"
 },
 {
-  "id" : "DocumentReference-content-last-updated",
+  "id" : "DocumentReference-logical-address",
   "type" : "SearchParameter",
-  "url" : "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-content-last-updated",
+  "url" : "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-logical-address",
   "version" : "0.1.0",
-  "name" : "ContentLastUpdated"
+  "name" : "LogicalAddress"
 },
 {
-  "id" : "DocumentReference-source-endpoint",
+  "id" : "DocumentReference-source-system",
   "type" : "SearchParameter",
-  "url" : "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-endpoint",
+  "url" : "https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-system",
   "version" : "0.1.0",
-  "name" : "SourceEndpoint"
+  "name" : "SourceSystem"
 },
 {
-  "id" : "CareUnit",
+  "id" : "IneraEngagement",
   "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/CareUnit",
+  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement",
   "version" : "0.1.0",
-  "name" : "CareUnit"
-},
-{
-  "id" : "ContentLastUpdated",
-  "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/ContentLastUpdated",
-  "version" : "0.1.0",
-  "name" : "ContentLastUpdated"
-},
-{
-  "id" : "DeregistrationReason",
-  "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/DeregistrationReason",
-  "version" : "0.1.0",
-  "name" : "DeregistrationReason"
-},
-{
-  "id" : "IneraIndexEntry",
-  "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexEntry",
-  "version" : "0.1.0",
-  "name" : "IneraIndexEntry"
-},
-{
-  "id" : "IneraIndexSubscription",
-  "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraIndexSubscription",
-  "version" : "0.1.0",
-  "name" : "IneraIndexSubscription"
+  "name" : "IneraEngagement"
 },
 {
   "id" : "LogicalAddress",
@@ -104,25 +62,18 @@
   "name" : "LogicalAddress"
 },
 {
-  "id" : "RegisteringProducer",
+  "id" : "MostRecentContent",
   "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegisteringProducer",
+  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/MostRecentContent",
   "version" : "0.1.0",
-  "name" : "RegisteringProducer"
+  "name" : "MostRecentContent"
 },
 {
-  "id" : "RegistrationStatus",
+  "id" : "Owner",
   "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/RegistrationStatus",
+  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/Owner",
   "version" : "0.1.0",
-  "name" : "RegistrationStatus"
-},
-{
-  "id" : "SourceEndpoint",
-  "type" : "StructureDefinition",
-  "url" : "https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceEndpoint",
-  "version" : "0.1.0",
-  "name" : "SourceEndpoint"
+  "name" : "Owner"
 },
 {
   "id" : "SourceSystem",
@@ -132,20 +83,6 @@
   "name" : "SourceSystem"
 },
 {
-  "id" : "indexpost-andrad",
-  "type" : "SubscriptionTopic",
-  "url" : "https://fhir.inera.se/ig/engagementindex/SubscriptionTopic/indexpost-andrad",
-  "version" : "0.1.0",
-  "name" : "IndexpostAndrad"
-},
-{
-  "id" : "IneraDeregistrationReasonValueSet",
-  "type" : "ValueSet",
-  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet",
-  "version" : "0.1.0",
-  "name" : "IneraDeregistrationReasonValueSet"
-},
-{
   "id" : "IneraEngagementCategoryValueSet",
   "type" : "ValueSet",
   "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementCategoryValueSet",
@@ -153,18 +90,18 @@
   "name" : "IneraEngagementCategoryValueSet"
 },
 {
-  "id" : "IneraIndexPopulationMethodValueSet",
+  "id" : "IneraEngagementStatusValueSet",
   "type" : "ValueSet",
-  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet",
+  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet",
   "version" : "0.1.0",
-  "name" : "IneraIndexPopulationMethodValueSet"
+  "name" : "IneraEngagementStatusValueSet"
 },
 {
-  "id" : "IneraIndexRegistrationStatusValueSet",
+  "id" : "IneraRetrievalProtocolValueSet",
   "type" : "ValueSet",
-  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet",
+  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraRetrievalProtocolValueSet",
   "version" : "0.1.0",
-  "name" : "IneraIndexRegistrationStatusValueSet"
+  "name" : "IneraRetrievalProtocolValueSet"
 },
 {
   "id" : "IneraServiceDomainValueSet",

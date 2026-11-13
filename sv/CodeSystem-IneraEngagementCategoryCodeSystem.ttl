@@ -23,7 +23,7 @@
   fhir:title [ fhir:v "Kodsystem för kategorier inom tjänstedomän"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
   fhir:experimental [ fhir:v false] ; # 
-  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:date [ fhir:v "2026-11-13"^^xsd:date] ; # 
   fhir:publisher [ fhir:v "Inera AB"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "Inera AB" ] ;
@@ -32,7 +32,7 @@
        fhir:value [ fhir:v "https://www.inera.se" ]
      ] )
   ] ) ; # 
-  fhir:description [ fhir:v "Kategorier inom en tjänstedomän, som anger informationsmängd i FHIR-EI under övergången till profil-canonicals. Motsvarar categorization i dagens engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."] ; # 
+  fhir:description [ fhir:v "Kategorier inom en tjänstedomän, som de anges i categorization i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas tillsammans med tjänstedomänerna."] ; # 
   fhir:jurisdiction ( [
      fhir:coding ( [
        fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;

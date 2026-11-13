@@ -8,7 +8,7 @@
 <html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Logisk adress - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0</title>
+    <title>Logisk adress - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -51,8 +51,8 @@
 	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
 	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"24.9"}
-    h3,h4,h5,h6{--heading-prefix:"24.9"}</style>
+    <style type="text/css">h2{--heading-prefix:"15.6"}
+    h3,h4,h5,h6{--heading-prefix:"15.6"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -64,7 +64,7 @@
 
 
         <div id="ig-status" data-fhir="generated">
-          <p><span style="font-size:12pt;font-weight:bold">FHIR-baserat engagemangsindex (FHIR-EI)</span>
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -97,31 +97,22 @@
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <ul class="nav navbar-nav">
   <li><a href="index.html">Hem</a></li>
-  <li><a href="introduction.html">Inledning</a></li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="information-basis.html">Informationsunderlag</a></li>
       <li><a href="use-cases.html">Användningsfall</a></li>
-      <li><a href="roles-and-responsibilities.html">Roller och ansvar</a></li>
-      <li><a href="legal-basis.html">Rättslig grund och ändamål</a></li>
-      <li><a href="information-model.html">Indexposten</a></li>
-      <li><a href="population.html">Försörjning av indexet</a></li>
-      <li><a href="information-sets.html">Kodverk för tjänster och informationsmängder</a></li>
-      <li><a href="event-model.html">Händelsemodell och övergång</a></li>
-      <li><a href="ehm-coexistence.html">Samexistens med eHM:s patientindex</a></li>
-      <li><a href="mappings.html">Mappning till profiler</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
     </ul>
   </li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
     <ul class="dropdown-menu">
-      <li><a href="rest-interactions.html">REST-interaktioner och sökparametrar</a></li>
-      <li><a href="subscriptions.html">Prenumeration</a></li>
-      <li><a href="expected-responses.html">Förväntade svar</a></li>
+      <li><a href="api.html">API</a></li>
       <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
       <li><a href="error-handling.html">Felhantering</a></li>
-      <li><a href="security.html">Spärr, loggning och behörighet</a></li>
       <li><a href="testing.html">Testning och validering</a></li>
     </ul>
   </li>
@@ -166,7 +157,7 @@
 
 <!-- layouts\layout-profile-definitions -->
 <div style="counter-reset: section 4" class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">FHIR-baserat engagemangsindex (FHIR-EI) - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
   
 
 
@@ -243,7 +234,7 @@
           
 
             per 
-2026-10-26
+2026-11-13
 
           
         
@@ -278,7 +269,7 @@
     </ul>
     <a name="tabs-key"> </a>
     <div id="tabs-key">
-      <p>Vägledning om hur innehållet i denna tabell ska tolkas finns <a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries">här</a> -- no content: do not translate #1 --</p><table class="dict" data-fhir="generated"><tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="key_Extension">  </a><span style="color: grey">0</span><b>. Extension</b><a href="#key_Extension" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p>Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.</p>
+      <p>Vägledning om hur innehållet i denna tabell ska tolkas finns <a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries">här</a> -- no content: do not translate #1 --</p><table class="dict" data-fhir="generated"><tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="key_Extension">  </a><span style="color: grey">0</span><b>. Extension</b><a href="#key_Extension" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p>Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.</p>
 <br/><div class="removedStyle"><p>Optional Extension Element - found in all resources.</p>
 </div></td></tr><tr><td style="white-space: nowrap">Kort</td><td>Logisk adress<span class="removedStyle">Optional Extensions Element</span></td></tr><tr><td style="white-space: nowrap"><a href="http://hl7.org/fhir/R5/conformance-rules.html#conformance">Kontroll</a></td><td><span class="unchangedStyle">0</span>..<span class="unchangedStyle">*</span></td></tr><tr><td style="white-space: nowrap"><a href="http://hl7.org/fhir/R5/conformance-rules.html#ismodifier">Är modifierare</a></td><td><span class="unchangedStyle">false</span></td></tr><tr><td style="white-space: nowrap">Invarianter</td><td><span class="unchangedStyle"><b title="Formell invariantidentifierare">ele-1</b>: All FHIR elements must have a @value or children (hasValue() or (children().count() &gt; id.count()))</span><br/><span class="unchangedStyle"><b title="Formell invariantidentifierare">ext-1</b>: Must have either extensions or value[x], not both (extension.exists() != value.exists())</span></td></tr>
 
@@ -319,7 +310,7 @@
 
     <a name="tabs-diff"> </a>
     <div id="tabs-diff">
-      <p>Vägledning om hur innehållet i denna tabell ska tolkas finns <a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries">här</a> -- no content: do not translate #1 --</p><table class="dict" data-fhir="generated"><tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="diff_Extension">  </a><span style="color: grey">0</span><b>. Extension</b><a href="#diff_Extension" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p style="font-size: 11px">Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.</p>
+      <p>Vägledning om hur innehållet i denna tabell ska tolkas finns <a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries">här</a> -- no content: do not translate #1 --</p><table class="dict" data-fhir="generated"><tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="diff_Extension">  </a><span style="color: grey">0</span><b>. Extension</b><a href="#diff_Extension" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p style="font-size: 11px">Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.</p>
 </td></tr><tr><td style="white-space: nowrap">Kort</td><td>Logisk adress</td></tr>
 
 <tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="diff_Extension.extension">  </a><span style="color: grey">2</span><b>. Extension.extension</b><a href="#diff_Extension.extension" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap"><a href="http://hl7.org/fhir/R5/conformance-rules.html#conformance">Kontroll</a></td><td>0..0</td></tr>
@@ -341,7 +332,7 @@
 
     <a name="tabs-snap"> </a>
     <div id="tabs-snap">
-      <p>Vägledning om hur innehållet i denna tabell ska tolkas finns <a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries">här</a> -- no content: do not translate #1 --</p><table class="dict" data-fhir="generated"><tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="Extension">  </a><span style="color: grey">0</span><b>. Extension</b><a href="#Extension" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p style="font-size: 11px">Den logiska adress som konsumenten anger när den hämtar informationen via tjänsteplattformen, som HSA-id. Krävs när endpointen adresseras med logisk adress, som för RIV-TA-källor; annars utelämnas den. I tjänstekatalogen är den logiska adressen en organisations HSA-id. Motsvarar logicalAddress i dagens engagemangsindex.</p>
+      <p>Vägledning om hur innehållet i denna tabell ska tolkas finns <a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries">här</a> -- no content: do not translate #1 --</p><table class="dict" data-fhir="generated"><tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="Extension">  </a><span style="color: grey">0</span><b>. Extension</b><a href="#Extension" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p style="font-size: 11px">Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda.</p>
 </td></tr><tr><td style="white-space: nowrap">Kort</td><td>Logisk adress</td></tr><tr><td style="white-space: nowrap"><a href="http://hl7.org/fhir/R5/conformance-rules.html#conformance">Kontroll</a></td><td>0..*</td></tr><tr><td style="white-space: nowrap"><a href="http://hl7.org/fhir/R5/conformance-rules.html#ismodifier">Är modifierare</a></td><td>false</td></tr><tr><td style="white-space: nowrap">Invarianter</td><td><b title="Formell invariantidentifierare">ele-1</b>: All FHIR elements must have a @value or children (<code>hasValue() or (children().count() &gt; id.count())</code>)<br/><b title="Formell invariantidentifierare">ext-1</b>: Must have either extensions or value[x], not both (<code>extension.exists() != value.exists()</code>)</td></tr>
 
 <tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="Extension.id">  </a><span style="color: grey">2</span><b>. Extension.id</b><a href="#Extension.id" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p style="font-size: 11px">Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.</p>
@@ -435,8 +426,8 @@
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
           Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
           Genererad 
-  <span title="2026-11-10 12:09:00 +0000">
-    2026-11-10
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
   </span>
 
           <br/>

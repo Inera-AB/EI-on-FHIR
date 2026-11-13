@@ -1,39 +1,30 @@
 {
   "codeSystems" : [{
-    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraDeregistrationReasonValueSet",
-    "version" : "0.1.0",
-    "status" : "draft",
-    "name" : "IneraDeregistrationReasonValueSet",
-    "title" : "Orsaker till avregistrering",
-    "description" : "Alla orsaker till avregistrering av en indexpost.",
-    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraDeregistrationReasonCodeSystem"]
-  },
-  {
     "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementCategoryValueSet",
     "version" : "0.1.0",
     "status" : "draft",
     "name" : "IneraEngagementCategoryValueSet",
     "title" : "Kategorier inom tjänstedomän",
-    "description" : "Alla kategorier i kodverket för kategorier inom tjänstedomän.",
+    "description" : "Alla kategorier i kodsystemet för kategorier inom tjänstedomän.",
     "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"]
   },
   {
-    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexPopulationMethodValueSet",
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet",
     "version" : "0.1.0",
     "status" : "draft",
-    "name" : "IneraIndexPopulationMethodValueSet",
-    "title" : "Försörjningssätt",
-    "description" : "Alla försörjningssätt för indexposter.",
-    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexPopulationMethodCodeSystem"]
+    "name" : "IneraEngagementStatusValueSet",
+    "title" : "Status för engagemangsposter",
+    "description" : "current för en registrerad post, superseded för en post som har tagits bort och visas under borttagsloggens lagringstid.",
+    "systems" : ["http://hl7.org/fhir/document-reference-status"]
   },
   {
-    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraIndexRegistrationStatusValueSet",
+    "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraRetrievalProtocolValueSet",
     "version" : "0.1.0",
     "status" : "draft",
-    "name" : "IneraIndexRegistrationStatusValueSet",
-    "title" : "Registreringsstatus för indexposter",
-    "description" : "Alla livscykeltillstånd för en indexpost.",
-    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraIndexRegistrationStatusCodeSystem"]
+    "name" : "IneraRetrievalProtocolValueSet",
+    "title" : "Hämtningsprotokoll",
+    "description" : "Alla hämtningsprotokoll för engagemangsposter.",
+    "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraRetrievalProtocolCodeSystem"]
   },
   {
     "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraServiceDomainValueSet",
@@ -41,7 +32,7 @@
     "status" : "draft",
     "name" : "IneraServiceDomainValueSet",
     "title" : "Tjänstedomäner",
-    "description" : "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner.",
+    "description" : "Alla tjänstedomäner i kodsystemet för tjänstedomäner.",
     "systems" : ["https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"]
   }]
 }

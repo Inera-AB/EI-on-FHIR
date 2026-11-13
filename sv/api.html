@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="sv" xmlns="http://www.w3.org/1999/xhtml" lang="sv" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>API - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<link href="inera.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="inera-thumbnail.png"/>
+<link rel="shortcut icon" href="inera-thumbnail.png"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"6"}
+    h3,h4,h5,h6{--heading-prefix:"6"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <div id="inera-nav">
+  <a id="inera-logo" data-no-external="true" href="https://www.inera.se">
+    <img height="50" alt="Inera" src="inera-logo-header.svg"/>
+  </a>
+</div>
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">EI-on-FHIR: FHIR-API för engagemangsindex</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  <img alt="Sweden flagga" src="../assets/images/swe.svg" height="16" title="Sweden"/>
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul class="nav navbar-nav">
+  <li><a href="index.html">Hem</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Funktionellt<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="information-basis.html">Informationsunderlag</a></li>
+      <li><a href="use-cases.html">Användningsfall</a></li>
+      <li><a href="engagement.html">Engagemangsposten</a></li>
+      <li><a href="ehm-sync.html">Synk till eHM:s patientindex</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Implementering<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="api.html">API</a></li>
+      <li><a href="capabilitystatement.html">CapabilityStatement</a></li>
+      <li><a href="security.html">Säkerhet och loggning</a></li>
+      <li><a href="error-handling.html">Felhantering</a></li>
+      <li><a href="testing.html">Testning och validering</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Om<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="about.html">Styrning och förvaltning</a></li>
+      <li><a href="open-issues.html">Öppna frågor</a></li>
+      <li><a href="downloads.html">Nedladdningar</a></li>
+      <li><a href="version-history.html">Versionshistorik</a></li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artefakter</a></li>
+  <li><a href="https://fhir.inera.se/" target="_blank" rel="noopener">FHIR på Inera <span aria-hidden="true">&#8599;</span></a></li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>API</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">EI-on-FHIR: FHIR-API för engagemangsindex - Lokal utvecklingsbygge (v0.1.0) byggt av FHIR (HL7® FHIR® Standard) Build Tools. Se <a href='https://fhir.inera.se/ig/engagementindex/history.html'>katalogen över publicerade versioner</a></p><!--EndReleaseHeader-->
+  <h2>API</h2>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p><!-- white space is critical inside of capture --></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#sökparametrar" id="markdown-toc-sökparametrar">Sökparametrar</a></li>
+  <li><a href="#borttagna-poster" id="markdown-toc-borttagna-poster">Borttagna poster</a></li>
+  <li><a href="#massuttag" id="markdown-toc-massuttag">Massuttag</a></li>
+  <li><a href="#registrering-för-fhir-producenter" id="markdown-toc-registrering-för-fhir-producenter">Registrering för FHIR-producenter</a></li>
+  <li><a href="#läsning" id="markdown-toc-läsning">Läsning</a></li>
+</ul>
+
+</div>
+<p>API:et följer FHIR R5:s RESTful API. Det stöder läsning och sökning av engagemangsposter från EI och från EI-on-FHIR:s register, registrering i registret för FHIR-producenter, och massuttag med <a href="https://hl7.org/fhir/uv/bulkdata/">Bulk Data Access</a>. Poster från EI går inte att ändra via API:et. De formella kraven finns i <a href="CapabilityStatement-IneraEngagementIndexServer.html">CapabilityStatement för EI-on-FHIR</a>.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Interaktion</th>
+      <th>Användningsfall</th>
+      <th>Motsvarighet i EI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sök en patients poster</td>
+      <td><code class="language-plaintext highlighter-rouge">GET DocumentReference?subject:identifier=…</code></td>
+      <td>1</td>
+      <td>FindContent</td>
+    </tr>
+    <tr>
+      <td>Läs en post</td>
+      <td><code class="language-plaintext highlighter-rouge">GET DocumentReference/[id]</code></td>
+      <td>1, 2</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>Sök ändrade poster</td>
+      <td><code class="language-plaintext highlighter-rouge">GET DocumentReference?_lastUpdated=gt…&amp;status=current,superseded&amp;_sort=_lastUpdated</code></td>
+      <td>2</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>Massuttag</td>
+      <td><code class="language-plaintext highlighter-rouge">GET [base]/$export?_type=DocumentReference</code></td>
+      <td>2</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>Registrera eller uppdatera en post</td>
+      <td><code class="language-plaintext highlighter-rouge">PUT DocumentReference?identifier=…</code></td>
+      <td>3</td>
+      <td>Update</td>
+    </tr>
+    <tr>
+      <td>Ta bort en post</td>
+      <td><code class="language-plaintext highlighter-rouge">DELETE DocumentReference/[id]</code></td>
+      <td>3</td>
+      <td>Update med deleteFlag</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="sökparametrar">Sökparametrar</h3>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Typ</th>
+      <th>Element</th>
+      <th>Krav</th>
+      <th>Kommentar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">subject</code></td>
+      <td>reference</td>
+      <td><code class="language-plaintext highlighter-rouge">subject</code></td>
+      <td>SHALL</td>
+      <td>Med <code class="language-plaintext highlighter-rouge">:identifier</code>. Obligatorisk, utom för klienter med behörighet för synk</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td>SHALL</td>
+      <td>Tjänstedomän</td>
+    </tr>
+    <tr>
+      <td><a href="SearchParameter-DocumentReference-logical-address.html"><code class="language-plaintext highlighter-rouge">logical-address</code></a></td>
+      <td>token</td>
+      <td>extension logicalAddress</td>
+      <td>SHALL</td>
+      <td>HSA-id</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">status</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">status</code></td>
+      <td>SHALL</td>
+      <td>Standardvärde <code class="language-plaintext highlighter-rouge">current</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_lastUpdated</code></td>
+      <td>date</td>
+      <td><code class="language-plaintext highlighter-rouge">meta.lastUpdated</code></td>
+      <td>SHALL</td>
+      <td>Löpande synk</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">category</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">category</code></td>
+      <td>SHOULD</td>
+      <td>Kategori inom tjänstedomän</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">custodian</code></td>
+      <td>reference</td>
+      <td><code class="language-plaintext highlighter-rouge">custodian</code></td>
+      <td>SHOULD</td>
+      <td>Med <code class="language-plaintext highlighter-rouge">:identifier</code></td>
+    </tr>
+    <tr>
+      <td><a href="SearchParameter-DocumentReference-source-system.html"><code class="language-plaintext highlighter-rouge">source-system</code></a></td>
+      <td>token</td>
+      <td>extension sourceSystem</td>
+      <td>SHOULD</td>
+      <td>HSA-id</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">format-code</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">content.profile</code> som Coding</td>
+      <td>SHOULD</td>
+      <td>Hämtningsprotokoll, <code class="language-plaintext highlighter-rouge">riv-ta</code> eller <code class="language-plaintext highlighter-rouge">fhir</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">identifier</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">identifier</code></td>
+      <td>SHALL</td>
+      <td>Producentens villkorade update</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_id</code></td>
+      <td>token</td>
+      <td><code class="language-plaintext highlighter-rouge">id</code></td>
+      <td>SHOULD</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Patienten söks med <code class="language-plaintext highlighter-rouge">subject:identifier</code>, som i NRL. Indexet har inga Patient-resurser, så patienten är en logisk referens. En sökning utan <code class="language-plaintext highlighter-rouge">status</code> returnerar bara poster med status <code class="language-plaintext highlighter-rouge">current</code>. Sökresultatet innehåller poster från både EI och registret; <code class="language-plaintext highlighter-rouge">format-code=…|fhir</code> begränsar det till FHIR-poster.</p>
+
+<p>Sökresultatet är en <code class="language-plaintext highlighter-rouge">searchset</code>-Bundle. Ett stort resultat delas upp i sidor; klienten följer länken <code class="language-plaintext highlighter-rouge">next</code>. API:et stöder <code class="language-plaintext highlighter-rouge">_count</code> och, för löpande synk, <code class="language-plaintext highlighter-rouge">_sort=_lastUpdated</code>. Se exemplet <a href="Bundle-SokresultatForPatient.html">Sökresultat för en patient</a>.</p>
+
+<h3 id="borttagna-poster">Borttagna poster</h3>
+
+<p>EI tar bort en post när källsystemet registrerar den med deleteFlag, och registret tar bort en post när producenten anropar <code class="language-plaintext highlighter-rouge">DELETE</code>. För att synken ska se borttaget sparas posten i en borttagslogg under en lagringstid, och visas med status <code class="language-plaintext highlighter-rouge">superseded</code>. Den kommer med i en sökning som anger <code class="language-plaintext highlighter-rouge">status=superseded</code>, i ett massuttag med <code class="language-plaintext highlighter-rouge">_since</code> och vid läsning med id. Efter lagringstiden svarar API:et <code class="language-plaintext highlighter-rouge">404 Not Found</code>. Hur länge loggen sparas är en <a href="open-issues.html">öppen fråga</a>.</p>
+
+<h3 id="massuttag">Massuttag</h3>
+
+<p>Massuttaget följer Bulk Data Access på systemnivå. Bulk Data Access finns bara publicerad för R4, så kravet står här i text och inte i CapabilityStatementet:</p>
+
+<ol>
+  <li>Klienten startar uttaget med <code class="language-plaintext highlighter-rouge">GET [base]/$export?_type=DocumentReference</code>, och <code class="language-plaintext highlighter-rouge">_since=</code> för ändringar sedan en tidpunkt. Svaret är <code class="language-plaintext highlighter-rouge">202 Accepted</code> med <code class="language-plaintext highlighter-rouge">Content-Location</code>.</li>
+  <li>Klienten frågar statusadressen tills uttaget är klart. Svaret listar NDJSON-filer med en engagemangspost per rad.</li>
+  <li>Klienten hämtar filerna och tar sedan bort uttaget med <code class="language-plaintext highlighter-rouge">DELETE</code> på statusadressen.</li>
+</ol>
+
+<p>Massuttag är bara tillåtet för klienter med behörighet för synk; se <a href="security.html">Säkerhet och loggning</a>.</p>
+
+<h3 id="registrering-för-fhir-producenter">Registrering för FHIR-producenter</h3>
+
+<p>En källa som implementerar en tjänsts FHIR-IG registrerar sina poster i EI-on-FHIR:s register, som i NRL:s producent-API. Bara klienter med behörighet som producent får skriva, och bara poster med sitt eget källsystem.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT [base]/DocumentReference?identifier=c2d8e6f1-3a47-4b0e-9e21-5f8a7d3b6c04
+Content-Type: application/fhir+json
+
+{ "resourceType": "DocumentReference", "status": "current", … }
+</code></pre></div></div>
+
+<p>Villkoret utvärderas bara mot producentens egna poster i registret:</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Träffar bland producentens poster</th>
+      <th>Resultat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Posten skapas: <code class="language-plaintext highlighter-rouge">201 Created</code> med <code class="language-plaintext highlighter-rouge">Location</code></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Posten uppdateras: <code class="language-plaintext highlighter-rouge">200 OK</code></td>
+    </tr>
+    <tr>
+      <td>Fler än 1</td>
+      <td>Avvisas med <code class="language-plaintext highlighter-rouge">412 Precondition Failed</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Posten ska följa profilen <a href="StructureDefinition-IneraEngagement.html">Engagemangspost</a> med <code class="language-plaintext highlighter-rouge">content.profile</code> = <code class="language-plaintext highlighter-rouge">fhir</code>. Producenten utelämnar <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">owner</code>, <code class="language-plaintext highlighter-rouge">date</code> och <code class="language-plaintext highlighter-rouge">meta.lastUpdated</code>, som API:et sätter. API:et kontrollerar dessutom:</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Kontroll</th>
+      <th>Regel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Källsystem</td>
+      <td>Extension <code class="language-plaintext highlighter-rouge">sourceSystem</code> är det källsystem som klienten är registrerad för</td>
+    </tr>
+    <tr>
+      <td>Vårdgivare</td>
+      <td><code class="language-plaintext highlighter-rouge">custodian</code> är en vårdgivare i HSA</td>
+    </tr>
+    <tr>
+      <td>Endpoint</td>
+      <td><code class="language-plaintext highlighter-rouge">content.attachment.url</code> är en FHIR-endpoint som vårdgivaren har i tjänstekatalogen</td>
+    </tr>
+    <tr>
+      <td>Logisk adress</td>
+      <td>Om den anges ska den vara en organisation hos samma vårdgivare</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Ett anrop som bryter mot en kontroll avvisas med <code class="language-plaintext highlighter-rouge">422 Unprocessable Entity</code>; se <a href="error-handling.html">Felhantering</a>. <code class="language-plaintext highlighter-rouge">DELETE DocumentReference/[id]</code> tar bort en av producentens egna poster. Poster från EI kan inte tas bort via API:et.</p>
+
+<h3 id="läsning">Läsning</h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET DocumentReference/[id]</code> returnerar posten. En post som inte finns, eller vars lagringstid i borttagsloggen har gått ut, ger <code class="language-plaintext highlighter-rouge">404 Not Found</code>.</p>
+
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.inera.se">Inera AB</a>.  
+          Paket inera.ei.engagementindex#0.1.0 baserat på <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 5.0.0</a>.
+          Genererad 
+  <span title="2026-11-13 09:35:00 +0000">
+    2026-11-13
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Länkar: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Innehållsförteckning</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-rapport</a>
+                 
+                
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

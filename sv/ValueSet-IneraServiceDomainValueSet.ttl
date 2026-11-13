@@ -23,7 +23,7 @@
   fhir:title [ fhir:v "Tjänstedomäner"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
   fhir:experimental [ fhir:v false] ; # 
-  fhir:date [ fhir:v "2026-10-26"^^xsd:date] ; # 
+  fhir:date [ fhir:v "2026-11-13"^^xsd:date] ; # 
   fhir:publisher [ fhir:v "Inera AB"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "Inera AB" ] ;
@@ -32,7 +32,7 @@
        fhir:value [ fhir:v "https://www.inera.se" ]
      ] )
   ] ) ; # 
-  fhir:description [ fhir:v "Alla tjänstedomäner i Ineras kodverk för tjänstedomäner."] ; # 
+  fhir:description [ fhir:v "Alla tjänstedomäner i kodsystemet för tjänstedomäner."] ; # 
   fhir:jurisdiction ( [
      fhir:coding ( [
        fhir:system [ fhir:v "urn:iso:std:iso:3166"^^xsd:anyURI ] ;

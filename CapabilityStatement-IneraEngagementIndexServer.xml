@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CapabilityStatement xmlns="http://hl7.org/fhir">
+  <id value="IneraEngagementIndexServer"/>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Genererad berättande text: CapabilityStatement IneraEngagementIndexServer</b></p><a name="IneraEngagementIndexServer"> </a><a name="hcIneraEngagementIndexServer"> </a><h2 id="title">EI-on-FHIR server</h2><ul><li>Implementationsguidens version: 0.1.0 </li><li>FHIR-version: 5.0.0 </li><li>Format som stöds: <code>json</code></li><li>Publicerad: 2026-11-13 </li><li>Publicerad av: Inera AB </li></ul><blockquote class="impl-note"><p><strong>Notera till implementörer: FHIR-förmågor</strong></p><p>Vilken FHIR-förmåga som helst kan vara 'tillåten' av systemet om den inte uttryckligen är markerad som 'SHALL NOT'. Några objekt är markerade som MAY i implementationsguiden för att belysa deras potentiella relevans för användningsfallet.</p></blockquote><h3 id="shallIGs">SKA stödja följande implementationsguider</h3><ul><li><a href="index.html">https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex</a></li></ul><h2 id="rest">FHIR RESTful-förmågor</h2><div class="panel panel-default"><div class="panel-heading"><h3 id="mode1" class="panel-title">Mode: <code>server</code></h3></div><div class="panel-body"><div><p>API ovanpå engagemangsindex, för Ineras interna stödtjänster och för FHIR-producenter. Poster från EI är skrivskyddade; FHIR-producenter skriver bara i EI-on-FHIR:s register. Varje anrop autentiseras som ett system och loggas. Se sidan Säkerhet och loggning.</p>
+</div><div class="lead"><em>Security</em></div><blockquote><div><p>SMART Backend Services med systembehörigheter och tre klientroller: stödtjänst, synktjänst och producent. Sökning utan patient och massuttag kräver behörighet för synk; skrivning kräver behörighet som producent.</p>
+</div></blockquote></div></div><h3 id="resourcesCap1">Förmågor per resurs/profil</h3><h4 id="resourcesSummary1">Sammanfattning</h4><p>Sammanfattningstabellen listar resurserna som ingår i denna konfiguration, och för varje resurs listar den:</p><ul><li>De relevanta profilerna (om några)</li><li>Interaktionerna som stöds av varje resurs (<b><span class="bg-info">R</span></b>ead, <b><span class="bg-info">S</span></b>earch, <b><span class="bg-info">U</span></b>pdate, and <b><span class="bg-info">C</span></b>reate, are always shown, while <b><span class="bg-info">VR</span></b>ead, <b><span class="bg-info">P</span></b>atch, <b><span class="bg-info">D</span></b>elete, <b><span class="bg-info">H</span></b>istory on <b><span class="bg-info">I</span></b>nstance, or <b><span class="bg-info">H</span></b>istory on <b><span class="bg-info">T</span></b>yp är endast närvarande om minst en av resurserna har stöd för dem.</li><li><span>De obligatoriska, rekommenderade och vissa valfria sökparametrarna (om några). </span></li><li>De länkade resurserna aktiverade för <code>_include</code></li><li>De övriga resurserna aktiverade för <code>_revinclude</code></li><li>Operationerna på resursen (om några)</li></ul><div class="table-responsive"><table class="table table-condensed table-hover"><thead><tr><th><b>Resurstyp</b></th><th><b>Profil</b></th><th class="text-center"><b title="GET en resurs (läs-interaktion)">R</b></th><th class="text-center"><b title="GET alla resurser av typen (sök-interaktion)">S</b></th><th class="text-center"><b title="PUT en ny resursversion (uppdatera-interaktion)">U</b></th><th class="text-center"><b title="POST en ny resurs (skapa-interaktion)">C</b></th><th class="text-center"><b title="DELETE en resurs (radera-interaktion)">D</b></th><th><b title="Obligatoriska och rekommenderade sökparametrar">Sökningar</b></th><th><code><b>_include</b></code></th><th><code><b>_revinclude</b></code></th><th><b>Operationer</b></th></tr></thead><tbody><tr><td><a href="#DocumentReference1-1">DocumentReference</a></td><td><a href="StructureDefinition-IneraEngagement.html">https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement</a></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td class="text-center"/><td class="text-center"><span title="SHALL"><b>Y</b></span></td><td>subject, type, logical-address, status, _lastUpdated, category, custodian, source-system, format-code, identifier, _id</td><td/><td/><td/></tr></tbody></table></div><hr/><div class="panel panel-default"><div class="panel-heading"><h4 id="DocumentReference1-1" class="panel-title"><span style="float: right;">Resurskonformans: unspecified </span>DocumentReference</h4></div><div class="panel-body"><div class="container"><div class="row"><div class="col-lg-6"><span class="lead">Bassystemprofil</span><br/><a href="StructureDefinition-IneraEngagement.html">Engagemangspost</a></div><div class="col-lg-3"><span class="lead">Profilkonformans</span><br/><b>SHALL</b></div><div class="col-lg-3"><span class="lead">Referenspolicy</span><br/></div></div><p/><div class="row"><div class="col-lg-6"><span class="lead">Interaktionssammanfattning</span><br/><ul><li><strong>SHALL</strong> stöd <code>read</code>, <code>search-type</code><br/><code>update</code><div><p>Villkorad update: PUT DocumentReference?identifier=[värde]. Skapar posten om producenten inte har någon post med identifieraren, annars uppdateras den.</p>
+</div><code>delete</code><div><p>DELETE DocumentReference/[id] för en post i registret. Posten visas därefter med status superseded under borttagsloggens lagringstid.</p>
+</div></li></ul></div></div><p/><div class="row"><div class="col-12"><span class="lead">Dokumentation</span><blockquote><div><p>Engagemangsposter från EI och från EI-on-FHIR:s register, i samma sökresultat. En sökning utan status returnerar bara poster med status current. En sökning måste ange subject:identifier, utom för klienter med behörighet för synk. En producent skriver med villkorad update på identifier och tar bort med delete; villkoret och borttaget gäller bara producentens egna poster i registret.</p>
+</div></blockquote></div></div><div class="row"><div class="col-lg-7"><span class="lead">Sökparametrar</span><table class="table table-condensed table-hover"><thead><tr><th>Konformans</th><th>Parameter</th><th>Typ</th><th>Dokumentation</th></tr></thead><tbody><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">subject</a></td><td><code>reference</code></td><td><div><p>Med modifieraren :identifier, till exempel subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212.</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">type</a></td><td><code>token</code></td><td><div/></td></tr><tr><td><b>SHALL</b></td><td><a href="SearchParameter-DocumentReference-logical-address.html">logical-address</a></td><td><code>token</code></td><td><div/></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">status</a></td><td><code>token</code></td><td><div><p>Standardvärde current. Borttagna poster returneras bara när status=superseded anges.</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/resource.html#search">_lastUpdated</a></td><td><code>date</code></td><td><div><p>Inkrementell synk, tillsammans med status=current,superseded och _sort=_lastUpdated.</p>
+</div></td></tr><tr><td><b>SHALL</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">identifier</a></td><td><code>token</code></td><td><div><p>För producentens villkorade update.</p>
+</div></td></tr><tr><td><b>SHOULD</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">category</a></td><td><code>token</code></td><td><div/></td></tr><tr><td><b>SHOULD</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">custodian</a></td><td><code>reference</code></td><td><div><p>Med modifieraren :identifier och HSA-id.</p>
+</div></td></tr><tr><td><b>SHOULD</b></td><td><a href="SearchParameter-DocumentReference-source-system.html">source-system</a></td><td><code>token</code></td><td><div/></td></tr><tr><td><b>SHOULD</b></td><td><a href="http://hl7.org/fhir/documentreference.html#search">format-code</a></td><td><code>token</code></td><td><div><p>Hämtningsprotokoll, riv-ta eller fhir.</p>
+</div></td></tr><tr><td><b>SHOULD</b></td><td><a href="http://hl7.org/fhir/resource.html#search">_id</a></td><td><code>token</code></td><td><div/></td></tr></tbody></table></div><div class="col-lg-5"> </div></div></div></div></div></div>
+  </text>
+  <url value="https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraEngagementIndexServer"/>
+  <version value="0.1.0"/>
+  <name value="IneraEngagementIndexServer"/>
+  <title value="EI-on-FHIR server"/>
+  <status value="draft"/>
+  <experimental value="false"/>
+  <date value="2026-11-13"/>
+  <publisher value="Inera AB"/>
+  <contact>
+    <name value="Inera AB"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://www.inera.se"/>
+    </telecom>
+  </contact>
+  <description value="Krav på EI-on-FHIR som server: läsning och sökning av engagemangsposter från EI och från EI-on-FHIR:s register, registrering i registret för FHIR-producenter. Massuttag med Bulk Data $export krävs i text på IG-sidan API, eftersom Bulk Data Access bara finns för R4."/>
+  <jurisdiction>
+    <coding>
+      <system value="urn:iso:std:iso:3166"/>
+      <code value="SE"/>
+      <display value="Sweden"/>
+    </coding>
+  </jurisdiction>
+  <kind value="requirements"/>
+  <fhirVersion value="5.0.0"/>
+  <format value="json"/>
+  <implementationGuide value="https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex"/>
+  <rest>
+    <mode value="server"/>
+    <documentation value="API ovanpå engagemangsindex, för Ineras interna stödtjänster och för FHIR-producenter. Poster från EI är skrivskyddade; FHIR-producenter skriver bara i EI-on-FHIR:s register. Varje anrop autentiseras som ett system och loggas. Se sidan Säkerhet och loggning."/>
+    <security>
+      <description value="SMART Backend Services med systembehörigheter och tre klientroller: stödtjänst, synktjänst och producent. Sökning utan patient och massuttag kräver behörighet för synk; skrivning kräver behörighet som producent."/>
+    </security>
+    <resource>
+      <type value="DocumentReference"/>
+      <profile value="https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement"/>
+      <documentation value="Engagemangsposter från EI och från EI-on-FHIR:s register, i samma sökresultat. En sökning utan status returnerar bara poster med status current. En sökning måste ange subject:identifier, utom för klienter med behörighet för synk. En producent skriver med villkorad update på identifier och tar bort med delete; villkoret och borttaget gäller bara producentens egna poster i registret."/>
+      <interaction>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <code value="read"/>
+      </interaction>
+      <interaction>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <code value="search-type"/>
+      </interaction>
+      <interaction>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <code value="update"/>
+        <documentation value="Villkorad update: PUT DocumentReference?identifier=[värde]. Skapar posten om producenten inte har någon post med identifieraren, annars uppdateras den."/>
+      </interaction>
+      <interaction>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <code value="delete"/>
+        <documentation value="DELETE DocumentReference/[id] för en post i registret. Posten visas därefter med status superseded under borttagsloggens lagringstid."/>
+      </interaction>
+      <versioning value="no-version"/>
+      <updateCreate value="false"/>
+      <conditionalCreate value="false"/>
+      <conditionalUpdate value="true"/>
+      <conditionalDelete value="not-supported"/>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <name value="subject"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/DocumentReference-subject"/>
+        <type value="reference"/>
+        <documentation value="Med modifieraren :identifier, till exempel subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212."/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <name value="type"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/clinical-type"/>
+        <type value="token"/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <name value="logical-address"/>
+        <definition value="https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-logical-address"/>
+        <type value="token"/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <name value="status"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/DocumentReference-status"/>
+        <type value="token"/>
+        <documentation value="Standardvärde current. Borttagna poster returneras bara när status=superseded anges."/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <name value="_lastUpdated"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/Resource-lastUpdated"/>
+        <type value="date"/>
+        <documentation value="Inkrementell synk, tillsammans med status=current,superseded och _sort=_lastUpdated."/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHOULD"/>
+        </extension>
+        <name value="category"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/DocumentReference-category"/>
+        <type value="token"/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHOULD"/>
+        </extension>
+        <name value="custodian"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/DocumentReference-custodian"/>
+        <type value="reference"/>
+        <documentation value="Med modifieraren :identifier och HSA-id."/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHOULD"/>
+        </extension>
+        <name value="source-system"/>
+        <definition value="https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-system"/>
+        <type value="token"/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHOULD"/>
+        </extension>
+        <name value="format-code"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/DocumentReference-format-code"/>
+        <type value="token"/>
+        <documentation value="Hämtningsprotokoll, riv-ta eller fhir."/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHALL"/>
+        </extension>
+        <name value="identifier"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/clinical-identifier"/>
+        <type value="token"/>
+        <documentation value="För producentens villkorade update."/>
+      </searchParam>
+      <searchParam>
+        <extension url="http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation">
+          <valueCode value="SHOULD"/>
+        </extension>
+        <name value="_id"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/Resource-id"/>
+        <type value="token"/>
+      </searchParam>
+    </resource>
+  </rest>
+</CapabilityStatement>

@@ -1,4 +1,4 @@
-# Kodsystem för tjänstedomäner - FHIR-baserat engagemangsindex (FHIR-EI) v0.1.0
+# Kodsystem för tjänstedomäner - EI-on-FHIR: FHIR-API för engagemangsindex v0.1.0
 
 ## CodeSystem: Kodsystem för tjänstedomäner 
 
@@ -27,7 +27,7 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
   "title" : "Kodsystem för tjänstedomäner",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2026-10-26",
+  "date" : "2026-11-13",
   "publisher" : "Inera AB",
   "contact" : [{
     "name" : "Inera AB",
@@ -36,7 +36,7 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
       "value" : "https://www.inera.se"
     }]
   }],
-  "description" : "Tjänstedomäner, som anger tjänst i FHIR-EI under övergången till IG-canonicals. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
+  "description" : "Tjänstedomäner, som de anges i serviceDomain i engagemangsindex. Utdrag; den fullständiga förteckningen förvaltas i Ineras förteckning över tjänstedomäner.",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
@@ -50,6 +50,11 @@ Detta kodsystem refereras i definitionen av följande värdemängder:
     "code" : "riv:clinicalprocess:healthcond:description",
     "display" : "riv:clinicalprocess:healthcond:description",
     "definition" : "Tjänstedomänen riv:clinicalprocess:healthcond:description."
+  },
+  {
+    "code" : "riv:clinicalprocess:activityprescription:actoutcome",
+    "display" : "riv:clinicalprocess:activityprescription:actoutcome",
+    "definition" : "Tjänstedomänen riv:clinicalprocess:activityprescription:actoutcome."
   }]
 }
 

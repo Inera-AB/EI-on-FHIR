@@ -1,0 +1,46 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "IneraEngagementStatusValueSet",
+  "language" : "sv",
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Genererad berättande text: ValueSet IneraEngagementStatusValueSet</b></p><a name=\"IneraEngagementStatusValueSet\"> </a><a name=\"hcIneraEngagementStatusValueSet\"> </a><ul><li>Include dessa koder enligt definitionen i <a href=\"http://hl7.org/fhir/R5/codesystem-document-reference-status.html\"><code>http://hl7.org/fhir/document-reference-status</code></a><span title=\"Versionen är inte uttryckligen angiven, vilket innebär att den är fast till 5.0.0, versionen som hittas via paketreferenserna\"> version &#x1F4E6;5.0.0</span><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Kod</b></td><td><b>Visning</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-current\">current</a></td><td style=\"color: #cccccc\">Current</td><td>This is the current reference for this document.</td></tr><tr><td><a href=\"http://hl7.org/fhir/R5/codesystem-document-reference-status.html#document-reference-status-superseded\">superseded</a></td><td style=\"color: #cccccc\">Superseded</td><td>This reference has been superseded by another reference.</td></tr></table></li></ul></div>"
+  },
+  "url" : "https://fhir.inera.se/ig/engagementindex/ValueSet/IneraEngagementStatusValueSet",
+  "identifier" : [{
+    "value" : "IneraEngagementStatusValueSet"
+  }],
+  "version" : "0.1.0",
+  "name" : "IneraEngagementStatusValueSet",
+  "title" : "Status för engagemangsposter",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-11-13",
+  "publisher" : "Inera AB",
+  "contact" : [{
+    "name" : "Inera AB",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.inera.se"
+    }]
+  }],
+  "description" : "current för en registrerad post, superseded för en post som har tagits bort och visas under borttagsloggens lagringstid.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "SE",
+      "display" : "Sweden"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "http://hl7.org/fhir/document-reference-status",
+      "concept" : [{
+        "code" : "current"
+      },
+      {
+        "code" : "superseded"
+      }]
+    }]
+  }
+}
