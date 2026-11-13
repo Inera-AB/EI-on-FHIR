@@ -3,7 +3,7 @@
 Extension: LogicalAddress
 Id: LogicalAddress
 Title: "Logisk adress"
-Description: "Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens."
+Description: "Den logiska adress som konsumenten anger när den anropar ett tjänstekontrakt i postens tjänstedomän via tjänsteplattformen (logicalAddress i EI). Ett HSA-id, oftast vårdgivarens eller vårdenhetens. En FHIR-post anger samma logiska adress som källans RIV-TA-post, när källan svarar på båda."
 * insert IneraMetadata(LogicalAddress)
 * ^context.type = #element
 * ^context.expression = "DocumentReference"
@@ -16,7 +16,7 @@ Description: "Den logiska adress som konsumenten anger när den anropar ett tjä
 Extension: SourceSystem
 Id: SourceSystem
 Title: "Källsystem"
-Description: "Det system som har informationen och har registrerat posten i EI (sourceSystem). Ett HSA-id."
+Description: "Det system som har informationen och har registrerat posten (sourceSystem i EI). Ett HSA-id."
 * insert IneraMetadata(SourceSystem)
 * ^context.type = #element
 * ^context.expression = "DocumentReference"
@@ -39,7 +39,7 @@ Description: "När informationen hos källsystemet senast ändrades, enligt käl
 Extension: Owner
 Id: Owner
 Title: "Ägare"
-Description: "Den EI-instans som äger posten (owner i EI). Ett HSA-id."
+Description: "Var posten förvaltas (owner i EI): det nationella EI för poster från EI, eller EI-on-FHIR för poster i dess register. Ett HSA-id."
 * insert IneraMetadata(Owner)
 * ^context.type = #element
 * ^context.expression = "DocumentReference"

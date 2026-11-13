@@ -34,10 +34,27 @@ Description: "Alla kategorier i kodsystemet för kategorier inom tjänstedomän.
 * insert IneraMetadata(IneraEngagementCategoryValueSet)
 * include codes from system IneraEngagementCategoryCodeSystem
 
+CodeSystem: IneraRetrievalProtocolCodeSystem
+Id: IneraRetrievalProtocolCodeSystem
+Title: "Kodsystem för hämtningsprotokoll"
+Description: "Hur en konsument hämtar den information som en engagemangspost pekar ut."
+* insert IneraMetadata(IneraRetrievalProtocolCodeSystem)
+* ^caseSensitive = true
+* ^content = #complete
+* #riv-ta "RIV-TA" "Ett tjänstekontrakt i postens tjänstedomän, via tjänsteplattformen och postens logiska adress."
+* #fhir-r4 "FHIR R4" "FHIR R4-API:t på den endpoint som anges i postens attachment.url, enligt tjänstens IG."
+
+ValueSet: IneraRetrievalProtocolValueSet
+Id: IneraRetrievalProtocolValueSet
+Title: "Hämtningsprotokoll"
+Description: "Alla hämtningsprotokoll för engagemangsposter."
+* insert IneraMetadata(IneraRetrievalProtocolValueSet)
+* include codes from system IneraRetrievalProtocolCodeSystem
+
 ValueSet: IneraEngagementStatusValueSet
 Id: IneraEngagementStatusValueSet
 Title: "Status för engagemangsposter"
-Description: "current för en post som finns i EI, superseded för en post som har tagits bort ur EI och visas under borttagsloggens lagringstid."
+Description: "current för en registrerad post, superseded för en post som har tagits bort och visas under borttagsloggens lagringstid."
 * insert IneraMetadata(IneraEngagementStatusValueSet)
 * $docref-status#current
 * $docref-status#superseded

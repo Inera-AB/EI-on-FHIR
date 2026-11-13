@@ -2,7 +2,7 @@ id: inera.ei.engagementindex
 canonical: https://fhir.inera.se/ig/engagementindex
 name: IneraEngagementIndex
 title: "EI-on-FHIR: FHIR-API för engagemangsindex"
-description: "Ett skrivskyddat FHIR R4-API ovanpå dagens engagemangsindex, för Ineras interna stödtjänster och för synk till eHM:s patientindex."
+description: "Ett FHIR R4-API ovanpå dagens engagemangsindex, för Ineras interna stödtjänster och för synk till eHM:s patientindex, med ett eget register för källor som implementerar en tjänsts FHIR-IG."
 status: draft
 version: 0.1.0
 fhirVersion: 4.0.1

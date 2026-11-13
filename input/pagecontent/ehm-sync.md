@@ -1,4 +1,4 @@
-En synktjänst kan använda API:et för att fylla eHM:s patientindex för vårdgivarnas räkning, utifrån befintlig data i EI. Sidan beskriver hur synktjänsten använder API:et. eHM:s API för patientindexet är inte specificerat än och beskrivs inte här.
+En synktjänst kan använda API:et för att fylla eHM:s patientindex för vårdgivarnas räkning, utifrån befintlig data i EI och EI-on-FHIR:s register. Sidan beskriver hur synktjänsten använder API:et. eHM:s API för patientindexet är inte specificerat än och beskrivs inte här.
 
 Synken förutsätter att vårdgivarna har gett Inera i uppdrag att rapportera till patientindexet för deras räkning; se [Öppna frågor](open-issues.html).
 
@@ -16,7 +16,7 @@ Enligt promemorian S2026/01360 innehåller patientindexet patientens identitet, 
 
 ### Vårdgivaren
 
-`custodian` är ofta vårdgivarens HSA-id, men kan vara källsystemets; se [Engagemangsposten](engagement.html). Synktjänsten bestämmer vårdgivaren i tur och ordning:
+I poster från registret är `custodian` alltid vårdgivaren. I poster från EI är `custodian` ofta vårdgivarens HSA-id, men kan vara källsystemets; se [Engagemangsposten](engagement.html). För dem bestämmer synktjänsten vårdgivaren i tur och ordning:
 
 1. `custodian`, om det är en vårdgivare i HSA.
 2. Organisationen för postens logiska adress, eller den vårdgivare den hör till.
@@ -41,5 +41,6 @@ Synktjänsten slår ihop poster per patient, vårdgivare och journalsystem:
 - Den första posten med status `current` för en kombination ger en ny uppgift i patientindexet.
 - När den sista posten för en kombination får status `superseded` tas uppgiften bort ur patientindexet.
 - Övriga ändringar påverkar inte patientindexet.
+- En källa som har både en RIV-TA-post och en FHIR-post för samma patient ger samma kombination, och därmed en uppgift i patientindexet.
 
 Synktjänsten behöver därför hålla reda på vilka poster som ingår i varje kombination. Den sparar bara det som krävs för det: postens id, kombinationen och status.

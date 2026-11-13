@@ -8,6 +8,13 @@ Följande frågor är inte avgjorda. Svaren kan ändra profilen, API:et eller ar
 - **Tidszon.** Bekräfta att EI:s tidsstämplar är svensk tid.
 - **Stabilt id.** Vilken nyckel i EI identifierar en post, så att resursens id kan härledas ur den och inte ändras?
 
+### Register för FHIR-producenter
+
+- **Fasta kontakter.** Vilken tjänstedomän (`type`) har Fasta kontakter, och ska FHIR-poster också kunna ange tjänstens IG?
+- **Koppling mellan klient och källsystem.** Hur binds en producents klient till dess källsystem (HSA-id)?
+- **FHIR-endpoints i tjänstekatalogen.** Hur registrerar en vårdgivare sin FHIR-endpoint för en tjänst i tjänstekatalogen, så att API:et kan kontrollera den?
+- **Avstämning för producenter.** Behöver producenterna kunna söka sina egna poster för att stämma av mot sitt källsystem?
+
 ### Synk till eHM:s patientindex
 
 - **Uppdrag.** Hur ger vårdgivarna Inera i uppdrag att rapportera till patientindexet för deras räkning, och räcker det för att använda EI:s information för det ändamålet?

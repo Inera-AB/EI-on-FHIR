@@ -18,7 +18,29 @@ Usage: #example
 * subject.identifier.value = "191212121212"
 * date = "2025-03-11T09:15:00+01:00"
 * custodian.identifier.value = "SE0000000000-VG01"
+* content.format = $protocol#riv-ta
 * content.attachment.contentType = #application/xml
+
+Instance: EngagemangspostFhir
+InstanceOf: IneraEngagement
+Title: "Engagemangspost från en FHIR-producent"
+Description: "En post i EI-on-FHIR:s register. Källsystemet SE0000000000-SYS1 svarar både på tjänstekontraktet och på tjänstens FHIR-IG, och har därför också en RIV-TA-post i EI (Aktuell engagemangspost). Posterna har samma patient, tjänstedomän och logiska adress, så en konsument kan välja väg."
+Usage: #example
+* meta.lastUpdated = "2026-11-12T09:41:27+01:00"
+* extension[logicalAddress].valueIdentifier.value = "SE0000000000-VG01"
+* extension[sourceSystem].valueIdentifier.value = "SE0000000000-SYS1"
+* extension[mostRecentContent].valueDateTime = "2026-11-12T09:40:00+01:00"
+* extension[owner].valueIdentifier.value = "SE0000000000-EIF0"
+* identifier.value = "c2d8e6f1-3a47-4b0e-9e21-5f8a7d3b6c04"
+* status = #current
+* type = $service-domain#riv:clinicalprocess:healthcond:description
+* subject.identifier.system = $personnummer
+* subject.identifier.value = "191212121212"
+* date = "2026-11-12T09:41:27+01:00"
+* custodian.identifier.value = "SE0000000000-VG01"
+* content.format = $protocol#fhir-r4
+* content.attachment.contentType = #application/fhir+json
+* content.attachment.url = "https://fhir.vg01.example.org/fhir"
 
 Instance: EngagemangspostKallsystemSomPuA
 InstanceOf: IneraEngagement
@@ -36,6 +58,7 @@ Usage: #example
 * subject.identifier.value = "191212121212"
 * date = "2024-06-03T10:20:00+02:00"
 * custodian.identifier.value = "SE0000000000-SYS2"
+* content.format = $protocol#riv-ta
 * content.attachment.contentType = #application/xml
 
 Instance: EngagemangspostBorttagen
@@ -55,15 +78,16 @@ Usage: #example
 * subject.identifier.value = "191212121212"
 * date = "2023-09-19T13:05:00+02:00"
 * custodian.identifier.value = "SE0000000000-VG03"
+* content.format = $protocol#riv-ta
 * content.attachment.contentType = #application/xml
 
 Instance: SokresultatForPatient
 InstanceOf: Bundle
 Title: "Sökresultat för en patient"
-Description: "Svar på GET [base]/DocumentReference?subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212. Den borttagna posten kommer inte med, eftersom sökningen inte anger status."
+Description: "Svar på GET [base]/DocumentReference?subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212. Resultatet innehåller poster från både EI och EI-on-FHIR:s register. Den borttagna posten kommer inte med, eftersom sökningen inte anger status."
 Usage: #example
 * type = #searchset
-* total = 2
+* total = 3
 * link[0].relation = "self"
 * link[0].url = "https://ei.example.org/fhir/DocumentReference?subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212"
 * entry[0].fullUrl = "https://ei.example.org/fhir/DocumentReference/EngagemangspostAktuell"
@@ -72,3 +96,6 @@ Usage: #example
 * entry[1].fullUrl = "https://ei.example.org/fhir/DocumentReference/EngagemangspostKallsystemSomPuA"
 * entry[1].resource = EngagemangspostKallsystemSomPuA
 * entry[1].search.mode = #match
+* entry[2].fullUrl = "https://ei.example.org/fhir/DocumentReference/EngagemangspostFhir"
+* entry[2].resource = EngagemangspostFhir
+* entry[2].search.mode = #match

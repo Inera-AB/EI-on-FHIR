@@ -2,16 +2,17 @@
 
 Utkast 0.1 · 2026-11-13
 
-EI-on-FHIR är ett skrivskyddat FHIR R4-API ovanpå det nationella engagemangsindexet (EI). Det har två användningsfall: Ineras interna stödtjänster ska kunna hitta var information finns, och en synktjänst ska kunna fylla eHM:s patientindex utifrån befintlig data i EI. Förebilden är NHS Englands National Record Locator (NRL). Den formella specifikationen är [IG:n](../input/pagecontent/index.md) i samma repo.
+EI-on-FHIR är ett FHIR R4-API ovanpå det nationella engagemangsindexet (EI). Det har tre användningsfall: Ineras interna stödtjänster ska kunna hitta var information finns, en synktjänst ska kunna fylla eHM:s patientindex utifrån befintlig data, och källor som implementerar en tjänsts FHIR-IG i stället för tjänstekontraktet, till exempel för Fasta kontakter, ska kunna registrera sina engagemang så att de syns på samma sätt. Förebilden är NHS Englands National Record Locator (NRL). Den formella specifikationen är [IG:n](../input/pagecontent/index.md) i samma repo.
 
 ## 1. Omfattning
 
 | Ingår | Ingår inte |
 |---|---|
-| Läsning, sökning och massuttag av EI:s poster via FHIR R4 | Ändringar i hur källsystemen registrerar (Update, ProcessNotification) |
-| Användningsfall 1: interna stödtjänster, till exempel EHDS-bryggan | Skrivning via FHIR, prenumerationer och notiser |
+| Läsning, sökning och massuttag av engagemangsposter via FHIR R4 | Ändringar i hur källor som implementerar tjänstekontrakten registrerar (Update, ProcessNotification) |
+| Användningsfall 1: interna stödtjänster, till exempel EHDS-bryggan | Prenumerationer och notiser |
 | Användningsfall 2: källa för synk till eHM:s patientindex | Åtkomst för vårdpersonal och invånare, till exempel via NPÖ eller 1177 |
-| Synktjänsten som konsument av API:et | eHM:s API för patientindexet |
+| Användningsfall 3: ett eget register där FHIR-producenter registrerar engagemang | eHM:s API för patientindexet |
+| Synktjänsten som konsument av API:et | |
 
 Den bredare visionen för ett FHIR-baserat index, med flera försörjningssätt, åtkomstkontroll per användare och juridiska frågor, finns på huvudbranchen i repot och ligger utanför den här lösningen.
 
@@ -26,7 +27,10 @@ Den bredare visionen för ett FHIR-baserat index, med flera försörjningssätt,
 | F3 | Synktjänsten kan ta ut alla poster i ett massuttag | 2 |
 | F4 | Synktjänsten kan hämta alla poster som ändrats eller tagits bort sedan en tidpunkt | 2 |
 | F5 | Varje post innehåller det som behövs för att anropa källan: tjänstedomän och logisk adress | 1 |
-| F6 | Varje post innehåller det som behövs för patientindexet: patient, källsystem och personuppgiftsansvarig enligt EI | 2 |
+| F6 | Varje post innehåller det som behövs för patientindexet: patient, källsystem och personuppgiftsansvarig | 2 |
+| F7 | En FHIR-producent kan registrera, uppdatera och ta bort sina egna poster | 3 |
+| F8 | Poster från EI och från registret kommer i samma sökresultat och massuttag | 1, 2, 3 |
+| F9 | Varje post anger hur informationen hämtas: med RIV-TA och logisk adress, eller med FHIR och endpoint | 1, 3 |
 
 ### Kvalitetskrav
 
@@ -46,6 +50,7 @@ Den bredare visionen för ett FHIR-baserat index, med flera försörjningssätt,
 - EHDS-bryggan och andra stödtjänster i samverkansinfrastrukturen använder FHIR R4 och HL7 Swedens basprofiler.
 - eHM:s patientindex innehåller patient, vårdgivarens organisationsnummer, journalsystem och kontaktuppgifter enligt promemorian S2026/01360. API:et för det är inte specificerat än.
 - EI:s fält dataController är ofta vårdgivarens HSA-id, men kan sedan 2015 vara källsystemets.
+- För vissa tjänster, till exempel Fasta kontakter, kan en vårdgivare välja att implementera tjänstens FHIR-IG i stället för tjänstekontraktet. En sådan källa registrerar inte i EI, och en vårdgivare kan ha källor av båda slagen.
 
 ## 4. Systemkontext
 
@@ -55,9 +60,13 @@ flowchart LR
   subgraph EI [Nationellt engagemangsindex]
     EIDB[(EI-databas)]
     API[EI-on-FHIR]
+    REG[(Register för FHIR-producenter)]
     API -- läser --> EIDB
+    API -- läser och skriver --> REG
   end
+  FP[FHIR-producent] -- "FHIR R4: PUT, DELETE" --> API
   BRY[EHDS-bryggan och andra stödtjänster] -- "FHIR R4: sök, läs" --> API
+  BRY -- "FHIR R4 till endpointen" --> FP
   SYNC[Synktjänst] -- "FHIR R4: sök, $export" --> API
   SYNC -- "slår upp vårdgivare" --> HSA[HSA och tjänstekatalogen]
   SYNC -- "rapporterar" --> PDI[eHM:s patientindex]
@@ -69,11 +78,12 @@ flowchart LR
 
 | System | Roll |
 |---|---|
-| Källsystem | Registrerar engagemangsposter i EI med Update, som i dag |
-| Nationellt engagemangsindex | Källan för posterna. EI-on-FHIR är ett nytt läsgränssnitt i det |
-| EHDS-bryggan och andra stödtjänster | Söker poster för en patient, inom användningsfall 1 |
+| Källsystem | Implementerar tjänstekontraktet och registrerar engagemangsposter i EI med Update, som i dag |
+| FHIR-producent | Implementerar en tjänsts FHIR-IG och registrerar sina poster i EI-on-FHIR:s register |
+| Nationellt engagemangsindex | Källan för poster från källsystem som implementerar tjänstekontrakten. EI-on-FHIR är ett nytt gränssnitt i det |
+| EHDS-bryggan och andra stödtjänster | Söker poster för en patient, inom användningsfall 1, och hämtar med RIV-TA eller FHIR enligt posten |
 | Synktjänst | Läser alla poster och ändringar och fyller eHM:s patientindex, inom användningsfall 2 |
-| HSA och tjänstekatalogen | Ger vårdgivare och organisationsnummer för HSA-id |
+| HSA och tjänstekatalogen | Ger vårdgivare och organisationsnummer för HSA-id, och vårdgivarnas FHIR-endpoints |
 | eHM:s patientindex | Tar emot uppgifter från synktjänsten |
 | Auktoriseringstjänst | Utfärdar token till systemklienterna |
 
@@ -84,8 +94,10 @@ flowchart LR
 - **Sökning på patient och typ, som i NRL.** Klienten söker med `subject:identifier` och `type`, och med `logical-address` när den vill avgränsa till en vårdgivare.
 - **Standarder för synk.** Massuttag med Bulk Data `$export` och ändringar med `_lastUpdated`, utan egna operationer (D7).
 - **Borttag syns.** Borttagna poster visas med status `superseded` under en lagringstid, så att synken kan ta bort uppgifter i patientindexet (D4).
+- **Eget register för FHIR-producenter.** En källa som implementerar en tjänsts FHIR-IG registrerar i EI-on-FHIR, inte i EI. Läsningen visar posterna från EI och registret tillsammans (D10).
+- **Posten säger hur den hämtas.** `content.format` anger `riv-ta` eller `fhir-r4`. En källa med båda gränssnitten har två poster, som konsumenten väljer mellan på patient, tjänstedomän och logisk adress (D11, D12).
 
-Från NRL tar lösningen pekaren som `DocumentReference`, sökningen på patientens identitet och informationens typ, att indexet inte bär innehåll, och att klienter är system med behörighet per organisation. Den tar inte NRL:s producent-API, eftersom källsystemen fortsätter registrera med RIV-TA, och den pekar inte ut innehållet med en URL utan med logisk adress via tjänsteplattformen.
+Från NRL tar lösningen pekaren som `DocumentReference`, sökningen på patientens identitet och informationens typ, att indexet inte bär innehåll, och att klienter är system med behörighet per organisation. Registret för FHIR-producenter följer NRL:s producent-API, med villkorad update och delete. Källor som implementerar tjänstekontrakten registrerar däremot som i dag i EI, och deras poster pekar ut innehållet med logisk adress via tjänsteplattformen, inte med en URL.
 
 ## 6. Byggblock
 
@@ -96,7 +108,9 @@ flowchart TB
     AC[Åtkomst och logg]
     MAP[Mappning]
     RD[EI-läsadapter]
+    VAL[Validering av registreringar]
     EX[Exportjobb]
+    REG[(Register för FHIR-producenter)]
   end
   subgraph EIB [Nationellt EI]
     DB[(Engagemangsposter)]
@@ -106,7 +120,11 @@ flowchart TB
   FH --> MAP
   FH --> EX
   MAP --> RD
+  MAP --> REG
+  FH --> VAL
+  VAL --> REG
   EX --> RD
+  EX --> REG
   RD --> DB
   RD --> TL
 ```
@@ -119,6 +137,8 @@ flowchart TB
 | EI-läsadapter | Frågar EI:s databas eller en läsreplika. Sökningarna motsvarar FindContent, plus sökning på uppdateringstid |
 | Exportjobb | Kör massuttag asynkront och skriver NDJSON-filer som klienten hämtar |
 | Borttagslogg | Nytt i EI: sparar varje borttagen post med tidpunkt och rensar efter lagringstiden |
+| Register för FHIR-producenter | EI-on-FHIR:s eget datalager för poster från FHIR-producenter, med samma borttagslogg. Sökningar och massuttag läser registret och EI tillsammans |
+| Validering av registreringar | Kontrollerar att posten följer profilen, att källsystemet är klientens eget, att `custodian` är en vårdgivare och att endpointen finns i tjänstekatalogen |
 
 Synktjänsten är en egen komponent med fyra delar: en läsare som håller reda på senaste `_lastUpdated`, ett uppslag av vårdgivare och organisationsnummer, en aggregering per patient, vårdgivare och journalsystem med eget tillstånd, och en klient mot eHM:s patientindex. Den behöver bara spara postens id, kombinationen och status.
 
@@ -168,16 +188,39 @@ sequenceDiagram
 
 En post vars vårdgivare inte går att bestämma rapporteras inte, utan läggs i en kö för manuell hantering. Med längre intervall jämför synktjänsten ett fullständigt uttag med patientindexet.
 
+### Användningsfall 3: en FHIR-producent registrerar ett engagemang
+
+```mermaid
+sequenceDiagram
+  participant F as FHIR-producent
+  participant A as EI-on-FHIR
+  participant K as HSA och tjänstekatalogen
+  participant R as Register
+  F->>A: PUT DocumentReference?identifier=…
+  A->>A: Validera token, klientroll och källsystem
+  A->>K: Kontrollera vårdgivare och endpoint
+  A->>R: Sök producentens post med identifieraren
+  alt Ingen träff
+    A->>R: Skapa posten
+    A-->>F: 201 Created
+  else En träff
+    A->>R: Uppdatera posten
+    A-->>F: 200 OK
+  end
+```
+
+När en stödtjänst sedan söker patientens poster kommer FHIR-posten med tillsammans med posterna från EI. Har samma källa också en RIV-TA-post för samma patient, tjänstedomän och logiska adress väljer en stödtjänst som kan FHIR FHIR-posten och hoppar över RIV-TA-anropet.
+
 ## 8. Driftsättning
 
-EI-on-FHIR driftas tillsammans med det nationella EI, nära dess databas, och exponeras bara internt via samverkansinfrastrukturens API-gateway. Massuttag körs mot en läsreplika om en sådan finns, så att de inte belastar EI:s skrivningar. Synktjänsten driftas för sig.
+EI-on-FHIR driftas tillsammans med det nationella EI, nära dess databas, och exponeras bara internt via samverkansinfrastrukturens API-gateway. Registret för FHIR-producenter är en egen databas i samma miljö. Massuttag körs mot en läsreplika om en sådan finns, så att de inte belastar EI:s skrivningar. Synktjänsten driftas för sig.
 
 ## 9. Tvärgående aspekter
 
 | Aspekt | Lösning |
 |---|---|
 | Autentisering | SMART Backend Services. Klienterna är registrerade system |
-| Behörighet | Två klientroller. En stödtjänst får läsa och söka med patient; en synktjänst får dessutom söka utan patient och göra massuttag |
+| Behörighet | Tre klientroller. En stödtjänst får läsa och söka med patient; en synktjänst får dessutom söka utan patient och göra massuttag; en producent får bara skriva och ta bort sina egna poster i registret |
 | Spärr | Prövas inte i API:t, som i dagens EI. Stödtjänsten prövar när den lämnar ut journalinformation |
 | Loggning | Varje anrop loggas med klient, tidpunkt, interaktion, parametrar och antal poster. Massuttag loggas per uttag |
 | Identifierare | HSA-id anges med `urn:oid:1.2.752.29.4.19`, personnummer och samordningsnummer med HL7 Swedens URI:er. API:et tar emot RIV-TA:s OID:er i sökningar |
@@ -193,11 +236,14 @@ EI-on-FHIR driftas tillsammans med det nationella EI, nära dess databas, och ex
 | D2 | API:et läser EI:s databas eller en läsreplika, som ett nytt gränssnitt i det nationella EI | Anropa FindContent per sökning; egen kopia fylld via ProcessNotification | FindContent kräver patient och kan inte ge ändringar, så användningsfall 2 blir omöjligt. En egen kopia blir ett nytt register att förvalta, och mottagare av notiser får i dag inte lagra posterna |
 | D3 | En resurs per EI-post, ingen sammanslagning | En resurs per patient, källa och tjänstedomän | Enkel och trogen mappning. Den som behöver sammanslagning, som synken, gör den själv |
 | D4 | Borttagna poster visas som `superseded` från en borttagslogg med lagringstid | Bara fullständig avstämning; borttag via egen notismottagare | Synken behöver se borttag snabbt för att kunna ta bort uppgifter i patientindexet |
-| D5 | Skrivskyddat API | Registrering via FHIR | Inga ändringar för källsystemen |
+| D5 | Poster från EI är skrivskyddade via API:et | Registrering i EI via FHIR | Inga ändringar för källor som implementerar tjänstekontrakten, och EI behöver inget nytt skrivgränssnitt |
 | D6 | Ingen spärrprövning i API:t | Prövning per anrop | Klienterna är tekniska stödtjänster utan användare. Prövningen görs när journalinformation lämnas ut, som i dag |
 | D7 | Synk med `_lastUpdated` och Bulk Data, utan prenumerationer | Prenumerationer enligt Subscriptions Backport | Enklast, och samma mönster som NRL. Prenumerationer kan läggas till senare |
 | D8 | Synktjänsten är en egen komponent | Inbyggd i API:t | API:et blir oberoende av eHM:s API, och synken kan ändras eller bytas utan att API:et påverkas |
-| D9 | SMART Backend Services med två klientroller | Bara klientcertifikat | Samma mönster som EHDS-bryggan, och behörigheter kan uttryckas per klient |
+| D9 | SMART Backend Services med tre klientroller | Bara klientcertifikat | Samma mönster som EHDS-bryggan, och behörigheter kan uttryckas per klient |
+| D10 | FHIR-producenter registrerar i ett eget register i EI-on-FHIR | Översätta FHIR-registreringar till Update i EI | En post i EI ska gå att anropa med RIV-TA, och en källa som bara har FHIR kan inte det. Registret kräver ingen ändring i EI |
+| D11 | Hämtningsprotokollet anges i `content.format`, med `fhir-r4` och endpointens URL för FHIR-poster | En egen extension; skilda profiler för RIV-TA och FHIR | Standardelement med standardsökparameter (`format`), och en profil för båda |
+| D12 | En källa med båda gränssnitten har två poster, som inte slås ihop. De matchas på patient, tjänstedomän och logisk adress | Slå ihop till en resurs med två `content` | Ingen samordning mellan EI och registret vid skrivning, och samma regel som D3 |
 
 ## 11. Risker och öppna frågor
 
@@ -209,6 +255,9 @@ EI-on-FHIR driftas tillsammans med det nationella EI, nära dess databas, och ex
 | Vårdgivarnas uppdrag för synken saknas | Användningsfall 2 kan inte tas i drift | Uppdraget utreds parallellt |
 | eHM:s API är inte specificerat | Synktjänstens klient kan inte byggas färdigt | Bygg läsning och aggregering först |
 | Fältlistan och nyckeln i EI är inte avstämda mot TKB:n | Mappningen eller resursens id kan behöva ändras | Stäm av mot TKB:n för `riv:itintegration:engagementindex` |
+| En FHIR-producent anger inte samma logiska adress som sin RIV-TA-post | Konsumenter kan inte se att två poster är samma källa, och kan anropa båda | Krav i IG:n; uppföljning av poster i registret utan logisk adress för vårdgivare som också finns i EI |
+| En källa som byter till FHIR slutar med Update innan den registrerar i registret | Engagemangen syns inte under bytet | Rutin vid byte: registrera i registret först |
+| Vårdgivarnas FHIR-endpoints finns inte i tjänstekatalogen | Registreringar avvisas | Stäm av hur endpoints för tjänster som Fasta kontakter registreras |
 
 Fler öppna frågor finns i IG:n, på sidan Öppna frågor.
 

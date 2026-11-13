@@ -5,7 +5,7 @@
 [![FHIR R4](https://img.shields.io/badge/FHIR-R4-blue)](https://hl7.org/fhir/R4/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-**This branch (`claude/ei-fhir-ehds-brygga`) covers only what EHDS-bryggan and the sync to eHM's patient index need.** It defines a read-only FHIR R4 API on top of today's national engagement index (EI), modelled on NHS England's National Record Locator. The broader vision for a FHIR-based index, with several population methods, per-user access control and legal analysis, is on `main` and is not part of this branch. The architecture document and the IG are written in Swedish.
+**This branch (`claude/ei-fhir-ehds-brygga`) covers only what EHDS-bryggan and the sync to eHM's patient index need.** It defines a FHIR R4 API on top of today's national engagement index (EI), modelled on NHS England's National Record Locator, with its own register for sources that implement a service's FHIR IG instead of the RIV-TA contract. The broader vision for a FHIR-based index, with several population methods, per-user access control and legal analysis, is on `main` and is not part of this branch. The architecture document and the IG are written in Swedish.
 
 | | |
 |---|---|
@@ -18,6 +18,7 @@
 
 1. **Support services find where information is.** Inera's internal support services in the new interoperability infrastructure, such as EHDS-bryggan, search a patient's engagement entries before calling a source system. This corresponds to FindContent.
 2. **Sync to eHM's patient index.** A sync service reads all entries and all changes through the API and populates eHM's patient index on behalf of care providers, from the data already in EI.
+3. **FHIR producers register engagements.** A source that implements a service's FHIR IG instead of the RIV-TA contract, for example Fasta kontakter, registers its entries in EI-on-FHIR's own register, so that they appear alongside the entries from EI.
 
 ### What is in this repository
 
@@ -29,11 +30,13 @@
 
 ### Design in brief
 
-- **A read interface in the national EI, not a new service with its own copy.** The API reads EI's database or a read replica, so there is no new register to keep in sync.
+- **A read interface in the national EI, not a new service with its own copy.** The API reads EI's database or a read replica, so there is no copy of EI to keep in sync.
+- **Its own register for FHIR producers**, written with conditional update and delete as in NRL's producer API. Searches and exports return entries from EI and the register together.
+- **Each entry says how to fetch the information:** `content.format` is `riv-ta` (logical address via the service platform) or `fhir-r4` (endpoint URL). A source with both interfaces has two entries, matched on patient, service domain and logical address; a FHIR-capable consumer picks the FHIR one.
 - **One `DocumentReference` per EI entry**, profiled as `IneraEngagement`, with no merging. Fields without a DocumentReference element are extensions: logical address, source system, owner and most recent content.
 - **Search like NRL:** `subject:identifier` and `type`, plus `logical-address` to narrow to one care provider. A search without a patient is allowed only for the sync client.
 - **Sync with standard FHIR:** Bulk Data `$export` for the initial load and reconciliation, `_lastUpdated` for incremental changes. Deleted entries appear with status `superseded` for a retention period.
-- **System clients only**, with SMART Backend Services and two client roles. The API does not check blocking (spärr), as today's EI does not; the support service checks it when it releases clinical information.
+- **System clients only**, with SMART Backend Services and three client roles: support service, sync service and producer. The API does not check blocking (spärr), as today's EI does not; the support service checks it when it releases clinical information.
 
 ### Related repositories
 
