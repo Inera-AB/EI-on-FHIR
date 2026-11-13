@@ -158,9 +158,9 @@
     "sources" : ["2.16.840.1.113883.4.642.3.45"],
     "uses" : {
     },
-    "StructureDefinition-IneraEngagement.html" : "Engagemangspost",
     "StructureDefinition-LogicalAddress.html" : "Logisk adress",
     "StructureDefinition-Owner.html" : "Ägare",
+    "StructureDefinition-IneraEngagement.html" : "Engagemangspost",
     "StructureDefinition-SourceSystem.html" : "Källsystem"
   },
   {
@@ -175,9 +175,9 @@
     "sources" : ["2.16.840.1.113883.4.642.3.57"],
     "uses" : {
     },
-    "StructureDefinition-IneraEngagement.html" : "Engagemangspost",
     "StructureDefinition-LogicalAddress.html" : "Logisk adress",
     "StructureDefinition-Owner.html" : "Ägare",
+    "StructureDefinition-IneraEngagement.html" : "Engagemangspost",
     "StructureDefinition-SourceSystem.html" : "Källsystem"
   },
   {

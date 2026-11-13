@@ -1,8 +1,8 @@
 {
   "resourceType" : "Bundle",
-  "id" : "ee669e8d-0f35-44aa-86c6-32fad01a688d",
+  "id" : "ad2cf822-f4f0-41ba-baaa-1c9b0e36259a",
   "meta" : {
-    "lastUpdated" : "2026-11-13T09:35:31.964+00:00"
+    "lastUpdated" : "2026-11-13T10:47:11.103+00:00"
   },
   "type" : "collection",
   "entry" : [{
@@ -39,8 +39,8 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason",
           "valueString" : "This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"
         }],
-        "identifier" : "urn:uuid:60bf5166-e6ca-4bfa-8fdf-1bff591eb899",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:b7f8d683-5171-4925-a083-e4baba3efdc0",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 1,
         "offset" : 0,
         "parameter" : [{
@@ -108,8 +108,8 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason",
           "valueString" : "This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraEngagementCategoryCodeSystem"
         }],
-        "identifier" : "urn:uuid:cde62686-f4d1-40c7-be59-b07af6d2cef8",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:36e24316-9179-4e6c-9ae2-ec5783167290",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 1,
         "offset" : 0,
         "parameter" : [{
@@ -169,8 +169,8 @@
         }]
       }],
       "expansion" : {
-        "identifier" : "urn:uuid:d6569984-a51c-4553-ac0c-6a806ab75fb5",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:e8ae276c-1fa1-4d8a-bba6-6d663f2f6141",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 2,
         "offset" : 0,
         "parameter" : [{
@@ -230,8 +230,8 @@
         }]
       }],
       "expansion" : {
-        "identifier" : "urn:uuid:10f633b5-ae12-4ca6-99c2-d070629b8238",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:956e6ff7-6c0d-4f2f-bcae-f5f8f66b9169",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 2,
         "offset" : 0,
         "parameter" : [{
@@ -291,8 +291,8 @@
         }]
       }],
       "expansion" : {
-        "identifier" : "urn:uuid:1e461d26-1952-4c9d-9041-1b180436cf90",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:db0d2805-37ce-4cdb-be97-d1cbd342c8f9",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 2,
         "offset" : 0,
         "parameter" : [{
@@ -352,8 +352,8 @@
         }]
       }],
       "expansion" : {
-        "identifier" : "urn:uuid:d241fcfd-f09b-4018-aa94-31baf5628b01",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:11474c6c-eee3-4415-8b7f-18b034e2502e",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 2,
         "offset" : 0,
         "parameter" : [{
@@ -421,8 +421,8 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason",
           "valueString" : "This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"
         }],
-        "identifier" : "urn:uuid:64e213a3-dd1a-446e-9d52-1d75b0b33e86",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:c635bd87-59f8-446c-b9a4-1cf7af54ef24",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 2,
         "offset" : 0,
         "parameter" : [{
@@ -494,8 +494,8 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/valueset-unclosed-reason",
           "valueString" : "This extension is based on a fragment of the code system https://fhir.inera.se/ig/engagementindex/CodeSystem/IneraServiceDomainCodeSystem"
         }],
-        "identifier" : "urn:uuid:2eebc05a-1b19-452f-af24-520983a31879",
-        "timestamp" : "2026-11-13T09:36:11+00:00",
+        "identifier" : "urn:uuid:6d8a0608-33ca-44f7-85e2-9d8388a588bb",
+        "timestamp" : "2026-11-13T10:48:00+00:00",
         "total" : 2,
         "offset" : 0,
         "parameter" : [{
