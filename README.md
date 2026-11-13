@@ -78,10 +78,18 @@ Three deliberate choices shape how this template's narrative pages are organised
 
 ## Inera branding
 
-The template uses Inera's visual identity by default. All branding is isolated to four files:
+The Inera look comes from the shared IG Publisher template in [Inera-AB/inera-fhir-graphic-profile](https://github.com/Inera-AB/inera-fhir-graphic-profile), set in `ig.ini`:
 
-| File | What it does |
-|------|-------------|
+```ini
+template = https://github.com/Inera-AB/inera-fhir-graphic-profile/tree/v1
+```
+
+It holds `inera.css`, the logos and favicon, and the two header fragments, on top of HL7's `fhir2.base.template`. A fix released there reaches this IG at its next build, locally and in CI.
+
+- Do not add `input/includes/fragment-css.html` or `fragment-header.html`: they replace the template's files and the Inera styling disappears. `input/includes/menu.xml` is this IG's own.
+- The logos are available to pages as `assets/images/inera-logo.svg`, `inera-logo-official.svg`, `inera-logo-negative.svg` and `inera-logo.png`.
+
+------|-------------|
 | `input/includes/fragment-css.html` | Loads Inera CSS and favicon |
 | `input/includes/fragment-header.html` | Inera logo in the header |
 | `input/images/inera.css` | All Inera colours, fonts and layout |
