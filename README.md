@@ -5,7 +5,7 @@
 [![FHIR R4](https://img.shields.io/badge/FHIR-R4-blue)](https://hl7.org/fhir/R4/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-**This branch (`claude/ei-fhir-ehds-brygga`) covers only what EHDS-bryggan and the sync to eHM's patient index need.** It defines a FHIR R4 API on top of today's national engagement index (EI), modelled on NHS England's National Record Locator, with its own register for sources that implement a service's FHIR IG instead of the RIV-TA contract. The broader vision for a FHIR-based index, with several population methods, per-user access control and legal analysis, is on `main` and is not part of this branch. The architecture document and the IG are written in Swedish.
+**EI-on-FHIR covers what EHDS-bryggan, the sync to eHM's patient index and FHIR producers such as Fasta kontakter need.** It defines a FHIR R4 API on top of today's national engagement index (EI), modelled on NHS England's National Record Locator, with its own register for sources that implement a service's FHIR IG instead of the RIV-TA contract. The earlier, broader vision for a FHIR-based index (FHIR R5, several population methods, per-user access control and legal analysis) is kept on the branch [`arkiv/fhir-ei-vision`](https://github.com/Inera-AB/EI-on-FHIR/tree/arkiv/fhir-ei-vision) and is not part of this IG. The architecture document and the IG are written in Swedish.
 
 | | |
 |---|---|

@@ -32,7 +32,7 @@ För det definierar IG:n:
 
 ### Arkitektur
 
-Arkitekturen, med alternativ och beslut, beskrivs i [SAD för EI-on-FHIR](https://github.com/Inera-AB/EI-on-FHIR/blob/claude/ei-fhir-ehds-brygga/sad/ei-on-fhir-sad.md) i IG:ns repo.
+Arkitekturen, med alternativ och beslut, beskrivs i [SAD för EI-on-FHIR](https://github.com/Inera-AB/EI-on-FHIR/blob/main/sad/ei-on-fhir-sad.md) i IG:ns repo.
 
 ---
 

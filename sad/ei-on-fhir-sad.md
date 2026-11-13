@@ -14,7 +14,7 @@ EI-on-FHIR är ett FHIR R4-API ovanpå det nationella engagemangsindexet (EI). D
 | Användningsfall 3: ett eget register där FHIR-producenter registrerar engagemang | eHM:s API för patientindexet |
 | Synktjänsten som konsument av API:et | |
 
-Den bredare visionen för ett FHIR-baserat index, med flera försörjningssätt, åtkomstkontroll per användare och juridiska frågor, finns på huvudbranchen i repot och ligger utanför den här lösningen.
+Den tidigare, bredare visionen för ett FHIR-baserat index, med flera försörjningssätt, åtkomstkontroll per användare och juridiska frågor, finns kvar på branchen [`arkiv/fhir-ei-vision`](https://github.com/Inera-AB/EI-on-FHIR/tree/arkiv/fhir-ei-vision) och ligger utanför den här lösningen.
 
 ## 2. Krav
 
@@ -232,7 +232,7 @@ EI-on-FHIR driftas tillsammans med det nationella EI, nära dess databas, och ex
 
 | Id | Beslut | Alternativ | Skäl |
 |---|---|---|---|
-| D1 | FHIR R4 (4.0.1) | R5, som huvudbranchens vision | NRL, EHDS-bryggan och HL7 Swedens basprofiler är R4, och Bulk Data finns för R4. Prenumerationer i R5 behövs inte |
+| D1 | FHIR R4 (4.0.1) | R5, som den arkiverade visionen | NRL, EHDS-bryggan och HL7 Swedens basprofiler är R4, och Bulk Data finns för R4. Prenumerationer i R5 behövs inte |
 | D2 | API:et läser EI:s databas eller en läsreplika, som ett nytt gränssnitt i det nationella EI | Anropa FindContent per sökning; egen kopia fylld via ProcessNotification | FindContent kräver patient och kan inte ge ändringar, så användningsfall 2 blir omöjligt. En egen kopia blir ett nytt register att förvalta, och mottagare av notiser får i dag inte lagra posterna |
 | D3 | En resurs per EI-post, ingen sammanslagning | En resurs per patient, källa och tjänstedomän | Enkel och trogen mappning. Den som behöver sammanslagning, som synken, gör den själv |
 | D4 | Borttagna poster visas som `superseded` från en borttagslogg med lagringstid | Bara fullständig avstämning; borttag via egen notismottagare | Synken behöver se borttag snabbt för att kunna ta bort uppgifter i patientindexet |

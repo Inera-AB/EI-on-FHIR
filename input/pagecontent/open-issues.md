@@ -28,4 +28,4 @@ Följande frågor är inte avgjorda. Svaren kan ändra profilen, API:et eller ar
 
 ### IG:n
 
-- **Paket-id och canonical.** IG:n delar paket-id och canonical med den bredare FHIR-EI-specen på huvudbranchen. Ska de skiljas åt?
+- **Paket-id och canonical.** IG:n har tagit över paket-id och canonical från den arkiverade FHIR-EI-specen (branchen `arkiv/fhir-ei-vision`), som aldrig publicerades. Ska en framtida bredare IG få egna?
