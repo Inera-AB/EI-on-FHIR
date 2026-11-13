@@ -1,6 +1,6 @@
 ### EI-on-FHIR
 
-EI-on-FHIR är ett FHIR R4-API ovanpå dagens engagemangsindex (EI). API:et gör befintlig EI-information tillgänglig för Ineras interna stödtjänster i den nya samverkansinfrastrukturen, till exempel EHDS-bryggan. Det kan också vara källa för en synktjänst som fyller eHM:s patientindex för vårdgivarnas räkning. En källa som implementerar en tjänsts FHIR-IG i stället för tjänstekontraktet registrerar sina engagemang i EI-on-FHIR:s eget register, så att de syns på samma sätt.
+EI-on-FHIR är ett FHIR R5-API ovanpå dagens engagemangsindex (EI). API:et gör befintlig EI-information tillgänglig för Ineras interna stödtjänster i den nya samverkansinfrastrukturen, till exempel EHDS-bryggan. Det kan också vara källa för en synktjänst som fyller eHM:s patientindex för vårdgivarnas räkning. En källa som implementerar en tjänsts FHIR-IG i stället för tjänstekontraktet registrerar sina engagemang i EI-on-FHIR:s eget register, så att de syns på samma sätt.
 
 Förebilden är NHS Englands [National Record Locator](https://digital.nhs.uk/services/national-record-locator) (NRL): en post i indexet är en pekare som exponeras som `DocumentReference`, och den söks på patientens identitet och informationens typ.
 

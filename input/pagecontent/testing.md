@@ -1,7 +1,7 @@
 Implementatörer, till exempel FHIR-producenter som vill kontrollera sina registreringar, kan validera engagemangsposter mot profilen med [HL7 FHIR Validator](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator) och IG-paketet (se [Nedladdningar](downloads.html)):
 
 ```
-java -jar validator_cli.jar engagemangspost.json -version 4.0.1 -ig inera.ei.engagementindex#current \
+java -jar validator_cli.jar engagemangspost.json -version 5.0.0 -ig inera.ei.engagementindex#current \
   -profile https://fhir.inera.se/ig/engagementindex/StructureDefinition/IneraEngagement
 ```
 

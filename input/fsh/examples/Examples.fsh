@@ -18,7 +18,7 @@ Usage: #example
 * subject.identifier.value = "191212121212"
 * date = "2025-03-11T09:15:00+01:00"
 * custodian.identifier.value = "SE0000000000-VG01"
-* content.format = $protocol#riv-ta
+* content.profile.valueCoding = $protocol#riv-ta
 * content.attachment.contentType = #application/xml
 
 Instance: EngagemangspostFhir
@@ -38,7 +38,7 @@ Usage: #example
 * subject.identifier.value = "191212121212"
 * date = "2026-11-12T09:41:27+01:00"
 * custodian.identifier.value = "SE0000000000-VG01"
-* content.format = $protocol#fhir-r4
+* content.profile.valueCoding = $protocol#fhir
 * content.attachment.contentType = #application/fhir+json
 * content.attachment.url = "https://fhir.vg01.example.org/fhir"
 
@@ -58,7 +58,7 @@ Usage: #example
 * subject.identifier.value = "191212121212"
 * date = "2024-06-03T10:20:00+02:00"
 * custodian.identifier.value = "SE0000000000-SYS2"
-* content.format = $protocol#riv-ta
+* content.profile.valueCoding = $protocol#riv-ta
 * content.attachment.contentType = #application/xml
 
 Instance: EngagemangspostBorttagen
@@ -78,7 +78,7 @@ Usage: #example
 * subject.identifier.value = "191212121212"
 * date = "2023-09-19T13:05:00+02:00"
 * custodian.identifier.value = "SE0000000000-VG03"
-* content.format = $protocol#riv-ta
+* content.profile.valueCoding = $protocol#riv-ta
 * content.attachment.contentType = #application/xml
 
 Instance: SokresultatForPatient
@@ -88,7 +88,7 @@ Description: "Svar på GET [base]/DocumentReference?subject:identifier=http://el
 Usage: #example
 * type = #searchset
 * total = 3
-* link[0].relation = "self"
+* link[0].relation = #self
 * link[0].url = "https://ei.example.org/fhir/DocumentReference?subject:identifier=http://electronichealth.se/identifier/personnummer|191212121212"
 * entry[0].fullUrl = "https://ei.example.org/fhir/DocumentReference/EngagemangspostAktuell"
 * entry[0].resource = EngagemangspostAktuell

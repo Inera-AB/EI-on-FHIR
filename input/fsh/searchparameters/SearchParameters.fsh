@@ -12,7 +12,7 @@ Title: "Sökparameter logical-address"
 * base = #DocumentReference
 * type = #token
 * expression = "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress').value.ofType(Identifier)"
-* xpathUsage = #normal
+* processingMode = #normal
 
 Instance: DocumentReference-source-system
 InstanceOf: SearchParameter
@@ -26,4 +26,4 @@ Title: "Sökparameter source-system"
 * base = #DocumentReference
 * type = #token
 * expression = "DocumentReference.extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/SourceSystem').value.ofType(Identifier)"
-* xpathUsage = #normal
+* processingMode = #normal

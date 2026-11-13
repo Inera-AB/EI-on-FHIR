@@ -2,7 +2,7 @@
   "mode" : "milestone",
   "status" : "release",
   "sequence" : "Releases",
-  "desc" : "Första publicerade versionen: FHIR R4-API ovanpå engagemangsindex, för interna stödtjänster, synk till eHM:s patientindex och registrering för FHIR-producenter.",
+  "desc" : "Första publicerade versionen: FHIR R5-API ovanpå engagemangsindex, för interna stödtjänster, synk till eHM:s patientindex och registrering för FHIR-producenter.",
   "first" : true,
   "title" : "EI-on-FHIR: FHIR-API för engagemangsindex",
   "category" : "National Base",

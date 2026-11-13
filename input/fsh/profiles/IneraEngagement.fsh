@@ -1,4 +1,4 @@
-// One engagement post, exposed as an R4 DocumentReference in the pointer style of NHS
+// One engagement post, exposed as an R5 DocumentReference in the pointer style of NHS
 // England's National Record Locator. A post comes either from today's engagement index (EI),
 // read-only, or from EI-on-FHIR's own register, where FHIR producers write. One resource per
 // post, no merging. See the page Engagemangsposten for the field mapping.
@@ -21,7 +21,6 @@ Description: "En engagemangspost, exponerad som DocumentReference. Posten pekar 
 * extension[logicalAddress] ^short = "Logisk adress. Krävs för RIV-TA, och anges för FHIR när samma källa också svarar på tjänstekontraktet"
 * extension[owner] ^short = "Var posten förvaltas: EI eller EI-on-FHIR:s register"
 
-* masterIdentifier 0..0
 * identifier 1..1 MS
 * identifier ^short = "Källsystemets id för informationen (businessObjectInstanceIdentifier); unikt tillsammans med sourceSystem"
 * identifier.value 1..1 MS
@@ -54,7 +53,7 @@ Description: "En engagemangspost, exponerad som DocumentReference. Posten pekar 
 * date ^short = "När posten skapades (creationTime i EI)"
 
 * author 0..0
-* authenticator 0..0
+* attester 0..0
 
 * custodian 1..1 MS
 * custodian only Reference(Organization)
@@ -73,9 +72,10 @@ Description: "En engagemangspost, exponerad som DocumentReference. Posten pekar 
 * content 1..1 MS
 * content ^short = "Hur innehållet hämtas: med RIV-TA via tjänsteplattformen och postens logiska adress, eller med FHIR från endpointen i attachment.url"
 * content obeys inera-ei-riv-ta-content and inera-ei-fhir
-* content.format 1..1 MS
-* content.format from IneraRetrievalProtocolValueSet (required)
-* content.format ^short = "riv-ta eller fhir-r4"
+* content.profile 1..1 MS
+* content.profile.value[x] only Coding
+* content.profile.valueCoding from IneraRetrievalProtocolValueSet (required)
+* content.profile ^short = "Hämtningsprotokoll som Coding: riv-ta eller fhir"
 * content.attachment.contentType 1..1 MS
 * content.attachment.contentType ^short = "application/xml för RIV-TA, application/fhir+json för FHIR"
 * content.attachment.data 0..0
@@ -91,15 +91,15 @@ Severity: #error
 
 Invariant: inera-ei-riv-ta
 Description: "En RIV-TA-post har logisk adress."
-Expression: "content.where(format.code = 'riv-ta').exists() implies extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress').exists()"
+Expression: "content.profile.where(value.ofType(Coding).code = 'riv-ta').exists() implies extension('https://fhir.inera.se/ig/engagementindex/StructureDefinition/LogicalAddress').exists()"
 Severity: #error
 
 Invariant: inera-ei-riv-ta-content
 Description: "En RIV-TA-post har innehållstypen application/xml och ingen URL."
-Expression: "format.code = 'riv-ta' implies (attachment.contentType = 'application/xml' and attachment.url.empty())"
+Expression: "profile.where(value.ofType(Coding).code = 'riv-ta').exists() implies (attachment.contentType = 'application/xml' and attachment.url.empty())"
 Severity: #error
 
 Invariant: inera-ei-fhir
 Description: "En FHIR-post har innehållstypen application/fhir+json och endpointens bas-URL."
-Expression: "format.code = 'fhir-r4' implies (attachment.contentType = 'application/fhir+json' and attachment.url.exists())"
+Expression: "profile.where(value.ofType(Coding).code = 'fhir').exists() implies (attachment.contentType = 'application/fhir+json' and attachment.url.exists())"
 Severity: #error

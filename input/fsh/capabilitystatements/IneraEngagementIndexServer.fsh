@@ -5,15 +5,14 @@ Title: "EI-on-FHIR server"
 * insert IneraInstanceMetadata
 * url = "https://fhir.inera.se/ig/engagementindex/CapabilityStatement/IneraEngagementIndexServer"
 * name = "IneraEngagementIndexServer"
-* description = "Krav på EI-on-FHIR som server: läsning och sökning av engagemangsposter från EI och från EI-on-FHIR:s register, registrering i registret för FHIR-producenter, och massuttag med Bulk Data."
+* description = "Krav på EI-on-FHIR som server: läsning och sökning av engagemangsposter från EI och från EI-on-FHIR:s register, registrering i registret för FHIR-producenter. Massuttag med Bulk Data $export krävs i text på IG-sidan API, eftersom Bulk Data Access bara finns för R4."
 * kind = #requirements
-* fhirVersion = #4.0.1
+* fhirVersion = #5.0.0
 * format[0] = #json
 * implementationGuide = "https://fhir.inera.se/ig/engagementindex/ImplementationGuide/inera.ei.engagementindex"
 
 * rest[0].mode = #server
 * rest[0].documentation = "API ovanpå engagemangsindex, för Ineras interna stödtjänster och för FHIR-producenter. Poster från EI är skrivskyddade; FHIR-producenter skriver bara i EI-on-FHIR:s register. Varje anrop autentiseras som ett system och loggas. Se sidan Säkerhet och loggning."
-* rest[0].security.service = http://terminology.hl7.org/CodeSystem/restful-security-service#SMART-on-FHIR
 * rest[0].security.description = "SMART Backend Services med systembehörigheter och tre klientroller: stödtjänst, synktjänst och producent. Sökning utan patient och massuttag kräver behörighet för synk; skrivning kräver behörighet som producent."
 
 * rest[0].resource[0]
@@ -43,14 +42,8 @@ Title: "EI-on-FHIR server"
   * insert SearchParam(custodian, http://hl7.org/fhir/SearchParameter/DocumentReference-custodian, reference, SHOULD)
   * searchParam[=].documentation = "Med modifieraren :identifier och HSA-id."
   * insert SearchParam(source-system, https://fhir.inera.se/ig/engagementindex/SearchParameter/DocumentReference-source-system, token, SHOULD)
-  * insert SearchParam(format, http://hl7.org/fhir/SearchParameter/DocumentReference-format, token, SHOULD)
-  * searchParam[=].documentation = "Hämtningsprotokoll, riv-ta eller fhir-r4."
+  * insert SearchParam(format-code, http://hl7.org/fhir/SearchParameter/DocumentReference-format-code, token, SHOULD)
+  * searchParam[=].documentation = "Hämtningsprotokoll, riv-ta eller fhir."
   * insert SearchParam(identifier, http://hl7.org/fhir/SearchParameter/clinical-identifier, token, SHALL)
   * searchParam[=].documentation = "För producentens villkorade update."
   * insert SearchParam(_id, http://hl7.org/fhir/SearchParameter/Resource-id, token, SHOULD)
-
-* rest[0].operation[0].name = "export"
-* rest[0].operation[=].definition = "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export"
-* rest[0].operation[=].documentation = "Massuttag på systemnivå med _type=DocumentReference och _since, för grundladdning och återsynk. Ett _since-uttag innehåller borttagna poster under borttagsloggens lagringstid."
-* rest[0].operation[=].extension[0].url = $expectation
-* rest[0].operation[=].extension[0].valueCode = #SHALL

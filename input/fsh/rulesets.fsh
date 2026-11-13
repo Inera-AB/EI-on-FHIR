@@ -14,7 +14,7 @@ RuleSet: IneraMetadata(id)
 * ^jurisdiction = urn:iso:std:iso:3166#SE "Sweden"
 
 // The same metadata for definitional instances (SearchParameter, CapabilityStatement),
-// which have no identifier element in R4.
+// to which this IG gives no identifier.
 RuleSet: IneraInstanceMetadata
 * status = #draft
 * experimental = false

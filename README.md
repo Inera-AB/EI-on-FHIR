@@ -2,16 +2,16 @@
 
 [![Build and publish IG](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/publish.yml)
 [![Validate FSH](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml/badge.svg)](https://github.com/Inera-AB/EI-on-FHIR/actions/workflows/validate.yml)
-[![FHIR R4](https://img.shields.io/badge/FHIR-R4-blue)](https://hl7.org/fhir/R4/)
+[![FHIR R5](https://img.shields.io/badge/FHIR-R5-blue)](https://hl7.org/fhir/R5/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-**EI-on-FHIR covers what EHDS-bryggan, the sync to eHM's patient index and FHIR producers such as Fasta kontakter need.** It defines a FHIR R4 API on top of today's national engagement index (EI), modelled on NHS England's National Record Locator, with its own register for sources that implement a service's FHIR IG instead of the RIV-TA contract. The earlier, broader vision for a FHIR-based index (FHIR R5, several population methods, per-user access control and legal analysis) is kept on the branch [`arkiv/fhir-ei-vision`](https://github.com/Inera-AB/EI-on-FHIR/tree/arkiv/fhir-ei-vision) and is not part of this IG. The architecture document and the IG are written in Swedish.
+**EI-on-FHIR covers what EHDS-bryggan, the sync to eHM's patient index and FHIR producers such as Fasta kontakter need.** It defines a FHIR R5 API on top of today's national engagement index (EI), modelled on NHS England's National Record Locator, with its own register for sources that implement a service's FHIR IG instead of the RIV-TA contract. The earlier, broader vision for a FHIR-based index (FHIR R5, several population methods, per-user access control and legal analysis) is kept on the branch [`arkiv/fhir-ei-vision`](https://github.com/Inera-AB/EI-on-FHIR/tree/arkiv/fhir-ei-vision) and is not part of this IG. The architecture document and the IG are written in Swedish.
 
 | | |
 |---|---|
 | Package id | `inera.ei.engagementindex` |
 | Canonical | `https://fhir.inera.se/ig/engagementindex` |
-| FHIR version | 4.0.1 |
+| FHIR version | 5.0.0 |
 | Status | Draft, version 0.1.0 (unpublished) |
 
 ### Use cases
@@ -32,7 +32,7 @@
 
 - **A read interface in the national EI, not a new service with its own copy.** The API reads EI's database or a read replica, so there is no copy of EI to keep in sync.
 - **Its own register for FHIR producers**, written with conditional update and delete as in NRL's producer API. Searches and exports return entries from EI and the register together.
-- **Each entry says how to fetch the information:** `content.format` is `riv-ta` (logical address via the service platform) or `fhir-r4` (endpoint URL). A source with both interfaces has two entries, matched on patient, service domain and logical address; a FHIR-capable consumer picks the FHIR one.
+- **Each entry says how to fetch the information:** `content.profile` (as a Coding) is `riv-ta` (logical address via the service platform) or `fhir` (endpoint URL). A source with both interfaces has two entries, matched on patient, service domain and logical address; a FHIR-capable consumer picks the FHIR one.
 - **One `DocumentReference` per EI entry**, profiled as `IneraEngagement`, with no merging. Fields without a DocumentReference element are extensions: logical address, source system, owner and most recent content.
 - **Search like NRL:** `subject:identifier` and `type`, plus `logical-address` to narrow to one care provider. A search without a patient is allowed only for the sync client.
 - **Sync with standard FHIR:** Bulk Data `$export` for the initial load and reconciliation, `_lastUpdated` for incremental changes. Deleted entries appear with status `superseded` for a retention period.
@@ -49,12 +49,16 @@
 
 | Artifact | FSH file |
 |---|---|
-| Engagement entry profile on R4 `DocumentReference` (`IneraEngagement`) | `input/fsh/profiles/IneraEngagement.fsh` |
+| Engagement entry profile on R5 `DocumentReference` (`IneraEngagement`) | `input/fsh/profiles/IneraEngagement.fsh` |
 | Extensions: logical address, source system, most recent content, owner | `input/fsh/extensions/Extensions.fsh` |
 | Code systems and value sets | `input/fsh/terminology/Terminology.fsh` |
 | Search parameters `logical-address` and `source-system` | `input/fsh/searchparameters/SearchParameters.fsh` |
 | Server CapabilityStatement | `input/fsh/capabilitystatements/IneraEngagementIndexServer.fsh` |
 | Examples | `input/fsh/examples/Examples.fsh` |
+
+Bulk Data `$export` is required in narrative only: Bulk Data Access is published for R4, so its OperationDefinition cannot be referenced from an R5 IG.
+
+An R5 IG validates against the R5 terminology server, so `publish.yml`, `release.yml` and `pr-qa.yml` pass `tx-server: https://tx.fhir.org/r5` to the shared workflows.
 
 Open questions are listed in the SAD and on the IG page *Öppna frågor* (`input/pagecontent/open-issues.md`).
 

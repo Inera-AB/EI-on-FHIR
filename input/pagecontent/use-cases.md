@@ -35,7 +35,7 @@ En vårdgivare kan välja att implementera en tjänsts FHIR-IG, till exempel Fas
    ```
    PUT [base]/DocumentReference?identifier=c2d8e6f1-3a47-4b0e-9e21-5f8a7d3b6c04
    ```
-   Posten anger `content.format` = `fhir-r4` och källans FHIR-endpoint i `content.attachment.url`. Se exemplet [Engagemangspost från en FHIR-producent](DocumentReference-EngagemangspostFhir.html).
+   Posten anger `content.profile` = `fhir` och källans FHIR-endpoint i `content.attachment.url`. Se exemplet [Engagemangspost från en FHIR-producent](DocumentReference-EngagemangspostFhir.html).
 2. API:et kontrollerar att klienten är en producent som får skriva för postens källsystem, att `custodian` är en vårdgivare och att endpointen finns i tjänstekatalogen för den vårdgivaren. Posten sparas i EI-on-FHIR:s register.
 3. Källan uppdaterar posten med samma anrop när informationen ändras, och tar bort den med `DELETE` när den inte längre har information om patienten inom tjänsten.
 4. Posten kommer med i sökningar och massuttag, tillsammans med posterna från EI.

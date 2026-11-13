@@ -42,7 +42,7 @@ Description: "Hur en konsument hämtar den information som en engagemangspost pe
 * ^caseSensitive = true
 * ^content = #complete
 * #riv-ta "RIV-TA" "Ett tjänstekontrakt i postens tjänstedomän, via tjänsteplattformen och postens logiska adress."
-* #fhir-r4 "FHIR R4" "FHIR R4-API:t på den endpoint som anges i postens attachment.url, enligt tjänstens IG."
+* #fhir "FHIR" "FHIR-API:t på den endpoint som anges i postens attachment.url, i den FHIR-version som tjänstens IG anger."
 
 ValueSet: IneraRetrievalProtocolValueSet
 Id: IneraRetrievalProtocolValueSet

@@ -8,14 +8,14 @@ Posten är en pekare, som i NHS Englands National Record Locator. Den säger att
 |---|---|---|
 | Registreras av | Källa som implementerar tjänstekontraktet, med Update i EI | Källa som implementerar tjänstens FHIR-IG, med `PUT` i EI-on-FHIR |
 | Skrivbar via API:et | Nej | Ja, av den producent som äger posten |
-| `content.format` | `riv-ta` | `fhir-r4` |
+| `content.profile` | `riv-ta` | `fhir` |
 | `content.attachment` | `contentType` `application/xml`, ingen URL | `contentType` `application/fhir+json`, `url` = FHIR-endpointens bas-URL |
 | Extension `logicalAddress` | Krävs | Anges om källan också svarar på tjänstekontraktet |
 | `custodian` | dataController, som kan vara källsystemets HSA-id | Alltid en vårdgivare |
 | Extension `owner` | Det nationella EI | EI-on-FHIR |
 {:.grid}
 
-`type` är samma tjänstedomänkod oavsett ursprung. En konsument söker på tjänsten en gång och får båda slagen av poster. Den som bara kan ett protokoll filtrerar med sökparametern `format`.
+`type` är samma tjänstedomänkod oavsett ursprung. En konsument söker på tjänsten en gång och får båda slagen av poster. Den som bara kan ett protokoll filtrerar med sökparametern `format-code`.
 
 ### När samma källa har båda gränssnitten
 
@@ -47,7 +47,7 @@ En källa som går över helt från tjänstekontraktet till FHIR registrerar fö
 | Borttagen post | `status` = `superseded` | Bara under borttagsloggens lagringstid; se [API](api.html) |
 | – | `status` = `current` | Posten är registrerad |
 | – | `id` | Stabilt, härlett ur EI:s nyckel för posten. Konsumenter ska inte tolka det |
-| – | `content.format`, `content.attachment.contentType` | Alltid `riv-ta` och `application/xml` |
+| – | `content.profile`, `content.attachment.contentType` | Alltid `riv-ta` (som Coding) och `application/xml` |
 {:.grid}
 
 En FHIR-producent fyller i samma element direkt. API:et sätter `id`, `owner`, `date` och `meta.lastUpdated`, och producenten utelämnar dem när den registrerar.

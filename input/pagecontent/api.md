@@ -1,4 +1,4 @@
-API:et följer FHIR R4:s RESTful API. Det stöder läsning och sökning av engagemangsposter från EI och från EI-on-FHIR:s register, registrering i registret för FHIR-producenter, och massuttag med [Bulk Data Access](https://hl7.org/fhir/uv/bulkdata/). Poster från EI går inte att ändra via API:et. De formella kraven finns i [CapabilityStatement för EI-on-FHIR](CapabilityStatement-IneraEngagementIndexServer.html).
+API:et följer FHIR R5:s RESTful API. Det stöder läsning och sökning av engagemangsposter från EI och från EI-on-FHIR:s register, registrering i registret för FHIR-producenter, och massuttag med [Bulk Data Access](https://hl7.org/fhir/uv/bulkdata/). Poster från EI går inte att ändra via API:et. De formella kraven finns i [CapabilityStatement för EI-on-FHIR](CapabilityStatement-IneraEngagementIndexServer.html).
 
 | Operation | Interaktion | Användningsfall | Motsvarighet i EI |
 |---|---|---|---|
@@ -24,12 +24,12 @@ API:et följer FHIR R4:s RESTful API. Det stöder läsning och sökning av engag
 | `category` | token | `category` | SHOULD | Kategori inom tjänstedomän |
 | `custodian` | reference | `custodian` | SHOULD | Med `:identifier` |
 | [`source-system`](SearchParameter-DocumentReference-source-system.html) | token | extension sourceSystem | SHOULD | HSA-id |
-| `format` | token | `content.format` | SHOULD | Hämtningsprotokoll, `riv-ta` eller `fhir-r4` |
+| `format-code` | token | `content.profile` som Coding | SHOULD | Hämtningsprotokoll, `riv-ta` eller `fhir` |
 | `identifier` | token | `identifier` | SHALL | Producentens villkorade update |
 | `_id` | token | `id` | SHOULD | |
 {:.grid}
 
-Patienten söks med `subject:identifier`, som i NRL. Indexet har inga Patient-resurser, så patienten är en logisk referens. En sökning utan `status` returnerar bara poster med status `current`. Sökresultatet innehåller poster från både EI och registret; `format=…|fhir-r4` begränsar det till FHIR-poster.
+Patienten söks med `subject:identifier`, som i NRL. Indexet har inga Patient-resurser, så patienten är en logisk referens. En sökning utan `status` returnerar bara poster med status `current`. Sökresultatet innehåller poster från både EI och registret; `format-code=…|fhir` begränsar det till FHIR-poster.
 
 Sökresultatet är en `searchset`-Bundle. Ett stort resultat delas upp i sidor; klienten följer länken `next`. API:et stöder `_count` och, för löpande synk, `_sort=_lastUpdated`. Se exemplet [Sökresultat för en patient](Bundle-SokresultatForPatient.html).
 
@@ -39,7 +39,7 @@ EI tar bort en post när källsystemet registrerar den med deleteFlag, och regis
 
 ### Massuttag
 
-Massuttaget följer Bulk Data Access på systemnivå:
+Massuttaget följer Bulk Data Access på systemnivå. Bulk Data Access finns bara publicerad för R4, så kravet står här i text och inte i CapabilityStatementet:
 
 1. Klienten startar uttaget med `GET [base]/$export?_type=DocumentReference`, och `_since=` för ändringar sedan en tidpunkt. Svaret är `202 Accepted` med `Content-Location`.
 2. Klienten frågar statusadressen tills uttaget är klart. Svaret listar NDJSON-filer med en engagemangspost per rad.
@@ -67,7 +67,7 @@ Villkoret utvärderas bara mot producentens egna poster i registret:
 | Fler än 1 | Avvisas med `412 Precondition Failed` |
 {:.grid}
 
-Posten ska följa profilen [Engagemangspost](StructureDefinition-IneraEngagement.html) med `content.format` = `fhir-r4`. Producenten utelämnar `id`, `owner`, `date` och `meta.lastUpdated`, som API:et sätter. API:et kontrollerar dessutom:
+Posten ska följa profilen [Engagemangspost](StructureDefinition-IneraEngagement.html) med `content.profile` = `fhir`. Producenten utelämnar `id`, `owner`, `date` och `meta.lastUpdated`, som API:et sätter. API:et kontrollerar dessutom:
 
 | Kontroll | Regel |
 |---|---|

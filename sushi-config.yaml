@@ -2,10 +2,10 @@ id: inera.ei.engagementindex
 canonical: https://fhir.inera.se/ig/engagementindex
 name: IneraEngagementIndex
 title: "EI-on-FHIR: FHIR-API för engagemangsindex"
-description: "Ett FHIR R4-API ovanpå dagens engagemangsindex, för Ineras interna stödtjänster och för synk till eHM:s patientindex, med ett eget register för källor som implementerar en tjänsts FHIR-IG."
+description: "Ett FHIR R5-API ovanpå dagens engagemangsindex, för Ineras interna stödtjänster och för synk till eHM:s patientindex, med ett eget register för källor som implementerar en tjänsts FHIR-IG."
 status: draft
 version: 0.1.0
-fhirVersion: 4.0.1
+fhirVersion: 5.0.0
 copyrightYear: 2026+
 releaseLabel: ci-build
 license: CC0-1.0
@@ -16,9 +16,6 @@ publisher:
 
 jurisdiction: urn:iso:std:iso:3166#SE "Sweden"
 
-
-dependencies:
-  hl7.fhir.uv.bulkdata: 3.0.0
 
 parameters:
   show-inherited-invariants: false
